@@ -1,0 +1,119 @@
+<section id="community" class="py-8 bg-gray-50 border-t border-gray-200">
+  <div class="container mx-auto px-4">
+    <h2 class="text-2xl font-bold text-gray-800 mb-6 pb-2 border-b border-gray-200">{{ include.title | default: "Community Portal" }}</h2>
+    
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+      <!-- Community news -->
+      <div class="lg:col-span-2">
+        <div class="bg-white border border-gray-200 rounded p-4">
+          <h3 class="text-lg font-medium text-gray-800 mb-4">{{ include.news_title | default: "Community News" }}</h3>
+          
+          <div class="space-y-4" id="community-news" hx-get="{{ include.news_endpoint | default: '/api/community-news' }}" hx-trigger="load">
+            {% if include.news_items %}
+              {% for item in include.news_items %}
+                {% include components/molecules/news-item.html 
+                  title=item.title
+                  content=item.content
+                  time_ago=item.time_ago
+                  author=item.author
+                  author_url=item.author_url
+                  color=item.color
+                %}
+              {% endfor %}
+            {% else %}
+              <!-- Default news items if none provided -->
+              {% include components/molecules/news-item.html 
+                title="New Category Structure Implemented"
+                content="We've restructured our category system to make navigation easier and more intuitive. Check out the new organization and let us know what you think!"
+                time_ago="3 days ago"
+                author="Admin"
+                color="blue"
+              %}
+              
+              {% include components/molecules/news-item.html 
+                title="Help Needed: Portuguese Translations"
+                content="We're looking for volunteers to help translate resources into Portuguese. If you're fluent in both English and Portuguese, please consider contributing to our translation efforts."
+                time_ago="1 week ago"
+                author="Linguist"
+                color="green"
+              %}
+              
+              {% include components/molecules/news-item.html 
+                title="Monthly Virtual Meetup"
+                content="Join us for our monthly virtual meetup to discuss the future of IPL, share ideas, and get to know fellow contributors. The next meeting is scheduled for July 15th at 18:00 UTC."
+                time_ago="2 weeks ago"
+                author="CommunityManager"
+                color="yellow"
+              %}
+            {% endif %}
+          </div>
+          
+          <div class="mt-4 text-right">
+            <a href="#" class="text-blue-600 hover:underline text-sm" hx-get="{{ include.all_announcements_endpoint | default: '/api/all-announcements' }}" hx-target="#content-area">{{ include.view_all_text | default: "View all announcements →" }}</a>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Community stats and leaderboard -->
+      <div>
+        <div class="bg-white border border-gray-200 rounded p-4 mb-4" id="active-contributors" hx-get="{{ include.contributors_endpoint | default: '/api/active-contributors' }}" hx-trigger="load">
+          <h3 class="text-lg font-medium text-gray-800 mb-4">{{ include.contributors_title | default: "Active Contributors" }}</h3>
+          
+          <ol class="space-y-2 text-sm">
+            {% if include.contributors %}
+              {% for contributor in include.contributors %}
+                {% include components/molecules/contributor-item.html 
+                  rank=forloop.index
+                  name=contributor.name
+                  url=contributor.url
+                  edits=contributor.edits
+                %}
+              {% endfor %}
+            {% else %}
+              <!-- Default contributors if none provided -->
+              {% include components/molecules/contributor-item.html 
+                rank=1
+                name="DataExplorer"
+                edits=152
+              %}
+              
+              {% include components/molecules/contributor-item.html 
+                rank=2
+                name="LegalEagle"
+                edits=98
+              %}
+              
+              {% include components/molecules/contributor-item.html 
+                rank=3
+                name="CodeNinja"
+                edits=76
+              %}
+              
+              {% include components/molecules/contributor-item.html 
+                rank=4
+                name="LibraryBuilder"
+                edits=61
+              %}
+              
+              {% include components/molecules/contributor-item.html 
+                rank=5
+                name="WikiWizard"
+                edits=43
+              %}
+            {% endif %}
+          </ol>
+          
+          <div class="mt-4 text-center">
+            <a href="#" class="text-blue-600 hover:underline text-sm" hx-get="{{ include.leaderboard_endpoint | default: '/api/leaderboard' }}" hx-target="#content-area">{{ include.leaderboard_text | default: "View full leaderboard" }}</a>
+          </div>
+        </div>
+        
+        <div class="bg-white border border-gray-200 rounded p-4">
+          <h3 class="text-lg font-medium text-gray-800 mb-2">{{ include.get_involved_title | default: "Get Involved" }}</h3>
+          <p class="text-sm text-gray-600 mb-4">{{ include.get_involved_text | default: "Join our community and help build the world's largest curated library of internet resources." }}</p>
+          <a href="#contribute" class="block w-full bg-blue-600 text-white text-center py-2 rounded hover:bg-blue-700 text-sm">{{ include.get_involved_button | default: "Start Contributing" }}</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section> 

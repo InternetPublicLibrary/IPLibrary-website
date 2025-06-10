@@ -13,31 +13,74 @@
 # you will see them accessed via {{ site.title }}, {{ site.email }}, and so on.
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
-title: Your awesome title
-email: your-email@example.com
+title: Internet Public Library
+email: admin@iplibrary.org
 description: >- # this means to ignore newlines until "baseurl:"
-  Write an awesome description for your new site here. You can edit this
-  line in _config.yml. It will appear in your document head meta (for
-  Google search results) and in your feed.xml site description.
+  The Internet Public Library (IPL) is a free encyclopedia of curated internet resources,
+  organized by category and maintained by a global community of contributors.
 baseurl: "" # the subpath of your site, e.g. /blog
-url: "" # the base hostname & protocol for your site, e.g. http://example.com
-twitter_username: jekyllrb
-github_username:  jekyll
+url: "https://iplibrary.org" # the base hostname & protocol for your site, e.g. http://example.com
+twitter_username: internetpubliclibrary
+github_username: InternetPublicLibrary
+
+# Enable dynamic page generation
+enable_dynamic_pages: true
+
+# Giscus configuration
+giscus:
+  en:
+    repo: "InternetPublicLibrary/en-US"
+    repo_id: "MDEwOlJlcG9zaXRvcnkxMzE5MzIxNzk="
+    category: "General"
+    category_id: "DIC_kwDOB90gE84CrNxh"
+  pt:
+    repo: "InternetPublicLibrary/pt-BR"
+    repo_id: "MDEwOlJlcG9zaXRvcnkxMzE5MzI0NzA="
+    category: "General"
+    category_id: "DIC_kwDOB90hNs4CrNxb"
+
+# Staticman settings for wiki-like contributions
+staticman:
+  branch: "main"
+  # Instance hosted on Heroku (replace with your own instance URL)
+  endpoint: "https://api.staticman.net/v2/entry"
+  # GitHub repositories
+  repositories:
+    en:
+      name: "InternetPublicLibrary/en-US"
+      branch: "main"
+    pt:
+      name: "InternetPublicLibrary/pt-BR" 
+      branch: "main"
+  # Allowed fields in forms (customize per form as needed)
+  allowedFields: ["name", "email", "url", "message", "title", "description", "content", "tags", "category"]
+  # Whether to send PR notification to PR authors
+  notifications:
+    enabled: true
+  # Secret used to secure communication with Staticman
+  secret: "REPLACE_WITH_YOUR_SECRET"
+  # reCAPTCHA configuration
+  recaptcha:
+    enabled: true
+    siteKey: "REPLACE_WITH_YOUR_SITE_KEY"
+    secret: "REPLACE_WITH_YOUR_SECRET"
 
 # Build settings
 plugins:
   - jekyll-admin
   - jekyll-feed
-   - jekyll-mentions
+  - jekyll-mentions
   - jemoji
   - jekyll-redirect-from
   - jekyll-sitemap
-  - jekyll-feed
   - jekyll-seo-tag
   - jekyll-paginate
   - jekyll-gist
 
 markdown: kramdown
+
+# Explicitly allow custom plugins
+safe: false
 
 # Exclude from processing.
 # The following items will not be processed, by default. Create a custom list

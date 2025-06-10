@@ -1,0 +1,59 @@
+---
+layout: default
+---
+
+<div class="container mx-auto px-4 py-8">
+  <h1 class="text-3xl font-bold mb-6">Data Structure Debug Page</h1>
+  
+  <section class="mb-8 p-4 bg-gray-100 rounded">
+    <h2 class="text-xl font-semibold mb-4">Site Data Structure</h2>
+    <pre class="whitespace-pre-wrap bg-white p-4 rounded border">
+      {% for item in site.data %}
+        Key: {{ item[0] }}
+        {% if item[0] == 'en-US' or item[0] == 'pt-BR' %}
+          {% for subitem in item[1] %}
+            - Subkey: {{ subitem[0] }}
+          {% endfor %}
+        {% endif %}
+      {% endfor %}
+    </pre>
+  </section>
+  
+  <section class="mb-8 p-4 bg-gray-100 rounded">
+    <h2 class="text-xl font-semibold mb-4">Menu Data (en-US)</h2>
+    <pre class="whitespace-pre-wrap bg-white p-4 rounded border">
+      {% if site.data.en-US %}
+        EN-US data exists
+        {% if site.data.en-US.menu %}
+          Menu data exists
+          {% for item in site.data.en-US.menu %}
+            - {{ item.title }} ({{ item.path }})
+          {% endfor %}
+        {% else %}
+          No menu data found in en-US
+        {% endif %}
+      {% else %}
+        No en-US data found
+      {% endif %}
+    </pre>
+  </section>
+  
+  <section class="p-4 bg-gray-100 rounded">
+    <h2 class="text-xl font-semibold mb-4">Menu Data (pt-BR)</h2>
+    <pre class="whitespace-pre-wrap bg-white p-4 rounded border">
+      {% if site.data.pt-BR %}
+        PT-BR data exists
+        {% if site.data.pt-BR.menu %}
+          Menu data exists
+          {% for item in site.data.pt-BR.menu %}
+            - {{ item.title }} ({{ item.path }})
+          {% endfor %}
+        {% else %}
+          No menu data found in pt-BR
+        {% endif %}
+      {% else %}
+        No pt-BR data found
+      {% endif %}
+    </pre>
+  </section>
+</div> 

@@ -1,0 +1,33 @@
+# Data science resources
+- title: "Towards Data Science"
+  url: "https://towardsdatascience.com/"
+  description: "A Medium publication sharing concepts, ideas, and codes related to data science."
+  tags:
+    - machine learning
+    - statistics
+    - programming
+  access: "Partially paid"
+  rank: 1
+  last_updated: 2024-01-05
+
+- title: "Kaggle"
+  url: "https://www.kaggle.com/"
+  description: "Platform for data science competitions, datasets, and notebooks sharing."
+  tags:
+    - competitions
+    - datasets
+    - community
+  access: "Free"
+  rank: 2
+  last_updated: 2024-01-08
+
+- title: "Data Science Central"
+  url: "https://www.datasciencecentral.com/"
+  description: "Online resource for big data practitioners with articles, news, and tutorials."
+  tags:
+    - big data
+    - analytics
+    - business intelligence
+  access: "Free"
+  rank: 3
+  last_updated: 2024-01-12 

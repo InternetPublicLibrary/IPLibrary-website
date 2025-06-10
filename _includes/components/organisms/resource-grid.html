@@ -1,0 +1,24 @@
+{% comment %}
+  Resource Grid Component
+  Usage:
+  {% include components/organisms/resource-grid.html resources=page.resources columns=2 %}
+  
+  Parameters:
+  - resources: Collection of resources to display
+  - columns: Number of columns (1-4, optional, default: 2)
+{% endcomment %}
+
+<div class="grid grid-cols-1 md:grid-cols-{{ include.columns | default: 2 }} gap-6">
+  {% for resource in include.resources %}
+    {% include components/molecules/resource-card.html title=resource.title description=resource.description url=resource.url source=resource.source type=resource.type page_url=resource.page_url image=resource.image %}
+  {% endfor %}
+</div>
+
+{% if include.resources.size == 0 %}
+<div class="bg-white rounded-lg border border-gray-200 p-8 text-center shadow-sm">
+  <i class="fas fa-info-circle text-4xl text-blue-400 mb-4"></i>
+  <h3 class="text-xl font-semibold text-gray-800 mb-2">No Resources Yet</h3>
+  <p class="text-gray-600 mb-6">We're still gathering resources for this category.</p>
+  {% include components/atoms/button.html text="Suggest a Resource" url="#contribute" variant="primary" size="md" icon="fas fa-arrow-right" %}
+</div>
+{% endif %} 

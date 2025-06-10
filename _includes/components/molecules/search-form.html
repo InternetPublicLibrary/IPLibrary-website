@@ -1,0 +1,34 @@
+<form hx-get="{{ include.endpoint | default: '/api/search' }}" hx-target="{{ include.target | default: '#search-results' }}" hx-trigger="submit">
+  <div class="flex">
+    {% include components/atoms/search-input.html 
+      name="q" 
+      placeholder=include.placeholder
+      rounded="l"
+    %}
+    
+    {% assign button_text_default = include.button_text | default: "Search" %}
+    {% include components/atoms/button.html 
+      type="submit" 
+      text=button_text_default
+      class="bg-blue-600 text-white px-4 py-2 rounded-r hover:bg-blue-700"
+    %}
+  </div>
+  
+  <div class="flex justify-between mt-2 text-xs text-gray-500">
+    <div>
+      <span>Search by: </span>
+      <a href="#" class="text-blue-600 hover:underline mx-1" hx-get="/api/search-config" hx-vals='{"type": "title"}' hx-target="#search-config">Title</a>
+      <span>•</span>
+      <a href="#" class="text-blue-600 hover:underline mx-1" hx-get="/api/search-config" hx-vals='{"type": "content"}' hx-target="#search-config">Content</a>
+      <span>•</span>
+      <a href="#" class="text-blue-600 hover:underline mx-1" hx-get="/api/search-config" hx-vals='{"type": "tags"}' hx-target="#search-config">Tags</a>
+    </div>
+    <div>
+      <a href="#" class="text-blue-600 hover:underline" hx-get="/api/advanced-search" hx-target="#advanced-search-modal">Advanced Search</a>
+    </div>
+  </div>
+</form>
+
+<div id="search-results" class="mt-4"></div>
+<div id="search-config" class="hidden"></div>
+<div id="advanced-search-modal" class="hidden"></div> 

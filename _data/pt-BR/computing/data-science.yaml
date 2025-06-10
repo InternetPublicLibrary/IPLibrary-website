@@ -1,0 +1,33 @@
+# Recursos de ciência de dados
+- title: "Data Hackers"
+  url: "https://datahackers.com.br/"
+  description: "Comunidade brasileira de profissionais e entusiastas de dados, com podcasts, newsletter e eventos."
+  tags:
+    - dados
+    - machine learning
+    - comunidade
+  access: "Gratuito"
+  rank: 1
+  last_updated: 2024-01-05
+
+- title: "Curso-R"
+  url: "https://curso-r.com/blog/"
+  description: "Blog focado em R e ciência de dados, com tutoriais e artigos técnicos."
+  tags:
+    - R
+    - estatística
+    - visualização
+  access: "Gratuito"
+  rank: 2
+  last_updated: 2024-01-08
+
+- title: "Brasil.IO"
+  url: "https://brasil.io/"
+  description: "Plataforma que disponibiliza dados públicos brasileiros em formatos acessíveis."
+  tags:
+    - dados abertos
+    - transparência
+    - governo
+  access: "Gratuito"
+  rank: 3
+  last_updated: 2024-01-12 

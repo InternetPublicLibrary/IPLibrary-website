@@ -1,0 +1,10 @@
+<div class="relative flex-grow">
+  <input 
+    type="text" 
+    name="{{ include.name | default: 'q' }}" 
+    placeholder="{{ include.placeholder | default: 'Search the Internet Public Library...' }}" 
+    class="w-full border border-gray-300 rounded-{{ include.rounded | default: 'l' }} px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
+  <button type="button" class="absolute right-0 top-0 h-full px-3 text-gray-500 border-l border-gray-300">
+    <i class="fas fa-search"></i>
+  </button>
+</div> 

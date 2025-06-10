@@ -1,0 +1,230 @@
+- title: Academics
+  path: /en-US/academics/
+  children:
+    - title: Formal Sciences
+      path: /en-US/academics/formal-sciences/
+    - title: Humanities
+      path: /en-US/academics/humanities/
+      children:
+        - title: Anthropology
+          path: /en-US/academics/humanities/anthropology/
+        - title: History
+          path: /en-US/academics/humanities/history/
+        - title: Linguistics and Languages
+          path: /en-US/academics/humanities/linguistics-and-languages/
+        - title: Philosophy
+          path: /en-US/academics/humanities/philosophy/
+    - title: Natural Sciences
+      path: /en-US/academics/natural-sciences/
+    - title: Professions and Applied Sciences
+      path: /en-US/academics/professions-and-applied-sciences/
+    - title: Social Sciences
+      path: /en-US/academics/social-sciences/
+
+- title: Business
+  path: /en-US/business/
+  children:
+    - title: Business Law
+      path: /en-US/business/business-law/
+    - title: Communications
+      path: /en-US/business/communications/
+    - title: Data and Analytics
+      path: /en-US/business/data-and-analytics/
+    - title: Entrepreneurship
+      path: /en-US/business/entrepreneurship/
+    - title: Finance
+      path: /en-US/business/finance/
+    - title: Home Business
+      path: /en-US/business/home-business/
+    - title: Human Resources
+      path: /en-US/business/human-resources/
+    - title: Industry
+      path: /en-US/business/industry/
+    - title: Management
+      path: /en-US/business/management/
+    - title: Media
+      path: /en-US/business/media/
+    - title: Operations
+      path: /en-US/business/operations/
+    - title: Project Management
+      path: /en-US/business/project-management/
+    - title: Real Estate
+      path: /en-US/business/real-estate/
+    - title: Sales
+      path: /en-US/business/sales/
+    - title: Strategy
+      path: /en-US/business/strategy/
+
+- title: Computing
+  path: /en-US/computing/
+  children:
+    - title: Big Data
+      path: /en-US/computing/big-data/
+    - title: Computer Information Systems
+      path: /en-US/computing/computer-information-systems/
+    - title: Computer Science
+      path: /en-US/computing/computer-science/
+    - title: Cyber Security
+      path: /en-US/computing/cyber-security/
+    - title: Data Science
+      path: /en-US/computing/data-science/
+    - title: Hardware
+      path: /en-US/computing/hardware/
+    - title: IT Certification
+      path: /en-US/computing/it-certification/
+    - title: Networking
+      path: /en-US/computing/netwoking/
+    - title: Operating Systems
+      path: /en-US/computing/operating-systems/
+
+- title: Design
+  path: /en-US/design/
+  children:
+    - title: 3D and Animation
+      path: /en-US/design/3d-and-animation/
+    - title: Architectural Design
+      path: /en-US/design/architectural-design/
+    - title: Design Thinking
+      path: /en-US/design/design-thinking/
+    - title: Design Tools
+      path: /en-US/design/design-tools/
+    - title: Fashion
+      path: /en-US/design/fashion/
+    - title: Game Design
+      path: /en-US/design/game-design/
+    - title: Graphic Design
+      path: /en-US/design/graphic-design/
+    - title: Interior Design
+      path: /en-US/design/interior-design/
+    - title: User Experience
+      path: /en-US/design/user-experience/
+    - title: Web Design
+      path: /en-US/design/web-design/
+
+- title: Development
+  path: /en-US/development/
+  children:
+    - title: Agile Project Management
+      path: /en-US/development/agile-project-management/
+    - title: Backend Development
+      path: /en-US/development/backend-development/
+    - title: Databases
+      path: /en-US/development/databases/
+    - title: Development Environment
+      path: /en-US/development/development-environment/
+    - title: Development Tools
+      path: /en-US/development/development-tools/
+    - title: E-commerce
+      path: /en-US/development/e-commerce/
+    - title: Frontend Development
+      path: /en-US/development/frontend-development/
+    - title: Game Development
+      path: /en-US/development/game-development/
+    - title: Miscellaneous
+      path: /en-US/development/miscellaneous/
+    - title: Platforms
+      path: /en-US/development/plataforms/
+    - title: Programming Languages
+      path: /en-US/development/programming-languages/
+    - title: Software Engineering
+      path: /en-US/development/software-engineering/
+    - title: Software Testing
+      path: /en-US/development/software-testing/
+    - title: Vulnerabilities
+      path: /en-US/development/vulnerabilities/
+
+- title: Marketing
+  path: /en-US/marketing/
+  children:
+    - title: Advertising
+      path: /en-US/marketing/advertising/
+    - title: Affiliate Marketing
+      path: /en-US/marketing/afiliate-marketing/
+    - title: Analytics and Automation
+      path: /en-US/marketing/analytics-and-automation/
+    - title: Branding
+      path: /en-US/marketing/branding/
+    - title: Content Marketing
+      path: /en-US/marketing/content-marketing/
+    - title: Digital Marketing
+      path: /en-US/marketing/digital-marketing/
+    - title: Growth Hacking
+      path: /en-US/marketing/growth-hacking/
+    - title: Marketing Fundamentals
+      path: /en-US/marketing/marketing-fundamentals/
+    - title: Non-digital Marketing
+      path: /en-US/marketing/non-digital-marketing/
+    - title: Product Marketing
+      path: /en-US/marketing/product-marketing/
+    - title: Public Relations
+      path: /en-US/marketing/public-relations/
+    - title: SEO
+      path: /en-US/marketing/seo/
+    - title: Social Media
+      path: /en-US/marketing/social-media/
+    - title: Video and Mobile Marketing
+      path: /en-US/marketing/video-and-modile-marketing/
+
+- title: Personal Development
+  path: /en-US/personal-development/
+  children:
+    - title: Career Development
+      path: /en-US/personal-development/career-development/
+    - title: Creativity
+      path: /en-US/personal-development/creativity/
+    - title: Happiness
+      path: /en-US/personal-development/happiness/
+    - title: Influence
+      path: /en-US/personal-development/influence/
+    - title: Leadership
+      path: /en-US/personal-development/leadership/
+    - title: Memory and Study Skills
+      path: /en-US/personal-development/memory-and-study-skills/
+    - title: Motivation
+      path: /en-US/personal-development/motivation/
+    - title: Parenting and Relationships
+      path: /en-US/personal-development/parenting-and-relationships/
+    - title: Personal Brand Building
+      path: /en-US/personal-development/-personal-brand-building/
+    - title: Personal Finance
+      path: /en-US/personal-development/personal-finance/
+    - title: Personal Transformation
+      path: /en-US/personal-development/personal-transformation/
+    - title: Productivity
+      path: /en-US/personal-development/productivity/
+    - title: Religion and Spirituality
+      path: /en-US/personal-development/religion-and-spirituality/
+    - title: Self-esteem
+      path: /en-US/personal-development/self-esteem/
+    - title: Stress Management
+      path: /en-US/personal-development/stress-management/
+
+- title: Photography
+  path: /en-US/photography/
+  children:
+    - title: Analogue Photography
+      path: /en-US/photography/analogue-photography/
+    - title: Black and White
+      path: /en-US/photography/blank-and-white/
+    - title: Commercial Photography
+      path: /en-US/photography/commercial-photography/
+    - title: Digital Photography
+      path: /en-US/photography/digital-photography/
+    - title: Landscape
+      path: /en-US/photography/landscape/
+    - title: Mobile Photography
+      path: /en-US/photography/mobile-photography/
+    - title: Photography Fundamentals
+      path: /en-US/photography/photography-fundamentals/
+    - title: Photography Tools
+      path: /en-US/photography/photography-tools/
+    - title: Portraits
+      path: /en-US/photography/portraits/
+    - title: Travel Photography
+      path: /en-US/photography/travel-photography/
+    - title: Video Design
+      path: /en-US/photography/video-design/
+    - title: Wedding Photography
+      path: /en-US/photography/wedding-photography/
+    - title: Wildlife Photography
+      path: /en-US/photography/wild-life-photography/ 

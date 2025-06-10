@@ -1,0 +1,73 @@
+<div class="bg-white border border-gray-200 rounded p-4 sticky top-4">
+  <h2 class="text-xl font-bold text-gray-800 mb-4 pb-2 border-b border-gray-200">{{ include.title | default: "Quick Links" }}</h2>
+  
+  <nav class="space-y-1">
+    {% assign current_lang = page.lang | default: 'en-US' %}
+    {% assign lang_prefix = '/' | append: current_lang %}
+    
+    {% for item in include.items %}
+      <a href="{{ item.url }}" 
+         class="block py-2 px-3 rounded {% if page.url == item.url %}bg-blue-50 text-blue-700 font-medium{% else %}hover:bg-gray-50 text-gray-700{% endif %}"
+         {% if item.hx_get %}hx-get="{{ item.hx_get }}"{% endif %}
+         {% if item.hx_target %}hx-target="{{ item.hx_target }}"{% endif %}>
+        {% if item.icon %}<i class="fas fa-{{ item.icon }} mr-2"></i>{% endif %}
+        {{ item.title }}
+      </a>
+    {% endfor %}
+    
+    {% if include.items == nil %}
+      <!-- Default navigation items if none provided -->
+      {% if current_lang == 'pt-BR' %}
+        <a href="/pt-BR/categorias" class="block py-2 px-3 rounded {% if page.url contains '/categorias' %}bg-blue-50 text-blue-700 font-medium{% else %}hover:bg-gray-50 text-gray-700{% endif %}">
+          <i class="fas fa-folder mr-2"></i> Navegar por Categorias
+        </a>
+        <a href="/pt-BR/recursos-destaque" class="block py-2 px-3 rounded {% if page.url contains '/recursos-destaque' %}bg-blue-50 text-blue-700 font-medium{% else %}hover:bg-gray-50 text-gray-700{% endif %}">
+          <i class="fas fa-star mr-2"></i> Recursos em Destaque
+        </a>
+        <a href="/pt-BR/alteracoes-recentes" class="block py-2 px-3 rounded {% if page.url contains '/alteracoes-recentes' %}bg-blue-50 text-blue-700 font-medium{% else %}hover:bg-gray-50 text-gray-700{% endif %}">
+          <i class="fas fa-history mr-2"></i> Mudanças Recentes
+        </a>
+        <a href="/pt-BR/portal-comunidade" class="block py-2 px-3 rounded {% if page.url contains '/portal-comunidade' %}bg-blue-50 text-blue-700 font-medium{% else %}hover:bg-gray-50 text-gray-700{% endif %}">
+          <i class="fas fa-users mr-2"></i> Portal da Comunidade
+        </a>
+        <a href="/pt-BR/recurso-aleatorio" class="block py-2 px-3 rounded {% if page.url contains '/recurso-aleatorio' %}bg-blue-50 text-blue-700 font-medium{% else %}hover:bg-gray-50 text-gray-700{% endif %}">
+          <i class="fas fa-random mr-2"></i> Recurso Aleatório
+        </a>
+        <a href="/pt-BR/contribuir" class="block py-2 px-3 rounded {% if page.url contains '/contribuir' %}bg-blue-50 text-blue-700 font-medium{% else %}hover:bg-gray-50 text-gray-700{% endif %}">
+          <i class="fas fa-plus-circle mr-2"></i> Contribuir com Recursos
+        </a>
+        <a href="/pt-BR/ajuda" class="block py-2 px-3 rounded {% if page.url contains '/ajuda' %}bg-blue-50 text-blue-700 font-medium{% else %}hover:bg-gray-50 text-gray-700{% endif %}">
+          <i class="fas fa-question-circle mr-2"></i> Ajuda e Documentação
+        </a>
+        <a href="/pt-BR/contato" class="block py-2 px-3 rounded {% if page.url contains '/contato' %}bg-blue-50 text-blue-700 font-medium{% else %}hover:bg-gray-50 text-gray-700{% endif %}">
+          <i class="fas fa-envelope mr-2"></i> Contatar Administradores
+        </a>
+      {% else %}
+        <a href="/en-US/categories" class="block py-2 px-3 rounded {% if page.url contains '/categories' %}bg-blue-50 text-blue-700 font-medium{% else %}hover:bg-gray-50 text-gray-700{% endif %}">
+          <i class="fas fa-folder mr-2"></i> Browse Categories
+        </a>
+        <a href="/en-US/featured-resources" class="block py-2 px-3 rounded {% if page.url contains '/featured-resources' %}bg-blue-50 text-blue-700 font-medium{% else %}hover:bg-gray-50 text-gray-700{% endif %}">
+          <i class="fas fa-star mr-2"></i> Featured Resources
+        </a>
+        <a href="/en-US/recent-changes" class="block py-2 px-3 rounded {% if page.url contains '/recent-changes' %}bg-blue-50 text-blue-700 font-medium{% else %}hover:bg-gray-50 text-gray-700{% endif %}">
+          <i class="fas fa-history mr-2"></i> Recent Changes
+        </a>
+        <a href="/en-US/community-portal" class="block py-2 px-3 rounded {% if page.url contains '/community-portal' %}bg-blue-50 text-blue-700 font-medium{% else %}hover:bg-gray-50 text-gray-700{% endif %}">
+          <i class="fas fa-users mr-2"></i> Community Portal
+        </a>
+        <a href="/en-US/random-resource" class="block py-2 px-3 rounded {% if page.url contains '/random-resource' %}bg-blue-50 text-blue-700 font-medium{% else %}hover:bg-gray-50 text-gray-700{% endif %}">
+          <i class="fas fa-random mr-2"></i> Random Resource
+        </a>
+        <a href="/en-US/contribute" class="block py-2 px-3 rounded {% if page.url contains '/contribute' %}bg-blue-50 text-blue-700 font-medium{% else %}hover:bg-gray-50 text-gray-700{% endif %}">
+          <i class="fas fa-plus-circle mr-2"></i> Contribute Resources
+        </a>
+        <a href="/en-US/help" class="block py-2 px-3 rounded {% if page.url contains '/help' %}bg-blue-50 text-blue-700 font-medium{% else %}hover:bg-gray-50 text-gray-700{% endif %}">
+          <i class="fas fa-question-circle mr-2"></i> Help & Documentation
+        </a>
+        <a href="/en-US/contact" class="block py-2 px-3 rounded {% if page.url contains '/contact' %}bg-blue-50 text-blue-700 font-medium{% else %}hover:bg-gray-50 text-gray-700{% endif %}">
+          <i class="fas fa-envelope mr-2"></i> Contact Administrators
+        </a>
+      {% endif %}
+    {% endif %}
+  </nav>
+</div> 

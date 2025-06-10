@@ -2,103 +2,26 @@
 <html lang="{{ page.lang | default: site.lang | default: "en" }}">
 
   <head>
-    {% include meta.html %}
-    {% include javascript.html %}
-    {% include css.html %}
-    {% include tracking.html %}
+    {% include components/atoms/head.html 
+      title=page.title 
+      description=page.description 
+    %}
   </head>
 
-<body id="example" ontouchstart="">
-<div class="pusher">
-  <div class="full height" >
-    <div class="toc">
-      <div class="ui vertical inverted sticky menu">
-          {% include site-menu.html %}
-      </div>
-    </div>
-    <div class="article">
-        {{ content }}
-    </div>
-  </div>
-  {% include footer.html %}
-</div>
-<script>
-$.fn.mla = function(options) {
-  var $sidebar = $(this);
-  var defaults = {
-    anchor: "a",
-    activeClass: "expended",
-    hasClass: "contained",
-    hasIconClass: "ico",
-    activeHtml: "+",
-    inActiveHtml: "-",
-    onActive: function() {},
-    onDeactive: function() {}
-  };
-  var settings = $.extend(defaults, options);
-  var $a = $sidebar.find(settings.anchor);
-  var $ul = $sidebar.find("ul");
-  $ul.hide();
-  $ul.eq(0).show();
-  // click
-  $a.on("click", function(e) {
-    var $this = $(this);
-    var $li = $this.closest("li");
-    var $siblings = $li.siblings();
-    var $childrens = $li.children("ul").length;
-    if (!$li.hasClass(settings.activeClass)) {
-      if ($childrens > 0) {
-        e.preventDefault();
-        $siblings.removeClass(settings.activeClass);
-        $siblings.find("li").removeClass(settings.activeClass);
-        $li.addClass(settings.activeClass);
-        $siblings.find("ul").slideUp();
-        $li.children("ul").slideDown();
-        $siblings
-          .find("a > ." + settings.hasIconClass)
-          .html(settings.activeHtml);
-        $this.find("." + settings.hasIconClass).html(settings.inActiveHtml);
-        settings.onActive.call(this);
-      }
-    } else {
-      e.preventDefault();
-      $siblings.removeClass(settings.activeClass);
-      $siblings.find("li").removeClass(settings.activeClass);
-      $li.removeClass(settings.activeClass);
-      $li.children("ul").slideUp();
-      $this.find("." + settings.hasIconClass).html(settings.activeHtml);
-      settings.onDeactive.call(this);
-    }
-  });
-  // load
-  $(window).on("load", function() {
-    $a.each(function() {
-      if (
-        $(this)
-          .closest("li")
-          .children("ul").length > 0
-      ) {
-        $(this)
-          .closest("li")
-          .addClass(settings.hasClass);
-        $(this)
-          .closest("li > a")
-          .prepend(
-            "<span class='" +
-              settings.hasIconClass +
-              "'>" +
-              settings.activeHtml +
-              "</span>"
-          );
-      }
-    });
-  });
-};
+<body class="bg-gray-50 min-h-screen flex flex-col">
+  <!-- Header -->
+  {% include components/organisms/header.html %}
 
-$(".menu").mla();
-</script>
-{% include language-modal.html %}
-{% include less.html %}
+  <!-- Main content -->
+  <main class="flex-grow">
+        {{ content }}
+  </main>
+
+  <!-- Footer -->
+  {% include components/organisms/footer.html %}
+
+  <!-- Scripts -->
+  <script src="/javascript/main.js"></script>
 </body>
 
 </html>

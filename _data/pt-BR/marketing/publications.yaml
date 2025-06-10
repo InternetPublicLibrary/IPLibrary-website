@@ -1,0 +1,33 @@
+# Publicações relacionadas a marketing
+- title: "Meio & Mensagem"
+  url: "https://www.meioemensagem.com.br/"
+  description: "Principal publicação brasileira sobre comunicação, marketing e mídia, com reportagens e análises do mercado."
+  tags:
+    - comunicação
+    - publicidade
+    - mídia
+  access: "Parcialmente pago"
+  rank: 1
+  last_updated: 2024-01-03
+
+- title: "ProXXIma"
+  url: "https://www.proxxima.com.br/"
+  description: "Publicação brasileira focada em marketing digital, transformação digital e inovação."
+  tags:
+    - marketing digital
+    - inovação
+    - tecnologia
+  access: "Parcialmente pago"
+  rank: 2
+  last_updated: 2024-01-08
+
+- title: "Mundo do Marketing"
+  url: "https://www.mundodomarketing.com.br/"
+  description: "Portal de notícias e informações sobre marketing, branding e comunicação."
+  tags:
+    - branding
+    - comunicação
+    - tendências
+  access: "Gratuito"
+  rank: 3
+  last_updated: 2024-01-12 

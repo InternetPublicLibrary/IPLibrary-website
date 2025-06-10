@@ -1,0 +1,56 @@
+{% comment %}
+  Avatar Component
+  Usage:
+  {% include components/atoms/avatar.html src="/path/to/image.jpg" initials="JD" size="md" status="online" %}
+  
+  Parameters:
+  - src: Path to avatar image (optional)
+  - initials: User initials, used if no src provided
+  - size: Size of avatar (xs, sm, md, lg, xl, default: md)
+  - status: User status (online, offline, away, optional)
+{% endcomment %}
+
+{% assign size_class = "" %}
+{% assign initials_size = "" %}
+
+{% case include.size %}
+  {% when "xs" %}
+    {% assign size_class = "w-6 h-6" %}
+    {% assign initials_size = "text-xs" %}
+  {% when "sm" %}
+    {% assign size_class = "w-8 h-8" %}
+    {% assign initials_size = "text-sm" %}
+  {% when "lg" %}
+    {% assign size_class = "w-12 h-12" %}
+    {% assign initials_size = "text-lg" %}
+  {% when "xl" %}
+    {% assign size_class = "w-16 h-16" %}
+    {% assign initials_size = "text-xl" %}
+  {% else %}
+    {% assign size_class = "w-10 h-10" %}
+    {% assign initials_size = "text-base" %}
+{% endcase %}
+
+<div class="relative inline-flex">
+  {% if include.src %}
+    <img src="{{ include.src }}" alt="Avatar" class="{{ size_class }} rounded-full object-cover border border-gray-200">
+  {% else %}
+    <div class="{{ size_class }} rounded-full bg-gray-200 flex items-center justify-center border border-gray-300">
+      <span class="{{ initials_size }} font-medium text-gray-700">{{ include.initials | default: "?" }}</span>
+    </div>
+  {% endif %}
+  
+  {% if include.status %}
+    {% assign status_color = "bg-gray-400" %}
+    {% case include.status %}
+      {% when "online" %}
+        {% assign status_color = "bg-green-500" %}
+      {% when "offline" %}
+        {% assign status_color = "bg-gray-400" %}
+      {% when "away" %}
+        {% assign status_color = "bg-yellow-500" %}
+    {% endcase %}
+    
+    <span class="absolute bottom-0 right-0 block rounded-full border-2 border-white {{ status_color }}" style="width:25%; height:25%;"></span>
+  {% endif %}
+</div> 

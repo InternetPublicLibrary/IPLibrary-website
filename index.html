@@ -1,563 +1,110 @@
 ---
-layout: default
-status: Publish
-title: Welcome to IPL3
-description: A piece of the internet public, cataloged and searchable. Contribute.
+layout: null
 ---
-
-{% include header.html %}
-
-<div class="main ui container">
-
-  <h2 class="ui dividing header">What is?</h2>
-
-  <div class="example">
-    <h4 class="ui header">Statistic</h4>
-    <p>A statistic can display a value with a label above or below it.</p>
-    <div class="ui statistic">
-      <div class="value">
-        5,550
-      </div>
-      <div class="label">
-        Downloads
-      </div>
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Internet Public Library - Redirecting...</title>
+  <script>
+    // Function to detect browser language and redirect accordingly
+    function redirectToLocalizedPage() {
+      // Get browser language
+      var language = navigator.language || navigator.userLanguage;
+      language = language.toLowerCase();
+      
+      // Default path
+      var redirectPath = '/en-US/';
+      
+      // Check if language is Portuguese (Brazil)
+      if (language.indexOf('pt-br') !== -1 || language.indexOf('pt') !== -1) {
+        redirectPath = '/pt-BR/';
+      }
+      
+      // Get user's preferred language from localStorage if available
+      var storedLanguage = localStorage.getItem('preferred_language');
+      if (storedLanguage) {
+        redirectPath = '/' + storedLanguage + '/';
+      }
+      
+      // Redirect to the appropriate language version
+      window.location.href = redirectPath;
+    }
+    
+    // Execute redirection on page load
+    window.onload = redirectToLocalizedPage;
+  </script>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background-color: #f8f9fa;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+      padding: 20px;
+      box-sizing: border-box;
+    }
+    .container {
+      max-width: 600px;
+      text-align: center;
+      background-color: white;
+      padding: 30px;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+    h1 {
+      color: #2563eb;
+      margin-top: 0;
+    }
+    p {
+      color: #4b5563;
+      margin-bottom: 20px;
+      line-height: 1.5;
+    }
+    .links {
+      margin-top: 30px;
+    }
+    a {
+      display: inline-block;
+      margin: 0 10px;
+      padding: 10px 20px;
+      background-color: #2563eb;
+      color: white;
+      text-decoration: none;
+      border-radius: 4px;
+      font-weight: 500;
+      transition: background-color 0.2s;
+    }
+    a:hover {
+      background-color: #1d4ed8;
+    }
+    .spinner {
+      border: 4px solid rgba(0, 0, 0, 0.1);
+      border-radius: 50%;
+      border-top: 4px solid #2563eb;
+      width: 40px;
+      height: 40px;
+      animation: spin 1s linear infinite;
+      margin: 20px auto;
+    }
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Internet Public Library</h1>
+    <p>Redirecting you to the appropriate language version...</p>
+    <div class="spinner"></div>
+    <p>If you are not redirected automatically, please choose your language:</p>
+    <div class="links">
+      <a href="/en-US/">English (US)</a>
+      <a href="/pt-BR/">Português (Brasil)</a>
     </div>
   </div>
-  <div class="another example">
-    <div class="ui statistic">
-      <div class="label">
-        Views
-      </div>
-      <div class="value">
-        40,509
-      </div>
-    </div>
-  </div>
-
-  <div class="example">
-    <h4 class="ui header">Statistic Group</h4>
-    <p>A group of statistics</p>
-    <div class="ui statistics">
-      <div class="statistic">
-        <div class="value">
-          22
-        </div>
-        <div class="label">
-          Faves
-        </div>
-      </div>
-      <div class="statistic">
-        <div class="value">
-          31,200
-        </div>
-        <div class="label">
-          Views
-        </div>
-      </div>
-      <div class="statistic">
-        <div class="value">
-          22
-        </div>
-        <div class="label">
-          Members
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <h2 class="ui dividing header">Content</h2>
-
-  <div class="example">
-    <h4 class="ui header">Value</h4>
-    <p>A statistic can contain a numeric, icon, image, or text value</p>
-    <div class="ui statistics">
-      <div class="statistic">
-        <div class="value">
-          22
-        </div>
-        <div class="label">
-          Saves
-        </div>
-      </div>
-      <div class="statistic">
-        <div class="text value">
-          Three<br>
-          Thousand
-        </div>
-        <div class="label">
-          Signups
-        </div>
-      </div>
-      <div class="statistic">
-        <div class="value">
-          <i class="plane icon"></i> 5
-        </div>
-        <div class="label">
-          Flights
-        </div>
-      </div>
-      <div class="statistic">
-        <div class="value">
-          <img src="/images/avatar/small/joe.jpg" class="ui circular inline image">
-          42
-        </div>
-        <div class="label">
-          Team Members
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="example">
-    <h4 class="ui header">Label</h4>
-    <p>A statistic can contain a label to help provide context for the presented value</p>
-    <div class="ui statistic">
-      <div class="value">
-        2,204
-      </div>
-      <div class="label">
-        Views
-      </div>
-    </div>
-  </div>
-
-
-  <h2 class="ui dividing header">Variations</h2>
-
-  <div class="example">
-    <h4 class="ui header">Horizontal Statistic</h4>
-    <p>A statistic can present its measurement horizontally</p>
-    <div class="ui horizontal statistic">
-      <div class="value">
-        2,204
-      </div>
-      <div class="label">
-        Views
-      </div>
-    </div>
-  </div>
-  <div class="another example">
-    <div class="ui horizontal statistics">
-      <div class="statistic">
-        <div class="value">
-          2,204
-        </div>
-        <div class="label">
-          Views
-        </div>
-      </div>
-      <div class="statistic">
-        <div class="value">
-          3,322
-        </div>
-        <div class="label">
-          Downloads
-        </div>
-      </div>
-      <div class="statistic">
-        <div class="value">
-          22
-        </div>
-        <div class="label">
-          Tasks
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="example">
-    <h4 class="ui header">Colored</h4>
-    <p>A statistic can be formatted to be different colors</p>
-    <div class="ui statistics">
-      <div class="red statistic">
-        <div class="value">
-          27
-        </div>
-        <div class="label">
-          Red
-        </div>
-      </div>
-      <div class="orange statistic">
-        <div class="value">
-          8
-        </div>
-        <div class="label">
-          Orange
-        </div>
-      </div>
-      <div class="yellow statistic">
-        <div class="value">
-          28
-        </div>
-        <div class="label">
-          Yellow
-        </div>
-      </div>
-      <div class="olive statistic">
-        <div class="value">
-          7
-        </div>
-        <div class="label">
-          Olive
-        </div>
-      </div>
-      <div class="green statistic">
-        <div class="value">
-          14
-        </div>
-        <div class="label">
-          Green
-        </div>
-      </div>
-      <div class="teal statistic">
-        <div class="value">
-          82
-        </div>
-        <div class="label">
-          Teal
-        </div>
-      </div>
-      <div class="blue statistic">
-        <div class="value">
-          1
-        </div>
-        <div class="label">
-          Blue
-        </div>
-      </div>
-      <div class="violet statistic">
-        <div class="value">
-          22
-        </div>
-        <div class="label">
-          Violet
-        </div>
-      </div>
-      <div class="purple statistic">
-        <div class="value">
-          23
-        </div>
-        <div class="label">
-          Purple
-        </div>
-      </div>
-      <div class="pink statistic">
-        <div class="value">
-          15
-        </div>
-        <div class="label">
-          Pink
-        </div>
-      </div>
-      <div class="brown statistic">
-        <div class="value">
-          36
-        </div>
-        <div class="label">
-          Brown
-        </div>
-      </div>
-      <div class="grey statistic">
-        <div class="value">
-          49
-        </div>
-        <div class="label">
-          Grey
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="example">
-    <h4 class="ui header">Inverted</h4>
-    <p>A statistic can be formatted to fit on a dark background</p>
-    <div class="ui inverted segment">
-      <div class="ui inverted statistic">
-        <div class="value">
-          54
-        </div>
-        <div class="label">
-          Inverted
-        </div>
-      </div>
-      <div class="ui red inverted statistic">
-        <div class="value">
-          27
-        </div>
-        <div class="label">
-          Red
-        </div>
-      </div>
-      <div class="ui orange inverted statistic">
-        <div class="value">
-          8
-        </div>
-        <div class="label">
-          Orange
-        </div>
-      </div>
-      <div class="ui yellow inverted statistic">
-        <div class="value">
-          28
-        </div>
-        <div class="label">
-          Yellow
-        </div>
-      </div>
-      <div class="ui olive inverted statistic">
-        <div class="value">
-          7
-        </div>
-        <div class="label">
-          Olive
-        </div>
-      </div>
-        <div class="ui green inverted statistic">
-        <div class="value">
-          14
-        </div>
-        <div class="label">
-          Green
-        </div>
-      </div>
-      <div class="ui teal inverted statistic">
-        <div class="value">
-          82
-        </div>
-        <div class="label">
-          Teal
-        </div>
-      </div>
-      <div class="ui blue inverted statistic">
-        <div class="value">
-          1
-        </div>
-        <div class="label">
-          Blue
-        </div>
-      </div>
-      <div class="ui violet inverted statistic">
-        <div class="value">
-          22
-        </div>
-        <div class="label">
-          Violet
-        </div>
-      </div>
-      <div class="ui purple inverted statistic">
-        <div class="value">
-          23
-        </div>
-        <div class="label">
-          Purple
-        </div>
-      </div>
-      <div class="ui pink inverted statistic">
-        <div class="value">
-          15
-        </div>
-        <div class="label">
-          Pink
-        </div>
-      </div>
-      <div class="ui brown inverted statistic">
-        <div class="value">
-          36
-        </div>
-        <div class="label">
-          Brown
-        </div>
-      </div>
-      <div class="ui grey inverted statistic">
-        <div class="value">
-          49
-        </div>
-        <div class="label">
-          Grey
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="example">
-    <h4 class="ui header">Evenly Divided</h4>
-    <p>A statistic group can have its items divided evenly</p>
-    <div class="ui four statistics">
-      <div class="statistic">
-        <div class="value">
-          22
-        </div>
-        <div class="label">
-          Saves
-        </div>
-      </div>
-      <div class="statistic">
-        <div class="text value">
-          Three<br>
-          Thousand
-        </div>
-        <div class="label">
-          Signups
-        </div>
-      </div>
-      <div class="statistic">
-        <div class="value">
-          <i class="plane icon"></i> 5
-        </div>
-        <div class="label">
-          Flights
-        </div>
-      </div>
-      <div class="statistic">
-        <div class="value">
-          <img src="/images/avatar/small/joe.jpg" class="ui circular inline image">
-          42
-        </div>
-        <div class="label">
-          Team Members
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="example">
-    <h4 class="ui header">Floated</h4>
-    <p>An statistic can sit to the left or right of other content</p>
-
-    <div class="ui segment">
-      <div class="ui right floated statistic">
-        <div class="value">
-          2,204
-        </div>
-        <div class="label">
-          Views
-        </div>
-      </div>
-      <p>Te eum doming eirmod, nominati pertinacia argumentum ad his. Ex eam alia facete scriptorem, est autem aliquip detraxit at. Usu ocurreret referrentur at, cu epicurei appellantur vix. Cum ea laoreet recteque electram, eos choro alterum definiebas in. Vim dolorum definiebas an. Mei ex natum rebum iisque.</p>
-
-      <p>Audiam quaerendum eu sea, pro omittam definiebas ex. Te est latine definitiones. Quot wisi nulla ex duo. Vis sint solet expetenda ne, his te phaedrum referrentur consectetuer. Id vix fabulas oporteat, ei quo vide phaedrum, vim vivendum maiestatis in.</p>
-
-      <div class="ui left floated statistic">
-        <div class="value">
-          2,204
-        </div>
-        <div class="label">
-          Views
-        </div>
-      </div>
-      <p>Eu quo homero blandit intellegebat. Incorrupte consequuntur mei id. Mei ut facer dolores adolescens, no illum aperiri quo, usu odio brute at. Qui te porro electram, ea dico facete utroque quo. Populo quodsi te eam, wisi everti eos ex, eum elitr altera utamur at. Quodsi convenire mnesarchum eu per, quas minimum postulant per id.</p>
-
-      <p>Audiam quaerendum eu sea, pro omittam definiebas ex. Te est latine definitiones. Quot wisi nulla ex duo. Vis sint solet expetenda ne, his te phaedrum referrentur consectetuer. Id vix fabulas oporteat, ei quo vide phaedrum, vim vivendum maiestatis in.</p>
-
-    </div>
-  </div>
-
-  <div class="example">
-    <h4 class="ui header">Size</h4>
-    <p>A statistic can vary in size</p>
-    <div class="ui mini statistic">
-      <div class="value">
-        2,204
-      </div>
-      <div class="label">
-        Views
-      </div>
-    </div>
-    <div class="ui tiny statistic">
-      <div class="value">
-        2,204
-      </div>
-      <div class="label">
-        Views
-      </div>
-    </div>
-    <div class="ui small statistic">
-      <div class="value">
-        2,204
-      </div>
-      <div class="label">
-        Views
-      </div>
-    </div>
-    <div class="ui statistic">
-      <div class="value">
-        2,204
-      </div>
-      <div class="label">
-        Views
-      </div>
-    </div>
-    <div class="ui large statistic">
-      <div class="value">
-        2,204
-      </div>
-      <div class="label">
-        Views
-      </div>
-    </div>
-    <div class="ui huge statistic">
-      <div class="value">
-        2,204
-      </div>
-      <div class="label">
-        Views
-      </div>
-    </div>
-  </div>
-  <div class="another example">
-    <div class="ui ignored divider"></div>
-    <div class="ui mini horizontal statistic">
-      <div class="value">
-        2,204
-      </div>
-      <div class="label">
-        Views
-      </div>
-    </div>
-    <div class="ui ignored divider"></div>
-    <div class="ui tiny horizontal statistic">
-      <div class="value">
-        2,204
-      </div>
-      <div class="label">
-        Views
-      </div>
-    </div>
-    <div class="ui ignored divider"></div>
-    <div class="ui small horizontal statistic">
-      <div class="value">
-        2,204
-      </div>
-      <div class="label">
-        Views
-      </div>
-    </div>
-    <div class="ui ignored divider"></div>
-    <div class="ui horizontal statistic">
-      <div class="value">
-        2,204
-      </div>
-      <div class="label">
-        Views
-      </div>
-    </div>
-    <div class="ui ignored divider"></div>
-    <div class="ui large horizontal statistic">
-      <div class="value">
-        2,204
-      </div>
-      <div class="label">
-        Views
-      </div>
-    </div>
-    <div class="ui ignored divider"></div>
-    <div class="ui huge horizontal statistic">
-      <div class="value">
-        2,204
-      </div>
-      <div class="label">
-        Views
-      </div>
-    </div>
-  </div>
-
-</div>
+</body>
+</html>

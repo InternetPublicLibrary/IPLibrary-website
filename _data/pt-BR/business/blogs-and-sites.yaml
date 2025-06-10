@@ -1,0 +1,33 @@
+# Blogs e sites relacionados a negócios
+- title: "Harvard Business Review Brasil"
+  url: "https://hbrbr.com.br/"
+  description: "Artigos sobre gestão, liderança e estratégia de negócios traduzidos da HBR americana."
+  tags:
+    - gestão
+    - liderança
+    - estratégia
+  access: "Parcialmente pago"
+  rank: 1
+  last_updated: 2024-01-05
+
+- title: "InfoMoney"
+  url: "https://www.infomoney.com.br/"
+  description: "Portal de notícias e análises sobre investimentos, finanças e economia."
+  tags:
+    - finanças
+    - investimentos
+    - economia
+  access: "Gratuito"
+  rank: 2
+  last_updated: 2024-01-10
+
+- title: "Exame"
+  url: "https://exame.com/"
+  description: "Revista e portal de notícias sobre negócios, economia, tecnologia e carreira."
+  tags:
+    - negócios
+    - economia
+    - carreira
+  access: "Parcialmente pago"
+  rank: 3
+  last_updated: 2024-01-15 

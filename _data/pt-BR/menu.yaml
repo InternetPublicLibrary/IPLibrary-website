@@ -1,0 +1,230 @@
+- title: Acadêmicos
+  path: /pt-BR/academics/
+  children:
+    - title: Ciências Formais
+      path: /pt-BR/academics/formal-sciences/
+    - title: Humanidades
+      path: /pt-BR/academics/humanities/
+      children:
+        - title: Antropologia
+          path: /pt-BR/academics/humanities/anthropology/
+        - title: História
+          path: /pt-BR/academics/humanities/history/
+        - title: Linguística e Idiomas
+          path: /pt-BR/academics/humanities/linguistics-and-languages/
+        - title: Filosofia
+          path: /pt-BR/academics/humanities/philosophy/
+    - title: Ciências Naturais
+      path: /pt-BR/academics/natural-sciences/
+    - title: Profissões e Ciências Aplicadas
+      path: /pt-BR/academics/professions-and-applied-sciences/
+    - title: Ciências Sociais
+      path: /pt-BR/academics/social-sciences/
+
+- title: Negócios
+  path: /pt-BR/business/
+  children:
+    - title: Direito Empresarial
+      path: /pt-BR/business/business-law/
+    - title: Comunicações
+      path: /pt-BR/business/communications/
+    - title: Dados e Análises
+      path: /pt-BR/business/data-and-analytics/
+    - title: Empreendedorismo
+      path: /pt-BR/business/entrepreneurship/
+    - title: Finanças
+      path: /pt-BR/business/finance/
+    - title: Negócios Domésticos
+      path: /pt-BR/business/home-business/
+    - title: Recursos Humanos
+      path: /pt-BR/business/human-resources/
+    - title: Indústria
+      path: /pt-BR/business/industry/
+    - title: Gestão
+      path: /pt-BR/business/management/
+    - title: Mídia
+      path: /pt-BR/business/media/
+    - title: Operações
+      path: /pt-BR/business/operations/
+    - title: Gerenciamento de Projetos
+      path: /pt-BR/business/project-management/
+    - title: Imóveis
+      path: /pt-BR/business/real-estate/
+    - title: Vendas
+      path: /pt-BR/business/sales/
+    - title: Estratégia
+      path: /pt-BR/business/strategy/
+
+- title: Computação
+  path: /pt-BR/computing/
+  children:
+    - title: Big Data
+      path: /pt-BR/computing/big-data/
+    - title: Sistemas de Informação
+      path: /pt-BR/computing/computer-information-systems/
+    - title: Ciência da Computação
+      path: /pt-BR/computing/computer-science/
+    - title: Segurança Cibernética
+      path: /pt-BR/computing/cyber-security/
+    - title: Ciência de Dados
+      path: /pt-BR/computing/data-science/
+    - title: Hardware
+      path: /pt-BR/computing/hardware/
+    - title: Certificação em TI
+      path: /pt-BR/computing/it-certification/
+    - title: Redes
+      path: /pt-BR/computing/netwoking/
+    - title: Sistemas Operacionais
+      path: /pt-BR/computing/operating-systems/
+
+- title: Design
+  path: /pt-BR/design/
+  children:
+    - title: 3D e Animação
+      path: /pt-BR/design/3d-and-animation/
+    - title: Design Arquitetônico
+      path: /pt-BR/design/architectural-design/
+    - title: Design Thinking
+      path: /pt-BR/design/design-thinking/
+    - title: Ferramentas de Design
+      path: /pt-BR/design/design-tools/
+    - title: Moda
+      path: /pt-BR/design/fashion/
+    - title: Design de Jogos
+      path: /pt-BR/design/game-design/
+    - title: Design Gráfico
+      path: /pt-BR/design/graphic-design/
+    - title: Design de Interiores
+      path: /pt-BR/design/interior-design/
+    - title: Experiência do Usuário
+      path: /pt-BR/design/user-experience/
+    - title: Web Design
+      path: /pt-BR/design/web-design/
+
+- title: Desenvolvimento
+  path: /pt-BR/development/
+  children:
+    - title: Gerenciamento Ágil de Projetos
+      path: /pt-BR/development/agile-project-management/
+    - title: Desenvolvimento Backend
+      path: /pt-BR/development/backend-development/
+    - title: Bancos de Dados
+      path: /pt-BR/development/databases/
+    - title: Ambiente de Desenvolvimento
+      path: /pt-BR/development/development-environment/
+    - title: Ferramentas de Desenvolvimento
+      path: /pt-BR/development/development-tools/
+    - title: E-commerce
+      path: /pt-BR/development/e-commerce/
+    - title: Desenvolvimento Frontend
+      path: /pt-BR/development/frontend-development/
+    - title: Desenvolvimento de Jogos
+      path: /pt-BR/development/game-development/
+    - title: Diversos
+      path: /pt-BR/development/miscellaneous/
+    - title: Plataformas
+      path: /pt-BR/development/plataforms/
+    - title: Linguagens de Programação
+      path: /pt-BR/development/programming-languages/
+    - title: Engenharia de Software
+      path: /pt-BR/development/software-engineering/
+    - title: Testes de Software
+      path: /pt-BR/development/software-testing/
+    - title: Vulnerabilidades
+      path: /pt-BR/development/vulnerabilities/
+
+- title: Marketing
+  path: /pt-BR/marketing/
+  children:
+    - title: Publicidade
+      path: /pt-BR/marketing/advertising/
+    - title: Marketing de Afiliados
+      path: /pt-BR/marketing/afiliate-marketing/
+    - title: Análise e Automação
+      path: /pt-BR/marketing/analytics-and-automation/
+    - title: Branding
+      path: /pt-BR/marketing/branding/
+    - title: Marketing de Conteúdo
+      path: /pt-BR/marketing/content-marketing/
+    - title: Marketing Digital
+      path: /pt-BR/marketing/digital-marketing/
+    - title: Growth Hacking
+      path: /pt-BR/marketing/growth-hacking/
+    - title: Fundamentos de Marketing
+      path: /pt-BR/marketing/marketing-fundamentals/
+    - title: Marketing Não-digital
+      path: /pt-BR/marketing/non-digital-marketing/
+    - title: Marketing de Produto
+      path: /pt-BR/marketing/product-marketing/
+    - title: Relações Públicas
+      path: /pt-BR/marketing/public-relations/
+    - title: SEO
+      path: /pt-BR/marketing/seo/
+    - title: Mídias Sociais
+      path: /pt-BR/marketing/social-media/
+    - title: Marketing de Vídeo e Mobile
+      path: /pt-BR/marketing/video-and-modile-marketing/
+
+- title: Desenvolvimento Pessoal
+  path: /pt-BR/personal-development/
+  children:
+    - title: Desenvolvimento de Carreira
+      path: /pt-BR/personal-development/career-development/
+    - title: Criatividade
+      path: /pt-BR/personal-development/creativity/
+    - title: Felicidade
+      path: /pt-BR/personal-development/happiness/
+    - title: Influência
+      path: /pt-BR/personal-development/influence/
+    - title: Liderança
+      path: /pt-BR/personal-development/leadership/
+    - title: Memória e Habilidades de Estudo
+      path: /pt-BR/personal-development/memory-and-study-skills/
+    - title: Motivação
+      path: /pt-BR/personal-development/motivation/
+    - title: Paternidade e Relacionamentos
+      path: /pt-BR/personal-development/parenting-and-relationships/
+    - title: Construção de Marca Pessoal
+      path: /pt-BR/personal-development/-personal-brand-building/
+    - title: Finanças Pessoais
+      path: /pt-BR/personal-development/personal-finance/
+    - title: Transformação Pessoal
+      path: /pt-BR/personal-development/personal-transformation/
+    - title: Produtividade
+      path: /pt-BR/personal-development/productivity/
+    - title: Religião e Espiritualidade
+      path: /pt-BR/personal-development/religion-and-spirituality/
+    - title: Autoestima
+      path: /pt-BR/personal-development/self-esteem/
+    - title: Gerenciamento de Estresse
+      path: /pt-BR/personal-development/stress-management/
+
+- title: Fotografia
+  path: /pt-BR/photography/
+  children:
+    - title: Fotografia Analógica
+      path: /pt-BR/photography/analogue-photography/
+    - title: Preto e Branco
+      path: /pt-BR/photography/blank-and-white/
+    - title: Fotografia Comercial
+      path: /pt-BR/photography/commercial-photography/
+    - title: Fotografia Digital
+      path: /pt-BR/photography/digital-photography/
+    - title: Paisagem
+      path: /pt-BR/photography/landscape/
+    - title: Fotografia Mobile
+      path: /pt-BR/photography/mobile-photography/
+    - title: Fundamentos de Fotografia
+      path: /pt-BR/photography/photography-fundamentals/
+    - title: Ferramentas de Fotografia
+      path: /pt-BR/photography/photography-tools/
+    - title: Retratos
+      path: /pt-BR/photography/portraits/
+    - title: Fotografia de Viagem
+      path: /pt-BR/photography/travel-photography/
+    - title: Design de Vídeo
+      path: /pt-BR/photography/video-design/
+    - title: Fotografia de Casamento
+      path: /pt-BR/photography/wedding-photography/
+    - title: Fotografia de Vida Selvagem
+      path: /pt-BR/photography/wild-life-photography/ 

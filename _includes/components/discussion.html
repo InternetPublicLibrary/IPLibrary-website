@@ -1,0 +1,54 @@
+{% comment %}
+  Discussion Component using Giscus (GitHub Discussions)
+  This component automatically detects the current page language and loads the appropriate Giscus configuration.
+  
+  Usage:
+  {% include components/discussion.html %}
+{% endcomment %}
+
+<div class="bg-white rounded-lg shadow-sm p-6 mb-8">
+  <h2 class="text-xl font-semibold text-gray-800 mb-4">
+    {% if page.lang == 'pt-BR' %}
+      Discussão
+    {% else %}
+      Discussion
+    {% endif %}
+  </h2>
+  
+  <div class="giscus-wrapper">
+    {% if page.lang == 'pt-BR' %}
+      <script src="https://giscus.app/client.js"
+        data-repo="InternetPublicLibrary/pt-BR"
+        data-repo-id="MDEwOlJlcG9zaXRvcnkxMzE5MzI0NzA="
+        data-category="General"
+        data-category-id="DIC_kwDOB90hNs4CrNxb"
+        data-mapping="pathname"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="top"
+        data-theme="light"
+        data-lang="pt"
+        data-loading="lazy"
+        crossorigin="anonymous"
+        async>
+      </script>
+    {% else %}
+      <script src="https://giscus.app/client.js"
+        data-repo="InternetPublicLibrary/en-US"
+        data-repo-id="MDEwOlJlcG9zaXRvcnkxMzE5MzIxNzk="
+        data-category="General"
+        data-category-id="DIC_kwDOB90gE84CrNxh"
+        data-mapping="pathname"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="bottom"
+        data-theme="light"
+        data-lang="en"
+        crossorigin="anonymous"
+        async>
+      </script>
+    {% endif %}
+  </div>
+</div> 

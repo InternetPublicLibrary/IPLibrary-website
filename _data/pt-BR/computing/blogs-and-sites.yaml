@@ -1,0 +1,33 @@
+# Blogs e sites relacionados a computação
+- title: "Tecnoblog"
+  url: "https://tecnoblog.net/"
+  description: "Blog brasileiro sobre tecnologia, com notícias, análises e tutoriais sobre hardware, software e internet."
+  tags:
+    - tecnologia
+    - hardware
+    - software
+  access: "Gratuito"
+  rank: 1
+  last_updated: 2024-01-05
+
+- title: "Alura"
+  url: "https://www.alura.com.br/artigos"
+  description: "Blog da plataforma de ensino Alura com artigos sobre programação, dados e tecnologia."
+  tags:
+    - programação
+    - desenvolvimento
+    - educação
+  access: "Gratuito"
+  rank: 2
+  last_updated: 2024-01-10
+
+- title: "TecMundo"
+  url: "https://www.tecmundo.com.br/"
+  description: "Portal brasileiro de tecnologia com notícias, análises e tutoriais."
+  tags:
+    - tecnologia
+    - games
+    - internet
+  access: "Gratuito"
+  rank: 3
+  last_updated: 2024-01-15 

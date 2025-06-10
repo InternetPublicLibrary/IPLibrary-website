@@ -1,0 +1,7 @@
+<li class="flex justify-between items-center">
+  <div class="flex items-center">
+    <span class="w-5 text-center text-gray-500 mr-2">{{ include.rank }}.</span>
+    <a href="{{ include.url | default: '#' }}" class="text-blue-600 hover:underline">{{ include.name }}</a>
+  </div>
+  <span class="text-gray-500">{{ include.edits }} edits</span>
+</li> 

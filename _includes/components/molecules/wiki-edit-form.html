@@ -1,0 +1,223 @@
+{% comment %}
+  Wiki Edit Form Component
+  This component allows users to edit page content using Staticman to create GitHub PRs.
+  
+  Parameters:
+  - page_path: Path to the file being edited
+  - current_content: Current content of the file (markdown format)
+  - form_action: Override the form action URL
+  - language: The language of the content (en-US or pt-BR)
+{% endcomment %}
+
+{% assign lang = include.language | default: page.lang | default: 'en-US' %}
+{% assign repo_lang = lang | split: '-' | first %}
+
+<div class="wiki-edit-form bg-white rounded-lg shadow-sm p-6">
+  <h2 class="text-xl font-semibold text-gray-800 mb-4">
+    {% if lang == 'pt-BR' %}Editar Conteúdo{% else %}Edit Content{% endif %}
+  </h2>
+  
+  <form id="wiki-edit-form" method="POST" action="{{ include.form_action | default: site.staticman.endpoint }}/{{ site.staticman.repositories[repo_lang].name }}/{{ site.staticman.repositories[repo_lang].branch }}/wiki">
+    <!-- Hidden fields -->
+    <input type="hidden" name="options[redirect]" value="{{ site.url }}{{ page.url }}?submission=success">
+    <input type="hidden" name="options[slug]" value="{{ page.url | slugify }}">
+    <input type="hidden" name="fields[page_path]" value="{{ include.page_path | default: page.path }}">
+    <input type="hidden" name="fields[language]" value="{{ lang }}">
+    <input type="hidden" name="fields[timestamp]" value="{{ site.time | date_to_xmlschema }}">
+    
+    <!-- Editor information -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+      <div>
+        <label for="name" class="block text-sm font-medium text-gray-700 mb-1">
+          {% if lang == 'pt-BR' %}Seu Nome{% else %}Your Name{% endif %}*
+        </label>
+        <input type="text" id="name" name="fields[name]" required 
+               class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
+      </div>
+      
+      <div>
+        <label for="email" class="block text-sm font-medium text-gray-700 mb-1">
+          {% if lang == 'pt-BR' %}Email{% else %}Email{% endif %}*
+        </label>
+        <input type="email" id="email" name="fields[email]" required 
+               class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
+        <p class="text-xs text-gray-500 mt-1">
+          {% if lang == 'pt-BR' %}Não será publicado. Usado apenas para notificações.{% else %}Won't be published. Used only for notifications.{% endif %}
+        </p>
+      </div>
+    </div>
+    
+    <!-- Edit summary -->
+    <div class="mb-4">
+      <label for="summary" class="block text-sm font-medium text-gray-700 mb-1">
+        {% if lang == 'pt-BR' %}Resumo da Edição{% else %}Edit Summary{% endif %}*
+      </label>
+      <input type="text" id="summary" name="fields[summary]" required
+             placeholder="{% if lang == 'pt-BR' %}Breve descrição das alterações{% else %}Brief description of your changes{% endif %}" 
+             class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
+    </div>
+    
+    <!-- Content editor -->
+    <div class="mb-4">
+      <label for="content" class="block text-sm font-medium text-gray-700 mb-1">
+        {% if lang == 'pt-BR' %}Conteúdo{% else %}Content{% endif %}*
+      </label>
+      <div class="border border-gray-300 rounded-md overflow-hidden">
+        <div class="bg-gray-50 px-4 py-2 border-b border-gray-300 flex justify-between items-center">
+          <span class="text-sm font-medium text-gray-700">Markdown</span>
+          <div class="flex space-x-2">
+            <button type="button" class="text-gray-500 hover:text-gray-700 text-sm px-2 py-1" onclick="insertMarkdown('bold')">
+              <i class="fas fa-bold"></i>
+            </button>
+            <button type="button" class="text-gray-500 hover:text-gray-700 text-sm px-2 py-1" onclick="insertMarkdown('italic')">
+              <i class="fas fa-italic"></i>
+            </button>
+            <button type="button" class="text-gray-500 hover:text-gray-700 text-sm px-2 py-1" onclick="insertMarkdown('link')">
+              <i class="fas fa-link"></i>
+            </button>
+            <button type="button" class="text-gray-500 hover:text-gray-700 text-sm px-2 py-1" onclick="insertMarkdown('image')">
+              <i class="fas fa-image"></i>
+            </button>
+            <button type="button" class="text-gray-500 hover:text-gray-700 text-sm px-2 py-1" onclick="insertMarkdown('heading')">
+              <i class="fas fa-heading"></i>
+            </button>
+            <button type="button" class="text-gray-500 hover:text-gray-700 text-sm px-2 py-1" onclick="insertMarkdown('list')">
+              <i class="fas fa-list"></i>
+            </button>
+            <button type="button" class="text-gray-500 hover:text-gray-700 text-sm px-2 py-1" onclick="insertMarkdown('code')">
+              <i class="fas fa-code"></i>
+            </button>
+          </div>
+        </div>
+        <textarea id="content" name="fields[content]" rows="15" required
+                  class="w-full px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 font-mono text-sm">{{ include.current_content }}</textarea>
+      </div>
+      <div class="mt-2 flex justify-between items-center">
+        <div class="text-xs text-gray-500">
+          {% if lang == 'pt-BR' %}Suporta sintaxe Markdown{% else %}Supports Markdown syntax{% endif %}
+        </div>
+        <button type="button" class="text-sm text-blue-600 hover:underline" onclick="togglePreview()">
+          {% if lang == 'pt-BR' %}Alternar visualização{% else %}Toggle preview{% endif %}
+        </button>
+      </div>
+      <div id="content-preview" class="hidden mt-4 p-4 border border-gray-300 rounded-md prose prose-sm max-w-none"></div>
+    </div>
+    
+    <!-- reCAPTCHA -->
+    {% if site.staticman.recaptcha.enabled %}
+    <div class="mb-4">
+      <div class="g-recaptcha" data-sitekey="{{ site.staticman.recaptcha.siteKey }}"></div>
+      <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    </div>
+    {% endif %}
+    
+    <!-- Terms checkbox -->
+    <div class="flex items-start mb-6">
+      <div class="flex items-center h-5">
+        <input id="terms" name="fields[terms]" type="checkbox" required 
+               class="focus:ring-blue-500 h-4 w-4 text-blue-600 border-gray-300 rounded">
+      </div>
+      <div class="ml-3 text-sm">
+        <label for="terms" class="text-gray-700">
+          {% if lang == 'pt-BR' %}
+          Concordo em contribuir sob a <a href="#" class="text-blue-600 hover:underline">licença CC-BY-SA</a> e confirmo que tenho o direito de enviar este conteúdo.
+          {% else %}
+          I agree to contribute under the <a href="#" class="text-blue-600 hover:underline">CC-BY-SA license</a> and confirm I have the right to submit this content.
+          {% endif %}
+        </label>
+      </div>
+    </div>
+    
+    <!-- Submit buttons -->
+    <div class="flex justify-between">
+      <a href="{{ page.url }}" class="bg-gray-100 text-gray-700 px-4 py-2 rounded hover:bg-gray-200">
+        {% if lang == 'pt-BR' %}Cancelar{% else %}Cancel{% endif %}
+      </a>
+      <button type="submit" class="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700">
+        {% if lang == 'pt-BR' %}Propor Mudanças{% else %}Propose Changes{% endif %}
+      </button>
+    </div>
+  </form>
+</div>
+
+<!-- JavaScript for Markdown editing -->
+<script>
+  function insertMarkdown(type) {
+    const textarea = document.getElementById('content');
+    const start = textarea.selectionStart;
+    const end = textarea.selectionEnd;
+    const selectedText = textarea.value.substring(start, end);
+    let insertion = '';
+    
+    switch(type) {
+      case 'bold':
+        insertion = `**${selectedText || 'bold text'}**`;
+        break;
+      case 'italic':
+        insertion = `*${selectedText || 'italic text'}*`;
+        break;
+      case 'link':
+        insertion = `[${selectedText || 'link text'}](url)`;
+        break;
+      case 'image':
+        insertion = `![${selectedText || 'alt text'}](image-url)`;
+        break;
+      case 'heading':
+        insertion = `## ${selectedText || 'Heading'}`;
+        break;
+      case 'list':
+        insertion = `- ${selectedText || 'List item'}\n- Another item\n- And another`;
+        break;
+      case 'code':
+        insertion = selectedText ? `\`\`\`\n${selectedText}\n\`\`\`` : "```\ncode here\n```";
+        break;
+    }
+    
+    textarea.focus();
+    document.execCommand('insertText', false, insertion);
+    
+    // For browsers where execCommand is deprecated
+    if (textarea.value.substring(start, start + insertion.length) !== insertion) {
+      textarea.value = textarea.value.substring(0, start) + insertion + textarea.value.substring(end);
+      textarea.selectionStart = start + insertion.length;
+      textarea.selectionEnd = start + insertion.length;
+    }
+  }
+  
+  function togglePreview() {
+    const content = document.getElementById('content').value;
+    const preview = document.getElementById('content-preview');
+    
+    if (preview.classList.contains('hidden')) {
+      // Simple markdown conversion (this is basic, consider using a full Markdown library)
+      let html = content
+        // Convert headings
+        .replace(/^# (.*$)/gm, '<h1>$1</h1>')
+        .replace(/^## (.*$)/gm, '<h2>$1</h2>')
+        .replace(/^### (.*$)/gm, '<h3>$1</h3>')
+        // Convert bold
+        .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+        // Convert italic
+        .replace(/\*(.*?)\*/g, '<em>$1</em>')
+        // Convert links
+        .replace(/\[(.*?)\]\((.*?)\)/g, '<a href="$2">$1</a>')
+        // Convert images
+        .replace(/!\[(.*?)\]\((.*?)\)/g, '<img src="$2" alt="$1">')
+        // Convert lists
+        .replace(/^- (.*$)/gm, '<li>$1</li>')
+        // Wrap list items in ul
+        .replace(/(<li>.*<\/li>)/s, '<ul>$1</ul>')
+        // Convert code blocks
+        .replace(/```([\s\S]*?)```/g, '<pre><code>$1</code></pre>')
+        // Convert inline code
+        .replace(/`(.*?)`/g, '<code>$1</code>')
+        // Convert paragraphs (simple approach)
+        .replace(/^(?!<[hou]).+/gm, '<p>$&</p>');
+      
+      preview.innerHTML = html;
+      preview.classList.remove('hidden');
+    } else {
+      preview.classList.add('hidden');
+    }
+  }
+</script> 

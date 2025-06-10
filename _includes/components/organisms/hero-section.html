@@ -1,0 +1,56 @@
+<section class="py-8 bg-gray-50 border-b border-gray-200">
+  <div class="container mx-auto px-4">
+    <div class="flex flex-col md:flex-row md:items-start">
+      <div class="md:w-2/3 mb-6 md:mb-0 md:pr-8">
+        <div class="flex items-center mb-4">
+          <h1 class="text-3xl font-bold text-gray-800">{{ include.title | default: "Internet Public Library" }}</h1>
+          <span class="ml-3 text-xs px-2 py-1 bg-blue-100 text-blue-800 rounded">{{ include.version | default: "Version 2.0" }}</span>
+        </div>
+        
+        <p class="text-lg text-gray-600 mb-4">{{ include.description | default: "A free, community-maintained encyclopedia of curated resources from across the internet." }}</p>
+        
+        <!-- Featured Article -->
+        {% include components/molecules/featured-article.html 
+          title=include.article_title
+          default_title=include.default_article_title
+          default_image=include.default_article_image
+          default_description=include.default_article_description
+          default_link=include.default_article_link
+        %}
+      </div>
+      
+      <!-- Right sidebar with quicklinks -->
+      <div class="md:w-1/3">
+        <!-- Personal tools section -->
+        <div class="bg-white border border-gray-200 rounded p-4 mb-4">
+          <h3 class="text-lg font-medium text-gray-800 mb-2">{{ include.tools_title | default: "Personal Tools" }}</h3>
+          <ul class="space-y-1 text-sm">
+            <li><a href="{% if page.lang == 'pt-BR' %}/pt-BR/criar-conta{% else %}/en-US/create-account{% endif %}" class="text-blue-600 hover:underline flex items-center"><i class="fas fa-user-circle mr-2 text-gray-500"></i> {{ include.create_account_text | default: "Create Account" }}</a></li>
+            <li><a href="{% if page.lang == 'pt-BR' %}/pt-BR/entrar{% else %}/en-US/login{% endif %}" class="text-blue-600 hover:underline flex items-center"><i class="fas fa-sign-in-alt mr-2 text-gray-500"></i> {{ include.login_text | default: "Log In" }}</a></li>
+            <li><a href="{% if page.lang == 'pt-BR' %}/pt-BR/observados{% else %}/en-US/watchlist{% endif %}" class="text-blue-600 hover:underline flex items-center"><i class="fas fa-star mr-2 text-gray-500"></i> {{ include.watchlist_text | default: "Watchlist" }}</a></li>
+            <li><a href="{% if page.lang == 'pt-BR' %}/pt-BR/favoritos{% else %}/en-US/bookmarks{% endif %}" class="text-blue-600 hover:underline flex items-center"><i class="fas fa-bookmark mr-2 text-gray-500"></i> {{ include.bookmarks_text | default: "Bookmarks" }}</a></li>
+            <li><a href="{% if page.lang == 'pt-BR' %}/pt-BR/historico-contribuicao{% else %}/en-US/contribution-history{% endif %}" class="text-blue-600 hover:underline flex items-center"><i class="fas fa-history mr-2 text-gray-500"></i> {{ include.history_text | default: "Contribution History" }}</a></li>
+          </ul>
+        </div>
+        
+        <!-- Quick navigation -->
+        <div class="bg-white border border-gray-200 rounded p-4">
+          <h3 class="text-lg font-medium text-gray-800 mb-2">{{ include.links_title | default: "Quick Links" }}</h3>
+          <ul class="space-y-1 text-sm">
+            <li><a href="{% if page.lang == 'pt-BR' %}/pt-BR/categorias{% else %}/en-US/categories{% endif %}" class="text-blue-600 hover:underline">{{ include.categories_text | default: "Browse Categories" }}</a></li>
+            <li><a href="{% if page.lang == 'pt-BR' %}/pt-BR/recursos-destaque{% else %}/en-US/featured-resources{% endif %}" class="text-blue-600 hover:underline">{{ include.featured_text | default: "Featured Resources" }}</a></li>
+            <li><a href="{% if page.lang == 'pt-BR' %}/pt-BR/alteracoes-recentes{% else %}/en-US/recent-changes{% endif %}" class="text-blue-600 hover:underline">{{ include.recent_text | default: "Recent Changes" }}</a></li>
+            <li><a href="{% if page.lang == 'pt-BR' %}/pt-BR/portal-comunidade{% else %}/en-US/community-portal{% endif %}" class="text-blue-600 hover:underline">{{ include.community_text | default: "Community Portal" }}</a></li>
+            <li>
+              <a href="{% if page.lang == 'pt-BR' %}/pt-BR/recurso-aleatorio{% else %}/en-US/random-resource{% endif %}" 
+                 class="text-blue-600 hover:underline">{{ include.random_text | default: "Random Resource" }}</a>
+            </li>
+            <li><a href="{% if page.lang == 'pt-BR' %}/pt-BR/contribuir{% else %}/en-US/contribute{% endif %}" class="text-blue-600 hover:underline">{{ include.contribute_text | default: "Contribute Resources" }}</a></li>
+            <li><a href="{% if page.lang == 'pt-BR' %}/pt-BR/ajuda{% else %}/en-US/help{% endif %}" class="text-blue-600 hover:underline">{{ include.help_text | default: "Help & Documentation" }}</a></li>
+            <li><a href="{% if page.lang == 'pt-BR' %}/pt-BR/contato{% else %}/en-US/contact{% endif %}" class="text-blue-600 hover:underline">{{ include.contact_text | default: "Contact Administrators" }}</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section> 

@@ -1,0 +1,39 @@
+# Eventos e conferências de marketing
+- title: "RD Summit"
+  url: "https://rdsummit.com.br/"
+  description: "Maior evento de marketing digital e vendas da América Latina, organizado pela Resultados Digitais."
+  tags:
+    - marketing digital
+    - vendas
+    - networking
+  access: "Pago"
+  rank: 1
+  last_updated: 2024-01-03
+  date: "2025-10-05"
+  location: "Florianópolis, SC"
+
+- title: "CONAREC"
+  url: "https://conarec.com.br/"
+  description: "Congresso de relacionamento com o cliente, vendas e marketing, organizado pela revista Consumidor Moderno."
+  tags:
+    - relacionamento
+    - atendimento
+    - CRM
+  access: "Pago"
+  rank: 2
+  last_updated: 2024-01-10
+  date: "2025-08-25"
+  location: "São Paulo, SP"
+
+- title: "ABComm e-Commerce Brasil"
+  url: "https://www.congressodecommerce.com.br/"
+  description: "Maior evento de e-commerce da América Latina, com conteúdo sobre marketing digital, logística e vendas online."
+  tags:
+    - e-commerce
+    - marketing digital
+    - vendas online
+  access: "Pago"
+  rank: 3
+  last_updated: 2024-01-15
+  date: "2025-07-28"
+  location: "São Paulo, SP" 

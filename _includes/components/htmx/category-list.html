@@ -1,0 +1,61 @@
+<div class="category-list">
+  <h2 class="text-xl font-semibold mb-4">{{ include.title | default: "Categorias" }}</h2>
+  
+  <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4"
+       hx-get="/api/categories.json"
+       hx-trigger="load"
+       hx-swap="innerHTML">
+    <div class="animate-pulse">
+      <div class="h-24 bg-gray-200 rounded-lg"></div>
+    </div>
+    <div class="animate-pulse">
+      <div class="h-24 bg-gray-200 rounded-lg"></div>
+    </div>
+    <div class="animate-pulse">
+      <div class="h-24 bg-gray-200 rounded-lg"></div>
+    </div>
+  </div>
+</div>
+
+<!-- Template para renderizar as categorias -->
+<template id="category-template">
+  <div class="p-4 border border-gray-200 rounded-lg hover:bg-gray-50">
+    <h3 class="font-medium text-blue-600 category-name"></h3>
+    <p class="text-sm text-gray-600 mt-1 category-description"></p>
+    <button class="mt-2 text-sm text-blue-500 hover:underline category-button"
+            hx-get=""
+            hx-target="#resource-container"
+            hx-swap="innerHTML">
+      Ver recursos
+    </button>
+  </div>
+</template>
+
+<script>
+  document.addEventListener('htmx:afterOnLoad', function(event) {
+    if (event.detail.xhr.responseURL.includes('/api/categories.json')) {
+      try {
+        const data = JSON.parse(event.detail.xhr.responseText);
+        const container = event.detail.target;
+        const template = document.getElementById('category-template');
+        
+        // Limpa o container
+        container.innerHTML = '';
+        
+        // Adiciona cada categoria
+        data.categories.forEach(category => {
+          const clone = template.content.cloneNode(true);
+          clone.querySelector('.category-name').textContent = category.name;
+          clone.querySelector('.category-description').textContent = category.description;
+          
+          const button = clone.querySelector('.category-button');
+          button.setAttribute('hx-get', category.url);
+          
+          container.appendChild(clone);
+        });
+      } catch (e) {
+        console.error('Erro ao processar categorias:', e);
+      }
+    }
+  });
+</script> 

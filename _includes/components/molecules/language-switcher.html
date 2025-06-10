@@ -1,0 +1,29 @@
+<div class="language-switcher">
+  <script>
+    // Function to set the preferred language in localStorage
+    function setPreferredLanguage(language) {
+      localStorage.setItem('preferred_language', language);
+      
+      // Redirect to the selected language version
+      window.location.href = '/' + language + '/';
+      
+      return false; // Prevent default link action
+    }
+  </script>
+  
+  <div class="flex space-x-2">
+    {% assign current_lang = page.lang | default: 'en-US' %}
+    
+    <a href="#" 
+       onclick="return setPreferredLanguage('en-US');" 
+       class="flex items-center px-2 py-1 rounded {% if current_lang == 'en-US' %}bg-blue-100 text-blue-800 font-medium{% else %}text-gray-600 hover:bg-gray-100{% endif %}">
+      <span class="mr-1">🇺🇸</span> English
+    </a>
+    
+    <a href="#" 
+       onclick="return setPreferredLanguage('pt-BR');" 
+       class="flex items-center px-2 py-1 rounded {% if current_lang == 'pt-BR' %}bg-blue-100 text-blue-800 font-medium{% else %}text-gray-600 hover:bg-gray-100{% endif %}">
+      <span class="mr-1">🇧🇷</span> Português
+    </a>
+  </div>
+</div> 

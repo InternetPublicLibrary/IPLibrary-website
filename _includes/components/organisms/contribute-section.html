@@ -1,0 +1,70 @@
+<section id="contribute" class="py-8 bg-white border-t border-gray-200">
+  <div class="container mx-auto px-4">
+    <h2 class="text-2xl font-bold text-gray-800 mb-6">{{ include.title | default: "Contribute to the Library" }}</h2>
+    
+    <div class="bg-blue-50 border border-blue-200 rounded p-6">
+      <div class="flex flex-col md:flex-row gap-6">
+        <div class="md:w-2/3">
+          <p class="text-gray-700 mb-4">{{ include.description | default: "The Internet Public Library is maintained by a community of volunteers. You can help by suggesting new resources, improving existing content, or translating pages to other languages." }}</p>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            {% if include.actions %}
+              {% for action in include.actions %}
+                {% include components/molecules/contribute-action.html 
+                  title=action.title
+                  description=action.description
+                  icon=action.icon
+                  url=action.url
+                  hx_get=action.hx_get
+                  hx_target=action.hx_target
+                %}
+              {% endfor %}
+            {% else %}
+              <!-- Default actions if none provided -->
+              {% include components/molecules/contribute-action.html 
+                title="Suggest a Resource"
+                description="Add new content to our library"
+                icon="plus-circle"
+                hx_get="/api/suggest-resource-form"
+                hx_target="#content-area"
+              %}
+              
+              {% include components/molecules/contribute-action.html 
+                title="Edit Content"
+                description="Improve existing pages"
+                icon="edit"
+                hx_get="/api/edit-content-form"
+                hx_target="#content-area"
+              %}
+              
+              {% include components/molecules/contribute-action.html 
+                title="Translate"
+                description="Help with translations"
+                icon="language"
+                hx_get="/api/translation-form"
+                hx_target="#content-area"
+              %}
+              
+              {% include components/molecules/contribute-action.html 
+                title="Report Issues"
+                description="Report broken links or errors"
+                icon="bug"
+                hx_get="/api/report-issue-form"
+                hx_target="#content-area"
+              %}
+            {% endif %}
+          </div>
+        </div>
+        <div class="md:w-1/3 flex items-center justify-center">
+          <div class="text-center">
+            <div class="text-4xl text-blue-600 mb-2">
+              <i class="fas fa-users"></i>
+            </div>
+            <div class="text-xl font-bold mb-1">{{ include.community_title | default: "Join Our Community" }}</div>
+            <p class="text-sm text-gray-600 mb-3">{{ include.community_description | default: "Collaborate with fellow librarians and knowledge seekers" }}</p>
+            <a href="{{ include.community_link | default: '#' }}" class="inline-block bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 text-sm">{{ include.community_button_text | default: "Learn More" }}</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section> 

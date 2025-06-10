@@ -1,47 +1,85 @@
-<div class="ui black inverted vertical footer segment">
-  <div class="ui center aligned container">
-    <div class="ui stackable inverted grid">
-      <div class="three wide column">
-        <h4 class="ui inverted header">Community</h4>
-        <div class="ui inverted link list">
-          <a class="item" href="https://www.transifex.com/organization/semantic-org/" target="_blank">Help Translate</a>
-          <a class="item" href="https://github.com/Semantic-Org/Semantic-UI/issues" target="_blank">Submit an Issue</a>
-          <a class="item" href="https://gitter.im/Semantic-Org/Semantic-UI" target="_blank">Join our Chat</a>
-          <a class="item" href="/cla.html" target="_blank">CLA</a>
+<footer class="bg-white border-t border-gray-200 py-8">
+  <div class="container mx-auto px-4">
+    <!-- Main footer navigation -->
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+      <div>
+        <h3 class="text-lg font-medium text-gray-800 mb-3">Internet Public Library</h3>
+        <p class="text-gray-600 text-sm mb-3">A free encyclopedia of curated internet resources.</p>
+        <div class="flex space-x-3">
+          <a href="#" class="text-gray-400 hover:text-gray-600">
+            <i class="fab fa-github text-lg"></i>
+          </a>
+          <a href="#" class="text-gray-400 hover:text-gray-600">
+            <i class="fab fa-twitter text-lg"></i>
+          </a>
+          <a href="#" class="text-gray-400 hover:text-gray-600">
+            <i class="fab fa-facebook text-lg"></i>
+          </a>
         </div>
       </div>
-      <div class="three wide column">
-        <h4 class="ui inverted header">Network</h4>
-        <div class="ui inverted link list">
-          <a class="item" href="https://github.com/Semantic-Org/Semantic-UI" target="_blank">GitHub Repo</a>
-          <a class="item" href="http://forums.semantic-ui.com" target="_blank">User Forums</a>
-          <a class="item" href="http://1.semantic-ui.com">1.x Docs</a>
-          <a class="item" href="http://legacy.semantic-ui.com">0.x Docs</a>
-        </div>
+      
+      <div>
+        <h4 class="text-base font-medium text-gray-800 mb-3">Categories</h4>
+        <ul class="space-y-1 text-sm">
+          {% for category in site.data.en.menu.en limit:6 %}
+          <li><a href="{{ category.path }}" class="text-gray-600 hover:text-blue-600 hover:underline">{{ category.name | capitalize }}</a></li>
+          {% endfor %}
+          <li><a href="/#categories" class="text-gray-500 hover:text-blue-600 hover:underline text-xs">View all categories →</a></li>
+        </ul>
       </div>
-   <!--    <div class="three wide column">
-        <h4 class="ui inverted header">Learn</h4>
-        <div class="ui inverted link list">
-          <a href="#" class="disabled item">Example Layouts</a>
-          <a href="#" class="disabled item">The Project</a>
-          <a href="#" class="disabled item">Roadmap</a>
-          <a href="#" class="disabled item">About the Author</a>
-        </div>
-      </div> -->
-      <div class="seven wide right floated column">
-        <h4 class="ui inverted teal header">Help Preserve This Project</h4>
-        <p> Support for the continued development of Semantic UI comes directly from the community.</p>
-        <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
-          <input type="hidden" name="cmd" value="_s-xclick">
-          <input type="hidden" name="hosted_button_id" value="7ZAF2Q8DBZAQL">
-          <button type="submit" class="ui large teal button">Donate Today</button>
-        </form>
+      
+      <div>
+        <h4 class="text-base font-medium text-gray-800 mb-3">About</h4>
+        <ul class="space-y-1 text-sm">
+          <li><a href="#" class="text-gray-600 hover:text-blue-600 hover:underline">About IPL</a></li>
+          <li><a href="#" class="text-gray-600 hover:text-blue-600 hover:underline">Mission</a></li>
+          <li><a href="#" class="text-gray-600 hover:text-blue-600 hover:underline">Community Portal</a></li>
+          <li><a href="#" class="text-gray-600 hover:text-blue-600 hover:underline">Recent Changes</a></li>
+          <li><a href="#" class="text-gray-600 hover:text-blue-600 hover:underline">Contact Us</a></li>
+        </ul>
+      </div>
+      
+      <div>
+        <h4 class="text-base font-medium text-gray-800 mb-3">Contribute</h4>
+        <ul class="space-y-1 text-sm">
+          <li><a href="#" class="text-gray-600 hover:text-blue-600 hover:underline">Help</a></li>
+          <li><a href="#" class="text-gray-600 hover:text-blue-600 hover:underline">Create Content</a></li>
+          <li><a href="#" class="text-gray-600 hover:text-blue-600 hover:underline">Report Issues</a></li>
+          <li><a href="#" class="text-gray-600 hover:text-blue-600 hover:underline">Content Policies</a></li>
+          <li><a href="#" class="text-gray-600 hover:text-blue-600 hover:underline">Donate</a></li>
+        </ul>
       </div>
     </div>
-    <div class="ui inverted section divider"></div>
-    <img src="/images/logo.png" class="ui centered mini image">
-    <div class="ui horizontal inverted small divided link list">
-      <a class="item" href="http://semantic-ui.mit-license.org/" target="_blank">Free & Open Source (MIT)</a>
+    
+    <!-- Language selector and legal links -->
+    <div class="border-t border-gray-100 pt-6 flex flex-col md:flex-row justify-between">
+      <div class="mb-4 md:mb-0">
+        <h4 class="text-sm font-medium text-gray-800 mb-2">Languages</h4>
+        <div class="flex flex-wrap gap-2 text-sm">
+          <a href="/en-US" class="text-gray-600 hover:text-blue-600 hover:underline">English</a>
+          <a href="/pt-BR" class="text-gray-600 hover:text-blue-600 hover:underline">Português</a>
+          <span class="text-gray-400">•</span>
+          <a href="#" class="text-gray-500 hover:text-blue-600 hover:underline text-xs">Add your language</a>
+        </div>
+      </div>
+      
+      <div class="text-sm text-gray-500">
+        <div class="mb-2">
+          <p>Content is available under <a href="#" class="text-blue-600 hover:underline">Creative Commons Attribution-ShareAlike License</a>.</p>
+        </div>
+        <div class="flex flex-wrap gap-x-4 gap-y-1">
+          <a href="#" class="hover:text-blue-600 hover:underline">Privacy Policy</a>
+          <a href="#" class="hover:text-blue-600 hover:underline">Terms of Use</a>
+          <a href="#" class="hover:text-blue-600 hover:underline">Cookie Policy</a>
+          <a href="#" class="hover:text-blue-600 hover:underline">Contact IPL</a>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Copyright -->
+    <div class="text-center text-xs text-gray-500 mt-8 pt-6 border-t border-gray-100">
+      <p>&copy; {{ 'now' | date: "%Y" }} Internet Public Library. All rights reserved.</p>
+      <p class="mt-1">Internet Public Library is a community project. Content contributors maintain their own copyrights.</p>
     </div>
   </div>
-</div>
+</footer>

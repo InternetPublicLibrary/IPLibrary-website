@@ -1,0 +1,51 @@
+{% comment %}
+  Button Component
+  Usage:
+  {% include components/atoms/button.html text="Click me" url="#" variant="primary" icon="fas fa-arrow-right" size="md" classes="" %}
+  
+  Parameters:
+  - text: Button text
+  - url: Button URL
+  - variant: primary, secondary, outline, link (optional, default: primary)
+  - icon: FontAwesome icon class (optional)
+  - size: sm, md, lg (optional, default: md)
+  - classes: Additional CSS classes (optional)
+{% endcomment %}
+
+{% assign variant_class = "" %}
+{% assign size_class = "" %}
+
+{% case include.variant %}
+  {% when "primary" %}
+    {% assign variant_class = "bg-blue-600 hover:bg-blue-700 text-white border border-blue-600" %}
+  {% when "secondary" %}
+    {% assign variant_class = "bg-gray-600 hover:bg-gray-700 text-white border border-gray-600" %}
+  {% when "outline" %}
+    {% assign variant_class = "bg-transparent hover:bg-gray-50 text-blue-600 border border-blue-600" %}
+  {% when "link" %}
+    {% assign variant_class = "bg-transparent hover:underline text-blue-600 border-0" %}
+  {% else %}
+    {% assign variant_class = "bg-blue-600 hover:bg-blue-700 text-white border border-blue-600" %}
+{% endcase %}
+
+{% case include.size %}
+  {% when "sm" %}
+    {% assign size_class = "text-xs px-2.5 py-1" %}
+  {% when "lg" %}
+    {% assign size_class = "text-base px-6 py-3" %}
+  {% else %}
+    {% assign size_class = "text-sm px-4 py-2" %}
+{% endcase %}
+
+<button 
+  type="{{ include.type | default: 'button' }}" 
+  class="{{ include.class | default: 'bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700' }}"
+  {% if include.hx_get %}hx-get="{{ include.hx_get }}"{% endif %}
+  {% if include.hx_post %}hx-post="{{ include.hx_post }}"{% endif %}
+  {% if include.hx_target %}hx-target="{{ include.hx_target }}"{% endif %}
+  {% if include.hx_swap %}hx-swap="{{ include.hx_swap }}"{% endif %}
+  {% if include.hx_trigger %}hx-trigger="{{ include.hx_trigger }}"{% endif %}
+  {% if include.hx_vals %}hx-vals='{{ include.hx_vals }}'{% endif %}
+>
+  {{ include.text }}
+</button> 

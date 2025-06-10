@@ -1,0 +1,33 @@
+# Publicações relacionadas a negócios
+- title: "Revista Exame"
+  url: "https://exame.com/"
+  description: "Uma das principais revistas de negócios e economia do Brasil, com análises de mercado e tendências."
+  tags:
+    - economia
+    - mercado
+    - negócios
+  access: "Parcialmente pago"
+  rank: 1
+  last_updated: 2024-01-02
+
+- title: "Valor Econômico"
+  url: "https://valor.globo.com/"
+  description: "Jornal especializado em economia, finanças e negócios com reportagens aprofundadas."
+  tags:
+    - economia
+    - finanças
+    - mercado
+  access: "Parcialmente pago"
+  rank: 2
+  last_updated: 2024-01-08
+
+- title: "Pequenas Empresas & Grandes Negócios"
+  url: "https://revistapegn.globo.com/"
+  description: "Revista voltada para empreendedores e pequenos empresários com dicas e casos de sucesso."
+  tags:
+    - empreendedorismo
+    - pequenas empresas
+    - gestão
+  access: "Parcialmente pago"
+  rank: 3
+  last_updated: 2024-01-12 

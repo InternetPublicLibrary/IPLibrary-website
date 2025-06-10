@@ -1,0 +1,187 @@
+{% comment %}
+  Category Sidebar Component
+  Usage:
+  {% include components/organisms/category-sidebar.html 
+    current_category=page.category
+    current_subcategory=page.subcategory
+  %}
+{% endcomment %}
+
+<div class="bg-white border border-gray-200 rounded-lg overflow-hidden shadow-sm">
+  <div class="p-4 bg-gradient-to-r from-blue-600 to-blue-700 border-b border-blue-500">
+    <h3 class="text-lg font-medium text-white">Categories</h3>
+  </div>
+  
+  <!-- Search Categories -->
+  <div class="p-4 border-b border-gray-200">
+    <div class="relative">
+      <input type="text" id="category-search" placeholder="Search categories..." 
+        class="w-full px-3 py-2 pr-8 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors duration-200">
+      <i class="fas fa-search absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+    </div>
+  </div>
+  
+  <!-- All Categories List -->
+  <div class="overflow-y-auto max-h-[70vh]">
+    <div class="category-tree p-3 text-sm">
+      {% for category in site.data.en.menu.en %}
+      <div class="category-item mb-1.5">
+        <!-- Main Category -->
+        <div class="category-header flex items-center py-1.5 px-3 hover:bg-gray-50 rounded-md cursor-pointer transition-colors duration-150
+          {% if include.current_category.path == category.path %}bg-blue-50 text-blue-700{% endif %}">
+          <span class="toggle-icon mr-1.5 w-4 text-center {% if include.current_category.path == category.path %}text-blue-500{% else %}text-gray-400{% endif %}">
+            {% if category.children.size > 0 %}
+            <i class="fas fa-caret-right transition-transform duration-200"></i>
+            {% else %}
+            <i class="fas fa-circle text-xs"></i>
+            {% endif %}
+          </span>
+          <a href="{{ category.path }}" class="font-medium hover:text-blue-600 flex-grow transition-colors duration-200
+            {% if include.current_category.path == category.path %}text-blue-700{% endif %}">
+            {{ category.name | capitalize }}
+          </a>
+          <span class="text-xs text-gray-500 bg-gray-100 px-1.5 rounded-full">{{ category.children.size }}</span>
+        </div>
+        
+        <!-- Subcategories -->
+        {% if category.children.size > 0 %}
+        <div class="subcategory-list ml-6 mt-1 space-y-1 {% if include.current_category.path != category.path %}hidden{% endif %}">
+          {% for subcategory in category.children %}
+          <div class="subcategory-item mb-1">
+            <!-- Subcategory -->
+            <div class="flex items-center py-1.5 px-3 hover:bg-gray-50 rounded-md cursor-pointer transition-colors duration-150
+              {% if include.current_subcategory.path == subcategory.path %}bg-blue-50 text-blue-700{% endif %}">
+              <span class="toggle-icon mr-1.5 w-4 text-center {% if include.current_subcategory.path == subcategory.path %}text-blue-500{% else %}text-gray-400{% endif %}">
+                {% if subcategory.children.size > 0 %}
+                <i class="fas fa-caret-right transition-transform duration-200"></i>
+                {% else %}
+                <i class="fas fa-circle text-xs"></i>
+                {% endif %}
+              </span>
+              <a href="{{ subcategory.path }}" class="hover:text-blue-600 flex-grow transition-colors duration-200
+                {% if include.current_subcategory.path == subcategory.path %}text-blue-700 font-medium{% endif %}">
+                {{ subcategory.name | capitalize }}
+              </a>
+              <span class="text-xs text-gray-500 bg-gray-100 px-1.5 rounded-full">{{ subcategory.children.size }}</span>
+            </div>
+            
+            <!-- Tertiary Categories -->
+            {% if subcategory.children.size > 0 %}
+            <div class="tertiary-list ml-6 mt-1 space-y-1 {% if include.current_subcategory.path != subcategory.path %}hidden{% endif %}">
+              {% for tertiary in subcategory.children %}
+              <div class="flex items-center py-1.5 px-3 hover:bg-gray-50 rounded-md transition-colors duration-150">
+                <span class="mr-1.5 w-4 text-center text-gray-400">
+                  <i class="fas fa-circle text-xs"></i>
+                </span>
+                <a href="{{ tertiary.path }}" class="hover:text-blue-600 transition-colors duration-200">
+                  {{ tertiary.name | capitalize }}
+                </a>
+              </div>
+              {% endfor %}
+            </div>
+            {% endif %}
+          </div>
+          {% endfor %}
+        </div>
+        {% endif %}
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+  
+  <!-- Language Selector -->
+  <div class="p-4 border-t border-gray-200 bg-gray-50">
+    <div class="text-sm font-medium text-gray-700 mb-2">Languages</div>
+    <div class="flex space-x-4">
+      <a href="/en-US" class="text-blue-600 hover:text-blue-800 hover:underline text-sm transition-colors duration-200">English</a>
+      <a href="/pt-BR" class="text-blue-600 hover:text-blue-800 hover:underline text-sm transition-colors duration-200">Português</a>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Category toggle functionality
+  document.addEventListener('DOMContentLoaded', function() {
+    // Get all category headers
+    const categoryHeaders = document.querySelectorAll('.category-header');
+    const subcategoryHeaders = document.querySelectorAll('.subcategory-item > div:first-child');
+    
+    // Add click event to category headers
+    categoryHeaders.forEach(header => {
+      header.addEventListener('click', function(e) {
+        // Prevent the click from triggering the link
+        if (e.target.tagName !== 'A') {
+          e.preventDefault();
+          
+          // Toggle the subcategory list
+          const subcategoryList = this.nextElementSibling;
+          if (subcategoryList && subcategoryList.classList.contains('subcategory-list')) {
+            subcategoryList.classList.toggle('hidden');
+            
+            // Toggle the icon
+            const icon = this.querySelector('.toggle-icon i');
+            if (icon) {
+              icon.classList.toggle('rotate-90');
+            }
+          }
+        }
+      });
+    });
+    
+    // Add click event to subcategory headers
+    subcategoryHeaders.forEach(header => {
+      header.addEventListener('click', function(e) {
+        // Prevent the click from triggering the link
+        if (e.target.tagName !== 'A') {
+          e.preventDefault();
+          
+          // Toggle the tertiary list
+          const tertiaryList = this.nextElementSibling;
+          if (tertiaryList && tertiaryList.classList.contains('tertiary-list')) {
+            tertiaryList.classList.toggle('hidden');
+            
+            // Toggle the icon
+            const icon = this.querySelector('.toggle-icon i');
+            if (icon) {
+              icon.classList.toggle('rotate-90');
+            }
+          }
+        }
+      });
+    });
+    
+    // Filter categories on search
+    const searchInput = document.getElementById('category-search');
+    if (searchInput) {
+      searchInput.addEventListener('input', function() {
+        const searchTerm = this.value.toLowerCase();
+        const allCategoryItems = document.querySelectorAll('.category-item');
+        
+        allCategoryItems.forEach(item => {
+          const categoryName = item.querySelector('.category-header a').textContent.toLowerCase();
+          
+          if (categoryName.includes(searchTerm)) {
+            item.style.display = 'block';
+          } else {
+            // Check subcategories
+            let showCategory = false;
+            const subcategoryLinks = item.querySelectorAll('.subcategory-item a');
+            
+            subcategoryLinks.forEach(link => {
+              if (link.textContent.toLowerCase().includes(searchTerm)) {
+                showCategory = true;
+                // Expand the subcategory list
+                const subcategoryList = item.querySelector('.subcategory-list');
+                if (subcategoryList) {
+                  subcategoryList.classList.remove('hidden');
+                }
+              }
+            });
+            
+            item.style.display = showCategory ? 'block' : 'none';
+          }
+        });
+      });
+    }
+  });
+</script> 

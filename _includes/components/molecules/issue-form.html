@@ -1,0 +1,181 @@
+{% comment %}
+  Issue Submission Form Component
+  This component allows users to submit issues via Staticman to create GitHub issues.
+  
+  Parameters:
+  - issue_type: Default issue type (bug, feature, content, etc.)
+  - page_url: URL of the page where the issue was found
+  - form_action: Override the form action URL
+  - language: The language of the content (en-US or pt-BR)
+{% endcomment %}
+
+{% assign lang = include.language | default: page.lang | default: 'en-US' %}
+{% assign repo_lang = lang | split: '-' | first %}
+
+<div class="issue-form bg-white rounded-lg shadow-sm p-6">
+  <h2 class="text-xl font-semibold text-gray-800 mb-4">
+    {% if lang == 'pt-BR' %}Reportar um Problema{% else %}Report an Issue{% endif %}
+  </h2>
+  
+  <form id="issue-form" method="POST" action="{{ include.form_action | default: site.staticman.endpoint }}/{{ site.staticman.repositories[repo_lang].name }}/{{ site.staticman.repositories[repo_lang].branch }}/issues">
+    <!-- Hidden fields -->
+    <input type="hidden" name="options[redirect]" value="{{ site.url }}{{ page.url }}?issue=success">
+    <input type="hidden" name="options[slug]" value="{{ page.url | slugify }}">
+    <input type="hidden" name="fields[page_url]" value="{{ include.page_url | default: page.url }}">
+    <input type="hidden" name="fields[language]" value="{{ lang }}">
+    <input type="hidden" name="fields[timestamp]" value="{{ site.time | date_to_xmlschema }}">
+    
+    <!-- Reporter information -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+      <div>
+        <label for="name" class="block text-sm font-medium text-gray-700 mb-1">
+          {% if lang == 'pt-BR' %}Seu Nome{% else %}Your Name{% endif %}*
+        </label>
+        <input type="text" id="name" name="fields[name]" required 
+               class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
+      </div>
+      
+      <div>
+        <label for="email" class="block text-sm font-medium text-gray-700 mb-1">
+          {% if lang == 'pt-BR' %}Email{% else %}Email{% endif %}*
+        </label>
+        <input type="email" id="email" name="fields[email]" required 
+               class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
+        <p class="text-xs text-gray-500 mt-1">
+          {% if lang == 'pt-BR' %}Não será publicado. Usado apenas para notificações.{% else %}Won't be published. Used only for notifications.{% endif %}
+        </p>
+      </div>
+    </div>
+    
+    <!-- Issue type -->
+    <div class="mb-4">
+      <label for="issue-type" class="block text-sm font-medium text-gray-700 mb-1">
+        {% if lang == 'pt-BR' %}Tipo de Problema{% else %}Issue Type{% endif %}*
+      </label>
+      <select id="issue-type" name="fields[issue_type]" required
+              class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
+        <option value="">{% if lang == 'pt-BR' %}Selecionar tipo{% else %}Select type{% endif %}</option>
+        <option value="bug" {% if include.issue_type == "bug" %}selected{% endif %}>
+          {% if lang == 'pt-BR' %}Erro técnico ou bug{% else %}Technical error or bug{% endif %}
+        </option>
+        <option value="content" {% if include.issue_type == "content" %}selected{% endif %}>
+          {% if lang == 'pt-BR' %}Problema de conteúdo{% else %}Content issue{% endif %}
+        </option>
+        <option value="suggestion" {% if include.issue_type == "suggestion" %}selected{% endif %}>
+          {% if lang == 'pt-BR' %}Sugestão de melhoria{% else %}Improvement suggestion{% endif %}
+        </option>
+        <option value="typo" {% if include.issue_type == "typo" %}selected{% endif %}>
+          {% if lang == 'pt-BR' %}Erro de digitação/gramática{% else %}Typo/grammar error{% endif %}
+        </option>
+        <option value="outdated" {% if include.issue_type == "outdated" %}selected{% endif %}>
+          {% if lang == 'pt-BR' %}Informação desatualizada{% else %}Outdated information{% endif %}
+        </option>
+        <option value="other" {% if include.issue_type == "other" %}selected{% endif %}>
+          {% if lang == 'pt-BR' %}Outro{% else %}Other{% endif %}
+        </option>
+      </select>
+    </div>
+    
+    <!-- Issue title -->
+    <div class="mb-4">
+      <label for="title" class="block text-sm font-medium text-gray-700 mb-1">
+        {% if lang == 'pt-BR' %}Título do Problema{% else %}Issue Title{% endif %}*
+      </label>
+      <input type="text" id="title" name="fields[title]" required
+             placeholder="{% if lang == 'pt-BR' %}Breve descrição do problema{% else %}Brief description of the issue{% endif %}" 
+             class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
+    </div>
+    
+    <!-- Issue description -->
+    <div class="mb-4">
+      <label for="description" class="block text-sm font-medium text-gray-700 mb-1">
+        {% if lang == 'pt-BR' %}Descrição Detalhada{% else %}Detailed Description{% endif %}*
+      </label>
+      <textarea id="description" name="fields[description]" rows="6" required
+                placeholder="{% if lang == 'pt-BR' %}Por favor, descreva o problema em detalhes...{% else %}Please describe the issue in detail...{% endif %}"
+                class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea>
+    </div>
+    
+    <!-- Steps to reproduce (for bugs) -->
+    <div id="steps-section" class="mb-4 hidden">
+      <label for="steps" class="block text-sm font-medium text-gray-700 mb-1">
+        {% if lang == 'pt-BR' %}Passos para Reproduzir{% else %}Steps to Reproduce{% endif %}
+      </label>
+      <textarea id="steps" name="fields[steps]" rows="4" 
+                placeholder="{% if lang == 'pt-BR' %}1. Vá para...\n2. Clique em...\n3. Observe que...{% else %}1. Go to...\n2. Click on...\n3. Notice that...{% endif %}"
+                class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea>
+    </div>
+    
+    <!-- Expected vs Actual (for bugs) -->
+    <div id="expected-section" class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4 hidden">
+      <div>
+        <label for="expected" class="block text-sm font-medium text-gray-700 mb-1">
+          {% if lang == 'pt-BR' %}Comportamento Esperado{% else %}Expected Behavior{% endif %}
+        </label>
+        <textarea id="expected" name="fields[expected]" rows="3"
+                  class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea>
+      </div>
+      
+      <div>
+        <label for="actual" class="block text-sm font-medium text-gray-700 mb-1">
+          {% if lang == 'pt-BR' %}Comportamento Atual{% else %}Actual Behavior{% endif %}
+        </label>
+        <textarea id="actual" name="fields[actual]" rows="3"
+                  class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea>
+      </div>
+    </div>
+    
+    <!-- Suggested fix -->
+    <div class="mb-4">
+      <label for="suggested-fix" class="block text-sm font-medium text-gray-700 mb-1">
+        {% if lang == 'pt-BR' %}Sugestão de Correção{% else %}Suggested Fix{% endif %}
+      </label>
+      <textarea id="suggested-fix" name="fields[suggested_fix]" rows="3"
+                placeholder="{% if lang == 'pt-BR' %}Se você tiver alguma ideia de como resolver este problema...{% else %}If you have any ideas on how to fix this issue...{% endif %}"
+                class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea>
+    </div>
+    
+    <!-- reCAPTCHA -->
+    {% if site.staticman.recaptcha.enabled %}
+    <div class="mb-4">
+      <div class="g-recaptcha" data-sitekey="{{ site.staticman.recaptcha.siteKey }}"></div>
+      <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    </div>
+    {% endif %}
+    
+    <!-- Submit buttons -->
+    <div class="flex justify-between">
+      <a href="{{ page.url }}" class="bg-gray-100 text-gray-700 px-4 py-2 rounded hover:bg-gray-200">
+        {% if lang == 'pt-BR' %}Cancelar{% else %}Cancel{% endif %}
+      </a>
+      <button type="submit" class="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700">
+        {% if lang == 'pt-BR' %}Enviar Problema{% else %}Submit Issue{% endif %}
+      </button>
+    </div>
+  </form>
+</div>
+
+<!-- JavaScript for toggling bug-specific fields -->
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const issueTypeSelect = document.getElementById('issue-type');
+    const stepsSection = document.getElementById('steps-section');
+    const expectedSection = document.getElementById('expected-section');
+    
+    function toggleBugFields() {
+      if (issueTypeSelect.value === 'bug') {
+        stepsSection.classList.remove('hidden');
+        expectedSection.classList.remove('hidden');
+      } else {
+        stepsSection.classList.add('hidden');
+        expectedSection.classList.add('hidden');
+      }
+    }
+    
+    // Set initial state
+    toggleBugFields();
+    
+    // Update on change
+    issueTypeSelect.addEventListener('change', toggleBugFields);
+  });
+</script> 

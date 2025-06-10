@@ -1,0 +1,61 @@
+---
+layout: default
+---
+
+<div class="container mx-auto px-4 py-8">
+  <h1 class="text-3xl font-bold mb-6">{{ page.title }}</h1>
+  
+  <div class="mb-8">
+    <p class="text-lg">{{ page.description }}</p>
+  </div>
+  
+  <!-- Exemplo de HTMX com carregamento de dados -->
+  <div class="mb-8">
+    <h2 class="text-2xl font-semibold mb-4">Selecione uma categoria:</h2>
+    
+    <div class="flex space-x-4">
+      <button 
+        class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
+        hx-get="/api/business/index.json" 
+        hx-trigger="click"
+        hx-target="#content-area"
+        hx-swap="innerHTML">
+        Business
+      </button>
+      
+      <button 
+        class="px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700"
+        hx-get="/api/computing/index.json" 
+        hx-trigger="click"
+        hx-target="#content-area"
+        hx-swap="innerHTML">
+        Computing
+      </button>
+    </div>
+  </div>
+  
+  <!-- Área onde o conteúdo será carregado -->
+  <div id="content-area" class="border rounded-lg p-6 bg-gray-50 min-h-[300px]">
+    <p class="text-gray-500 text-center">Selecione uma categoria para ver os dados.</p>
+  </div>
+  
+  <!-- Área para mostrar o código JSON -->
+  <div class="mt-8">
+    <h2 class="text-2xl font-semibold mb-4">Código JSON:</h2>
+    <pre id="json-display" class="bg-gray-800 text-green-400 p-4 rounded-lg overflow-auto max-h-[400px]">
+      // O JSON aparecerá aqui
+    </pre>
+  </div>
+</div>
+
+<script>
+  document.addEventListener('htmx:afterSwap', function(event) {
+    // Pega o conteúdo carregado e formata como JSON
+    try {
+      const data = JSON.parse(event.detail.xhr.responseText);
+      document.getElementById('json-display').textContent = JSON.stringify(data, null, 2);
+    } catch (e) {
+      console.error('Erro ao parsear JSON:', e);
+    }
+  });
+</script> 

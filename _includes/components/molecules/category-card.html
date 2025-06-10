@@ -1,0 +1,21 @@
+<div class="border border-gray-200 rounded p-3 hover:bg-gray-50">
+  <h3 class="text-lg font-medium">
+    <a href="{{ include.category.path }}" class="text-blue-600 hover:underline">{{ include.category.title }}</a>
+  </h3>
+  
+  {% if include.category.children %}
+  <ul class="mt-2 text-sm space-y-1">
+    {% for subcategory in include.category.children limit:include.limit | default: 3 %}
+    <li>
+      <a href="{{ subcategory.path }}" class="text-blue-600 hover:underline">{{ subcategory.title }}</a>
+    </li>
+    {% endfor %}
+    
+    {% if include.category.children.size > include.limit | default: 3 %}
+    <li class="text-gray-500 text-xs">
+      <a href="{{ include.category.path }}" class="hover:underline">+ {{ include.category.children.size | minus: include.limit | default: 3 }} more subcategories</a>
+    </li>
+    {% endif %}
+  </ul>
+  {% endif %}
+</div> 

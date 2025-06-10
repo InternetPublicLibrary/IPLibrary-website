@@ -1,0 +1,31 @@
+<div class="border border-gray-200 rounded p-4">
+  <h3 class="text-lg font-medium text-gray-800 mb-2">{{ include.title | default: "Available Languages" }}</h3>
+  
+  <div class="grid grid-cols-2 gap-2 text-sm">
+    {% assign current_lang = page.lang | default: 'en-US' %}
+    
+    <a href="#" 
+       onclick="return setPreferredLanguage('en-US');" 
+       class="flex items-center p-2 border border-gray-200 rounded {% if current_lang == 'en-US' %}bg-blue-50{% else %}hover:bg-gray-50{% endif %}">
+      <span class="mr-2">🇺🇸</span> English (US)
+    </a>
+    
+    <a href="#" 
+       onclick="return setPreferredLanguage('pt-BR');" 
+       class="flex items-center p-2 border border-gray-200 rounded {% if current_lang == 'pt-BR' %}bg-blue-50{% else %}hover:bg-gray-50{% endif %}">
+      <span class="mr-2">🇧🇷</span> Português (Brasil)
+    </a>
+  </div>
+  
+  <script>
+    // Function to set the preferred language in localStorage
+    function setPreferredLanguage(language) {
+      localStorage.setItem('preferred_language', language);
+      
+      // Redirect to the selected language version
+      window.location.href = '/' + language + '/';
+      
+      return false; // Prevent default link action
+    }
+  </script>
+</div> 

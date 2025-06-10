@@ -1,0 +1,33 @@
+# Recursos de aprendizado sobre marketing
+- title: "Rock University"
+  url: "https://university.rockcontent.com/"
+  description: "Plataforma de cursos gratuitos da Rock Content sobre marketing de conteúdo e marketing digital."
+  tags:
+    - marketing de conteúdo
+    - cursos
+    - marketing digital
+  access: "Gratuito"
+  rank: 1
+  last_updated: 2024-01-05
+
+- title: "RD University"
+  url: "https://rduniversity.com.br/"
+  description: "Academia online da Resultados Digitais com cursos sobre marketing digital e vendas."
+  tags:
+    - inbound marketing
+    - vendas
+    - automação
+  access: "Gratuito"
+  rank: 2
+  last_updated: 2024-01-10
+
+- title: "Escola de Marketing Digital - ESPM"
+  url: "https://www.espm.br/cursos-de-ferias/marketing-digital/"
+  description: "Cursos de marketing digital da ESPM, uma das principais escolas de comunicação e marketing do Brasil."
+  tags:
+    - marketing digital
+    - mídias sociais
+    - estratégia
+  access: "Pago"
+  rank: 3
+  last_updated: 2024-01-15 

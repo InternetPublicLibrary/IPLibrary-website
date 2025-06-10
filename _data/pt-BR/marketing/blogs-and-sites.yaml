@@ -1,0 +1,33 @@
+# Blogs e sites relacionados a marketing
+- title: "Marketing de Conteúdo - Rock Content"
+  url: "https://rockcontent.com/br/blog/"
+  description: "Blog da Rock Content com artigos sobre marketing de conteúdo, SEO, mídias sociais e marketing digital."
+  tags:
+    - marketing de conteúdo
+    - SEO
+    - mídias sociais
+  access: "Gratuito"
+  rank: 1
+  last_updated: 2024-01-05
+
+- title: "Resultados Digitais"
+  url: "https://resultadosdigitais.com.br/blog/"
+  description: "Blog sobre marketing digital, inbound marketing, geração de leads e vendas online."
+  tags:
+    - inbound marketing
+    - geração de leads
+    - automação de marketing
+  access: "Gratuito"
+  rank: 2
+  last_updated: 2024-01-10
+
+- title: "Neil Patel Brasil"
+  url: "https://neilpatel.com/br/blog/"
+  description: "Versão brasileira do blog do especialista em marketing digital Neil Patel, com foco em SEO e análise de dados."
+  tags:
+    - SEO
+    - análise de dados
+    - tráfego
+  access: "Gratuito"
+  rank: 3
+  last_updated: 2024-01-15 

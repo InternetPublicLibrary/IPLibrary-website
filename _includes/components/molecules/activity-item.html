@@ -1,0 +1,26 @@
+<li class="py-3 first:pt-0 last:pb-0">
+  <div class="flex justify-between">
+    <a href="{{ include.url }}" class="text-blue-600 hover:underline">{{ include.title }}</a>
+    <span class="text-xs text-gray-500">{{ include.time }}</span>
+  </div>
+  <div class="text-xs text-gray-600 mt-1">
+    {% if include.user %}
+      <span class="text-gray-500">by</span> <a href="{{ include.user_url | default: '#' }}" class="text-blue-600 hover:underline">{{ include.user }}</a>
+      {% if include.comment %}
+        <span class="mx-1">•</span>
+        <span class="text-gray-500">comment:</span> {{ include.comment }}
+      {% endif %}
+    {% endif %}
+    
+    {% if include.category %}
+      <div class="flex justify-between text-xs mt-1">
+        <span class="text-gray-600">
+          <span class="text-gray-500">Category:</span> {{ include.category }}
+        </span>
+        {% if include.label %}
+          <span class="bg-{{ include.label_color | default: 'blue' }}-100 text-{{ include.label_color | default: 'blue' }}-800 px-2 py-0.5 rounded-full">{{ include.label }}</span>
+        {% endif %}
+      </div>
+    {% endif %}
+  </div>
+</li> 

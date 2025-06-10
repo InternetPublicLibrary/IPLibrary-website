@@ -1,0 +1,42 @@
+{% comment %}
+  Badge Component
+  Usage:
+  {% include components/atoms/badge.html text="New" variant="blue" size="md" %}
+  
+  Parameters:
+  - text: Badge text
+  - variant: Badge color variant (blue, gray, green, red, yellow, purple, default: blue)
+  - size: Badge size (sm, md, default: md)
+  - classes: Additional CSS classes (optional)
+{% endcomment %}
+
+{% assign variant_class = "" %}
+{% assign size_class = "" %}
+
+{% case include.variant %}
+  {% when "blue" %}
+    {% assign variant_class = "bg-blue-100 text-blue-800" %}
+  {% when "gray" %}
+    {% assign variant_class = "bg-gray-100 text-gray-800" %}
+  {% when "green" %}
+    {% assign variant_class = "bg-green-100 text-green-800" %}
+  {% when "red" %}
+    {% assign variant_class = "bg-red-100 text-red-800" %}
+  {% when "yellow" %}
+    {% assign variant_class = "bg-yellow-100 text-yellow-800" %}
+  {% when "purple" %}
+    {% assign variant_class = "bg-purple-100 text-purple-800" %}
+  {% else %}
+    {% assign variant_class = "bg-blue-100 text-blue-800" %}
+{% endcase %}
+
+{% case include.size %}
+  {% when "sm" %}
+    {% assign size_class = "text-xs px-1.5 py-0.5" %}
+  {% else %}
+    {% assign size_class = "text-xs px-2.5 py-1" %}
+{% endcase %}
+
+<span class="inline-flex items-center rounded-md font-medium {{ variant_class }} {{ size_class }} {{ include.classes }}">
+  {{ include.text }}
+</span> 

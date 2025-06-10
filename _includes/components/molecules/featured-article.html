@@ -1,0 +1,35 @@
+<div class="border border-blue-200 rounded overflow-hidden">
+  <div class="bg-blue-50 px-4 py-2 border-b border-blue-200">
+    <div class="flex justify-between items-center">
+      <h2 class="text-lg font-medium text-blue-800">{{ include.title | default: "Today's Featured Article" }}</h2>
+      <a href="#" 
+         class="text-xs text-blue-600 hover:underline"
+         hx-get="{{ include.archives_endpoint | default: '/api/featured-archives' }}"
+         hx-target="{{ include.archives_target | default: '#featured-archives-modal' }}"
+         hx-trigger="click">{{ include.archives_text | default: "View Archives" }}</a>
+    </div>
+  </div>
+  
+  <div class="p-4 bg-white" 
+       id="{{ include.content_id | default: 'featured-article-content' }}"
+       hx-get="{{ include.content_endpoint | default: '/api/featured-article' }}"
+       hx-trigger="{{ include.trigger | default: 'load' }}">
+    
+    {% if include.loading_content %}
+      {{ include.loading_content }}
+    {% else %}
+      <!-- Default content while loading -->
+      <h3 class="text-xl font-semibold mb-2">{{ include.default_title | default: "Data Science Resources" }}</h3>
+      <div class="flex mb-3">
+        <div class="mr-4 shrink-0">
+          <img src="{{ include.default_image | default: 'https://via.placeholder.com/120x80' }}" alt="{{ include.default_alt | default: 'Featured Article' }}" class="rounded border border-gray-200">
+        </div>
+        <p class="text-sm text-gray-700">{{ include.default_description | default: "The field of data science combines domain expertise, programming skills, and knowledge of mathematics and statistics to extract meaningful insights from data. The Internet Public Library's curated collection includes academic journals, online courses, datasets, and visualization tools for data scientists of all levels..." }}</p>
+      </div>
+      <div class="text-right">
+        <a href="{{ include.default_link | default: '/en-US/computing/data-science' }}" class="text-blue-600 hover:underline text-sm">Continue reading →</a>
+      </div>
+    {% endif %}
+    
+  </div>
+</div> 

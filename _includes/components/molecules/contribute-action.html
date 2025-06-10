@@ -1,0 +1,10 @@
+<a href="{{ include.url | default: '#' }}" 
+   class="flex items-center p-3 bg-white border border-gray-200 rounded hover:bg-gray-50" 
+   {% if include.hx_get %}hx-get="{{ include.hx_get }}"{% endif %} 
+   {% if include.hx_target %}hx-target="{{ include.hx_target }}"{% endif %}>
+  <i class="fas fa-{{ include.icon | default: 'plus-circle' }} text-blue-600 mr-3 text-lg"></i>
+  <div>
+    <div class="font-medium">{{ include.title }}</div>
+    <div class="text-sm text-gray-600">{{ include.description }}</div>
+  </div>
+</a> 

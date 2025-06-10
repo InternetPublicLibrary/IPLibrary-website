@@ -1,0 +1,25 @@
+{% comment %}
+  Resource Card Component
+  Usage:
+  {% include components/molecules/resource-card.html title="Resource Title" description="Resource description text" url="https://example.com" source="Example Source" type="Article" page_url="/path/to/detail-page" image="/path/to/image.jpg" %}
+  
+  Parameters:
+  - title: Resource title
+  - description: Resource description text
+  - url: Resource URL
+  - source: Source name
+  - type: Resource type (Article, Video, etc.)
+  - page_url: Path to detail page (optional)
+  - image: Path to image (optional)
+{% endcomment %}
+
+<div class="bg-white border border-gray-200 rounded overflow-hidden">
+  <div class="p-4 border-b border-gray-200 bg-gray-50">
+    <div class="text-blue-600 text-sm font-medium">{{ include.category }}</div>
+    <h3 class="text-lg font-bold text-gray-800">{{ include.title }}</h3>
+  </div>
+  <div class="p-4">
+    <p class="text-gray-600 text-sm mb-4">{{ include.description }}</p>
+    <a href="{{ include.url }}" class="text-blue-600 hover:underline text-sm">{{ include.link_text | default: "Explore Resources →" }}</a>
+  </div>
+</div> 

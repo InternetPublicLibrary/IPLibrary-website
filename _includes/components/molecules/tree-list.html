@@ -1,0 +1,48 @@
+{% if include.items %}
+  <ul class="tree-list {% if include.level > 0 %}ml-4 {% if include.collapsed %}hidden{% endif %}{% endif %}" id="tree-list-{{ include.parent_id | default: 'root' }}">
+    {% for item in include.items %}
+      {% assign item_id = item.title | slugify | append: '-' | append: forloop.index %}
+      <li class="py-1">
+        <div class="flex items-center">
+          {% if item.children %}
+            <button class="mr-1 w-4 text-gray-500 hover:text-blue-600 focus:outline-none" 
+                    onclick="toggleTree('{{ item_id }}')">
+              <svg class="toggle-icon transform transition-transform duration-200" width="12" height="12" viewBox="0 0 12 12">
+                <path fill="currentColor" d="M6 9L0 3h12z" />
+              </svg>
+            </button>
+          {% else %}
+            <span class="mr-1 w-4"></span>
+          {% endif %}
+          <a href="{{ item.path }}" class="text-gray-800 hover:text-blue-600 {% if include.level == 0 %}font-semibold{% endif %}">
+            {{ item.title }}
+          </a>
+        </div>
+        {% if item.children %}
+          {% assign child_items = item.children %}
+          {% assign next_level = include.level | plus: 1 %}
+          {% include components/molecules/tree-list.html 
+            items=child_items 
+            level=next_level 
+            parent_id=item_id 
+            collapsed=true 
+          %}
+        {% endif %}
+      </li>
+    {% endfor %}
+  </ul>
+{% endif %}
+
+{% if include.level == 0 %}
+<script>
+  function toggleTree(id) {
+    const childList = document.getElementById('tree-list-' + id);
+    const toggleIcon = event.currentTarget.querySelector('.toggle-icon');
+    
+    if (childList) {
+      childList.classList.toggle('hidden');
+      toggleIcon.classList.toggle('rotate-180');
+    }
+  }
+</script>
+{% endif %} 

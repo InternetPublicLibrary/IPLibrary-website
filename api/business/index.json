@@ -1,0 +1,16 @@
+---
+layout: none
+---
+{
+  "name": "Business",
+  "subcategories": [
+    {% assign business_pages = site.pages | where_exp: "page", "page.url contains '/business/'" %}
+    {% for page in business_pages %}
+      {
+        "title": {{ page.title | jsonify }},
+        "url": {{ page.url | jsonify }},
+        "description": {{ page.description | jsonify }}
+      }{% unless forloop.last %},{% endunless %}
+    {% endfor %}
+  ]
+} 

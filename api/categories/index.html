@@ -1,0 +1,15 @@
+---
+layout: null
+---
+{% assign lang = "en-US" %}
+{% if request.params.lang %}
+  {% assign lang = request.params.lang %}
+{% endif %}
+
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+  {% for category in site.data[lang].menu %}
+    {% include components/molecules/category-card.html 
+      category=category
+    %}
+  {% endfor %}
+</div> 

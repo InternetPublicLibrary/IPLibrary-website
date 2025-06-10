@@ -1,0 +1,33 @@
+# Empresas relacionadas a negócios
+- title: "Ambev"
+  url: "https://www.ambev.com.br/"
+  description: "Uma das maiores empresas de bebidas do mundo, parte da AB InBev."
+  tags:
+    - bebidas
+    - consumo
+    - manufatura
+  access: "Site corporativo"
+  rank: 1
+  last_updated: 2024-01-03
+
+- title: "Itaú Unibanco"
+  url: "https://www.itau.com.br/"
+  description: "Maior banco privado do Brasil, oferecendo serviços financeiros completos."
+  tags:
+    - banco
+    - finanças
+    - investimentos
+  access: "Site corporativo"
+  rank: 2
+  last_updated: 2024-01-08
+
+- title: "Petrobras"
+  url: "https://petrobras.com.br/"
+  description: "Empresa brasileira de petróleo e gás natural, uma das maiores produtoras de petróleo do mundo."
+  tags:
+    - petróleo
+    - energia
+    - estatal
+  access: "Site corporativo"
+  rank: 3
+  last_updated: 2024-01-12 

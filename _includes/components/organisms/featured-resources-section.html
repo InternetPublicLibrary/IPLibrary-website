@@ -1,0 +1,44 @@
+<section id="featured" class="py-8 bg-white border-t border-gray-200">
+  <div class="container mx-auto px-4">
+    <h2 class="text-2xl font-bold text-gray-800 mb-6 pb-2 border-b border-gray-200">{{ include.title | default: "Featured Resources" }}</h2>
+    
+    <div id="featured-resources" hx-get="{{ include.endpoint | default: '/api/featured-resources' }}" hx-trigger="load">
+      <!-- Fallback for when no featured resources are defined -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        {% if include.resources %}
+          {% for resource in include.resources %}
+            {% include components/molecules/resource-card.html 
+              category=resource.category
+              title=resource.title
+              description=resource.description
+              url=resource.url
+              link_text=resource.link_text
+            %}
+          {% endfor %}
+        {% else %}
+          <!-- Default resources if none provided -->
+          {% include components/molecules/resource-card.html 
+            category="Business"
+            title="Business Law Resources"
+            description="A collection of the best business law resources available online, including legal databases, scholarly articles, and professional references."
+            url="/en-US/business/business-law"
+          %}
+          
+          {% include components/molecules/resource-card.html 
+            category="Computing"
+            title="Data Science Publications"
+            description="Leading publications and papers in the field of data science, including academic journals, conference proceedings, and research repositories."
+            url="/en-US/computing/data-science/publications"
+          %}
+          
+          {% include components/molecules/resource-card.html 
+            category="Development"
+            title="Programming Languages"
+            description="Comprehensive guides and resources for various programming languages, including documentation, tutorials, best practices, and community forums."
+            url="/en-US/development/programming-languages"
+          %}
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</section> 

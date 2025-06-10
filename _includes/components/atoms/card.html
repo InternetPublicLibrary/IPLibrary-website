@@ -1,0 +1,17 @@
+<div class="border {{ include.border_color | default: 'border-gray-200' }} rounded {{ include.bg_color | default: 'bg-white' }} {{ include.classes }} overflow-hidden">
+  {% if include.header %}
+  <div class="p-4 border-b {{ include.border_color | default: 'border-gray-200' }} {{ include.header_bg | default: 'bg-gray-50' }}">
+    {{ include.header }}
+  </div>
+  {% endif %}
+  
+  <div class="p-4">
+    {{ include.content }}
+  </div>
+  
+  {% if include.footer %}
+  <div class="p-4 border-t {{ include.border_color | default: 'border-gray-200' }} {{ include.footer_bg | default: 'bg-white' }}">
+    {{ include.footer }}
+  </div>
+  {% endif %}
+</div> 

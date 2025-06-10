@@ -1,0 +1,14 @@
+---
+layout: none
+---
+[
+  {%- for page in site.pages %}
+    {
+      "title": {{ page.title | jsonify }},
+      "url": {{ page.url | jsonify }},
+      "layout": {{ page.layout | jsonify }},
+      "description": {{ page.description | jsonify }},
+      "last_modified": "{{ page.last_modified_at | date: '%Y-%m-%d' }}"
+    }{% unless forloop.last %},{% endunless %}
+  {% endfor %}
+] 

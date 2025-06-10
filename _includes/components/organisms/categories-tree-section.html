@@ -1,0 +1,13 @@
+<section id="categories-tree" class="py-8">
+  <div class="container mx-auto px-4">
+    <div class="mb-6">
+      <h2 class="text-2xl font-bold text-gray-800 mb-4 pb-2 border-b border-gray-200">{{ include.title | default: "Complete Category List" }}</h2>
+      
+      <!-- First assign the menu items to a variable -->
+      {% assign menu_items = site.data[include.language | default: 'en-US'].menu %}
+      
+      <!-- Then include the tree-list template with the assigned variable -->
+      {% include components/molecules/tree-list.html items=menu_items level=0 %}
+    </div>
+  </div>
+</section>

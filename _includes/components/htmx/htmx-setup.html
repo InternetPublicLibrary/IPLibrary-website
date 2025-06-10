@@ -1,0 +1,15 @@
+<!-- Required HTMX script -->
+<script src="https://unpkg.com/htmx.org@1.9.2" integrity="sha384-L6OqL9pRWyyFU3+/bjdSri+iIphTN/bvYyM37tICVyOJkWZLpP2vGn6VUEXgzg6h" crossorigin="anonymous"></script>
+
+<!-- Optional: Add HTMX extensions -->
+{% if include.extensions %}
+  {% for extension in include.extensions %}
+    <script src="https://unpkg.com/htmx.org/dist/ext/{{ extension }}.js"></script>
+  {% endfor %}
+{% endif %}
+
+<!-- Content area for dynamic loading -->
+<div id="content-area"></div>
+
+<!-- Modal for featured archives -->
+<div id="featured-archives-modal" class="hidden"></div> 

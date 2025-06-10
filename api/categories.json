@@ -1,0 +1,32 @@
+---
+layout: none
+---
+{
+  "categories": [
+    {
+      "name": "Business",
+      "url": "/api/business/index.json",
+      "description": "Business related resources and information"
+    },
+    {
+      "name": "Computing",
+      "url": "/api/computing/index.json",
+      "description": "Computing and technology related resources"
+    },
+    {
+      "name": "Design",
+      "url": "/api/design/index.json",
+      "description": "Design related resources and information"
+    },
+    {
+      "name": "Development",
+      "url": "/api/development/index.json",
+      "description": "Software development resources and information"
+    },
+    {
+      "name": "Marketing",
+      "url": "/api/marketing/index.json",
+      "description": "Marketing related resources and information"
+    }
+  ]
+} 

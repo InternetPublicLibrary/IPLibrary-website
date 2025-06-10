@@ -1,0 +1,179 @@
+<div class="bg-gray-50 border border-gray-200 rounded overflow-hidden">
+  <div class="p-3 bg-gray-100 border-b border-gray-200">
+    <h3 class="text-lg font-medium text-gray-800">Categories</h3>
+  </div>
+  
+  <!-- Search Categories -->
+  <div class="p-3 border-b border-gray-200">
+    <div class="relative">
+      <input type="text" id="category-search" placeholder="Search categories..." class="w-full px-3 py-2 pr-8 text-sm border border-gray-300 rounded focus:outline-none focus:ring-1 focus:ring-blue-500">
+      <i class="fas fa-search absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+    </div>
+  </div>
+  
+  <!-- All Categories List -->
+  <div class="overflow-y-auto max-h-[70vh]">
+    <div class="category-tree p-2 text-sm">
+      {% for category in site.data.en.menu.en %}
+      <div class="category-item mb-1">
+        <!-- Main Category -->
+        <div class="category-header flex items-center py-1 px-2 hover:bg-gray-100 rounded cursor-pointer">
+          <span class="toggle-icon mr-1 w-4 text-center text-gray-500">
+            {% if category.children.size > 0 %}
+            <i class="fas fa-caret-right"></i>
+            {% else %}
+            <i class="fas fa-circle text-xs"></i>
+            {% endif %}
+          </span>
+          <a href="{{ category.path }}" class="font-medium text-blue-600 hover:underline flex-grow">{{ category.name | capitalize }}</a>
+          <span class="text-xs text-gray-500">{{ category.children.size }}</span>
+        </div>
+        
+        <!-- Subcategories -->
+        {% if category.children.size > 0 %}
+        <div class="subcategory-list ml-5 hidden">
+          {% for subcategory in category.children %}
+          <div class="subcategory-item mb-1">
+            <!-- Subcategory -->
+            <div class="flex items-center py-1 px-2 hover:bg-gray-100 rounded cursor-pointer">
+              <span class="toggle-icon mr-1 w-4 text-center text-gray-500">
+                {% if subcategory.children.size > 0 %}
+                <i class="fas fa-caret-right"></i>
+                {% else %}
+                <i class="fas fa-circle text-xs"></i>
+                {% endif %}
+              </span>
+              <a href="{{ subcategory.path }}" class="text-blue-600 hover:underline flex-grow">{{ subcategory.name | capitalize }}</a>
+              <span class="text-xs text-gray-500">{{ subcategory.children.size }}</span>
+            </div>
+            
+            <!-- Tertiary Categories -->
+            {% if subcategory.children.size > 0 %}
+            <div class="tertiary-list ml-5 hidden">
+              {% for tertiary in subcategory.children %}
+              <div class="flex items-center py-1 px-2 hover:bg-gray-100 rounded">
+                <span class="mr-1 w-4 text-center text-gray-500">
+                  <i class="fas fa-circle text-xs"></i>
+                </span>
+                <a href="{{ tertiary.path }}" class="text-blue-600 hover:underline">{{ tertiary.name | capitalize }}</a>
+              </div>
+              {% endfor %}
+            </div>
+            {% endif %}
+          </div>
+          {% endfor %}
+        </div>
+        {% endif %}
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+  
+  <!-- Language Selector -->
+  <div class="p-3 border-t border-gray-200">
+    <div class="text-sm text-gray-600 mb-2">Languages</div>
+    <div class="flex space-x-3">
+      <a href="/en-US" class="text-blue-600 hover:underline text-sm">English</a>
+      <a href="/pt-BR" class="text-blue-600 hover:underline text-sm">Português</a>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Category toggle functionality
+  document.addEventListener('DOMContentLoaded', function() {
+    // Get all category headers
+    const categoryHeaders = document.querySelectorAll('.category-header');
+    const subcategoryHeaders = document.querySelectorAll('.subcategory-item > div:first-child');
+    
+    // Add click event to category headers
+    categoryHeaders.forEach(header => {
+      header.addEventListener('click', function(e) {
+        // Prevent the click from triggering the link
+        if (e.target.tagName !== 'A') {
+          e.preventDefault();
+          
+          // Toggle the subcategory list
+          const subcategoryList = this.nextElementSibling;
+          if (subcategoryList && subcategoryList.classList.contains('subcategory-list')) {
+            subcategoryList.classList.toggle('hidden');
+            
+            // Toggle the icon
+            const icon = this.querySelector('.toggle-icon i');
+            if (icon) {
+              if (icon.classList.contains('fa-caret-right')) {
+                icon.classList.remove('fa-caret-right');
+                icon.classList.add('fa-caret-down');
+              } else {
+                icon.classList.remove('fa-caret-down');
+                icon.classList.add('fa-caret-right');
+              }
+            }
+          }
+        }
+      });
+    });
+    
+    // Add click event to subcategory headers
+    subcategoryHeaders.forEach(header => {
+      header.addEventListener('click', function(e) {
+        // Prevent the click from triggering the link
+        if (e.target.tagName !== 'A') {
+          e.preventDefault();
+          
+          // Toggle the tertiary list
+          const tertiaryList = this.nextElementSibling;
+          if (tertiaryList && tertiaryList.classList.contains('tertiary-list')) {
+            tertiaryList.classList.toggle('hidden');
+            
+            // Toggle the icon
+            const icon = this.querySelector('.toggle-icon i');
+            if (icon) {
+              if (icon.classList.contains('fa-caret-right')) {
+                icon.classList.remove('fa-caret-right');
+                icon.classList.add('fa-caret-down');
+              } else {
+                icon.classList.remove('fa-caret-down');
+                icon.classList.add('fa-caret-right');
+              }
+            }
+          }
+        }
+      });
+    });
+    
+    // Filter categories on search
+    const searchInput = document.getElementById('category-search');
+    if (searchInput) {
+      searchInput.addEventListener('input', function() {
+        const searchTerm = this.value.toLowerCase();
+        const allCategoryItems = document.querySelectorAll('.category-item');
+        
+        allCategoryItems.forEach(item => {
+          const categoryName = item.querySelector('.category-header a').textContent.toLowerCase();
+          
+          if (categoryName.includes(searchTerm)) {
+            item.style.display = 'block';
+          } else {
+            // Check subcategories
+            let showCategory = false;
+            const subcategoryLinks = item.querySelectorAll('.subcategory-item a');
+            
+            subcategoryLinks.forEach(link => {
+              if (link.textContent.toLowerCase().includes(searchTerm)) {
+                showCategory = true;
+                // Expand the subcategory list
+                const subcategoryList = item.querySelector('.subcategory-list');
+                if (subcategoryList) {
+                  subcategoryList.classList.remove('hidden');
+                }
+              }
+            });
+            
+            item.style.display = showCategory ? 'block' : 'none';
+          }
+        });
+      });
+    }
+  });
+</script> 

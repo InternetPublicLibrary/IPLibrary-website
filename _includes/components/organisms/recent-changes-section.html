@@ -1,0 +1,104 @@
+<section id="recent" class="py-8 bg-gray-50 border-t border-gray-200">
+  <div class="container mx-auto px-4">
+    <h2 class="text-2xl font-bold text-gray-800 mb-6 pb-2 border-b border-gray-200">{{ include.title | default: "Recent Changes" }}</h2>
+    
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      <!-- Recent edits -->
+      <div class="bg-white border border-gray-200 rounded p-4" id="latest-edits" hx-get="{{ include.edits_endpoint | default: '/api/latest-edits' }}" hx-trigger="load">
+        <div class="flex justify-between items-center mb-4">
+          <h3 class="text-lg font-medium text-gray-800">{{ include.edits_title | default: "Latest Edits" }}</h3>
+          <a href="#" class="text-sm text-blue-600 hover:underline" hx-get="{{ include.all_edits_endpoint | default: '/api/all-edits' }}" hx-target="#content-area">{{ include.view_all_text | default: "View All" }}</a>
+        </div>
+        <ul class="divide-y divide-gray-100">
+          {% if include.edits %}
+            {% for edit in include.edits %}
+              {% include components/molecules/activity-item.html 
+                title=edit.title
+                url=edit.url
+                time=edit.time
+                user=edit.user
+                user_url=edit.user_url
+                comment=edit.comment
+              %}
+            {% endfor %}
+          {% else %}
+            <!-- Default items if none provided -->
+            {% include components/molecules/activity-item.html 
+              title="Data Science Resources"
+              url="#"
+              time="Today, 14:32"
+              user="DataExplorer"
+              comment="Added new machine learning resources"
+            %}
+            
+            {% include components/molecules/activity-item.html 
+              title="Business Law Categories"
+              url="#"
+              time="Yesterday, 09:45"
+              user="LegalEagle"
+              comment="Restructured subcategories"
+            %}
+            
+            {% include components/molecules/activity-item.html 
+              title="Programming Languages"
+              url="#"
+              time="2 days ago, 17:21"
+              user="CodeNinja"
+              comment="Updated JavaScript resources"
+            %}
+          {% endif %}
+        </ul>
+      </div>
+      
+      <!-- Recently added resources -->
+      <div class="bg-white border border-gray-200 rounded p-4" id="new-resources" hx-get="{{ include.resources_endpoint | default: '/api/new-resources' }}" hx-trigger="load">
+        <div class="flex justify-between items-center mb-4">
+          <h3 class="text-lg font-medium text-gray-800">{{ include.resources_title | default: "New Resources Added" }}</h3>
+          <a href="#" class="text-sm text-blue-600 hover:underline" hx-get="{{ include.all_resources_endpoint | default: '/api/all-resources' }}" hx-target="#content-area">{{ include.view_all_text | default: "View All" }}</a>
+        </div>
+        <ul class="divide-y divide-gray-100">
+          {% if include.resources %}
+            {% for resource in include.resources %}
+              {% include components/molecules/activity-item.html 
+                title=resource.title
+                url=resource.url
+                time=resource.time
+                category=resource.category
+                label=resource.label
+                label_color=resource.label_color
+              %}
+            {% endfor %}
+          {% else %}
+            <!-- Default items if none provided -->
+            {% include components/molecules/activity-item.html 
+              title="Introduction to Neural Networks"
+              url="#"
+              time="3 days ago"
+              category="Data Science"
+              label="Academic"
+              label_color="blue"
+            %}
+            
+            {% include components/molecules/activity-item.html 
+              title="Contract Law Principles"
+              url="#"
+              time="5 days ago"
+              category="Business Law"
+              label="Guide"
+              label_color="green"
+            %}
+            
+            {% include components/molecules/activity-item.html 
+              title="JavaScript ES2022 Features"
+              url="#"
+              time="1 week ago"
+              category="Programming"
+              label="Documentation"
+              label_color="purple"
+            %}
+          {% endif %}
+        </ul>
+      </div>
+    </div>
+  </div>
+</section> 

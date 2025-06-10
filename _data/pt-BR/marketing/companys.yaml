@@ -1,0 +1,33 @@
+# Empresas relacionadas a marketing
+- title: "Rock Content"
+  url: "https://rockcontent.com/br/"
+  description: "Empresa brasileira especializada em marketing de conteúdo, oferecendo soluções para estratégias de conteúdo digital."
+  tags:
+    - marketing de conteúdo
+    - agência
+    - soluções digitais
+  access: "Site corporativo"
+  rank: 1
+  last_updated: 2024-01-03
+
+- title: "Resultados Digitais"
+  url: "https://resultadosdigitais.com.br/"
+  description: "Empresa brasileira de tecnologia para marketing digital e vendas, criadora do RD Station."
+  tags:
+    - automação de marketing
+    - software
+    - inbound marketing
+  access: "Site corporativo"
+  rank: 2
+  last_updated: 2024-01-08
+
+- title: "Ogilvy Brasil"
+  url: "https://www.ogilvy.com.br/"
+  description: "Escritório brasileiro de uma das maiores agências de publicidade e comunicação do mundo."
+  tags:
+    - publicidade
+    - agência
+    - comunicação
+  access: "Site corporativo"
+  rank: 3
+  last_updated: 2024-01-12 

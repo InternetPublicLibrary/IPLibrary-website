@@ -1,0 +1,74 @@
+<section id="categories" class="py-8">
+  <div class="container mx-auto px-4">
+    <div class="flex flex-col md:flex-row gap-6">
+      <!-- Left column with categories -->
+      <div class="md:w-1/2">
+        <h2 class="text-2xl font-bold text-gray-800 mb-4 pb-2 border-b border-gray-200">{{ include.categories_title | default: "Main Categories" }}</h2>
+        
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          {% for category in include.categories | default: site.data[include.language | default: 'en-US'].menu %}
+            {% include components/molecules/category-card.html 
+              category=category
+              limit=include.subcategory_limit
+            %}
+          {% endfor %}
+        </div>
+      </div>
+
+      <!-- Right column with stats and featured content -->
+      <div class="md:w-1/2">
+        <h2 class="text-2xl font-bold text-gray-800 mb-4 pb-2 border-b border-gray-200">{{ include.overview_title | default: "Library Overview" }}</h2>
+        
+        <!-- Stats boxes -->
+        <div class="grid grid-cols-2 gap-4 mb-6" id="library-stats" hx-get="{{ include.stats_endpoint | default: '/api/library-stats' }}" hx-trigger="load">
+          {% if include.stats %}
+            {% for stat in include.stats %}
+              {% include components/atoms/stat-card.html value=stat.value label=stat.label %}
+            {% endfor %}
+          {% else %}
+            <!-- Default stats if none provided -->
+            {% include components/atoms/stat-card.html value="5,000+" label="Curated Resources" %}
+            {% include components/atoms/stat-card.html value="100+" label="Subcategories" %}
+            {% include components/atoms/stat-card.html value="2" label="Languages" %}
+            {% include components/atoms/stat-card.html value="24/7" label="Availability" %}
+          {% endif %}
+        </div>
+        
+        <!-- Recently updated -->
+        <div class="border border-gray-200 rounded p-4 mb-6" id="recently-updated" hx-get="{{ include.recently_updated_endpoint | default: '/api/recently-updated' }}" hx-trigger="load">
+          <h3 class="text-lg font-medium text-gray-800 mb-2">{{ include.recently_updated_title | default: "Recently Updated" }}</h3>
+          <ul class="space-y-2 text-sm">
+            {% if include.recently_updated_items %}
+              {% for item in include.recently_updated_items %}
+                <li class="flex justify-between">
+                  <a href="{{ item.url }}" class="text-blue-600 hover:underline">{{ item.title }}</a>
+                  <span class="text-gray-500">{{ item.time_ago }}</span>
+                </li>
+              {% endfor %}
+            {% else %}
+              <!-- Default items if none provided -->
+              <li class="flex justify-between">
+                <a href="/en-US/computing/data-science/publications" class="text-blue-600 hover:underline">Data Science Publications</a>
+                <span class="text-gray-500">5 days ago</span>
+              </li>
+              <li class="flex justify-between">
+                <a href="/en-US/business/business-law" class="text-blue-600 hover:underline">Business Law Resources</a>
+                <span class="text-gray-500">1 week ago</span>
+              </li>
+              <li class="flex justify-between">
+                <a href="#" class="text-blue-600 hover:underline">Programming Languages</a>
+                <span class="text-gray-500">2 weeks ago</span>
+              </li>
+            {% endif %}
+          </ul>
+        </div>
+        
+        <!-- Languages -->
+        {% include components/molecules/language-selector.html 
+          title=include.language_selector_title 
+          languages=include.languages
+        %}
+      </div>
+    </div>
+  </div>
+</section> 

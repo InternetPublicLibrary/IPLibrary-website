@@ -1,0 +1,7 @@
+<div class="border-l-4 border-{{ include.color | default: 'blue' }}-500 pl-4">
+  <h4 class="font-medium">{{ include.title }}</h4>
+  <p class="text-sm text-gray-600 mt-1">{{ include.content }}</p>
+  <div class="mt-2 text-xs text-gray-500">
+    Posted {{ include.time_ago }} by <a href="{{ include.author_url | default: '#' }}" class="text-blue-600 hover:underline">{{ include.author }}</a>
+  </div>
+</div> 

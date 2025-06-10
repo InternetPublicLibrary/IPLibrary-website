@@ -1,0 +1,33 @@
+# Recursos de aprendizado sobre negócios
+- title: "Sebrae - Cursos Online"
+  url: "https://www.sebrae.com.br/sites/PortalSebrae/cursosonline"
+  description: "Cursos gratuitos para empreendedores e pequenos empresários pelo Serviço Brasileiro de Apoio às Micro e Pequenas Empresas."
+  tags:
+    - empreendedorismo
+    - pequenos negócios
+    - gestão
+  access: "Gratuito"
+  rank: 1
+  last_updated: 2024-01-05
+
+- title: "FGV Online"
+  url: "https://educacao-executiva.fgv.br/cursos/online"
+  description: "Cursos online da Fundação Getúlio Vargas, uma das principais instituições de ensino em negócios no Brasil."
+  tags:
+    - gestão
+    - administração
+    - MBA
+  access: "Parcialmente pago"
+  rank: 2
+  last_updated: 2024-01-07
+
+- title: "Fundação Dom Cabral - FDC"
+  url: "https://www.fdc.org.br/"
+  description: "Escola de negócios brasileira com programas de educação executiva e desenvolvimento de lideranças."
+  tags:
+    - liderança
+    - educação executiva
+    - gestão
+  access: "Pago"
+  rank: 3
+  last_updated: 2024-01-10 

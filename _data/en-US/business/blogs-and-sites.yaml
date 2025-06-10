@@ -1,0 +1,33 @@
+# Business blogs and sites
+- title: "Harvard Business Review"
+  url: "https://hbr.org/"
+  description: "Leading destination for smart management thinking with articles from expert authors."
+  tags:
+    - management
+    - leadership
+    - strategy
+  access: "Partially paid"
+  rank: 1
+  last_updated: 2024-01-05
+
+- title: "Forbes"
+  url: "https://www.forbes.com/"
+  description: "Global media company focusing on business, investing, technology, entrepreneurship, leadership, and lifestyle."
+  tags:
+    - business
+    - finance
+    - entrepreneurship
+  access: "Partially paid"
+  rank: 2
+  last_updated: 2024-01-10
+
+- title: "Bloomberg"
+  url: "https://www.bloomberg.com/"
+  description: "Business and markets news, data, analysis, and video covering financial markets and businesses."
+  tags:
+    - finance
+    - markets
+    - economy
+  access: "Partially paid"
+  rank: 3
+  last_updated: 2024-01-15 

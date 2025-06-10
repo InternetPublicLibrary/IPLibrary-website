@@ -1,0 +1,47 @@
+---
+layout: null
+---
+{% assign lang = "en-US" %}
+{% if request.params.lang %}
+  {% assign lang = request.params.lang %}
+{% endif %}
+
+{% assign query = request.params.q | downcase %}
+
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+  {% for category in site.data[lang].menu %}
+    {% assign category_title = category.title | downcase %}
+    {% if query == "" or category_title contains query %}
+      {% include components/molecules/category-card.html 
+        category=category
+      %}
+    {% else %}
+      {% assign found_in_children = false %}
+      {% for subcategory in category.children %}
+        {% assign subcategory_title = subcategory.title | downcase %}
+        {% if subcategory_title contains query %}
+          {% assign found_in_children = true %}
+          {% break %}
+        {% endif %}
+      {% endfor %}
+      
+      {% if found_in_children %}
+        {% include components/molecules/category-card.html 
+          category=category
+        %}
+      {% endif %}
+    {% endif %}
+  {% endfor %}
+</div>
+
+{% if forloop.length == 0 %}
+<div class="text-center py-8">
+  <p class="text-gray-500">
+    {% if lang == "pt-BR" %}
+      Nenhuma categoria encontrada para "{{ request.params.q }}". Tente uma pesquisa diferente.
+    {% else %}
+      No categories found for "{{ request.params.q }}". Try a different search.
+    {% endif %}
+  </p>
+</div>
+{% endif %} 

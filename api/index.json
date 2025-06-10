@@ -1,0 +1,39 @@
+---
+layout: none
+---
+{
+  "api": "IPLibrary REST API",
+  "version": "1.0.0",
+  "description": "API REST para acessar os dados do IPLibrary",
+  "endpoints": [
+    {
+      "name": "All Pages",
+      "url": "/api/pages.json",
+      "description": "Lista todas as páginas do site"
+    },
+    {
+      "name": "All Posts",
+      "url": "/api/posts.json",
+      "description": "Lista todos os posts do site"
+    },
+    {
+      "name": "Categories",
+      "url": "/api/categories.json",
+      "description": "Lista todas as categorias disponíveis"
+    },
+    {
+      "name": "Business",
+      "url": "/api/business/index.json",
+      "description": "Recursos relacionados a negócios"
+    },
+    {
+      "name": "Computing",
+      "url": "/api/computing/index.json",
+      "description": "Recursos relacionados a computação"
+    }
+  ],
+  "documentation": {
+    "demo": "/htmx-demo/",
+    "github": "https://github.com/yourusername/IPLibrary-website"
+  }
+} 
