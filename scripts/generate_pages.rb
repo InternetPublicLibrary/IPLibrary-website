@@ -1,4 +1,5 @@
 #!/usr/bin/env ruby
+# encoding: UTF-8
 require 'yaml'
 require 'fileutils'
 
@@ -63,7 +64,7 @@ def generate_page(path, frontmatter, content)
   frontmatter_yaml = frontmatter.to_yaml
   
   # Write the file with frontmatter and content
-  File.open(full_path, 'w') do |file|
+  File.open(full_path, 'w:UTF-8') do |file|
     file.puts "---"
     file.puts frontmatter_yaml.sub(/---\n/, '')
     file.puts "---"

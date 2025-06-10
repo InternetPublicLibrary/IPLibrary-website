@@ -8,6 +8,11 @@ echo "Bundler version: $(bundle -v)"
 # Install specific bundler version
 gem install bundler:2.6.9
 
+# Set encoding to UTF-8
+export LANG=en_US.UTF-8
+export LC_ALL=en_US.UTF-8
+export RUBYOPT="-E utf-8"
+
 # Clean any previous builds
 bundle exec jekyll clean
 
