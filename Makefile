@@ -129,7 +129,7 @@ enus-commit:
 		echo "Error: Commit message is required. Use MSG='your message'"; \
 		exit 1; \
 	fi
-	@echo "Committing changes to 'en-US' submodule..."
+	@echo "Committing changes to 'en-US'submodule..."
 	@cd en-US && \
 	git add . && \
 	git commit -m "$(MSG)" && \

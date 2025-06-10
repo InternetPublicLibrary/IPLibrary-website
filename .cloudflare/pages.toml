@@ -1,0 +1,11 @@
+# Cloudflare Pages configuration
+[build]
+command = "bundle exec jekyll build"
+publish = "_site"
+
+[build.environment]
+RUBY_VERSION = "3.2.2"
+
+# Ensure proper bundler version
+[build.lifecycle]
+onPreBuild = "gem install bundler:2.6.9" 

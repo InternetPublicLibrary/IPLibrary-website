@@ -10,9 +10,15 @@ source "https://rubygems.org"
 # Happy Jekylling!
 # gem "jekyll", "~> 3.8.0"
 
+# Ruby version specification
+ruby '3.2.2'
+
 # If you want to use GitHub Pages, remove the "gem "jekyll"" above and
 # uncomment the line below. To upgrade, run `bundle update github-pages`.
 gem "github-pages", group: :jekyll_plugins
+
+# Fix for the public_suffix dependency issue
+gem "public_suffix", "~> 5.1.1"
 
 gem 'html-proofer'
 

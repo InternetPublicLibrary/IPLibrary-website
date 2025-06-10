@@ -382,6 +382,10 @@ DEPENDENCIES
   jekyll-admin
   jekyll-feed
   jekyll-github-metadata
+  public_suffix (~> 5.1.1)
+
+RUBY VERSION
+   ruby 3.2.2p53
 
 BUNDLED WITH
    2.6.9

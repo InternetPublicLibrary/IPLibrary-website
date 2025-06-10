@@ -1,0 +1,3 @@
+# Redirects file for Cloudflare Pages
+# Redirect default Netlify/Cloudflare subdomain to primary domain
+/* /:splat 301 
