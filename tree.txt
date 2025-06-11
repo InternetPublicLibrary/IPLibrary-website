@@ -1,0 +1,1440 @@
+.
+├── 404.html
+├── AGENTS.md
+├── api
+│   ├── business
+│   │   └── index.json
+│   ├── categories
+│   │   └── index.html
+│   ├── categories.json
+│   ├── computing
+│   │   └── index.json
+│   ├── data.json
+│   ├── design
+│   ├── development
+│   ├── index.json
+│   ├── marketing
+│   ├── pages.json
+│   ├── posts.json
+│   ├── random-resource
+│   │   └── index.html
+│   ├── search-categories
+│   │   └── index.html
+│   └── templates
+├── build.sh
+├── _config.yml
+├── _data
+│   ├── en-US
+│   │   ├── business
+│   │   │   └── blogs-and-sites.yaml
+│   │   ├── categories
+│   │   ├── computing
+│   │   │   └── data-science.yaml
+│   │   ├── design
+│   │   ├── development
+│   │   ├── marketing
+│   │   ├── menu.yaml
+│   │   ├── personal-development
+│   │   └── photography
+│   └── pt-BR
+│       ├── business
+│       │   ├── blogs-and-sites.yaml
+│       │   ├── companys.yaml
+│       │   ├── events-and-conferences.yaml
+│       │   ├── learn.yaml
+│       │   └── publications.yaml
+│       ├── categories
+│       ├── computing
+│       │   ├── blogs-and-sites.yaml
+│       │   └── data-science.yaml
+│       ├── design
+│       ├── development
+│       ├── marketing
+│       │   ├── blogs-and-sites.yaml
+│       │   ├── companys.yaml
+│       │   ├── events-and-conferences.yaml
+│       │   ├── learn.yaml
+│       │   └── publications.yaml
+│       ├── menu.yaml
+│       ├── personal-development
+│       └── photography
+├── debug-data.html
+├── docs
+│   └── AGENTS.md
+├── en-US
+│   ├── academics
+│   │   ├── formal-sciences
+│   │   ├── humanities
+│   │   │   ├── anthropology
+│   │   │   ├── history
+│   │   │   ├── linguistics-and-languages
+│   │   │   └── philosophy
+│   │   ├── natural-sciences
+│   │   ├── professions-and-applied-sciences
+│   │   └── social-sciences
+│   ├── business
+│   │   ├── business-law
+│   │   ├── communications
+│   │   ├── data-and-analytics
+│   │   ├── entrepreneurship
+│   │   ├── finance
+│   │   ├── home-business
+│   │   ├── human-resources
+│   │   ├── industry
+│   │   ├── management
+│   │   ├── media
+│   │   ├── operations
+│   │   ├── project-management
+│   │   ├── real-estate
+│   │   ├── sales
+│   │   └── strategy
+│   ├── computing
+│   │   ├── big-data
+│   │   ├── computer-information-systems
+│   │   ├── computer-science
+│   │   ├── cyber-security
+│   │   ├── data-science
+│   │   ├── hardware
+│   │   ├── it-certification
+│   │   ├── netwoking
+│   │   └── operating-systems
+│   ├── design
+│   │   ├── 3d-and-animation
+│   │   ├── architectural-design
+│   │   ├── design-thinking
+│   │   ├── design-tools
+│   │   ├── fashion
+│   │   ├── game-design
+│   │   ├── graphic-design
+│   │   ├── interior-design
+│   │   ├── user-experience
+│   │   └── web-design
+│   ├── development
+│   │   ├── agile-project-management
+│   │   ├── backend-development
+│   │   ├── databases
+│   │   ├── development-environment
+│   │   ├── development-tools
+│   │   ├── e-commerce
+│   │   ├── frontend-development
+│   │   ├── game-development
+│   │   ├── miscellaneous
+│   │   ├── plataforms
+│   │   ├── programming-languages
+│   │   ├── software-engineering
+│   │   ├── software-testing
+│   │   └── vulnerabilities
+│   ├── LICENSE
+│   ├── marketing
+│   │   ├── advertising
+│   │   ├── afiliate-marketing
+│   │   ├── analytics-and-automation
+│   │   ├── branding
+│   │   ├── content-marketing
+│   │   ├── digital-marketing
+│   │   ├── growth-hacking
+│   │   ├── marketing-fundamentals
+│   │   ├── non-digital-marketing
+│   │   ├── product-marketing
+│   │   ├── public-relations
+│   │   ├── seo
+│   │   ├── social-media
+│   │   └── video-and-modile-marketing
+│   ├── personal-development
+│   │   ├── career-development
+│   │   ├── creativity
+│   │   ├── happiness
+│   │   ├── influence
+│   │   ├── leadership
+│   │   ├── memory-and-study-skills
+│   │   ├── motivation
+│   │   ├── parenting-and-relationships
+│   │   ├── -personal-brand-building
+│   │   ├── personal-finance
+│   │   ├── personal-transformation
+│   │   ├── productivity
+│   │   ├── religion-and-spirituality
+│   │   ├── self-esteem
+│   │   └── stress-management
+│   └── photography
+│       ├── analogue-photography
+│       ├── blank-and-white
+│       ├── commercial-photography
+│       ├── digital-photography
+│       ├── landscape
+│       ├── mobile-photography
+│       ├── photography-fundamentals
+│       ├── photography-tools
+│       ├── portraits
+│       ├── travel-photography
+│       ├── video-design
+│       ├── wedding-photography
+│       └── wild-life-photography
+├── files
+│   └── menu.json
+├── fonts
+│   └── lato
+│       ├── Lato-Bold.eot
+│       ├── Lato-BoldItalic.eot
+│       ├── Lato-BoldItalic.ttf
+│       ├── Lato-BoldItalic.woff
+│       ├── Lato-BoldItalic.woff2
+│       ├── Lato-Bold.ttf
+│       ├── Lato-Bold.woff
+│       ├── Lato-Bold.woff2
+│       ├── Lato-Italic.eot
+│       ├── Lato-Italic.ttf
+│       ├── Lato-Italic.woff
+│       ├── Lato-Italic.woff2
+│       ├── Lato-Regular.eot
+│       ├── Lato-Regular.ttf
+│       ├── Lato-Regular.woff
+│       └── Lato-Regular.woff2
+├── Gemfile
+├── Gemfile.lock
+├── images
+│   ├── 4by3.jpg
+│   ├── avatar
+│   │   ├── large
+│   │   │   ├── ade.jpg
+│   │   │   ├── chris.jpg
+│   │   │   ├── christian.jpg
+│   │   │   ├── daniel.jpg
+│   │   │   ├── elliot.jpg
+│   │   │   ├── helen.jpg
+│   │   │   ├── jenny.jpg
+│   │   │   ├── joe.jpg
+│   │   │   ├── justen.jpg
+│   │   │   ├── laura.jpg
+│   │   │   ├── matt.jpg
+│   │   │   ├── nan.jpg
+│   │   │   ├── nom.jpg
+│   │   │   ├── steve.jpg
+│   │   │   ├── stevie.jpg
+│   │   │   ├── tom.jpg
+│   │   │   ├── veronika.jpg
+│   │   │   └── zoe.jpg
+│   │   └── small
+│   │       ├── ade.jpg
+│   │       ├── chris.jpg
+│   │       ├── christian.jpg
+│   │       ├── daniel.jpg
+│   │       ├── elliot.jpg
+│   │       ├── helen.jpg
+│   │       ├── jenny.jpg
+│   │       ├── joe.jpg
+│   │       ├── justen.jpg
+│   │       ├── laura.jpg
+│   │       ├── matt.jpg
+│   │       ├── nan.jpg
+│   │       ├── nom.jpg
+│   │       ├── steve.jpg
+│   │       ├── stevie.jpg
+│   │       ├── tom.jpg
+│   │       ├── veronika.jpg
+│   │       └── zoe.jpg
+│   ├── avatar2
+│   │   ├── large
+│   │   │   ├── cassie.png
+│   │   │   ├── elyse.png
+│   │   │   ├── eve.png
+│   │   │   ├── kristy.png
+│   │   │   ├── lena.png
+│   │   │   ├── lindsay.png
+│   │   │   ├── mark.png
+│   │   │   ├── matthew.png
+│   │   │   ├── molly.png
+│   │   │   ├── patrick.png
+│   │   │   └── rachel.png
+│   │   └── small
+│   │       ├── cassie.png
+│   │       ├── elyse.png
+│   │       ├── eve.png
+│   │       ├── kristy.png
+│   │       ├── lena.png
+│   │       ├── lindsay.png
+│   │       ├── mark.png
+│   │       ├── matthew.png
+│   │       ├── molly.png
+│   │       ├── patrick.png
+│   │       └── rachel.png
+│   ├── backgrounds
+│   │   ├── 10.jpg
+│   │   ├── 11.jpg
+│   │   ├── 12.jpg
+│   │   ├── 13.jpg
+│   │   ├── 14.jpg
+│   │   ├── 15.jpg
+│   │   ├── 16.jpg
+│   │   ├── 1.jpg
+│   │   ├── 2.jpg
+│   │   ├── 3.jpg
+│   │   ├── 4.jpg
+│   │   ├── 5.jpg
+│   │   ├── 6.jpg
+│   │   ├── 7.jpg
+│   │   ├── 8.jpg
+│   │   └── 9.jpg
+│   ├── bear-waving.jpg
+│   ├── before.jpg
+│   ├── bg2.jpg
+│   ├── bg3.jpg
+│   ├── bg.jpg
+│   ├── bg-moonlight.jpg
+│   ├── bg-moonlight-original.jpg
+│   ├── bg-sky.jpg
+│   ├── blue-bg.png
+│   ├── casanova.jpg
+│   ├── cat2.png
+│   ├── cat.png
+│   ├── celebrate.gif
+│   ├── chevron.jpg
+│   ├── dark-bg.png
+│   ├── depeng.png
+│   ├── devices.png
+│   ├── dog.png
+│   ├── esb.png
+│   ├── examples
+│   │   ├── attached.png
+│   │   ├── bootstrap.png
+│   │   ├── fixed.png
+│   │   ├── grid.png
+│   │   ├── homepage.png
+│   │   ├── login.png
+│   │   ├── responsive.png
+│   │   ├── sticky.png
+│   │   └── theming.png
+│   ├── gif
+│   │   └── multi-shortcuts.gif
+│   ├── home-avatar.png
+│   ├── icons
+│   │   ├── attention.png
+│   │   ├── award.png
+│   │   ├── book.png
+│   │   ├── candle.png
+│   │   ├── check.png
+│   │   ├── community.png
+│   │   ├── conversation.png
+│   │   ├── eye-dropper.png
+│   │   ├── folder.png
+│   │   ├── gear.png
+│   │   ├── glasses.png
+│   │   ├── globe.png
+│   │   ├── heart.png
+│   │   ├── hourglass.png
+│   │   ├── lab.png
+│   │   ├── mobile.png
+│   │   ├── paintbucket.png
+│   │   ├── paint.png
+│   │   ├── paintroller.png
+│   │   ├── pen.png
+│   │   ├── plugin.png
+│   │   ├── rocket.png
+│   │   ├── school.png
+│   │   ├── star.png
+│   │   ├── theming.png
+│   │   └── toolbox.png
+│   ├── icons-inverted.png
+│   ├── icons.png
+│   ├── ics-logo.png
+│   ├── ics-logo-reversed.png
+│   ├── image-16by9.png
+│   ├── large-pdf.pdf
+│   ├── learn-logo.png
+│   ├── leaves
+│   │   ├── 10.png
+│   │   ├── 11.png
+│   │   ├── 12.png
+│   │   ├── 13.png
+│   │   ├── 14.png
+│   │   ├── 15.png
+│   │   ├── 16.png
+│   │   ├── 17.png
+│   │   ├── 18.png
+│   │   ├── 19.png
+│   │   ├── 1.png
+│   │   ├── 20.png
+│   │   ├── 2.png
+│   │   ├── 3.png
+│   │   ├── 4.png
+│   │   ├── 5.png
+│   │   ├── 6.png
+│   │   ├── 7.png
+│   │   ├── 8.png
+│   │   └── 9.png
+│   ├── logo.png
+│   ├── logos
+│   │   ├── arrowhead.png
+│   │   ├── big-buck.png
+│   │   └── sunset.png
+│   ├── moonlight.jpg
+│   ├── movies
+│   │   ├── 12years-horizontal.jpg
+│   │   ├── 12years.jpg
+│   │   ├── 1942.jpg
+│   │   ├── adaptation-horizontal.jpg
+│   │   ├── adaptation.jpg
+│   │   ├── happiness.jpg
+│   │   ├── hemingway.jpg
+│   │   ├── sherlock.jpg
+│   │   ├── spiderman-horizontal.jpg
+│   │   ├── spiderman.jpg
+│   │   ├── totoro-horizontal.jpg
+│   │   ├── totoro.jpg
+│   │   ├── watchmen-horizontal.jpg
+│   │   └── watchmen.jpg
+│   ├── new-school.jpg
+│   ├── setup
+│   │   └── install.gif
+│   ├── shape
+│   │   ├── heroku.png
+│   │   ├── jira.png
+│   │   └── quirky.png
+│   ├── teal-bg.png
+│   ├── tile-bg.png
+│   ├── ui.png
+│   ├── vimeo-example.jpg
+│   └── wireframe
+│       ├── centered-paragraph.png
+│       ├── image.png
+│       ├── image-square.png
+│       ├── image-text.png
+│       ├── media-paragraph-alt.png
+│       ├── media-paragraph.png
+│       ├── paragraph.png
+│       ├── short-paragraph.png
+│       ├── square-image.png
+│       ├── text-image.png
+│       └── white-image.png
+├── _includes
+│   ├── category-sidebar.html
+│   ├── components
+│   │   ├── atoms
+│   │   │   ├── avatar.html
+│   │   │   ├── badge.html
+│   │   │   ├── button.html
+│   │   │   ├── card.html
+│   │   │   ├── head.html
+│   │   │   ├── input.html
+│   │   │   ├── search-input.html
+│   │   │   └── stat-card.html
+│   │   ├── discussion.html
+│   │   ├── htmx
+│   │   │   ├── category-list.html
+│   │   │   └── htmx-setup.html
+│   │   ├── molecules
+│   │   │   ├── activity-item.html
+│   │   │   ├── breadcrumb.html
+│   │   │   ├── card.html
+│   │   │   ├── category-card.html
+│   │   │   ├── contribute-action.html
+│   │   │   ├── contributor-item.html
+│   │   │   ├── featured-article.html
+│   │   │   ├── issue-form.html
+│   │   │   ├── language-selector.html
+│   │   │   ├── language-switcher.html
+│   │   │   ├── news-item.html
+│   │   │   ├── resource-card.html
+│   │   │   ├── search-form.html
+│   │   │   ├── tree-list.html
+│   │   │   ├── wiki-create-form.html
+│   │   │   └── wiki-edit-form.html
+│   │   ├── organisms
+│   │   │   ├── categories-section.html
+│   │   │   ├── categories-tree-section.html
+│   │   │   ├── category-sidebar.html
+│   │   │   ├── community-portal-section.html
+│   │   │   ├── contribute-section.html
+│   │   │   ├── featured-resources-section.html
+│   │   │   ├── footer.html
+│   │   │   ├── header.html
+│   │   │   ├── hero-section.html
+│   │   │   ├── recent-changes-section.html
+│   │   │   ├── resource-grid.html
+│   │   │   ├── search-section.html
+│   │   │   └── sidebar-navigation.html
+│   │   └── templates
+│   ├── docs-css.html
+│   ├── footer.html
+│   ├── header.html
+│   ├── head.html
+│   ├── resource-grid.html
+│   └── templates
+│       ├── category-content.md
+│       ├── section-content.md
+│       └── subcategory-content.md
+├── index.html
+├── javascript
+│   ├── accordion.js
+│   ├── api.js
+│   ├── button.js
+│   ├── card.js
+│   ├── checkbox.js
+│   ├── components
+│   │   └── core
+│   ├── container.js
+│   ├── customize.js
+│   ├── dimmer.js
+│   ├── docs.js
+│   ├── dropdown.js
+│   ├── embed.js
+│   ├── form.js
+│   ├── grid.js
+│   ├── header.js
+│   ├── home.js
+│   ├── icon.js
+│   ├── input.js
+│   ├── item.js
+│   ├── library
+│   │   ├── clipboard.js
+│   │   ├── clipboard.min.js
+│   │   ├── cookie.js
+│   │   ├── cookie.min.js
+│   │   ├── detect.js
+│   │   ├── detect.min.js
+│   │   ├── easing.js
+│   │   ├── easing.min.js
+│   │   ├── highlight.min.js
+│   │   ├── history.js
+│   │   ├── history.min.js
+│   │   ├── jquery.hotkeys.js
+│   │   ├── jquery.hotkeys.min.js
+│   │   ├── jquery.js
+│   │   ├── jquery.legacy.js
+│   │   ├── jquery.legacy.min.js
+│   │   ├── jquery.min.js
+│   │   ├── less.js
+│   │   ├── less.min.js
+│   │   ├── serialize-object.js
+│   │   ├── sinon.js
+│   │   ├── tablesort.js
+│   │   ├── tablesort.min.js
+│   │   ├── typing.js
+│   │   ├── typing.min.js
+│   │   ├── underscore.js
+│   │   └── underscore.min.js
+│   ├── main.js
+│   ├── menu.js
+│   ├── message.js
+│   ├── modal.js
+│   ├── new.js
+│   ├── playground.js
+│   ├── popup.js
+│   ├── progress.js
+│   ├── rating.js
+│   ├── search.js
+│   ├── shape.js
+│   ├── sidebar.js
+│   ├── slider.js
+│   ├── started.js
+│   ├── sticky.js
+│   ├── tab.js
+│   ├── table.js
+│   ├── theming.js
+│   ├── transition.js
+│   ├── validate-form.js
+│   └── visibility.js
+├── _layouts
+│   ├── category-api.html
+│   ├── category.html
+│   ├── data.html
+│   ├── default.html
+│   ├── htmx-demo.html
+│   ├── resource.html
+│   ├── section.html
+│   ├── subcategory.html
+│   └── wiki.html
+├── LICENSE
+├── Makefile
+├── metadata.json
+├── pages
+│   └── htmx-demo.html
+├── _plugins
+│   ├── generate_menu_pages.rb
+│   └── test_plugin.rb
+├── pt-BR
+│   ├── academics
+│   │   ├── formal-sciences
+│   │   ├── humanities
+│   │   │   ├── anthropology
+│   │   │   ├── history
+│   │   │   ├── linguistics-and-languages
+│   │   │   └── philosophy
+│   │   ├── natural-sciences
+│   │   ├── professions-and-applied-sciences
+│   │   └── social-sciences
+│   ├── business
+│   │   ├── business-law
+│   │   ├── communications
+│   │   ├── data-and-analytics
+│   │   ├── entrepreneurship
+│   │   ├── finance
+│   │   ├── home-business
+│   │   ├── human-resources
+│   │   ├── industry
+│   │   ├── management
+│   │   ├── media
+│   │   ├── operations
+│   │   ├── project-management
+│   │   ├── real-estate
+│   │   ├── sales
+│   │   └── strategy
+│   ├── computing
+│   │   ├── big-data
+│   │   ├── computer-information-systems
+│   │   ├── computer-science
+│   │   ├── cyber-security
+│   │   ├── data-science
+│   │   ├── hardware
+│   │   ├── it-certification
+│   │   ├── netwoking
+│   │   └── operating-systems
+│   ├── design
+│   │   ├── 3d-and-animation
+│   │   ├── architectural-design
+│   │   ├── design-thinking
+│   │   ├── design-tools
+│   │   ├── fashion
+│   │   ├── game-design
+│   │   ├── graphic-design
+│   │   ├── interior-design
+│   │   ├── user-experience
+│   │   └── web-design
+│   ├── development
+│   │   ├── agile-project-management
+│   │   ├── backend-development
+│   │   ├── databases
+│   │   ├── development-environment
+│   │   ├── development-tools
+│   │   ├── e-commerce
+│   │   ├── frontend-development
+│   │   ├── game-development
+│   │   ├── miscellaneous
+│   │   ├── plataforms
+│   │   ├── programming-languages
+│   │   ├── software-engineering
+│   │   ├── software-testing
+│   │   └── vulnerabilities
+│   ├── LICENSE
+│   ├── marketing
+│   │   ├── advertising
+│   │   ├── afiliate-marketing
+│   │   ├── analytics-and-automation
+│   │   ├── branding
+│   │   ├── content-marketing
+│   │   ├── digital-marketing
+│   │   ├── growth-hacking
+│   │   ├── marketing-fundamentals
+│   │   ├── non-digital-marketing
+│   │   ├── product-marketing
+│   │   ├── public-relations
+│   │   ├── seo
+│   │   ├── social-media
+│   │   └── video-and-modile-marketing
+│   ├── personal-development
+│   │   ├── career-development
+│   │   ├── creativity
+│   │   ├── happiness
+│   │   ├── influence
+│   │   ├── leadership
+│   │   ├── memory-and-study-skills
+│   │   ├── motivation
+│   │   ├── parenting-and-relationships
+│   │   ├── -personal-brand-building
+│   │   ├── personal-finance
+│   │   ├── personal-transformation
+│   │   ├── productivity
+│   │   ├── religion-and-spirituality
+│   │   ├── self-esteem
+│   │   └── stress-management
+│   └── photography
+│       ├── analogue-photography
+│       ├── blank-and-white
+│       ├── commercial-photography
+│       ├── digital-photography
+│       ├── landscape
+│       ├── mobile-photography
+│       ├── photography-fundamentals
+│       ├── photography-tools
+│       ├── portraits
+│       ├── travel-photography
+│       ├── video-design
+│       ├── wedding-photography
+│       └── wild-life-photography
+├── README.md
+├── _redirects
+├── scripts
+│   └── generate_pages.rb
+├── _site
+│   ├── 404.html
+│   ├── AGENTS.md
+│   ├── api
+│   │   ├── business
+│   │   │   └── index.json
+│   │   ├── categories
+│   │   │   └── index.html
+│   │   ├── categories.json
+│   │   ├── computing
+│   │   │   └── index.json
+│   │   ├── data.json
+│   │   ├── index.json
+│   │   ├── pages.json
+│   │   ├── posts.json
+│   │   ├── random-resource
+│   │   │   └── index.html
+│   │   └── search-categories
+│   │       └── index.html
+│   ├── build.sh
+│   ├── debug-data.html
+│   ├── docs
+│   │   └── AGENTS.md
+│   ├── en-US
+│   │   ├── academics
+│   │   │   ├── formal-sciences
+│   │   │   │   └── index.html
+│   │   │   ├── humanities
+│   │   │   │   ├── anthropology
+│   │   │   │   │   └── index.html
+│   │   │   │   ├── history
+│   │   │   │   │   └── index.html
+│   │   │   │   ├── index.html
+│   │   │   │   ├── linguistics-and-languages
+│   │   │   │   │   └── index.html
+│   │   │   │   └── philosophy
+│   │   │   │       └── index.html
+│   │   │   ├── index.html
+│   │   │   ├── natural-sciences
+│   │   │   │   └── index.html
+│   │   │   ├── professions-and-applied-sciences
+│   │   │   │   └── index.html
+│   │   │   └── social-sciences
+│   │   │       └── index.html
+│   │   ├── business
+│   │   │   ├── business-law
+│   │   │   │   └── index.html
+│   │   │   ├── communications
+│   │   │   │   └── index.html
+│   │   │   ├── data-and-analytics
+│   │   │   │   └── index.html
+│   │   │   ├── entrepreneurship
+│   │   │   │   └── index.html
+│   │   │   ├── finance
+│   │   │   │   └── index.html
+│   │   │   ├── home-business
+│   │   │   │   └── index.html
+│   │   │   ├── human-resources
+│   │   │   │   └── index.html
+│   │   │   ├── index.html
+│   │   │   ├── industry
+│   │   │   │   └── index.html
+│   │   │   ├── management
+│   │   │   │   └── index.html
+│   │   │   ├── media
+│   │   │   │   └── index.html
+│   │   │   ├── operations
+│   │   │   │   └── index.html
+│   │   │   ├── project-management
+│   │   │   │   └── index.html
+│   │   │   ├── real-estate
+│   │   │   │   └── index.html
+│   │   │   ├── sales
+│   │   │   │   └── index.html
+│   │   │   └── strategy
+│   │   │       └── index.html
+│   │   ├── computing
+│   │   │   ├── big-data
+│   │   │   │   └── index.html
+│   │   │   ├── computer-information-systems
+│   │   │   │   └── index.html
+│   │   │   ├── computer-science
+│   │   │   │   └── index.html
+│   │   │   ├── cyber-security
+│   │   │   │   └── index.html
+│   │   │   ├── data-science
+│   │   │   │   └── index.html
+│   │   │   ├── hardware
+│   │   │   │   └── index.html
+│   │   │   ├── index.html
+│   │   │   ├── it-certification
+│   │   │   │   └── index.html
+│   │   │   ├── netwoking
+│   │   │   │   └── index.html
+│   │   │   └── operating-systems
+│   │   │       └── index.html
+│   │   ├── design
+│   │   │   ├── 3d-and-animation
+│   │   │   │   └── index.html
+│   │   │   ├── architectural-design
+│   │   │   │   └── index.html
+│   │   │   ├── design-thinking
+│   │   │   │   └── index.html
+│   │   │   ├── design-tools
+│   │   │   │   └── index.html
+│   │   │   ├── fashion
+│   │   │   │   └── index.html
+│   │   │   ├── game-design
+│   │   │   │   └── index.html
+│   │   │   ├── graphic-design
+│   │   │   │   └── index.html
+│   │   │   ├── index.html
+│   │   │   ├── interior-design
+│   │   │   │   └── index.html
+│   │   │   ├── user-experience
+│   │   │   │   └── index.html
+│   │   │   └── web-design
+│   │   │       └── index.html
+│   │   ├── development
+│   │   │   ├── agile-project-management
+│   │   │   │   └── index.html
+│   │   │   ├── backend-development
+│   │   │   │   └── index.html
+│   │   │   ├── databases
+│   │   │   │   └── index.html
+│   │   │   ├── development-environment
+│   │   │   │   └── index.html
+│   │   │   ├── development-tools
+│   │   │   │   └── index.html
+│   │   │   ├── e-commerce
+│   │   │   │   └── index.html
+│   │   │   ├── frontend-development
+│   │   │   │   └── index.html
+│   │   │   ├── game-development
+│   │   │   │   └── index.html
+│   │   │   ├── index.html
+│   │   │   ├── miscellaneous
+│   │   │   │   └── index.html
+│   │   │   ├── plataforms
+│   │   │   │   └── index.html
+│   │   │   ├── programming-languages
+│   │   │   │   └── index.html
+│   │   │   ├── software-engineering
+│   │   │   │   └── index.html
+│   │   │   ├── software-testing
+│   │   │   │   └── index.html
+│   │   │   └── vulnerabilities
+│   │   │       └── index.html
+│   │   ├── LICENSE
+│   │   ├── marketing
+│   │   │   ├── advertising
+│   │   │   │   └── index.html
+│   │   │   ├── afiliate-marketing
+│   │   │   │   └── index.html
+│   │   │   ├── analytics-and-automation
+│   │   │   │   └── index.html
+│   │   │   ├── branding
+│   │   │   │   └── index.html
+│   │   │   ├── content-marketing
+│   │   │   │   └── index.html
+│   │   │   ├── digital-marketing
+│   │   │   │   └── index.html
+│   │   │   ├── growth-hacking
+│   │   │   │   └── index.html
+│   │   │   ├── index.html
+│   │   │   ├── marketing-fundamentals
+│   │   │   │   └── index.html
+│   │   │   ├── non-digital-marketing
+│   │   │   │   └── index.html
+│   │   │   ├── product-marketing
+│   │   │   │   └── index.html
+│   │   │   ├── public-relations
+│   │   │   │   └── index.html
+│   │   │   ├── seo
+│   │   │   │   └── index.html
+│   │   │   ├── social-media
+│   │   │   │   └── index.html
+│   │   │   └── video-and-modile-marketing
+│   │   │       └── index.html
+│   │   ├── personal-development
+│   │   │   ├── career-development
+│   │   │   │   └── index.html
+│   │   │   ├── creativity
+│   │   │   │   └── index.html
+│   │   │   ├── happiness
+│   │   │   │   └── index.html
+│   │   │   ├── index.html
+│   │   │   ├── influence
+│   │   │   │   └── index.html
+│   │   │   ├── leadership
+│   │   │   │   └── index.html
+│   │   │   ├── memory-and-study-skills
+│   │   │   │   └── index.html
+│   │   │   ├── motivation
+│   │   │   │   └── index.html
+│   │   │   ├── parenting-and-relationships
+│   │   │   │   └── index.html
+│   │   │   ├── -personal-brand-building
+│   │   │   │   └── index.html
+│   │   │   ├── personal-finance
+│   │   │   │   └── index.html
+│   │   │   ├── personal-transformation
+│   │   │   │   └── index.html
+│   │   │   ├── productivity
+│   │   │   │   └── index.html
+│   │   │   ├── religion-and-spirituality
+│   │   │   │   └── index.html
+│   │   │   ├── self-esteem
+│   │   │   │   └── index.html
+│   │   │   └── stress-management
+│   │   │       └── index.html
+│   │   └── photography
+│   │       ├── analogue-photography
+│   │       │   └── index.html
+│   │       ├── blank-and-white
+│   │       │   └── index.html
+│   │       ├── commercial-photography
+│   │       │   └── index.html
+│   │       ├── digital-photography
+│   │       │   └── index.html
+│   │       ├── index.html
+│   │       ├── landscape
+│   │       │   └── index.html
+│   │       ├── mobile-photography
+│   │       │   └── index.html
+│   │       ├── photography-fundamentals
+│   │       │   └── index.html
+│   │       ├── photography-tools
+│   │       │   └── index.html
+│   │       ├── portraits
+│   │       │   └── index.html
+│   │       ├── travel-photography
+│   │       │   └── index.html
+│   │       ├── video-design
+│   │       │   └── index.html
+│   │       ├── wedding-photography
+│   │       │   └── index.html
+│   │       └── wild-life-photography
+│   │           └── index.html
+│   ├── feed.xml
+│   ├── files
+│   │   └── menu.json
+│   ├── fonts
+│   │   └── lato
+│   │       ├── Lato-Bold.eot
+│   │       ├── Lato-BoldItalic.eot
+│   │       ├── Lato-BoldItalic.ttf
+│   │       ├── Lato-BoldItalic.woff
+│   │       ├── Lato-BoldItalic.woff2
+│   │       ├── Lato-Bold.ttf
+│   │       ├── Lato-Bold.woff
+│   │       ├── Lato-Bold.woff2
+│   │       ├── Lato-Italic.eot
+│   │       ├── Lato-Italic.ttf
+│   │       ├── Lato-Italic.woff
+│   │       ├── Lato-Italic.woff2
+│   │       ├── Lato-Regular.eot
+│   │       ├── Lato-Regular.ttf
+│   │       ├── Lato-Regular.woff
+│   │       └── Lato-Regular.woff2
+│   ├── htmx-demo
+│   │   └── index.html
+│   ├── images
+│   │   ├── 4by3.jpg
+│   │   ├── avatar
+│   │   │   ├── large
+│   │   │   │   ├── ade.jpg
+│   │   │   │   ├── chris.jpg
+│   │   │   │   ├── christian.jpg
+│   │   │   │   ├── daniel.jpg
+│   │   │   │   ├── elliot.jpg
+│   │   │   │   ├── helen.jpg
+│   │   │   │   ├── jenny.jpg
+│   │   │   │   ├── joe.jpg
+│   │   │   │   ├── justen.jpg
+│   │   │   │   ├── laura.jpg
+│   │   │   │   ├── matt.jpg
+│   │   │   │   ├── nan.jpg
+│   │   │   │   ├── nom.jpg
+│   │   │   │   ├── steve.jpg
+│   │   │   │   ├── stevie.jpg
+│   │   │   │   ├── tom.jpg
+│   │   │   │   ├── veronika.jpg
+│   │   │   │   └── zoe.jpg
+│   │   │   └── small
+│   │   │       ├── ade.jpg
+│   │   │       ├── chris.jpg
+│   │   │       ├── christian.jpg
+│   │   │       ├── daniel.jpg
+│   │   │       ├── elliot.jpg
+│   │   │       ├── helen.jpg
+│   │   │       ├── jenny.jpg
+│   │   │       ├── joe.jpg
+│   │   │       ├── justen.jpg
+│   │   │       ├── laura.jpg
+│   │   │       ├── matt.jpg
+│   │   │       ├── nan.jpg
+│   │   │       ├── nom.jpg
+│   │   │       ├── steve.jpg
+│   │   │       ├── stevie.jpg
+│   │   │       ├── tom.jpg
+│   │   │       ├── veronika.jpg
+│   │   │       └── zoe.jpg
+│   │   ├── avatar2
+│   │   │   ├── large
+│   │   │   │   ├── cassie.png
+│   │   │   │   ├── elyse.png
+│   │   │   │   ├── eve.png
+│   │   │   │   ├── kristy.png
+│   │   │   │   ├── lena.png
+│   │   │   │   ├── lindsay.png
+│   │   │   │   ├── mark.png
+│   │   │   │   ├── matthew.png
+│   │   │   │   ├── molly.png
+│   │   │   │   ├── patrick.png
+│   │   │   │   └── rachel.png
+│   │   │   └── small
+│   │   │       ├── cassie.png
+│   │   │       ├── elyse.png
+│   │   │       ├── eve.png
+│   │   │       ├── kristy.png
+│   │   │       ├── lena.png
+│   │   │       ├── lindsay.png
+│   │   │       ├── mark.png
+│   │   │       ├── matthew.png
+│   │   │       ├── molly.png
+│   │   │       ├── patrick.png
+│   │   │       └── rachel.png
+│   │   ├── backgrounds
+│   │   │   ├── 10.jpg
+│   │   │   ├── 11.jpg
+│   │   │   ├── 12.jpg
+│   │   │   ├── 13.jpg
+│   │   │   ├── 14.jpg
+│   │   │   ├── 15.jpg
+│   │   │   ├── 16.jpg
+│   │   │   ├── 1.jpg
+│   │   │   ├── 2.jpg
+│   │   │   ├── 3.jpg
+│   │   │   ├── 4.jpg
+│   │   │   ├── 5.jpg
+│   │   │   ├── 6.jpg
+│   │   │   ├── 7.jpg
+│   │   │   ├── 8.jpg
+│   │   │   └── 9.jpg
+│   │   ├── bear-waving.jpg
+│   │   ├── before.jpg
+│   │   ├── bg2.jpg
+│   │   ├── bg3.jpg
+│   │   ├── bg.jpg
+│   │   ├── bg-moonlight.jpg
+│   │   ├── bg-moonlight-original.jpg
+│   │   ├── bg-sky.jpg
+│   │   ├── blue-bg.png
+│   │   ├── casanova.jpg
+│   │   ├── cat2.png
+│   │   ├── cat.png
+│   │   ├── celebrate.gif
+│   │   ├── chevron.jpg
+│   │   ├── dark-bg.png
+│   │   ├── depeng.png
+│   │   ├── devices.png
+│   │   ├── dog.png
+│   │   ├── esb.png
+│   │   ├── examples
+│   │   │   ├── attached.png
+│   │   │   ├── bootstrap.png
+│   │   │   ├── fixed.png
+│   │   │   ├── grid.png
+│   │   │   ├── homepage.png
+│   │   │   ├── login.png
+│   │   │   ├── responsive.png
+│   │   │   ├── sticky.png
+│   │   │   └── theming.png
+│   │   ├── gif
+│   │   │   └── multi-shortcuts.gif
+│   │   ├── home-avatar.png
+│   │   ├── icons
+│   │   │   ├── attention.png
+│   │   │   ├── award.png
+│   │   │   ├── book.png
+│   │   │   ├── candle.png
+│   │   │   ├── check.png
+│   │   │   ├── community.png
+│   │   │   ├── conversation.png
+│   │   │   ├── eye-dropper.png
+│   │   │   ├── folder.png
+│   │   │   ├── gear.png
+│   │   │   ├── glasses.png
+│   │   │   ├── globe.png
+│   │   │   ├── heart.png
+│   │   │   ├── hourglass.png
+│   │   │   ├── lab.png
+│   │   │   ├── mobile.png
+│   │   │   ├── paintbucket.png
+│   │   │   ├── paint.png
+│   │   │   ├── paintroller.png
+│   │   │   ├── pen.png
+│   │   │   ├── plugin.png
+│   │   │   ├── rocket.png
+│   │   │   ├── school.png
+│   │   │   ├── star.png
+│   │   │   ├── theming.png
+│   │   │   └── toolbox.png
+│   │   ├── icons-inverted.png
+│   │   ├── icons.png
+│   │   ├── ics-logo.png
+│   │   ├── ics-logo-reversed.png
+│   │   ├── image-16by9.png
+│   │   ├── large-pdf.pdf
+│   │   ├── learn-logo.png
+│   │   ├── leaves
+│   │   │   ├── 10.png
+│   │   │   ├── 11.png
+│   │   │   ├── 12.png
+│   │   │   ├── 13.png
+│   │   │   ├── 14.png
+│   │   │   ├── 15.png
+│   │   │   ├── 16.png
+│   │   │   ├── 17.png
+│   │   │   ├── 18.png
+│   │   │   ├── 19.png
+│   │   │   ├── 1.png
+│   │   │   ├── 20.png
+│   │   │   ├── 2.png
+│   │   │   ├── 3.png
+│   │   │   ├── 4.png
+│   │   │   ├── 5.png
+│   │   │   ├── 6.png
+│   │   │   ├── 7.png
+│   │   │   ├── 8.png
+│   │   │   └── 9.png
+│   │   ├── logo.png
+│   │   ├── logos
+│   │   │   ├── arrowhead.png
+│   │   │   ├── big-buck.png
+│   │   │   └── sunset.png
+│   │   ├── moonlight.jpg
+│   │   ├── movies
+│   │   │   ├── 12years-horizontal.jpg
+│   │   │   ├── 12years.jpg
+│   │   │   ├── 1942.jpg
+│   │   │   ├── adaptation-horizontal.jpg
+│   │   │   ├── adaptation.jpg
+│   │   │   ├── happiness.jpg
+│   │   │   ├── hemingway.jpg
+│   │   │   ├── sherlock.jpg
+│   │   │   ├── spiderman-horizontal.jpg
+│   │   │   ├── spiderman.jpg
+│   │   │   ├── totoro-horizontal.jpg
+│   │   │   ├── totoro.jpg
+│   │   │   ├── watchmen-horizontal.jpg
+│   │   │   └── watchmen.jpg
+│   │   ├── new-school.jpg
+│   │   ├── setup
+│   │   │   └── install.gif
+│   │   ├── shape
+│   │   │   ├── heroku.png
+│   │   │   ├── jira.png
+│   │   │   └── quirky.png
+│   │   ├── teal-bg.png
+│   │   ├── tile-bg.png
+│   │   ├── ui.png
+│   │   ├── vimeo-example.jpg
+│   │   └── wireframe
+│   │       ├── centered-paragraph.png
+│   │       ├── image.png
+│   │       ├── image-square.png
+│   │       ├── image-text.png
+│   │       ├── media-paragraph-alt.png
+│   │       ├── media-paragraph.png
+│   │       ├── paragraph.png
+│   │       ├── short-paragraph.png
+│   │       ├── square-image.png
+│   │       ├── text-image.png
+│   │       └── white-image.png
+│   ├── index.html
+│   ├── javascript
+│   │   ├── accordion.js
+│   │   ├── api.js
+│   │   ├── button.js
+│   │   ├── card.js
+│   │   ├── checkbox.js
+│   │   ├── container.js
+│   │   ├── customize.js
+│   │   ├── dimmer.js
+│   │   ├── docs.js
+│   │   ├── dropdown.js
+│   │   ├── embed.js
+│   │   ├── form.js
+│   │   ├── grid.js
+│   │   ├── header.js
+│   │   ├── home.js
+│   │   ├── icon.js
+│   │   ├── input.js
+│   │   ├── item.js
+│   │   ├── library
+│   │   │   ├── clipboard.js
+│   │   │   ├── clipboard.min.js
+│   │   │   ├── cookie.js
+│   │   │   ├── cookie.min.js
+│   │   │   ├── detect.js
+│   │   │   ├── detect.min.js
+│   │   │   ├── easing.js
+│   │   │   ├── easing.min.js
+│   │   │   ├── highlight.min.js
+│   │   │   ├── history.js
+│   │   │   ├── history.min.js
+│   │   │   ├── jquery.hotkeys.js
+│   │   │   ├── jquery.hotkeys.min.js
+│   │   │   ├── jquery.js
+│   │   │   ├── jquery.legacy.js
+│   │   │   ├── jquery.legacy.min.js
+│   │   │   ├── jquery.min.js
+│   │   │   ├── less.js
+│   │   │   ├── less.min.js
+│   │   │   ├── serialize-object.js
+│   │   │   ├── sinon.js
+│   │   │   ├── tablesort.js
+│   │   │   ├── tablesort.min.js
+│   │   │   ├── typing.js
+│   │   │   ├── typing.min.js
+│   │   │   ├── underscore.js
+│   │   │   └── underscore.min.js
+│   │   ├── main.js
+│   │   ├── menu.js
+│   │   ├── message.js
+│   │   ├── modal.js
+│   │   ├── new.js
+│   │   ├── playground.js
+│   │   ├── popup.js
+│   │   ├── progress.js
+│   │   ├── rating.js
+│   │   ├── search.js
+│   │   ├── shape.js
+│   │   ├── sidebar.js
+│   │   ├── slider.js
+│   │   ├── started.js
+│   │   ├── sticky.js
+│   │   ├── tab.js
+│   │   ├── table.js
+│   │   ├── theming.js
+│   │   ├── transition.js
+│   │   ├── validate-form.js
+│   │   └── visibility.js
+│   ├── LICENSE
+│   ├── Makefile
+│   ├── metadata.json
+│   ├── pt-BR
+│   │   ├── academics
+│   │   │   ├── formal-sciences
+│   │   │   │   └── index.html
+│   │   │   ├── humanities
+│   │   │   │   ├── anthropology
+│   │   │   │   │   └── index.html
+│   │   │   │   ├── history
+│   │   │   │   │   └── index.html
+│   │   │   │   ├── index.html
+│   │   │   │   ├── linguistics-and-languages
+│   │   │   │   │   └── index.html
+│   │   │   │   └── philosophy
+│   │   │   │       └── index.html
+│   │   │   ├── index.html
+│   │   │   ├── natural-sciences
+│   │   │   │   └── index.html
+│   │   │   ├── professions-and-applied-sciences
+│   │   │   │   └── index.html
+│   │   │   └── social-sciences
+│   │   │       └── index.html
+│   │   ├── business
+│   │   │   ├── business-law
+│   │   │   │   └── index.html
+│   │   │   ├── communications
+│   │   │   │   └── index.html
+│   │   │   ├── data-and-analytics
+│   │   │   │   └── index.html
+│   │   │   ├── entrepreneurship
+│   │   │   │   └── index.html
+│   │   │   ├── finance
+│   │   │   │   └── index.html
+│   │   │   ├── home-business
+│   │   │   │   └── index.html
+│   │   │   ├── human-resources
+│   │   │   │   └── index.html
+│   │   │   ├── index.html
+│   │   │   ├── industry
+│   │   │   │   └── index.html
+│   │   │   ├── management
+│   │   │   │   └── index.html
+│   │   │   ├── media
+│   │   │   │   └── index.html
+│   │   │   ├── operations
+│   │   │   │   └── index.html
+│   │   │   ├── project-management
+│   │   │   │   └── index.html
+│   │   │   ├── real-estate
+│   │   │   │   └── index.html
+│   │   │   ├── sales
+│   │   │   │   └── index.html
+│   │   │   └── strategy
+│   │   │       └── index.html
+│   │   ├── computing
+│   │   │   ├── big-data
+│   │   │   │   └── index.html
+│   │   │   ├── computer-information-systems
+│   │   │   │   └── index.html
+│   │   │   ├── computer-science
+│   │   │   │   └── index.html
+│   │   │   ├── cyber-security
+│   │   │   │   └── index.html
+│   │   │   ├── data-science
+│   │   │   │   └── index.html
+│   │   │   ├── hardware
+│   │   │   │   └── index.html
+│   │   │   ├── index.html
+│   │   │   ├── it-certification
+│   │   │   │   └── index.html
+│   │   │   ├── netwoking
+│   │   │   │   └── index.html
+│   │   │   └── operating-systems
+│   │   │       └── index.html
+│   │   ├── design
+│   │   │   ├── 3d-and-animation
+│   │   │   │   └── index.html
+│   │   │   ├── architectural-design
+│   │   │   │   └── index.html
+│   │   │   ├── design-thinking
+│   │   │   │   └── index.html
+│   │   │   ├── design-tools
+│   │   │   │   └── index.html
+│   │   │   ├── fashion
+│   │   │   │   └── index.html
+│   │   │   ├── game-design
+│   │   │   │   └── index.html
+│   │   │   ├── graphic-design
+│   │   │   │   └── index.html
+│   │   │   ├── index.html
+│   │   │   ├── interior-design
+│   │   │   │   └── index.html
+│   │   │   ├── user-experience
+│   │   │   │   └── index.html
+│   │   │   └── web-design
+│   │   │       └── index.html
+│   │   ├── development
+│   │   │   ├── agile-project-management
+│   │   │   │   └── index.html
+│   │   │   ├── backend-development
+│   │   │   │   └── index.html
+│   │   │   ├── databases
+│   │   │   │   └── index.html
+│   │   │   ├── development-environment
+│   │   │   │   └── index.html
+│   │   │   ├── development-tools
+│   │   │   │   └── index.html
+│   │   │   ├── e-commerce
+│   │   │   │   └── index.html
+│   │   │   ├── frontend-development
+│   │   │   │   └── index.html
+│   │   │   ├── game-development
+│   │   │   │   └── index.html
+│   │   │   ├── index.html
+│   │   │   ├── miscellaneous
+│   │   │   │   └── index.html
+│   │   │   ├── plataforms
+│   │   │   │   └── index.html
+│   │   │   ├── programming-languages
+│   │   │   │   └── index.html
+│   │   │   ├── software-engineering
+│   │   │   │   └── index.html
+│   │   │   ├── software-testing
+│   │   │   │   └── index.html
+│   │   │   └── vulnerabilities
+│   │   │       └── index.html
+│   │   ├── LICENSE
+│   │   ├── marketing
+│   │   │   ├── advertising
+│   │   │   │   └── index.html
+│   │   │   ├── afiliate-marketing
+│   │   │   │   └── index.html
+│   │   │   ├── analytics-and-automation
+│   │   │   │   └── index.html
+│   │   │   ├── branding
+│   │   │   │   └── index.html
+│   │   │   ├── content-marketing
+│   │   │   │   └── index.html
+│   │   │   ├── digital-marketing
+│   │   │   │   └── index.html
+│   │   │   ├── growth-hacking
+│   │   │   │   └── index.html
+│   │   │   ├── index.html
+│   │   │   ├── marketing-fundamentals
+│   │   │   │   └── index.html
+│   │   │   ├── non-digital-marketing
+│   │   │   │   └── index.html
+│   │   │   ├── product-marketing
+│   │   │   │   └── index.html
+│   │   │   ├── public-relations
+│   │   │   │   └── index.html
+│   │   │   ├── seo
+│   │   │   │   └── index.html
+│   │   │   ├── social-media
+│   │   │   │   └── index.html
+│   │   │   └── video-and-modile-marketing
+│   │   │       └── index.html
+│   │   ├── personal-development
+│   │   │   ├── career-development
+│   │   │   │   └── index.html
+│   │   │   ├── creativity
+│   │   │   │   └── index.html
+│   │   │   ├── happiness
+│   │   │   │   └── index.html
+│   │   │   ├── index.html
+│   │   │   ├── influence
+│   │   │   │   └── index.html
+│   │   │   ├── leadership
+│   │   │   │   └── index.html
+│   │   │   ├── memory-and-study-skills
+│   │   │   │   └── index.html
+│   │   │   ├── motivation
+│   │   │   │   └── index.html
+│   │   │   ├── parenting-and-relationships
+│   │   │   │   └── index.html
+│   │   │   ├── -personal-brand-building
+│   │   │   │   └── index.html
+│   │   │   ├── personal-finance
+│   │   │   │   └── index.html
+│   │   │   ├── personal-transformation
+│   │   │   │   └── index.html
+│   │   │   ├── productivity
+│   │   │   │   └── index.html
+│   │   │   ├── religion-and-spirituality
+│   │   │   │   └── index.html
+│   │   │   ├── self-esteem
+│   │   │   │   └── index.html
+│   │   │   └── stress-management
+│   │   │       └── index.html
+│   │   └── photography
+│   │       ├── analogue-photography
+│   │       │   └── index.html
+│   │       ├── blank-and-white
+│   │       │   └── index.html
+│   │       ├── commercial-photography
+│   │       │   └── index.html
+│   │       ├── digital-photography
+│   │       │   └── index.html
+│   │       ├── index.html
+│   │       ├── landscape
+│   │       │   └── index.html
+│   │       ├── mobile-photography
+│   │       │   └── index.html
+│   │       ├── photography-fundamentals
+│   │       │   └── index.html
+│   │       ├── photography-tools
+│   │       │   └── index.html
+│   │       ├── portraits
+│   │       │   └── index.html
+│   │       ├── travel-photography
+│   │       │   └── index.html
+│   │       ├── video-design
+│   │       │   └── index.html
+│   │       ├── wedding-photography
+│   │       │   └── index.html
+│   │       └── wild-life-photography
+│   │           └── index.html
+│   ├── README.md
+│   ├── redirects.json
+│   ├── robots.txt
+│   ├── scripts
+│   │   └── generate_pages.rb
+│   └── sitemap.xml
+└── tree.txt
+
+531 directories, 907 files
