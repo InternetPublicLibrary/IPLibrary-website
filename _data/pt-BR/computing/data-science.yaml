@@ -8,7 +8,7 @@
     - comunidade
   access: "Gratuito"
   rank: 1
-  last_updated: 2024-01-05
+  last_updated: "2024-01-05"
 
 - title: "Curso-R"
   url: "https://curso-r.com/blog/"
@@ -19,7 +19,7 @@
     - visualização
   access: "Gratuito"
   rank: 2
-  last_updated: 2024-01-08
+  last_updated: "2024-01-08"
 
 - title: "Brasil.IO"
   url: "https://brasil.io/"

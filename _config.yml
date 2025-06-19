@@ -29,6 +29,15 @@ encoding: UTF-8
 # Enable dynamic page generation
 enable_dynamic_pages: true
 
+# Intelligent page generation system
+enable_intelligent_page_generation: true
+
+# Enhanced API system
+api:
+  version: "2.0"
+  enabled: true
+  cache_duration: 3600
+
 # Giscus configuration
 giscus:
   en:
@@ -96,3 +105,54 @@ safe: false
 #   - vendor/cache/
 #   - vendor/gems/
 #   - vendor/ruby/
+
+# PAGE GENERATION CONFIGURATION
+# Controls how pages are generated to prevent duplication
+page_generation:
+  # Strategy: 'rake' (Rakefile only), 'jekyll' (plugins only), 'hybrid' (both with coordination)
+  strategy: 'jekyll'
+  # Enable caching for faster builds
+  enable_caching: true
+  # Skip Jekyll plugins when using Rake strategy
+  skip_jekyll_plugins: false
+
+# Legacy settings (deprecated - use page_generation.strategy instead)
+enable_menu_pages: true
+enable_wiki_pages: true
+
+# Track generated pages between plugin executions to prevent conflicts
+page_registry: true
+
+# Default language
+lang: "en-US"
+languages:
+  - code: "en-US"
+    name: "English (US)"
+    dir: "en-US"
+  - code: "pt-BR"
+    name: "Português (Brasil)"
+    dir: "pt-BR"
+
+# Permalink structure
+permalink: /:categories/:title/
+
+# Collections configuration
+collections:
+  resources:
+    output: true
+    permalink: /:collection/:path/
+
+# Defaults for pages
+defaults:
+  - scope:
+      path: ""
+    values:
+      layout: "default"
+  - scope:
+      path: "en-US"
+    values:
+      lang: "en-US"
+  - scope:
+      path: "pt-BR"
+    values:
+      lang: "pt-BR"

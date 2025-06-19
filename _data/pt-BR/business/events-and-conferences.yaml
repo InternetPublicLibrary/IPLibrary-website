@@ -8,7 +8,7 @@
     - inovação
   access: "Pago"
   rank: 1
-  last_updated: 2024-01-03
+  last_updated: "2024-01-03"
   date: "2025-05-15"
   location: "Rio de Janeiro, RJ"
 
@@ -21,7 +21,7 @@
     - sustentabilidade
   access: "Somente por convite"
   rank: 2
-  last_updated: 2024-01-10
+  last_updated: "2024-01-10"
   date: "2025-03-20"
   location: "São Paulo, SP"
 
@@ -34,6 +34,6 @@
     - carreira
   access: "Pago"
   rank: 3
-  last_updated: 2024-01-15
+  last_updated: "2024-01-15"
   date: "2025-08-18"
   location: "São Paulo, SP" 

@@ -228,8 +228,10 @@ build-dev: generate-pages
 
 .PHONY: build-prod
 build-prod: generate-pages
-	$(call log_info,Building for production...)
-	@JEKYLL_ENV=production bundle exec jekyll build --profile
+	@echo "Building site for production..."
+	JEKYLL_ENV=production bundle exec jekyll build
+	@$(MAKE) copy-lang-indexes
+	@echo "Production build completed with language index files."
 
 .PHONY: build
 build: build-prod
@@ -602,6 +604,15 @@ security: audit
 	@if [ -f ".semgrepignore" ]; then \
 		semgrep --config=auto . || $(call log_warning,semgrep not installed); \
 	fi
+
+# Post-build fix for language index files
+copy-lang-indexes:
+	@echo "Copying language index files to language root directories..."
+	@mkdir -p _site/en-US
+	@mkdir -p _site/pt-BR
+	@cp -f _site/en-US/index/index.html _site/en-US/index.html || true
+	@cp -f _site/pt-BR/index/index.html _site/pt-BR/index.html || true
+	@echo "Language index files copied successfully."
 
 # Make targets that don't create files
 .PHONY: all clean-all install-all update-all

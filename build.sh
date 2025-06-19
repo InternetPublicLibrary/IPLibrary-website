@@ -1,27 +1,23 @@
 #!/bin/bash
 set -e
 
-# Print Ruby and environment info
-echo "Ruby version: $(ruby -v)"
-echo "Bundler version: $(bundle -v)"
+echo "Starting IPLibrary website build process..."
 
-# Install specific bundler version
-gem install bundler:2.6.9
+# Check for Ruby and required gems
+command -v ruby >/dev/null 2>&1 || { echo "Ruby is required but not installed. Aborting."; exit 1; }
+command -v bundle >/dev/null 2>&1 || { echo "Bundler is required but not installed. Aborting."; exit 1; }
 
-# Set encoding to UTF-8
-export LANG=en_US.UTF-8
-export LC_ALL=en_US.UTF-8
-export RUBYOPT="-E utf-8"
+# Install dependencies if needed
+echo "Installing dependencies..."
+bundle install
 
-# Clean any previous builds
+# Clean any previous build artifacts
+echo "Cleaning previous build..."
 bundle exec jekyll clean
 
-# Generate pages from menu data
-echo "Generating pages from menu data..."
-ruby scripts/generate_pages.rb
-
-# Build the site with proper environment
+# Build the Jekyll site with our custom plugins
+echo "Building Jekyll site with plugins for page generation..."
 JEKYLL_ENV=production bundle exec jekyll build
 
-# Success message
-echo "Build completed successfully!" 
+echo "Build completed successfully!"
+echo "The site is available in the _site directory." 

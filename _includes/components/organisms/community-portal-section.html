@@ -8,48 +8,28 @@
         <div class="bg-white border border-gray-200 rounded p-4">
           <h3 class="text-lg font-medium text-gray-800 mb-4">{{ include.news_title | default: "Community News" }}</h3>
           
-          <div class="space-y-4" id="community-news" hx-get="{{ include.news_endpoint | default: '/api/community-news' }}" hx-trigger="load">
-            {% if include.news_items %}
-              {% for item in include.news_items %}
-                {% include components/molecules/news-item.html 
-                  title=item.title
-                  content=item.content
-                  time_ago=item.time_ago
-                  author=item.author
-                  author_url=item.author_url
-                  color=item.color
-                %}
-              {% endfor %}
-            {% else %}
-              <!-- Default news items if none provided -->
-              {% include components/molecules/news-item.html 
-                title="New Category Structure Implemented"
-                content="We've restructured our category system to make navigation easier and more intuitive. Check out the new organization and let us know what you think!"
-                time_ago="3 days ago"
-                author="Admin"
-                color="blue"
-              %}
-              
-              {% include components/molecules/news-item.html 
-                title="Help Needed: Portuguese Translations"
-                content="We're looking for volunteers to help translate resources into Portuguese. If you're fluent in both English and Portuguese, please consider contributing to our translation efforts."
-                time_ago="1 week ago"
-                author="Linguist"
-                color="green"
-              %}
-              
-              {% include components/molecules/news-item.html 
-                title="Monthly Virtual Meetup"
-                content="Join us for our monthly virtual meetup to discuss the future of IPL, share ideas, and get to know fellow contributors. The next meeting is scheduled for July 15th at 18:00 UTC."
-                time_ago="2 weeks ago"
-                author="CommunityManager"
-                color="yellow"
-              %}
-            {% endif %}
-          </div>
-          
-          <div class="mt-4 text-right">
-            <a href="#" class="text-blue-600 hover:underline text-sm" hx-get="{{ include.all_announcements_endpoint | default: '/api/all-announcements' }}" hx-target="#content-area">{{ include.view_all_text | default: "View all announcements →" }}</a>
+          <div class="space-y-4">
+            <div class="bg-blue-50 border border-blue-200 rounded p-4">
+              <h3 class="text-lg font-medium text-blue-800 mb-2">New Category Structure Implemented</h3>
+              <p class="text-sm text-blue-700 mb-2">We've restructured our category system to make navigation easier and more intuitive. Check out the new organization and let us know what you think!</p>
+              <div class="text-xs text-blue-600">3 days ago by Admin</div>
+            </div>
+            
+            <div class="bg-green-50 border border-green-200 rounded p-4">
+              <h3 class="text-lg font-medium text-green-800 mb-2">Help Needed: Portuguese Translations</h3>
+              <p class="text-sm text-green-700 mb-2">We're looking for volunteers to help translate resources into Portuguese. If you're fluent in both English and Portuguese, please consider contributing.</p>
+              <div class="text-xs text-green-600">1 week ago by Linguist</div>
+            </div>
+            
+            <div class="bg-yellow-50 border border-yellow-200 rounded p-4">
+              <h3 class="text-lg font-medium text-yellow-800 mb-2">Monthly Virtual Meetup</h3>
+              <p class="text-sm text-yellow-700 mb-2">Join us for our monthly virtual meetup to discuss the future of IPL and share ideas. Next meeting: July 15th at 18:00 UTC.</p>
+              <div class="text-xs text-yellow-600">2 weeks ago by CommunityManager</div>
+            </div>
+            
+            <div class="text-right">
+              <a href="#" class="text-blue-600 hover:underline text-sm">View all announcements →</a>
+            </div>
           </div>
         </div>
       </div>

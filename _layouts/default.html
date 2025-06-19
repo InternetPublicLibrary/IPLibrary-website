@@ -7,6 +7,16 @@
       title=page.title 
       description=page.description 
     %}
+    
+    <!-- HTMX Setup -->
+    {% include components/htmx/htmx-setup.html %}
+    
+    <!-- Additional page-specific styles -->
+    {% if page.additional_css %}
+      {% for css_file in page.additional_css %}
+        <link rel="stylesheet" href="{{ css_file }}">
+      {% endfor %}
+    {% endif %}
   </head>
 
 <body class="bg-gray-50 min-h-screen flex flex-col">
@@ -21,8 +31,12 @@
   <!-- Footer -->
   {% include components/organisms/footer.html %}
 
-  <!-- Scripts -->
-  <script src="/javascript/main.js"></script>
+  <!-- Additional page-specific scripts -->
+  {% if page.additional_js %}
+    {% for js_file in page.additional_js %}
+      <script src="{{ js_file }}"></script>
+    {% endfor %}
+  {% endif %}
 </body>
 
 </html>

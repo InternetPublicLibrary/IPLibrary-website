@@ -8,13 +8,38 @@
   <!-- Top bar with language and user options -->
   <div class="bg-gray-50 border-b border-gray-200">
     <div class="container mx-auto px-4">
-      <div class="flex justify-end py-1.5 text-xs text-gray-600">
+      <div class="flex justify-between py-1.5 text-xs text-gray-600">
+        <!-- Language switcher -->
+        <div class="relative group">
+          <button class="flex items-center hover:text-blue-600 transition-colors duration-200">
+            <i class="fas fa-globe mr-1"></i>
+            {% if page.lang == 'pt-BR' %}
+              Português
+            {% else %}
+              English
+            {% endif %}
+            <i class="fas fa-chevron-down ml-1 text-xs"></i>
+          </button>
+          <div class="absolute left-0 mt-1 w-40 bg-white border border-gray-200 rounded-lg shadow-lg hidden group-hover:block z-10">
+            <div class="p-1">
+              <a href="/en-US/" class="block px-3 py-2 rounded-md hover:bg-gray-50 {% if page.lang == 'en-US' %}font-semibold text-blue-600{% endif %}">
+                <span class="fi fi-us mr-2"></span>English (US)
+              </a>
+              <a href="/pt-BR/" class="block px-3 py-2 rounded-md hover:bg-gray-50 {% if page.lang == 'pt-BR' %}font-semibold text-blue-600{% endif %}">
+                <span class="fi fi-br mr-2"></span>Português (Brasil)
+              </a>
+            </div>
+          </div>
+        </div>
+        
+        <!-- User options -->
         <div class="flex space-x-4">
-          <a href="/en-US" class="hover:text-blue-600 transition-colors duration-200">English</a>
-          <a href="/pt-BR" class="hover:text-blue-600 transition-colors duration-200">Português</a>
-          <span class="text-gray-300">|</span>
-          <a href="#" class="hover:text-blue-600 transition-colors duration-200">Log in</a>
-          <a href="#" class="hover:text-blue-600 transition-colors duration-200">Create account</a>
+          <a href="#" class="hover:text-blue-600 transition-colors duration-200">
+            <i class="fas fa-sign-in-alt mr-1"></i>Log in
+          </a>
+          <a href="#" class="hover:text-blue-600 transition-colors duration-200">
+            <i class="fas fa-user-plus mr-1"></i>Create account
+          </a>
         </div>
       </div>
     </div>
@@ -24,11 +49,12 @@
   <div class="container mx-auto px-4 py-3">
     <div class="flex justify-between items-center">
       <div class="flex items-center">
-        <a href="/" class="text-2xl font-bold text-gray-800 flex items-center">
+        <a href="/{{ page.lang | default: 'en-US' }}/" class="text-2xl font-bold text-gray-800 flex items-center">
           <span class="bg-blue-600 text-white w-8 h-8 rounded-lg flex items-center justify-center mr-2">IP</span>
-          <span>Internet Public Library</span>
+          <span class="hidden sm:inline">Internet Public Library</span>
+          <span class="sm:hidden">IPL</span>
         </a>
-        <span class="hidden md:inline-block text-gray-500 ml-3 text-sm">The Free Encyclopedia</span>
+        <span class="hidden lg:inline-block text-gray-500 ml-3 text-sm">The Free Encyclopedia</span>
       </div>
       
       <!-- Desktop search -->
@@ -54,17 +80,19 @@
   <div class="hidden md:block bg-gray-50 border-t border-gray-200">
     <div class="container mx-auto px-4">
       <div class="flex">
-        <div class="flex">
-          <a href="/" class="px-4 py-2.5 border-r border-gray-200 text-sm font-medium hover:bg-white hover:text-blue-600 transition-colors duration-200">Home</a>
-          <a href="#discussion" class="px-4 py-2.5 border-r border-gray-200 text-sm hover:bg-white hover:text-blue-600 transition-colors duration-200">Discussion</a>
-          <a href="{% if page.lang == 'pt-BR' %}/pt-BR/contribuir{% else %}/en-US/contribute{% endif %}" class="px-4 py-2.5 border-r border-gray-200 text-sm hover:bg-white hover:text-blue-600 transition-colors duration-200">{% if page.lang == 'pt-BR' %}Editar{% else %}Edit{% endif %}</a>
-          <a href="{% if page.lang == 'pt-BR' %}/pt-BR/alteracoes-recentes{% else %}/en-US/recent-changes{% endif %}" class="px-4 py-2.5 border-r border-gray-200 text-sm hover:bg-white hover:text-blue-600 transition-colors duration-200">{% if page.lang == 'pt-BR' %}Histórico{% else %}History{% endif %}</a>
+        <div class="flex overflow-x-auto whitespace-nowrap scrollbar-hide">
+          <a href="/{{ page.lang | default: 'en-US' }}/" class="px-4 py-2.5 border-r border-gray-200 text-sm font-medium hover:bg-white hover:text-blue-600 transition-colors duration-200 {% if page.url == '/en-US/' or page.url == '/pt-BR/' %}text-blue-600 bg-white{% endif %}">Home</a>
+          <a href="/{{ page.lang | default: 'en-US' }}/categories" class="px-4 py-2.5 border-r border-gray-200 text-sm hover:bg-white hover:text-blue-600 transition-colors duration-200 {% if page.url contains '/categories' %}text-blue-600 bg-white{% endif %}">Categories</a>
+          <a href="/{{ page.lang | default: 'en-US' }}/recent-changes" class="px-4 py-2.5 border-r border-gray-200 text-sm hover:bg-white hover:text-blue-600 transition-colors duration-200 {% if page.url contains '/recent-changes' %}text-blue-600 bg-white{% endif %}">Recent Changes</a>
+          <a href="/{{ page.lang | default: 'en-US' }}/contribute" class="px-4 py-2.5 border-r border-gray-200 text-sm hover:bg-white hover:text-blue-600 transition-colors duration-200 {% if page.url contains '/contribute' %}text-blue-600 bg-white{% endif %}">Contribute</a>
         </div>
         <div class="ml-auto flex">
-          <a href="{% if page.lang == 'pt-BR' %}/pt-BR/categorias{% else %}/en-US/categories{% endif %}" class="px-4 py-2.5 text-sm hover:bg-white hover:text-blue-600 transition-colors duration-200">{% if page.lang == 'pt-BR' %}Categorias{% else %}Categories{% endif %}</a>
-          <a href="{% if page.lang == 'pt-BR' %}/pt-BR/alteracoes-recentes{% else %}/en-US/recent-changes{% endif %}" class="px-4 py-2.5 border-l border-gray-200 text-sm hover:bg-white hover:text-blue-600 transition-colors duration-200">{% if page.lang == 'pt-BR' %}Alterações Recentes{% else %}Recent Changes{% endif %}</a>
-          <a href="{% if page.lang == 'pt-BR' %}/pt-BR/recurso-aleatorio{% else %}/en-US/random-resource{% endif %}" class="px-4 py-2.5 border-l border-gray-200 text-sm hover:bg-white hover:text-blue-600 transition-colors duration-200">{% if page.lang == 'pt-BR' %}Aleatório{% else %}Random{% endif %}</a>
-          <a href="{% if page.lang == 'pt-BR' %}/pt-BR/ajuda{% else %}/en-US/help{% endif %}" class="px-4 py-2.5 border-l border-gray-200 text-sm hover:bg-white hover:text-blue-600 transition-colors duration-200">{% if page.lang == 'pt-BR' %}Ajuda{% else %}Help{% endif %}</a>
+          <a href="/{{ page.lang | default: 'en-US' }}/random-resource" class="px-4 py-2.5 border-l border-gray-200 text-sm hover:bg-white hover:text-blue-600 transition-colors duration-200">
+            <i class="fas fa-random mr-1"></i>Random
+          </a>
+          <a href="/{{ page.lang | default: 'en-US' }}/help" class="px-4 py-2.5 border-l border-gray-200 text-sm hover:bg-white hover:text-blue-600 transition-colors duration-200">
+            <i class="fas fa-question-circle mr-1"></i>Help
+          </a>
         </div>
       </div>
     </div>
@@ -83,15 +111,26 @@
     </div>
     
     <!-- Mobile navigation -->
-    <div class="border-t border-gray-200">
-      <a href="/" class="block px-4 py-3 hover:bg-gray-50 border-b border-gray-100 hover:text-blue-600 transition-colors duration-200">{% if page.lang == 'pt-BR' %}Início{% else %}Home{% endif %}</a>
-      <a href="{% if page.lang == 'pt-BR' %}/pt-BR/categorias{% else %}/en-US/categories{% endif %}" class="block px-4 py-3 hover:bg-gray-50 border-b border-gray-100 hover:text-blue-600 transition-colors duration-200">{% if page.lang == 'pt-BR' %}Categorias{% else %}Categories{% endif %}</a>
-      <a href="{% if page.lang == 'pt-BR' %}/pt-BR/alteracoes-recentes{% else %}/en-US/recent-changes{% endif %}" class="block px-4 py-3 hover:bg-gray-50 border-b border-gray-100 hover:text-blue-600 transition-colors duration-200">{% if page.lang == 'pt-BR' %}Alterações Recentes{% else %}Recent Changes{% endif %}</a>
-      <a href="{% if page.lang == 'pt-BR' %}/pt-BR/recurso-aleatorio{% else %}/en-US/random-resource{% endif %}" class="block px-4 py-3 hover:bg-gray-50 border-b border-gray-100 hover:text-blue-600 transition-colors duration-200">{% if page.lang == 'pt-BR' %}Recurso Aleatório{% else %}Random Resource{% endif %}</a>
-      <a href="{% if page.lang == 'pt-BR' %}/pt-BR/ajuda{% else %}/en-US/help{% endif %}" class="block px-4 py-3 hover:bg-gray-50 hover:text-blue-600 transition-colors duration-200">{% if page.lang == 'pt-BR' %}Ajuda{% else %}Help{% endif %}</a>
-      <a href="{% if page.lang == 'pt-BR' %}/pt-BR/portal-comunidade{% else %}/en-US/community-portal{% endif %}" class="block px-4 py-3 hover:bg-gray-50 border-b border-gray-100 hover:text-blue-600 transition-colors duration-200">{% if page.lang == 'pt-BR' %}Portal da Comunidade{% else %}Community Portal{% endif %}</a>
-      <a href="{% if page.lang == 'pt-BR' %}/pt-BR/contribuir{% else %}/en-US/contribute{% endif %}" class="block px-4 py-3 hover:bg-gray-50 border-b border-gray-100 hover:text-blue-600 transition-colors duration-200">{% if page.lang == 'pt-BR' %}Contribuir{% else %}Contribute{% endif %}</a>
-    </div>
+    <nav class="border-t border-gray-200">
+      <a href="/{{ page.lang | default: 'en-US' }}/" class="flex items-center px-4 py-3 hover:bg-gray-50 border-b border-gray-100 hover:text-blue-600 transition-colors duration-200 {% if page.url == '/en-US/' or page.url == '/pt-BR/' %}text-blue-600 bg-gray-50{% endif %}">
+        <i class="fas fa-home w-6 text-gray-500"></i>Home
+      </a>
+      <a href="/{{ page.lang | default: 'en-US' }}/categories" class="flex items-center px-4 py-3 hover:bg-gray-50 border-b border-gray-100 hover:text-blue-600 transition-colors duration-200 {% if page.url contains '/categories' %}text-blue-600 bg-gray-50{% endif %}">
+        <i class="fas fa-th-large w-6 text-gray-500"></i>Categories
+      </a>
+      <a href="/{{ page.lang | default: 'en-US' }}/recent-changes" class="flex items-center px-4 py-3 hover:bg-gray-50 border-b border-gray-100 hover:text-blue-600 transition-colors duration-200 {% if page.url contains '/recent-changes' %}text-blue-600 bg-gray-50{% endif %}">
+        <i class="fas fa-history w-6 text-gray-500"></i>Recent Changes
+      </a>
+      <a href="/{{ page.lang | default: 'en-US' }}/random-resource" class="flex items-center px-4 py-3 hover:bg-gray-50 border-b border-gray-100 hover:text-blue-600 transition-colors duration-200">
+        <i class="fas fa-random w-6 text-gray-500"></i>Random Resource
+      </a>
+      <a href="/{{ page.lang | default: 'en-US' }}/contribute" class="flex items-center px-4 py-3 hover:bg-gray-50 border-b border-gray-100 hover:text-blue-600 transition-colors duration-200 {% if page.url contains '/contribute' %}text-blue-600 bg-gray-50{% endif %}">
+        <i class="fas fa-edit w-6 text-gray-500"></i>Contribute
+      </a>
+      <a href="/{{ page.lang | default: 'en-US' }}/help" class="flex items-center px-4 py-3 hover:bg-gray-50 hover:text-blue-600 transition-colors duration-200 {% if page.url contains '/help' %}text-blue-600 bg-gray-50{% endif %}">
+        <i class="fas fa-question-circle w-6 text-gray-500"></i>Help
+      </a>
+    </nav>
   </div>
 </header>
 
@@ -105,5 +144,13 @@
         mobileMenu.classList.toggle('hidden');
       });
     }
+    
+    // Save language preference when switching
+    document.querySelectorAll('a[href^="/en-US"], a[href^="/pt-BR"]').forEach(link => {
+      link.addEventListener('click', function() {
+        const lang = this.getAttribute('href').substring(1, 6);
+        localStorage.setItem('preferred_language', lang);
+      });
+    });
   });
 </script> 

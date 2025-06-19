@@ -8,24 +8,24 @@ checking for whether -std=c99 is accepted as CFLAGS... yes
 creating Makefile
 
 current directory: /home/nakamoto/dev/z-opensource/IPLibrary-website/vendor/bundle/ruby/3.2.0/gems/json-2.12.2/ext/json/ext/parser
-make DESTDIR\= sitearchdir\=./.gem.20250610-820344-183m88 sitelibdir\=./.gem.20250610-820344-183m88 clean
+make DESTDIR\= sitearchdir\=./.gem.20250610-823855-d9ykbx sitelibdir\=./.gem.20250610-823855-d9ykbx clean
 make[1]: Entering directory '/home/nakamoto/dev/z-opensource/IPLibrary-website/vendor/bundle/ruby/3.2.0/gems/json-2.12.2/ext/json/ext/parser'
 make[1]: Leaving directory '/home/nakamoto/dev/z-opensource/IPLibrary-website/vendor/bundle/ruby/3.2.0/gems/json-2.12.2/ext/json/ext/parser'
 
 current directory: /home/nakamoto/dev/z-opensource/IPLibrary-website/vendor/bundle/ruby/3.2.0/gems/json-2.12.2/ext/json/ext/parser
-make DESTDIR\= sitearchdir\=./.gem.20250610-820344-183m88 sitelibdir\=./.gem.20250610-820344-183m88
+make DESTDIR\= sitearchdir\=./.gem.20250610-823855-d9ykbx sitelibdir\=./.gem.20250610-823855-d9ykbx
 make[1]: Entering directory '/home/nakamoto/dev/z-opensource/IPLibrary-website/vendor/bundle/ruby/3.2.0/gems/json-2.12.2/ext/json/ext/parser'
 compiling parser.c
 linking shared-object json/ext/parser.so
 make[1]: Leaving directory '/home/nakamoto/dev/z-opensource/IPLibrary-website/vendor/bundle/ruby/3.2.0/gems/json-2.12.2/ext/json/ext/parser'
 
 current directory: /home/nakamoto/dev/z-opensource/IPLibrary-website/vendor/bundle/ruby/3.2.0/gems/json-2.12.2/ext/json/ext/parser
-make DESTDIR\= sitearchdir\=./.gem.20250610-820344-183m88 sitelibdir\=./.gem.20250610-820344-183m88 install
+make DESTDIR\= sitearchdir\=./.gem.20250610-823855-d9ykbx sitelibdir\=./.gem.20250610-823855-d9ykbx install
 make[1]: Entering directory '/home/nakamoto/dev/z-opensource/IPLibrary-website/vendor/bundle/ruby/3.2.0/gems/json-2.12.2/ext/json/ext/parser'
-/usr/bin/install -c -m 0755 parser.so ./.gem.20250610-820344-183m88/json/ext
+/usr/bin/install -c -m 0755 parser.so ./.gem.20250610-823855-d9ykbx/json/ext
 make[1]: Leaving directory '/home/nakamoto/dev/z-opensource/IPLibrary-website/vendor/bundle/ruby/3.2.0/gems/json-2.12.2/ext/json/ext/parser'
 
 current directory: /home/nakamoto/dev/z-opensource/IPLibrary-website/vendor/bundle/ruby/3.2.0/gems/json-2.12.2/ext/json/ext/parser
-make DESTDIR\= sitearchdir\=./.gem.20250610-820344-183m88 sitelibdir\=./.gem.20250610-820344-183m88 clean
+make DESTDIR\= sitearchdir\=./.gem.20250610-823855-d9ykbx sitelibdir\=./.gem.20250610-823855-d9ykbx clean
 make[1]: Entering directory '/home/nakamoto/dev/z-opensource/IPLibrary-website/vendor/bundle/ruby/3.2.0/gems/json-2.12.2/ext/json/ext/parser'
 make[1]: Leaving directory '/home/nakamoto/dev/z-opensource/IPLibrary-website/vendor/bundle/ruby/3.2.0/gems/json-2.12.2/ext/json/ext/parser'

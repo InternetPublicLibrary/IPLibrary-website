@@ -1,34 +1,97 @@
-<form hx-get="{{ include.endpoint | default: '/api/search' }}" hx-target="{{ include.target | default: '#search-results' }}" hx-trigger="submit">
-  <div class="flex">
-    {% include components/atoms/search-input.html 
-      name="q" 
-      placeholder=include.placeholder
-      rounded="l"
-    %}
+<div class="max-w-2xl mx-auto">
+  <div class="relative">
+    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+      <i class="fas fa-search text-gray-400"></i>
+    </div>
     
-    {% assign button_text_default = include.button_text | default: "Search" %}
-    {% include components/atoms/button.html 
-      type="submit" 
-      text=button_text_default
-      class="bg-blue-600 text-white px-4 py-2 rounded-r hover:bg-blue-700"
-    %}
+    <input 
+      type="text" 
+      name="search"
+      placeholder="{{ include.placeholder | default: 'Search the library...' }}"
+      class="w-full pl-10 pr-12 py-3 border border-gray-300 rounded-lg text-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors duration-200"
+      hx-get="{{ include.search_endpoint | default: '/api/search-categories/index.html' }}"
+      hx-trigger="input changed delay:300ms, search"
+      hx-target="{{ include.target | default: '#search-results' }}"
+      hx-swap="innerHTML"
+      hx-indicator="#search-loading"
+      autocomplete="off">
+    
+    <div class="absolute inset-y-0 right-0 pr-3 flex items-center">
+      <div id="search-loading" class="htmx-indicator">
+        <div class="animate-spin rounded-full h-5 w-5 border-t-2 border-b-2 border-blue-500"></div>
+      </div>
+    </div>
   </div>
   
-  <div class="flex justify-between mt-2 text-xs text-gray-500">
-    <div>
-      <span>Search by: </span>
-      <a href="#" class="text-blue-600 hover:underline mx-1" hx-get="/api/search-config" hx-vals='{"type": "title"}' hx-target="#search-config">Title</a>
-      <span>•</span>
-      <a href="#" class="text-blue-600 hover:underline mx-1" hx-get="/api/search-config" hx-vals='{"type": "content"}' hx-target="#search-config">Content</a>
-      <span>•</span>
-      <a href="#" class="text-blue-600 hover:underline mx-1" hx-get="/api/search-config" hx-vals='{"type": "tags"}' hx-target="#search-config">Tags</a>
-    </div>
-    <div>
-      <a href="#" class="text-blue-600 hover:underline" hx-get="/api/advanced-search" hx-target="#advanced-search-modal">Advanced Search</a>
-    </div>
+  <!-- Search Results Container -->
+  <div id="search-results" class="mt-4 bg-white rounded-lg shadow-lg border border-gray-200 hidden">
+    <!-- Results will be loaded here -->
   </div>
-</form>
+  
+  <!-- Quick Filters -->
+  <div class="mt-4 flex flex-wrap gap-2 justify-center">
+    <button 
+      class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm hover:bg-blue-200 transition-colors duration-200"
+      hx-get="/api/categories/{{ page.lang | default: 'en-US' }}.json"
+      hx-target="#search-results"
+      hx-swap="innerHTML">
+      All Categories
+    </button>
+    
+    <button 
+      class="px-3 py-1 bg-green-100 text-green-800 rounded-full text-sm hover:bg-green-200 transition-colors duration-200"
+      hx-get="/api/business/index.json"
+      hx-target="#search-results"
+      hx-swap="innerHTML">
+      Business
+    </button>
+    
+    <button 
+      class="px-3 py-1 bg-purple-100 text-purple-800 rounded-full text-sm hover:bg-purple-200 transition-colors duration-200"
+      hx-get="/api/computing/index.json"
+      hx-target="#search-results"
+      hx-swap="innerHTML">
+      Computing
+    </button>
+    
+    <button 
+      class="px-3 py-1 bg-yellow-100 text-yellow-800 rounded-full text-sm hover:bg-yellow-200 transition-colors duration-200"
+      hx-get="/api/design/index.json"
+      hx-target="#search-results"
+      hx-swap="innerHTML">
+      Design
+    </button>
+  </div>
+</div>
 
-<div id="search-results" class="mt-4"></div>
-<div id="search-config" class="hidden"></div>
-<div id="advanced-search-modal" class="hidden"></div> 
+<script>
+  document.addEventListener('htmx:beforeSend', function(event) {
+    if (event.detail.target.id === 'search-results') {
+      event.detail.target.classList.remove('hidden');
+    }
+  });
+  
+  document.addEventListener('htmx:afterSwap', function(event) {
+    if (event.detail.target.id === 'search-results') {
+      // Process the search results and format them
+      try {
+        const content = event.detail.target.innerHTML;
+        if (content.trim() === '') {
+          event.detail.target.innerHTML = '<div class="p-4 text-center text-gray-500">No results found</div>';
+        }
+      } catch (e) {
+        console.log('Search results processed');
+      }
+    }
+  });
+  
+  // Hide search results when clicking outside
+  document.addEventListener('click', function(event) {
+    const searchResults = document.getElementById('search-results');
+    const searchForm = event.target.closest('.max-w-2xl');
+    
+    if (!searchForm && searchResults) {
+      searchResults.classList.add('hidden');
+    }
+  });
+</script> 

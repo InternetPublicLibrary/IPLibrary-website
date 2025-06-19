@@ -3,67 +3,61 @@
     <h2 class="text-2xl font-bold text-gray-800 mb-6">{{ include.title | default: "Contribute to the Library" }}</h2>
     
     <div class="bg-blue-50 border border-blue-200 rounded p-6">
-      <div class="flex flex-col md:flex-row gap-6">
-        <div class="md:w-2/3">
-          <p class="text-gray-700 mb-4">{{ include.description | default: "The Internet Public Library is maintained by a community of volunteers. You can help by suggesting new resources, improving existing content, or translating pages to other languages." }}</p>
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            {% if include.actions %}
-              {% for action in include.actions %}
-                {% include components/molecules/contribute-action.html 
-                  title=action.title
-                  description=action.description
-                  icon=action.icon
-                  url=action.url
-                  hx_get=action.hx_get
-                  hx_target=action.hx_target
-                %}
-              {% endfor %}
-            {% else %}
-              <!-- Default actions if none provided -->
-              {% include components/molecules/contribute-action.html 
-                title="Suggest a Resource"
-                description="Add new content to our library"
-                icon="plus-circle"
-                hx_get="/api/suggest-resource-form"
-                hx_target="#content-area"
-              %}
-              
-              {% include components/molecules/contribute-action.html 
-                title="Edit Content"
-                description="Improve existing pages"
-                icon="edit"
-                hx_get="/api/edit-content-form"
-                hx_target="#content-area"
-              %}
-              
-              {% include components/molecules/contribute-action.html 
-                title="Translate"
-                description="Help with translations"
-                icon="language"
-                hx_get="/api/translation-form"
-                hx_target="#content-area"
-              %}
-              
-              {% include components/molecules/contribute-action.html 
-                title="Report Issues"
-                description="Report broken links or errors"
-                icon="bug"
-                hx_get="/api/report-issue-form"
-                hx_target="#content-area"
-              %}
-            {% endif %}
-          </div>
-        </div>
-        <div class="md:w-1/3 flex items-center justify-center">
-          <div class="text-center">
-            <div class="text-4xl text-blue-600 mb-2">
-              <i class="fas fa-users"></i>
+      <h3 class="text-xl font-bold text-blue-900 mb-4">Get Involved</h3>
+      <p class="text-blue-800 mb-6">The Internet Public Library is maintained by a community of volunteers. You can help by suggesting new resources, improving existing content, or translating pages to other languages.</p>
+      
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div class="bg-white border border-blue-200 rounded p-4">
+          <div class="flex items-center mb-2">
+            <div class="bg-blue-100 p-2 rounded mr-3">
+              <svg class="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
+              </svg>
             </div>
-            <div class="text-xl font-bold mb-1">{{ include.community_title | default: "Join Our Community" }}</div>
-            <p class="text-sm text-gray-600 mb-3">{{ include.community_description | default: "Collaborate with fellow librarians and knowledge seekers" }}</p>
-            <a href="{{ include.community_link | default: '#' }}" class="inline-block bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 text-sm">{{ include.community_button_text | default: "Learn More" }}</a>
+            <h4 class="font-semibold text-blue-900">Suggest a Resource</h4>
           </div>
+          <p class="text-sm text-blue-700">Add new content to our library</p>
         </div>
+        
+        <div class="bg-white border border-blue-200 rounded p-4">
+          <div class="flex items-center mb-2">
+            <div class="bg-blue-100 p-2 rounded mr-3">
+              <svg class="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
+              </svg>
+            </div>
+            <h4 class="font-semibold text-blue-900">Edit Content</h4>
+          </div>
+          <p class="text-sm text-blue-700">Improve existing pages</p>
+        </div>
+        
+        <div class="bg-white border border-blue-200 rounded p-4">
+          <div class="flex items-center mb-2">
+            <div class="bg-blue-100 p-2 rounded mr-3">
+              <svg class="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129"/>
+              </svg>
+            </div>
+            <h4 class="font-semibold text-blue-900">Translate</h4>
+          </div>
+          <p class="text-sm text-blue-700">Help with translations</p>
+        </div>
+        
+        <div class="bg-white border border-blue-200 rounded p-4">
+          <div class="flex items-center mb-2">
+            <div class="bg-blue-100 p-2 rounded mr-3">
+              <svg class="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z"/>
+              </svg>
+            </div>
+            <h4 class="font-semibold text-blue-900">Report Issues</h4>
+          </div>
+          <p class="text-sm text-blue-700">Report broken links or errors</p>
+        </div>
+      </div>
+      
+      <div class="text-center mt-6">
+        <a href="#" class="inline-block bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 font-semibold">Join Our Community</a>
       </div>
     </div>
   </div>

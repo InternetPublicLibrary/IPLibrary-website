@@ -13,13 +13,165 @@
   - image: Path to image (optional)
 {% endcomment %}
 
-<div class="bg-white border border-gray-200 rounded overflow-hidden">
-  <div class="p-4 border-b border-gray-200 bg-gray-50">
-    <div class="text-blue-600 text-sm font-medium">{{ include.category }}</div>
-    <h3 class="text-lg font-bold text-gray-800">{{ include.title }}</h3>
-  </div>
-  <div class="p-4">
-    <p class="text-gray-600 text-sm mb-4">{{ include.description }}</p>
-    <a href="{{ include.url }}" class="text-blue-600 hover:underline text-sm">{{ include.link_text | default: "Explore Resources →" }}</a>
-  </div>
-</div> 
+<!-- 
+  Resource Card Molecule Component
+  
+  Usage: 
+  {% include components/molecules/resource-card.html 
+       resource=resource_object
+       variant="default|featured|compact"
+       show_category="true|false"
+       show_tags="true|false" %}
+-->
+
+{% assign resource = include.resource %}
+{% assign variant = include.variant | default: "default" %}
+{% assign show_category = include.show_category | default: "true" %}
+{% assign show_tags = include.show_tags | default: "true" %}
+
+{% case variant %}
+  {% when "featured" %}
+    {% assign card_variant = "elevated" %}
+    {% assign card_padding = "lg" %}
+  {% when "compact" %}
+    {% assign card_variant = "default" %}
+    {% assign card_padding = "sm" %}
+  {% else %}
+    {% assign card_variant = "gradient" %}
+    {% assign card_padding = "md" %}
+{% endcase %}
+
+{% capture card_content %}
+  <article class="group">
+    <!-- Header with title and type -->
+    <header class="mb-4">
+      <div class="flex items-start justify-between mb-3">
+        <h3 class="text-lg font-bold text-slate-900 group-hover:text-blue-600 transition-colors duration-200 line-clamp-2 pr-4">
+          <a href="{{ resource.url }}" target="_blank" rel="noopener noreferrer" class="hover:underline">
+            {{ resource.title }}
+          </a>
+        </h3>
+        
+        <!-- Resource type badge -->
+        {% if resource.type %}
+          {% assign type_color = "blue" %}
+          {% case resource.type %}
+            {% when "course", "tutorial" %}
+              {% assign type_color = "green" %}
+            {% when "tool", "software" %}
+              {% assign type_color = "purple" %}
+            {% when "publication", "paper" %}
+              {% assign type_color = "yellow" %}
+            {% when "community", "forum" %}
+              {% assign type_color = "pink" %}
+          {% endcase %}
+          
+          {% include components/atoms/badge.html 
+               content=resource.type 
+               variant=type_color 
+               size="sm" %}
+        {% endif %}
+      </div>
+      
+      <!-- Category breadcrumb -->
+      {% if show_category == "true" and resource.category %}
+        <div class="text-xs text-slate-500 mb-2">
+          <span class="hover:text-blue-600 transition-colors duration-200">{{ resource.category }}</span>
+          {% if resource.subcategory %}
+            <span class="mx-1">›</span>
+            <span class="hover:text-blue-600 transition-colors duration-200">{{ resource.subcategory }}</span>
+          {% endif %}
+        </div>
+      {% endif %}
+    </header>
+    
+    <!-- Description -->
+    <div class="mb-4">
+      <p class="text-slate-600 text-sm leading-relaxed line-clamp-3">
+        {{ resource.description }}
+      </p>
+    </div>
+    
+    <!-- Tags -->
+    {% if show_tags == "true" and resource.tags %}
+      <div class="flex flex-wrap gap-2 mb-4">
+        {% for tag in resource.tags limit:4 %}
+          {% include components/atoms/badge.html 
+               content=tag 
+               variant="outline" 
+               size="xs" %}
+        {% endfor %}
+        {% if resource.tags.size > 4 %}
+          <span class="text-xs text-slate-400">+{{ resource.tags.size | minus: 4 }} more</span>
+        {% endif %}
+      </div>
+    {% endif %}
+    
+    <!-- Footer with metadata and actions -->
+    <footer class="flex items-center justify-between pt-4 border-t border-slate-100">
+      <div class="flex items-center space-x-4 text-xs text-slate-500">
+        <!-- Quality score -->
+        {% if resource.quality_score %}
+          <div class="flex items-center">
+            <svg class="w-3 h-3 mr-1 text-yellow-500" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+            </svg>
+            <span>{{ resource.quality_score }}/5</span>
+          </div>
+        {% endif %}
+        
+        <!-- Last updated -->
+        {% if resource.last_verified or resource.last_updated %}
+          <div class="flex items-center">
+            <svg class="w-3 h-3 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+            </svg>
+            <span>Updated {{ resource.last_verified | default: resource.last_updated | date: "%b %Y" }}</span>
+          </div>
+        {% endif %}
+        
+        <!-- Language -->
+        {% if resource.language and resource.language != "en" %}
+          <div class="flex items-center">
+            <svg class="w-3 h-3 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129"/>
+            </svg>
+            <span>{{ resource.language | upcase }}</span>
+          </div>
+        {% endif %}
+      </div>
+      
+      <!-- Action buttons -->
+      <div class="flex items-center space-x-2">
+        <!-- Visit button -->
+        {% include components/atoms/button.html 
+             content="Visit" 
+             variant="outline" 
+             size="sm" 
+             icon="external-link" 
+             icon_position="right" 
+             href=resource.url 
+             target="_blank" 
+             class="text-xs" %}
+        
+        <!-- Save/Favorite button -->
+        <button class="p-2 text-slate-400 hover:text-red-500 transition-colors duration-200 rounded-lg hover:bg-slate-50" title="Save to favorites">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
+          </svg>
+        </button>
+      </div>
+    </footer>
+    
+    <!-- Hover overlay effect -->
+    <div class="absolute inset-0 bg-gradient-to-r from-blue-500/10 to-purple-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-xl pointer-events-none"></div>
+  </article>
+{% endcapture %}
+
+{% include components/atoms/card.html 
+     content=card_content 
+     variant=card_variant 
+     padding=card_padding 
+     hover="true" 
+     decorative="false" 
+     class="relative" %} 

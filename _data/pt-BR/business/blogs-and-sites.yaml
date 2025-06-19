@@ -8,7 +8,7 @@
     - estratégia
   access: "Parcialmente pago"
   rank: 1
-  last_updated: 2024-01-05
+  last_updated: "2024-01-05"
 
 - title: "InfoMoney"
   url: "https://www.infomoney.com.br/"
@@ -19,7 +19,7 @@
     - economia
   access: "Gratuito"
   rank: 2
-  last_updated: 2024-01-10
+  last_updated: "2024-01-10"
 
 - title: "Exame"
   url: "https://exame.com/"

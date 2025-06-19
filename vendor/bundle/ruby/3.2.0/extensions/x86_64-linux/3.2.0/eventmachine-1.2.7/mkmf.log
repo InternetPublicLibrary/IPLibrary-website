@@ -168,7 +168,7 @@ checked program was:
 /* end */
 
 LD_LIBRARY_PATH=.:/home/nakamoto/.rvm/rubies/ruby-3.2.2/lib "gcc -o conftest -I/home/nakamoto/.rvm/rubies/ruby-3.2.2/include/ruby-3.2.0/x86_64-linux -I/home/nakamoto/.rvm/rubies/ruby-3.2.2/include/ruby-3.2.0/ruby/backward -I/home/nakamoto/.rvm/rubies/ruby-3.2.2/include/ruby-3.2.0 -I.     -O3 -fno-fast-math -ggdb3 -Wall -Wextra -Wdeprecated-declarations -Wdiv-by-zero -Wduplicated-cond -Wimplicit-function-declaration -Wimplicit-int -Wmisleading-indentation -Wpointer-arith -Wwrite-strings -Wold-style-definition -Wimplicit-fallthrough=0 -Wmissing-noreturn -Wno-cast-function-type -Wno-constant-logical-operand -Wno-long-long -Wno-missing-field-initializers -Wno-overlength-strings -Wno-packed-bitfield-compat -Wno-parentheses-equality -Wno-self-assign -Wno-tautological-compare -Wno-unused-parameter -Wno-unused-value -Wsuggest-attribute=format -Wsuggest-attribute=noreturn -Wunused-variable -Wundef  -fPIC  conftest.c  -L. -L/home/nakamoto/.rvm/rubies/ruby-3.2.2/lib -Wl,-rpath,/home/nakamoto/.rvm/rubies/ruby-3.2.2/lib -L. -fstack-protector-strong -rdynamic -Wl,-export-dynamic -Wl,--no-as-needed      -lssl -lcrypto -lcrypto -lssl -Wl,-rpath,/home/nakamoto/.rvm/rubies/ruby-3.2.2/lib -L/home/nakamoto/.rvm/rubies/ruby-3.2.2/lib -lruby  -lssl -lcrypto -lcrypto -lssl -lm -lpthread  -lc"
-/usr/bin/ld: /tmp/ccWjuFf5.o: in function `t':
+/usr/bin/ld: /tmp/ccG1c7bv.o: in function `t':
 /home/nakamoto/dev/z-opensource/IPLibrary-website/vendor/bundle/ruby/3.2.0/gems/eventmachine-1.2.7/ext/conftest.c:15: undefined reference to `rb_thread_blocking_region'
 collect2: error: ld returned 1 exit status
 checked program was:
@@ -340,7 +340,7 @@ checked program was:
 /* end */
 
 LD_LIBRARY_PATH=.:/home/nakamoto/.rvm/rubies/ruby-3.2.2/lib "gcc -o conftest -I/home/nakamoto/.rvm/rubies/ruby-3.2.2/include/ruby-3.2.0/x86_64-linux -I/home/nakamoto/.rvm/rubies/ruby-3.2.2/include/ruby-3.2.0/ruby/backward -I/home/nakamoto/.rvm/rubies/ruby-3.2.2/include/ruby-3.2.0 -I.     -O3 -fno-fast-math -ggdb3 -Wall -Wextra -Wdeprecated-declarations -Wdiv-by-zero -Wduplicated-cond -Wimplicit-function-declaration -Wimplicit-int -Wmisleading-indentation -Wpointer-arith -Wwrite-strings -Wold-style-definition -Wimplicit-fallthrough=0 -Wmissing-noreturn -Wno-cast-function-type -Wno-constant-logical-operand -Wno-long-long -Wno-missing-field-initializers -Wno-overlength-strings -Wno-packed-bitfield-compat -Wno-parentheses-equality -Wno-self-assign -Wno-tautological-compare -Wno-unused-parameter -Wno-unused-value -Wsuggest-attribute=format -Wsuggest-attribute=noreturn -Wunused-variable -Wundef  -fPIC  conftest.c  -L. -L/home/nakamoto/.rvm/rubies/ruby-3.2.2/lib -Wl,-rpath,/home/nakamoto/.rvm/rubies/ruby-3.2.2/lib -L. -fstack-protector-strong -rdynamic -Wl,-export-dynamic -Wl,--no-as-needed      -lssl -lcrypto -lcrypto -lssl -Wl,-rpath,/home/nakamoto/.rvm/rubies/ruby-3.2.2/lib -L/home/nakamoto/.rvm/rubies/ruby-3.2.2/lib -lruby  -lssl -lcrypto -lcrypto -lssl -lm -lpthread  -lc"
-/usr/bin/ld: /tmp/cctj3LxV.o: in function `t':
+/usr/bin/ld: /tmp/ccIJ5Mlh.o: in function `t':
 /home/nakamoto/dev/z-opensource/IPLibrary-website/vendor/bundle/ruby/3.2.0/gems/eventmachine-1.2.7/ext/conftest.c:15: undefined reference to `rb_enable_interrupt'
 collect2: error: ld returned 1 exit status
 checked program was:

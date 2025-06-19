@@ -8,7 +8,7 @@
     - manufatura
   access: "Site corporativo"
   rank: 1
-  last_updated: 2024-01-03
+  last_updated: "2024-01-03"
 
 - title: "Itaú Unibanco"
   url: "https://www.itau.com.br/"
@@ -19,7 +19,7 @@
     - investimentos
   access: "Site corporativo"
   rank: 2
-  last_updated: 2024-01-08
+  last_updated: "2024-01-08"
 
 - title: "Petrobras"
   url: "https://petrobras.com.br/"

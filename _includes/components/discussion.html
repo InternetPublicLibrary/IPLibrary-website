@@ -6,49 +6,359 @@
   {% include components/discussion.html %}
 {% endcomment %}
 
-<div class="bg-white rounded-lg shadow-sm p-6 mb-8">
-  <h2 class="text-xl font-semibold text-gray-800 mb-4">
-    {% if page.lang == 'pt-BR' %}
-      Discussão
+<!-- 
+  Enhanced Discussion Component
+  
+  Integrates Giscus (GitHub Discussions) + Staticman for contribution workflow
+  Modern, accessible design with proper language support
+-->
+
+{% assign current_lang = page.lang | default: "en-US" %}
+{% assign disable_discussion = page.disable_discussion | default: false %}
+
+{% unless disable_discussion %}
+<section class="discussion-section bg-gradient-to-br from-slate-50 to-blue-50 border-t border-slate-200 mt-16">
+  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    
+    <!-- Section Header -->
+    <header class="text-center mb-12">
+      <h2 class="text-3xl font-bold bg-gradient-to-r from-slate-900 to-blue-900 bg-clip-text text-transparent mb-4">
+        {% if current_lang == "pt-BR" %}
+          Discussão da Comunidade
     {% else %}
-      Discussion
+          Community Discussion
     {% endif %}
   </h2>
-  
-  <div class="giscus-wrapper">
-    {% if page.lang == 'pt-BR' %}
-      <script src="https://giscus.app/client.js"
-        data-repo="InternetPublicLibrary/pt-BR"
-        data-repo-id="MDEwOlJlcG9zaXRvcnkxMzE5MzI0NzA="
-        data-category="General"
-        data-category-id="DIC_kwDOB90hNs4CrNxb"
+      <p class="text-slate-600 max-w-2xl mx-auto">
+        {% if current_lang == "pt-BR" %}
+          Participe da conversa, faça perguntas ou sugira melhorias para este conteúdo.
+        {% else %}
+          Join the conversation, ask questions, or suggest improvements to this content.
+        {% endif %}
+      </p>
+    </header>
+    
+    <!-- Discussion Tabs -->
+    <div class="mb-8">
+      <nav class="flex space-x-2 bg-white rounded-xl p-2 shadow-sm border border-slate-200" role="tablist">
+        <button id="discussion-tab" 
+                class="flex-1 px-4 py-2 text-sm font-medium rounded-lg transition-all duration-200 bg-blue-600 text-white"
+                role="tab" 
+                aria-selected="true" 
+                aria-controls="discussion-panel">
+          {% if current_lang == "pt-BR" %}Discussão{% else %}Discussion{% endif %}
+        </button>
+        <button id="contribute-tab" 
+                class="flex-1 px-4 py-2 text-sm font-medium rounded-lg transition-all duration-200 text-slate-600 hover:text-blue-600 hover:bg-blue-50"
+                role="tab" 
+                aria-selected="false" 
+                aria-controls="contribute-panel">
+          {% if current_lang == "pt-BR" %}Contribuir{% else %}Contribute{% endif %}
+        </button>
+        <button id="issues-tab" 
+                class="flex-1 px-4 py-2 text-sm font-medium rounded-lg transition-all duration-200 text-slate-600 hover:text-blue-600 hover:bg-blue-50"
+                role="tab" 
+                aria-selected="false" 
+                aria-controls="issues-panel">
+          {% if current_lang == "pt-BR" %}Reportar Problema{% else %}Report Issue{% endif %}
+        </button>
+      </nav>
+    </div>
+    
+    <!-- Discussion Panel (Giscus) -->
+    <div id="discussion-panel" 
+         class="tab-panel bg-white rounded-2xl shadow-sm border border-slate-200 p-6" 
+         role="tabpanel" 
+         aria-labelledby="discussion-tab">
+      
+      <div id="giscus-container" 
+           class="giscus-container"
+           data-repo="{{ site.giscus[current_lang == 'pt-BR' ? 'pt' : 'en'].repo }}"
+           data-repo-id="{{ site.giscus[current_lang == 'pt-BR' ? 'pt' : 'en'].repo_id }}"
+           data-category="{{ site.giscus[current_lang == 'pt-BR' ? 'pt' : 'en'].category }}"
+           data-category-id="{{ site.giscus[current_lang == 'pt-BR' ? 'pt' : 'en'].category_id }}"
         data-mapping="pathname"
-        data-strict="0"
+           data-strict="1"
         data-reactions-enabled="1"
-        data-emit-metadata="0"
+           data-emit-metadata="1"
         data-input-position="top"
         data-theme="light"
-        data-lang="pt"
-        data-loading="lazy"
-        crossorigin="anonymous"
-        async>
-      </script>
+           data-lang="{{ current_lang == 'pt-BR' ? 'pt' : 'en' }}"
+           data-loading="lazy">
+        
+        <!-- Loading state -->
+        <div class="flex items-center justify-center py-12">
+          {% include components/atoms/loading-spinner.html 
+               variant="pulse" 
+               size="lg" 
+               color="blue" %}
+          <span class="ml-4 text-slate-600">
+            {% if current_lang == "pt-BR" %}Carregando discussões...{% else %}Loading discussions...{% endif %}
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Contribute Panel (Staticman Form) -->
+    <div id="contribute-panel" 
+         class="tab-panel hidden bg-white rounded-2xl shadow-sm border border-slate-200 p-6" 
+         role="tabpanel" 
+         aria-labelledby="contribute-tab">
+      
+      <div class="mb-6">
+        <h3 class="text-xl font-semibold text-slate-900 mb-2">
+          {% if current_lang == "pt-BR" %}Sugerir Conteúdo{% else %}Suggest Content{% endif %}
+        </h3>
+        <p class="text-slate-600">
+          {% if current_lang == "pt-BR" %}
+            Sugira novos recursos ou melhorias para esta página. Sua contribuição será revisada pela comunidade.
+          {% else %}
+            Suggest new resources or improvements to this page. Your contribution will be reviewed by the community.
+          {% endif %}
+        </p>
+      </div>
+      
+      <!-- Staticman Contribution Form -->
+      <form action="{{ site.staticman.endpoint }}/{{ site.staticman.repositories[current_lang == 'pt-BR' ? 'pt' : 'en'].name }}/{{ site.staticman.repositories[current_lang == 'pt-BR' ? 'pt' : 'en'].branch }}/contributions"
+            method="post"
+            class="space-y-6"
+            id="contribution-form">
+        
+        <!-- Hidden fields -->
+        <input type="hidden" name="options[redirect]" value="{{ page.url }}#contribute-success">
+        <input type="hidden" name="options[slug]" value="{{ page.slug | default: page.title | slugify }}">
+        <input type="hidden" name="fields[page]" value="{{ page.url }}">
+        <input type="hidden" name="fields[language]" value="{{ current_lang }}">
+        
+        <!-- Name field -->
+        <div>
+          <label for="contribution-name" class="block text-sm font-medium text-slate-700 mb-2">
+            {% if current_lang == "pt-BR" %}Nome{% else %}Name{% endif %} *
+          </label>
+          <input type="text" 
+                 id="contribution-name" 
+                 name="fields[name]" 
+                 required
+                 class="w-full px-4 py-3 border border-slate-300 rounded-xl focus:border-blue-500 focus:outline-none focus:ring-4 focus:ring-blue-500/20 transition-all duration-200">
+        </div>
+        
+        <!-- Email field -->
+        <div>
+          <label for="contribution-email" class="block text-sm font-medium text-slate-700 mb-2">
+            {% if current_lang == "pt-BR" %}Email{% else %}Email{% endif %} *
+          </label>
+          <input type="email" 
+                 id="contribution-email" 
+                 name="fields[email]" 
+                 required
+                 class="w-full px-4 py-3 border border-slate-300 rounded-xl focus:border-blue-500 focus:outline-none focus:ring-4 focus:ring-blue-500/20 transition-all duration-200">
+        </div>
+        
+        <!-- Resource URL -->
+        <div>
+          <label for="contribution-url" class="block text-sm font-medium text-slate-700 mb-2">
+            {% if current_lang == "pt-BR" %}URL do Recurso{% else %}Resource URL{% endif %}
+          </label>
+          <input type="url" 
+                 id="contribution-url" 
+                 name="fields[url]" 
+                 placeholder="https://"
+                 class="w-full px-4 py-3 border border-slate-300 rounded-xl focus:border-blue-500 focus:outline-none focus:ring-4 focus:ring-blue-500/20 transition-all duration-200">
+        </div>
+        
+        <!-- Title -->
+        <div>
+          <label for="contribution-title" class="block text-sm font-medium text-slate-700 mb-2">
+            {% if current_lang == "pt-BR" %}Título do Recurso{% else %}Resource Title{% endif %} *
+          </label>
+          <input type="text" 
+                 id="contribution-title" 
+                 name="fields[title]" 
+                 required
+                 class="w-full px-4 py-3 border border-slate-300 rounded-xl focus:border-blue-500 focus:outline-none focus:ring-4 focus:ring-blue-500/20 transition-all duration-200">
+        </div>
+        
+        <!-- Description -->
+        <div>
+          <label for="contribution-description" class="block text-sm font-medium text-slate-700 mb-2">
+            {% if current_lang == "pt-BR" %}Descrição{% else %}Description{% endif %} *
+          </label>
+          <textarea id="contribution-description" 
+                    name="fields[description]" 
+                    rows="4" 
+                    required
+                    class="w-full px-4 py-3 border border-slate-300 rounded-xl focus:border-blue-500 focus:outline-none focus:ring-4 focus:ring-blue-500/20 transition-all duration-200 resize-none"></textarea>
+        </div>
+        
+        <!-- Category -->
+        <div>
+          <label for="contribution-category" class="block text-sm font-medium text-slate-700 mb-2">
+            {% if current_lang == "pt-BR" %}Categoria{% else %}Category{% endif %}
+          </label>
+          <select id="contribution-category" 
+                  name="fields[category]"
+                  class="w-full px-4 py-3 border border-slate-300 rounded-xl focus:border-blue-500 focus:outline-none focus:ring-4 focus:ring-blue-500/20 transition-all duration-200">
+            <option value="">{% if current_lang == "pt-BR" %}Selecione uma categoria{% else %}Select a category{% endif %}</option>
+            {% assign menu_data = site.data[current_lang].menu %}
+            {% if menu_data %}
+              {% for category in menu_data %}
+                <option value="{{ category.title }}">{{ category.title }}</option>
+              {% endfor %}
+            {% endif %}
+          </select>
+        </div>
+        
+        <!-- reCAPTCHA -->
+        {% if site.staticman.recaptcha.enabled %}
+        <div class="g-recaptcha" data-sitekey="{{ site.staticman.recaptcha.siteKey }}"></div>
+        {% endif %}
+        
+        <!-- Submit button -->
+        <div class="flex justify-end">
+          {% if current_lang == "pt-BR" %}
+            {% assign button_text = "Enviar Sugestão" %}
+          {% else %}
+            {% assign button_text = "Submit Suggestion" %}
+          {% endif %}
+          {% include components/atoms/button.html 
+               content=button_text
+               type="submit"
+               variant="gradient" 
+               size="lg" 
+               icon="plus" 
+               loading="false" 
+               class="min-w-48" %}
+        </div>
+      </form>
+    </div>
+    
+    <!-- Issues Panel (GitHub Issues) -->
+    <div id="issues-panel" 
+         class="tab-panel hidden bg-white rounded-2xl shadow-sm border border-slate-200 p-6" 
+         role="tabpanel" 
+         aria-labelledby="issues-tab">
+      
+      <div class="text-center py-12">
+        <div class="mx-auto w-16 h-16 bg-gradient-to-br from-red-500 to-pink-500 rounded-2xl flex items-center justify-center mb-6">
+          <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.728-.833-2.498 0L4.316 15.5c-.77.833.192 2.5 1.732 2.5z"></path>
+          </svg>
+        </div>
+        
+        <h3 class="text-xl font-semibold text-slate-900 mb-4">
+          {% if current_lang == "pt-BR" %}Encontrou um Problema?{% else %}Found an Issue?{% endif %}
+        </h3>
+        
+        <p class="text-slate-600 mb-8 max-w-md mx-auto">
+          {% if current_lang == "pt-BR" %}
+            Reporte bugs, links quebrados ou problemas de conteúdo diretamente no GitHub.
+          {% else %}
+            Report bugs, broken links, or content issues directly on GitHub.
+          {% endif %}
+        </p>
+        
+        {% assign issue_url = "https://github.com/" | append: site.giscus[current_lang == 'pt-BR' ? 'pt' : 'en'].repo | append: "/issues/new?template=content-issue.md&title=" | append: page.title | url_encode | append: "&labels=content,bug" %}
+        
+        {% if current_lang == "pt-BR" %}
+          {% assign github_button_text = "Reportar no GitHub" %}
+        {% else %}
+          {% assign github_button_text = "Report on GitHub" %}
+        {% endif %}
+        {% include components/atoms/button.html 
+             content=github_button_text
+             variant="outline" 
+             size="lg" 
+             icon="external-link" 
+             icon_position="right" 
+             href=issue_url
+             target="_blank" 
+             class="mb-4" %}
+        
+        <p class="text-xs text-slate-500">
+          {% if current_lang == "pt-BR" %}
+            Requer uma conta GitHub
     {% else %}
-      <script src="https://giscus.app/client.js"
-        data-repo="InternetPublicLibrary/en-US"
-        data-repo-id="MDEwOlJlcG9zaXRvcnkxMzE5MzIxNzk="
-        data-category="General"
-        data-category-id="DIC_kwDOB90gE84CrNxh"
-        data-mapping="pathname"
-        data-strict="0"
-        data-reactions-enabled="1"
-        data-emit-metadata="0"
-        data-input-position="bottom"
-        data-theme="light"
-        data-lang="en"
-        crossorigin="anonymous"
-        async>
-      </script>
+            Requires a GitHub account
     {% endif %}
+        </p>
+      </div>
+    </div>
   </div>
-</div> 
+</section>
+
+<!-- Tab functionality -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  // Tab switching functionality
+  const tabs = document.querySelectorAll('[role="tab"]');
+  const panels = document.querySelectorAll('[role="tabpanel"]');
+  
+  tabs.forEach(tab => {
+    tab.addEventListener('click', function() {
+      // Remove active state from all tabs and panels
+      tabs.forEach(t => {
+        t.classList.remove('bg-blue-600', 'text-white');
+        t.classList.add('text-slate-600', 'hover:text-blue-600', 'hover:bg-blue-50');
+        t.setAttribute('aria-selected', 'false');
+      });
+      
+      panels.forEach(p => p.classList.add('hidden'));
+      
+      // Add active state to clicked tab
+      this.classList.add('bg-blue-600', 'text-white');
+      this.classList.remove('text-slate-600', 'hover:text-blue-600', 'hover:bg-blue-50');
+      this.setAttribute('aria-selected', 'true');
+      
+      // Show corresponding panel
+      const panelId = this.getAttribute('aria-controls');
+      document.getElementById(panelId).classList.remove('hidden');
+    });
+  });
+  
+  // Load Giscus
+  loadGiscus();
+  
+  // Form submission handling
+  const form = document.getElementById('contribution-form');
+  if (form) {
+    form.addEventListener('submit', function(e) {
+      const submitBtn = form.querySelector('button[type="submit"]');
+      if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = '{% if current_lang == "pt-BR" %}Enviando...{% else %}Submitting...{% endif %}';
+      }
+    });
+  }
+});
+
+function loadGiscus() {
+  const container = document.getElementById('giscus-container');
+  if (!container) return;
+  
+  const script = document.createElement('script');
+  script.src = 'https://giscus.app/client.js';
+  script.setAttribute('data-repo', container.dataset.repo);
+  script.setAttribute('data-repo-id', container.dataset.repoId);
+  script.setAttribute('data-category', container.dataset.category);
+  script.setAttribute('data-category-id', container.dataset.categoryId);
+  script.setAttribute('data-mapping', container.dataset.mapping);
+  script.setAttribute('data-strict', container.dataset.strict);
+  script.setAttribute('data-reactions-enabled', container.dataset.reactionsEnabled);
+  script.setAttribute('data-emit-metadata', container.dataset.emitMetadata);
+  script.setAttribute('data-input-position', container.dataset.inputPosition);
+  script.setAttribute('data-theme', container.dataset.theme);
+  script.setAttribute('data-lang', container.dataset.lang);
+  script.setAttribute('data-loading', container.dataset.loading);
+  script.crossOrigin = 'anonymous';
+  script.async = true;
+  
+  container.appendChild(script);
+}
+</script>
+
+<!-- Load reCAPTCHA if enabled -->
+{% if site.staticman.recaptcha.enabled %}
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
+{% endif %}
+
+{% endunless %} 

@@ -8,7 +8,7 @@
     - software
   access: "Gratuito"
   rank: 1
-  last_updated: 2024-01-05
+  last_updated: "2024-01-05"
 
 - title: "Alura"
   url: "https://www.alura.com.br/artigos"
@@ -19,7 +19,7 @@
     - educação
   access: "Gratuito"
   rank: 2
-  last_updated: 2024-01-10
+  last_updated: "2024-01-10"
 
 - title: "TecMundo"
   url: "https://www.tecmundo.com.br/"

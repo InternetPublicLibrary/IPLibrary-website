@@ -1,43 +1,25 @@
 <section id="featured" class="py-8 bg-white border-t border-gray-200">
   <div class="container mx-auto px-4">
-    <h2 class="text-2xl font-bold text-gray-800 mb-6 pb-2 border-b border-gray-200">{{ include.title | default: "Featured Resources" }}</h2>
+    <h2 class="text-2xl font-bold text-gray-800 mb-6 pb-2 border-b border-gray-200">Featured Resources</h2>
     
-    <div id="featured-resources" hx-get="{{ include.endpoint | default: '/api/featured-resources' }}" hx-trigger="load">
-      <!-- Fallback for when no featured resources are defined -->
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-        {% if include.resources %}
-          {% for resource in include.resources %}
-            {% include components/molecules/resource-card.html 
-              category=resource.category
-              title=resource.title
-              description=resource.description
-              url=resource.url
-              link_text=resource.link_text
-            %}
-          {% endfor %}
-        {% else %}
-          <!-- Default resources if none provided -->
-          {% include components/molecules/resource-card.html 
-            category="Business"
-            title="Business Law Resources"
-            description="A collection of the best business law resources available online, including legal databases, scholarly articles, and professional references."
-            url="/en-US/business/business-law"
-          %}
-          
-          {% include components/molecules/resource-card.html 
-            category="Computing"
-            title="Data Science Publications"
-            description="Leading publications and papers in the field of data science, including academic journals, conference proceedings, and research repositories."
-            url="/en-US/computing/data-science/publications"
-          %}
-          
-          {% include components/molecules/resource-card.html 
-            category="Development"
-            title="Programming Languages"
-            description="Comprehensive guides and resources for various programming languages, including documentation, tutorials, best practices, and community forums."
-            url="/en-US/development/programming-languages"
-          %}
-        {% endif %}
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <!-- Default featured resources -->
+      <div class="bg-white border border-gray-200 rounded p-4 hover:shadow-lg transition-shadow">
+        <h3 class="text-lg font-semibold mb-2">Business Law Resources</h3>
+        <p class="text-sm text-gray-600 mb-4">A collection of the best business law resources available online.</p>
+        <a href="/en-US/business/business-law" class="text-blue-600 hover:underline text-sm">Learn More →</a>
+      </div>
+      
+      <div class="bg-white border border-gray-200 rounded p-4 hover:shadow-lg transition-shadow">
+        <h3 class="text-lg font-semibold mb-2">Data Science Publications</h3>
+        <p class="text-sm text-gray-600 mb-4">Leading publications and papers in the field of data science.</p>
+        <a href="/en-US/computing/data-science/publications" class="text-blue-600 hover:underline text-sm">Learn More →</a>
+      </div>
+      
+      <div class="bg-white border border-gray-200 rounded p-4 hover:shadow-lg transition-shadow">
+        <h3 class="text-lg font-semibold mb-2">Programming Languages</h3>
+        <p class="text-sm text-gray-600 mb-4">Comprehensive guides and resources for various programming languages.</p>
+        <a href="/en-US/development/programming-languages" class="text-blue-600 hover:underline text-sm">Learn More →</a>
       </div>
     </div>
   </div>

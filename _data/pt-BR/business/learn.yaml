@@ -8,7 +8,7 @@
     - gestão
   access: "Gratuito"
   rank: 1
-  last_updated: 2024-01-05
+  last_updated: "2024-01-05"
 
 - title: "FGV Online"
   url: "https://educacao-executiva.fgv.br/cursos/online"
@@ -19,7 +19,7 @@
     - MBA
   access: "Parcialmente pago"
   rank: 2
-  last_updated: 2024-01-07
+  last_updated: "2024-01-07"
 
 - title: "Fundação Dom Cabral - FDC"
   url: "https://www.fdc.org.br/"

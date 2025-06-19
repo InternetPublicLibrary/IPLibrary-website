@@ -1,17 +1,102 @@
-<div class="border {{ include.border_color | default: 'border-gray-200' }} rounded {{ include.bg_color | default: 'bg-white' }} {{ include.classes }} overflow-hidden">
-  {% if include.header %}
-  <div class="p-4 border-b {{ include.border_color | default: 'border-gray-200' }} {{ include.header_bg | default: 'bg-gray-50' }}">
-    {{ include.header }}
-  </div>
+<!-- 
+  Futuristic Card Atom Component
+  
+  Usage: 
+  {% include components/atoms/card.html 
+       variant="default|elevated|glass|gradient" 
+       hover="true|false" 
+       padding="sm|md|lg" 
+       rounded="sm|md|lg|xl|2xl" 
+       border="true|false" 
+       class="custom-classes" %}
+-->
+
+{% assign variant = include.variant | default: "default" %}
+{% assign hover = include.hover | default: "true" %}
+{% assign padding = include.padding | default: "md" %}
+{% assign rounded = include.rounded | default: "xl" %}
+{% assign border = include.border | default: "true" %}
+
+<!-- Base classes -->
+{% assign base_classes = "relative overflow-hidden transition-all duration-300 ease-out" %}
+
+<!-- Variant classes -->
+{% case variant %}
+  {% when "elevated" %}
+    {% assign variant_classes = "bg-white shadow-lg hover:shadow-2xl" %}
+  {% when "glass" %}
+    {% assign variant_classes = "bg-white/80 backdrop-blur-sm border border-white/20 shadow-lg" %}
+  {% when "gradient" %}
+    {% assign variant_classes = "bg-gradient-to-br from-white to-slate-50 shadow-md" %}
+  {% else %}
+    {% assign variant_classes = "bg-white shadow-sm" %}
+{% endcase %}
+
+<!-- Hover effects -->
+{% if hover == "true" %}
+  {% assign hover_classes = "hover:transform hover:-translate-y-1 hover:shadow-xl" %}
+{% else %}
+  {% assign hover_classes = "" %}
+{% endif %}
+
+<!-- Padding classes -->
+{% case padding %}
+  {% when "sm" %}
+    {% assign padding_classes = "p-4" %}
+  {% when "lg" %}
+    {% assign padding_classes = "p-8" %}
+  {% when "xl" %}
+    {% assign padding_classes = "p-10" %}
+  {% else %}
+    {% assign padding_classes = "p-6" %}
+{% endcase %}
+
+<!-- Rounded classes -->
+{% case rounded %}
+  {% when "sm" %}
+    {% assign rounded_classes = "rounded-lg" %}
+  {% when "md" %}
+    {% assign rounded_classes = "rounded-xl" %}
+  {% when "lg" %}
+    {% assign rounded_classes = "rounded-2xl" %}
+  {% when "2xl" %}
+    {% assign rounded_classes = "rounded-3xl" %}
+  {% else %}
+    {% assign rounded_classes = "rounded-xl" %}
+{% endcase %}
+
+<!-- Border classes -->
+{% if border == "true" %}
+  {% assign border_classes = "border border-slate-200" %}
+{% else %}
+  {% assign border_classes = "" %}
+{% endif %}
+
+<!-- Custom classes -->
+{% assign custom_classes = include.class | default: "" %}
+
+<!-- Combine all classes -->
+{% assign all_classes = base_classes | append: " " | append: variant_classes | append: " " | append: hover_classes | append: " " | append: padding_classes | append: " " | append: rounded_classes | append: " " | append: border_classes | append: " " | append: custom_classes %}
+
+<div class="{{ all_classes }}">
+  <!-- Optional gradient overlay for visual depth -->
+  {% if variant == "gradient" or variant == "glass" %}
+    <div class="absolute inset-0 bg-gradient-to-br from-blue-600/5 via-transparent to-purple-600/5 pointer-events-none"></div>
   {% endif %}
   
-  <div class="p-4">
+  <!-- Content container -->
+  <div class="relative z-10">
     {{ include.content }}
   </div>
   
-  {% if include.footer %}
-  <div class="p-4 border-t {{ include.border_color | default: 'border-gray-200' }} {{ include.footer_bg | default: 'bg-white' }}">
-    {{ include.footer }}
-  </div>
+  <!-- Optional decorative elements -->
+  {% if include.decorative == "true" %}
+    <div class="absolute -top-2 -right-2 w-16 h-16 bg-gradient-to-br from-blue-400/20 to-purple-400/20 rounded-full blur-xl"></div>
+    <div class="absolute -bottom-2 -left-2 w-12 h-12 bg-gradient-to-br from-green-400/20 to-blue-400/20 rounded-full blur-lg"></div>
+  {% endif %}
+  
+  <!-- Hover glow effect -->
+  {% if hover == "true" and variant != "glass" %}
+    <div class="absolute inset-0 opacity-0 hover:opacity-100 transition-opacity duration-300 rounded-{{ rounded }} bg-gradient-to-r from-blue-500/10 via-transparent to-purple-500/10 pointer-events-none"></div>
   {% endif %}
 </div> 
