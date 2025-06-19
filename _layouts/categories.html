@@ -1,0 +1,55 @@
+---
+layout: default
+---
+
+<div class="container mx-auto px-4 py-8">
+  <div class="flex flex-col md:flex-row gap-8">
+    <!-- Left sidebar -->
+    <div class="md:w-1/4">
+      <div class="sticky top-4">
+        {% include category-sidebar.html %}
+      </div>
+    </div>
+    
+    <!-- Main content -->
+    <div class="md:w-3/4">
+      <h1 class="text-3xl font-bold text-gray-800 mb-6">{{ page.title }}</h1>
+      
+      <div class="prose max-w-none mb-8">
+        {{ content }}
+        
+        {% if page.description %}
+          <p class="text-lg text-gray-600">{{ page.description }}</p>
+        {% endif %}
+      </div>
+      
+      <!-- Categories Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {% for lang in site.data %}
+          {% if lang[0] == page.lang %}
+            {% for category in lang[1].menu %}
+              <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                <div class="p-6">
+                  <h3 class="text-xl font-semibold text-gray-800 mb-2">{{ category.title }}</h3>
+                  {% if category.children %}
+                    <p class="text-sm text-gray-500 mb-3">
+                      {{ category.children.size }} subcategories
+                    </p>
+                  {% endif %}
+                  <p class="text-gray-600 line-clamp-3">
+                    Explore resources related to {{ category.title }}
+                  </p>
+                </div>
+                <div class="bg-gray-50 px-6 py-3 border-t border-gray-100">
+                  <a href="{{ category.path }}" class="text-indigo-700 font-semibold hover:text-indigo-900 inline-flex items-center">
+                    Browse Category <i class="fas fa-arrow-right text-xs ml-1"></i>
+                  </a>
+                </div>
+              </div>
+            {% endfor %}
+          {% endif %}
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div> 

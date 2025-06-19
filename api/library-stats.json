@@ -1,0 +1,21 @@
+---
+layout: null
+---
+{
+  "message": "API has been migrated to language-specific endpoints",
+  "available_endpoints": {
+    "en-US": {
+      "stats": "/api/en-us/stats.json",
+      "recent_activity": "/api/en-us/recent-activity.json",
+      "categories": "/api/en-us/categories.json"
+    },
+    "pt-BR": {
+      "stats": "/api/pt-br/stats.json", 
+      "recent_activity": "/api/pt-br/recent-activity.json",
+      "categories": "/api/pt-br/categories.json"
+    }
+  },
+  "usage": "Use language-specific endpoints for better localization",
+  "default_redirect": "/api/en-us/stats.json",
+  "migration_date": "{{ site.time | date: '%Y-%m-%d' }}"
+} 

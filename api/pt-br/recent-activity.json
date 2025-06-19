@@ -1,0 +1,51 @@
+---
+layout: null
+---
+{
+  "language": "pt-BR",
+  "recent_activity": [
+    {
+      "type": "new_resource",
+      "title": "Padrões Avançados em React",
+      "category": "Desenvolvimento",
+      "subcategory": "Desenvolvimento Frontend",
+      "user": "ExploradorTech",
+      "timestamp": "{{ site.time | date: '%Y-%m-%dT%H:%M:%SZ' }}",
+      "description": "Adicionado guia abrangente sobre padrões avançados do React"
+    },
+    {
+      "type": "edit",
+      "title": "Fundamentos de Machine Learning",
+      "category": "Computação",
+      "subcategory": "Ciência de Dados",
+      "user": "CientistaData",
+      "timestamp": "{{ site.time | date: '%Y-%m-%dT%H:%M:%SZ' | date: '%s' | plus: -3600 | date: '%Y-%m-%dT%H:%M:%SZ' }}",
+      "description": "Atualizado com frameworks ML mais recentes"
+    },
+    {
+      "type": "new_category",
+      "title": "Práticas Empresariais Sustentáveis",
+      "category": "Negócios",
+      "subcategory": "Estratégia",
+      "user": "NegocioVerde",
+      "timestamp": "{{ site.time | date: '%Y-%m-%dT%H:%M:%SZ' | date: '%s' | plus: -7200 | date: '%Y-%m-%dT%H:%M:%SZ' }}",
+      "description": "Criada nova coleção de recursos de sustentabilidade"
+    },
+    {
+      "type": "comment",
+      "title": "Princípios de Design UI/UX",
+      "category": "Design",
+      "subcategory": "Experiência do Usuário",
+      "user": "MestreDesign",
+      "timestamp": "{{ site.time | date: '%Y-%m-%dT%H:%M:%SZ' | date: '%s' | plus: -10800 | date: '%Y-%m-%dT%H:%M:%SZ' }}",
+      "description": "Adicionada discussão sobre diretrizes de acessibilidade"
+    }
+  ],
+  "stats": {
+    "total_activities_today": 31,
+    "new_resources": 8,
+    "edits": 15,
+    "comments": 5,
+    "new_users": 3
+  }
+} 

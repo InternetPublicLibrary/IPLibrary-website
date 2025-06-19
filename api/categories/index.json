@@ -1,0 +1,8 @@
+{
+  "redirect": true,
+  "message": "Please use the language-specific endpoint: /api/categories/{lang}.json",
+  "available_languages": [
+    "en-US",
+    "pt-BR"
+  ]
+} 

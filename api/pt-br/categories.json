@@ -1,0 +1,63 @@
+---
+layout: null
+permalink: /api/pt-br/categories.json
+---
+{% assign lang_code = "pt-BR" %}
+{% assign lang_data = site.data[lang_code] %}
+{
+  "api_version": "2.0",
+  "language": "{{ lang_code }}",
+  "generated_at": "{{ site.time | date_to_xmlschema }}",
+  "meta": {
+    "total_categories": {% if lang_data.menu %}{{ lang_data.menu.size }}{% else %}0{% endif %},
+    "total_subcategories": {% assign subcategory_count = 0 %}{% if lang_data.menu %}{% for category in lang_data.menu %}{% if category.children %}{% assign subcategory_count = subcategory_count | plus: category.children.size %}{% endif %}{% endfor %}{% endif %}{{ subcategory_count }},
+    "last_updated": "{{ site.time | date: '%Y-%m-%d' }}"
+  },
+  "categories": [
+    {% if lang_data.menu %}
+      {% for category in lang_data.menu %}
+      {
+        "id": "{{ category.key | default: category.title | slugify }}",
+        "title": "{{ category.title | escape }}",
+        "description": "{{ category.description | default: 'Explore recursos nesta categoria' | escape }}",
+        "path": "{{ category.path }}",
+        "icon": "{{ category.icon | default: 'folder' }}",
+        "resource_count": {{ category.resource_count | default: 100 }},
+        "subcategories_count": {% if category.children %}{{ category.children.size }}{% else %}0{% endif %},
+        "featured": {{ category.featured | default: false }},
+        "last_updated": "{{ category.last_updated | default: site.time | date: '%Y-%m-%d' }}",
+        "subcategories": [
+          {% if category.children %}
+            {% for subcategory in category.children %}
+            {
+              "id": "{{ subcategory.key | default: subcategory.title | slugify }}",
+              "title": "{{ subcategory.title | escape }}",
+              "description": "{{ subcategory.description | default: 'Explore recursos nesta subcategoria' | escape }}",
+              "path": "{{ subcategory.path }}",
+              "icon": "{{ subcategory.icon | default: 'folder' }}",
+              "resource_count": {{ subcategory.resource_count | default: 25 }},
+              "sections_count": {% if subcategory.children %}{{ subcategory.children.size }}{% else %}0{% endif %},
+              "last_updated": "{{ subcategory.last_updated | default: site.time | date: '%Y-%m-%d' }}",
+              "sections": [
+                {% if subcategory.children %}
+                  {% for section in subcategory.children %}
+                  {
+                    "id": "{{ section.key | default: section.title | slugify }}",
+                    "title": "{{ section.title | escape }}",
+                    "description": "{{ section.description | default: 'Explore recursos nesta seção' | escape }}",
+                    "path": "{{ section.path }}",
+                    "resource_count": {{ section.resource_count | default: 10 }},
+                    "last_updated": "{{ section.last_updated | default: site.time | date: '%Y-%m-%d' }}"
+                  }{% unless forloop.last %},{% endunless %}
+                  {% endfor %}
+                {% endif %}
+              ]
+            }{% unless forloop.last %},{% endunless %}
+            {% endfor %}
+          {% endif %}
+        ]
+      }{% unless forloop.last %},{% endunless %}
+      {% endfor %}
+    {% endif %}
+  ]
+} 

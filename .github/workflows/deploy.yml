@@ -1,0 +1,383 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [ master, main ]
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Environment to deploy to'
+        required: true
+        default: 'production'
+        type: choice
+        options:
+        - production
+        - staging
+
+env:
+  RUBY_VERSION: '3.2.2'
+  NODE_VERSION: '20'
+  JEKYLL_ENV: production
+
+# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
+# However, do NOT cancel in-progress runs as we want to allow these production deployments to complete.
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  # Build job
+  build:
+    name: Build for Deployment
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      with:
+        submodules: recursive
+        fetch-depth: 0
+
+    - name: Setup Ruby
+      uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: ${{ env.RUBY_VERSION }}
+        bundler-cache: true
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: ${{ env.NODE_VERSION }}
+        cache: 'npm'
+
+    - name: Setup Pages
+      id: pages
+      uses: actions/configure-pages@v4
+
+    - name: Install Node dependencies
+      run: npm ci
+
+    - name: Restore Jekyll cache
+      uses: actions/cache@v4
+      with:
+        path: |
+          .jekyll-cache
+          _site
+          .sass-cache
+          tmp/
+        key: jekyll-deploy-${{ runner.os }}-${{ hashFiles('_config.yml', 'Gemfile.lock', 'package-lock.json') }}-${{ github.sha }}
+        restore-keys: |
+          jekyll-deploy-${{ runner.os }}-${{ hashFiles('_config.yml', 'Gemfile.lock', 'package-lock.json') }}-
+          jekyll-deploy-${{ runner.os }}-
+
+    - name: Clean previous builds
+      run: npm run clean
+
+    - name: Generate dynamic pages with caching
+      run: |
+        echo "Generating dynamic pages..."
+        npm run generate:pages:cached
+        echo "Page generation completed"
+
+    - name: Build Jekyll site for production
+      run: |
+        echo "Building Jekyll site..."
+        JEKYLL_ENV=production bundle exec jekyll build --config _config.yml
+        npm run copy:indexes
+        echo "Jekyll build completed"
+      env:
+        JEKYLL_ENV: production
+
+    - name: Optimize build
+      run: |
+        echo "Optimizing build..."
+        # Remove unnecessary files
+        find _site -name "*.map" -delete
+        find _site -name ".DS_Store" -delete
+        
+        # Compress CSS if available
+        if command -v cleancss >/dev/null 2>&1; then
+          find _site -name "*.css" -not -name "*.min.css" -exec cleancss -o {}.min {} \; || true
+        fi
+        
+        echo "Build optimization completed"
+
+    - name: Validate deployment build
+      run: |
+        echo "=== Deployment Validation ==="
+        
+        # Check critical files
+        REQUIRED_FILES=(
+          "_site/index.html"
+          "_site/pt-BR/index.html"
+          "_site/api/categories.json"
+          "_site/api/categories/en-US.json"
+          "_site/api/categories/pt-BR.json"
+        )
+        
+        for file in "${REQUIRED_FILES[@]}"; do
+          if [ ! -f "$file" ]; then
+            echo "❌ Critical file missing: $file"
+            exit 1
+          else
+            echo "✅ Found: $file"
+          fi
+        done
+        
+        # Basic HTML validation on key pages
+        if command -v htmlhint >/dev/null 2>&1; then
+          htmlhint _site/index.html || echo "Warning: HTML issues in index.html"
+          htmlhint _site/pt-BR/index.html || echo "Warning: HTML issues in pt-BR/index.html"
+        fi
+        
+        echo "Build validation completed successfully"
+
+    - name: Generate deployment report
+      run: |
+        echo "=== Deployment Report ===" > deployment-report.txt
+        echo "Build Date: $(date -u)" >> deployment-report.txt
+        echo "Commit: ${{ github.sha }}" >> deployment-report.txt
+        echo "Branch: ${{ github.ref_name }}" >> deployment-report.txt
+        echo "Jekyll Environment: $JEKYLL_ENV" >> deployment-report.txt
+        echo "" >> deployment-report.txt
+        echo "Site Statistics:" >> deployment-report.txt
+        echo "- Total Size: $(du -sh _site/ | cut -f1)" >> deployment-report.txt
+        echo "- HTML Files: $(find _site/ -name '*.html' | wc -l)" >> deployment-report.txt
+        echo "- English Pages: $(find _site/en-US -name '*.html' | wc -l)" >> deployment-report.txt
+        echo "- Portuguese Pages: $(find _site/pt-BR -name '*.html' | wc -l)" >> deployment-report.txt
+        echo "- JSON APIs: $(find _site/api -name '*.json' | wc -l)" >> deployment-report.txt
+        echo "" >> deployment-report.txt
+        echo "Build completed successfully at $(date -u)" >> deployment-report.txt
+        
+        cat deployment-report.txt
+
+    - name: Upload Pages artifact
+      uses: actions/upload-pages-artifact@v3
+      with:
+        path: _site/
+
+    - name: Upload deployment report
+      uses: actions/upload-artifact@v4
+      with:
+        name: deployment-report
+        path: deployment-report.txt
+        retention-days: 30
+
+  # Deployment job
+  deploy:
+    name: Deploy to GitHub Pages
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: build
+    
+    steps:
+    - name: Deploy to GitHub Pages
+      id: deployment
+      uses: actions/deploy-pages@v4
+
+    - name: Get deployment URL
+      run: |
+        echo "🚀 Site deployed successfully!"
+        echo "📍 URL: ${{ steps.deployment.outputs.page_url }}"
+        echo "⏰ Deployed at: $(date -u)"
+
+  # Post-deployment testing
+  post-deploy-tests:
+    name: Post-Deployment Tests
+    runs-on: ubuntu-latest
+    needs: [build, deploy]
+    if: success()
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: ${{ env.NODE_VERSION }}
+
+    - name: Install Lighthouse CI
+      run: |
+        npm install -g @lhci/cli@0.12.x
+        npm install -g puppeteer
+
+    - name: Wait for deployment
+      run: |
+        echo "Waiting for deployment to be ready..."
+        sleep 30
+
+    - name: Test site accessibility
+      run: |
+        SITE_URL="${{ needs.deploy.outputs.page_url || 'https://iplibrary.org' }}"
+        echo "Testing site: $SITE_URL"
+        
+        # Basic curl test
+        if curl -sS --fail --connect-timeout 30 "$SITE_URL" > /dev/null; then
+          echo "✅ Site is accessible"
+        else
+          echo "❌ Site is not accessible"
+          exit 1
+        fi
+
+    - name: Test multilingual pages
+      run: |
+        SITE_URL="${{ needs.deploy.outputs.page_url || 'https://iplibrary.org' }}"
+        
+        # Test English page
+        if curl -sS --fail "${SITE_URL}en-US/" > /dev/null; then
+          echo "✅ English site accessible"
+        else
+          echo "⚠️ English site may not be accessible"
+        fi
+        
+        # Test Portuguese page
+        if curl -sS --fail "${SITE_URL}pt-BR/" > /dev/null; then
+          echo "✅ Portuguese site accessible"
+        else
+          echo "⚠️ Portuguese site may not be accessible"
+        fi
+
+    - name: Test API endpoints
+      run: |
+        SITE_URL="${{ needs.deploy.outputs.page_url || 'https://iplibrary.org' }}"
+        
+        # Test main categories API
+        if curl -sS --fail "${SITE_URL}api/categories.json" | jq . > /dev/null 2>&1; then
+          echo "✅ Main categories API working"
+        else
+          echo "⚠️ Main categories API may have issues"
+        fi
+        
+        # Test language-specific APIs
+        if curl -sS --fail "${SITE_URL}api/categories/en-US.json" | jq . > /dev/null 2>&1; then
+          echo "✅ English categories API working"
+        else
+          echo "⚠️ English categories API may have issues"
+        fi
+        
+        if curl -sS --fail "${SITE_URL}api/categories/pt-BR.json" | jq . > /dev/null 2>&1; then
+          echo "✅ Portuguese categories API working"
+        else
+          echo "⚠️ Portuguese categories API may have issues"
+        fi
+
+    - name: Performance audit with Lighthouse
+      run: |
+        SITE_URL="${{ needs.deploy.outputs.page_url || 'https://iplibrary.org' }}"
+        echo "Running Lighthouse audit on: $SITE_URL"
+        
+        # Create LHCI config
+        cat > .lighthouserc.json << EOF
+        {
+          "ci": {
+            "collect": {
+              "url": [
+                "$SITE_URL",
+                "${SITE_URL}en-US/",
+                "${SITE_URL}pt-BR/"
+              ],
+              "numberOfRuns": 1,
+              "settings": {
+                "chromeFlags": "--no-sandbox --headless"
+              }
+            },
+            "assert": {
+              "assertions": {
+                "categories:performance": ["warn", {"minScore": 0.7}],
+                "categories:accessibility": ["warn", {"minScore": 0.8}],
+                "categories:best-practices": ["warn", {"minScore": 0.8}],
+                "categories:seo": ["warn", {"minScore": 0.8}]
+              }
+            },
+            "upload": {
+              "target": "temporary-public-storage"
+            }
+          }
+        }
+        EOF
+        
+        # Run Lighthouse CI
+        lhci autorun || echo "Lighthouse audit completed with warnings"
+      continue-on-error: true
+
+    - name: Upload Lighthouse reports
+      uses: actions/upload-artifact@v4
+      if: always()
+      with:
+        name: lighthouse-reports
+        path: .lighthouseci/
+        retention-days: 30
+
+  # Notification job
+  notify:
+    name: Deployment Notification
+    runs-on: ubuntu-latest
+    needs: [build, deploy, post-deploy-tests]
+    if: always()
+    
+    steps:
+    - name: Download deployment report
+      uses: actions/download-artifact@v4
+      with:
+        name: deployment-report
+
+    - name: Deployment Summary
+      run: |
+        echo "=== IPLibrary Deployment Summary ==="
+        echo "🌐 Site: IPLibrary Website"
+        echo "📅 Date: $(date -u)"
+        echo "🔗 Commit: ${{ github.sha }}"
+        echo "🌿 Branch: ${{ github.ref_name }}"
+        echo "👤 Actor: ${{ github.actor }}"
+        echo ""
+        echo "📊 Job Results:"
+        echo "- Build: ${{ needs.build.result }}"
+        echo "- Deploy: ${{ needs.deploy.result }}"
+        echo "- Post-Deploy Tests: ${{ needs.post-deploy-tests.result }}"
+        echo ""
+        
+        if [[ "${{ needs.build.result }}" == "success" && "${{ needs.deploy.result }}" == "success" ]]; then
+          echo "✅ Deployment completed successfully!"
+          echo "🚀 Site is live and accessible"
+          
+          if [[ "${{ needs.post-deploy-tests.result }}" == "success" ]]; then
+            echo "✅ All post-deployment tests passed"
+          else
+            echo "⚠️ Some post-deployment tests had issues"
+          fi
+        else
+          echo "❌ Deployment failed"
+          echo "Please check the logs above for details"
+        fi
+        
+        echo ""
+        echo "📋 Deployment Report:"
+        if [ -f deployment-report.txt ]; then
+          cat deployment-report.txt
+        else
+          echo "Report not available"
+        fi
+
+    # Optional: Send deployment notification to external service
+    # - name: Send deployment notification
+    #   if: success()
+    #   run: |
+    #     # Example webhook notification
+    #     # curl -X POST "${{ secrets.WEBHOOK_URL }}" \
+    #     #   -H "Content-Type: application/json" \
+    #     #   -d '{
+    #     #     "text": "IPLibrary website deployed successfully",
+    #     #     "url": "${{ needs.deploy.outputs.page_url }}",
+    #     #     "commit": "${{ github.sha }}",
+    #     #     "branch": "${{ github.ref_name }}"
+    #     #   }'
+    #     echo "Deployment notification sent (placeholder)"

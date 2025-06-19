@@ -1,0 +1,42 @@
+---
+layout: null
+---
+{
+  "active_contributors": [
+    {
+      "name": "Alex Developer",
+      "avatar": "/images/avatar/small/alex.jpg",
+      "contributions": 45,
+      "specialties": ["Development", "Computing"],
+      "last_active": "{{ site.time | date: '%Y-%m-%d' }}",
+      "role": "Maintainer"
+    },
+    {
+      "name": "Maria Designer",
+      "avatar": "/images/avatar/small/maria.jpg", 
+      "contributions": 38,
+      "specialties": ["Design", "Photography"],
+      "last_active": "{{ site.time | date: '%Y-%m-%d' }}",
+      "role": "Contributor"
+    },
+    {
+      "name": "John Business",
+      "avatar": "/images/avatar/small/john.jpg",
+      "contributions": 29,
+      "specialties": ["Business", "Marketing"],
+      "last_active": "{{ site.time | date: '%Y-%m-%d' }}",
+      "role": "Contributor"
+    },
+    {
+      "name": "Sara Academic",
+      "avatar": "/images/avatar/small/sara.jpg",
+      "contributions": 52,
+      "specialties": ["Academics", "Personal Development"],
+      "last_active": "{{ site.time | date: '%Y-%m-%d' }}",
+      "role": "Moderator"
+    }
+  ],
+  "total_contributors": 156,
+  "total_contributions_this_month": 234,
+  "last_updated": "{{ site.time | date: '%Y-%m-%d' }}"
+} 

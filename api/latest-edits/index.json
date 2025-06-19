@@ -1,0 +1,41 @@
+---
+layout: null
+---
+{
+  "latest_edits": [
+    {
+      "title": "Updated Business Resources",
+      "description": "Added new startup and entrepreneurship resources",
+      "category": "Business",
+      "editor": "Community",
+      "date": "{{ site.time | date: '%Y-%m-%d' }}",
+      "changes": 5
+    },
+    {
+      "title": "Design Tools Update",
+      "description": "Added latest UI/UX design tools and frameworks",
+      "category": "Design", 
+      "editor": "Community",
+      "date": "{{ site.time | date: '%Y-%m-%d' }}",
+      "changes": 8
+    },
+    {
+      "title": "Programming Resources",
+      "description": "New Python and JavaScript learning resources",
+      "category": "Development",
+      "editor": "Community", 
+      "date": "{{ site.time | date: '%Y-%m-%d' }}",
+      "changes": 3
+    },
+    {
+      "title": "Marketing Tools",
+      "description": "Updated digital marketing and analytics tools",
+      "category": "Marketing",
+      "editor": "Community",
+      "date": "{{ site.time | date: '%Y-%m-%d' }}",
+      "changes": 6
+    }
+  ],
+  "total_recent_changes": 22,
+  "last_updated": "{{ site.time | date: '%Y-%m-%d' }}"
+} 

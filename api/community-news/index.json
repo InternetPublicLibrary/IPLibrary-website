@@ -1,0 +1,37 @@
+---
+layout: null
+---
+{
+  "community_news": [
+    {
+      "title": "IPLibrary Community Milestone",
+      "content": "We've reached 10,000+ curated resources across all categories!",
+      "type": "milestone",
+      "date": "{{ site.time | date: '%Y-%m-%d' }}",
+      "author": "IPLibrary Team"
+    },
+    {
+      "title": "New Language Support",
+      "content": "Portuguese (Brazil) language support has been added to the platform.",
+      "type": "feature",
+      "date": "{{ site.time | date: '%Y-%m-%d' }}",
+      "author": "Development Team"
+    },
+    {
+      "title": "Contributing Guidelines Updated",
+      "content": "New streamlined process for submitting and reviewing resources.",
+      "type": "update",
+      "date": "{{ site.time | date: '%Y-%m-%d' }}",
+      "author": "Community Team"
+    },
+    {
+      "title": "Weekly Spotlight: AI Resources",
+      "content": "This week we're highlighting the best AI and machine learning resources.",
+      "type": "spotlight",
+      "date": "{{ site.time | date: '%Y-%m-%d' }}",
+      "author": "Editorial Team"
+    }
+  ],
+  "total_posts": 127,
+  "last_updated": "{{ site.time | date: '%Y-%m-%d' }}"
+} 

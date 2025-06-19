@@ -1,0 +1,46 @@
+---
+layout: null
+---
+{
+  "new_resources": [
+    {
+      "title": "ChatGPT",
+      "description": "AI-powered conversational assistant",
+      "url": "https://chat.openai.com",
+      "category": "Computing",
+      "type": "AI Tool",
+      "added_date": "{{ site.time | date: '%Y-%m-%d' }}",
+      "status": "new"
+    },
+    {
+      "title": "Figma",
+      "description": "Collaborative design platform", 
+      "url": "https://figma.com",
+      "category": "Design",
+      "type": "Design Tool",
+      "added_date": "{{ site.time | date: '%Y-%m-%d' }}",
+      "status": "updated"
+    },
+    {
+      "title": "TikTok for Business",
+      "description": "Marketing platform for TikTok",
+      "url": "https://ads.tiktok.com",
+      "category": "Marketing",
+      "type": "Platform",
+      "added_date": "{{ site.time | date: '%Y-%m-%d' }}",
+      "status": "new"
+    },
+    {
+      "title": "Notion",
+      "description": "All-in-one productivity workspace",
+      "url": "https://notion.so",
+      "category": "Personal Development",
+      "type": "Productivity",
+      "added_date": "{{ site.time | date: '%Y-%m-%d' }}",
+      "status": "trending"
+    }
+  ],
+  "total_new_this_week": 15,
+  "total_updated_this_week": 8,
+  "last_updated": "{{ site.time | date: '%Y-%m-%d' }}"
+} 

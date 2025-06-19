@@ -1,0 +1,89 @@
+---
+layout: default
+---
+
+<div class="container mx-auto px-4 py-8">
+  <div class="flex flex-col md:flex-row gap-8">
+    <!-- Left sidebar -->
+    <div class="md:w-1/4">
+      <div class="sticky top-4">
+        {% include category-sidebar.html %}
+      </div>
+    </div>
+    
+    <!-- Main content -->
+    <div class="md:w-3/4">
+      <div class="flex items-center text-sm text-gray-600 mb-4">
+        <a href="/" class="hover:underline">Home</a>
+        <span class="mx-2">›</span>
+        <a href="/{{ page.lang }}/categories" class="hover:underline">Categories</a>
+        <span class="mx-2">›</span>
+        <a href="/{{ page.lang }}/{{ page.category }}" class="hover:underline">{{ page.category | capitalize }}</a>
+        <span class="mx-2">›</span>
+        <span>{{ page.resource_type | capitalize }}</span>
+      </div>
+      
+      <h1 class="text-3xl font-bold text-gray-800 mb-6">{{ page.title }}</h1>
+      
+      <div class="prose max-w-none mb-8">
+        {{ content }}
+        
+        {% if page.description %}
+          <p class="text-lg text-gray-600">{{ page.description }}</p>
+        {% endif %}
+      </div>
+      
+      <!-- Resources Grid -->
+      <div id="resources-container">
+        <!-- This will be populated with the resources from window.resourcesData by JavaScript -->
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const resourcesContainer = document.getElementById('resources-container');
+    
+    if (window.resourcesData && resourcesContainer) {
+      if (window.resourcesData.length > 0) {
+        const resourcesHtml = `
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            ${window.resourcesData.map(resource => `
+              <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                <div class="p-6">
+                  <div class="flex justify-between items-start mb-3">
+                    <h3 class="text-lg font-bold text-gray-800">${resource.title}</h3>
+                    ${resource.tags ? `
+                      <span class="bg-indigo-100 text-indigo-800 text-xs font-medium px-2.5 py-0.5 rounded">${resource.tags[0]}</span>
+                    ` : ''}
+                  </div>
+                  <p class="text-gray-500 text-sm mb-3">${resource.url}</p>
+                  <p class="text-gray-600">${resource.description}</p>
+                </div>
+                <div class="bg-gray-50 px-6 py-3 border-t border-gray-100">
+                  <a href="${resource.url}" target="_blank" rel="noopener" class="text-indigo-700 font-semibold hover:text-indigo-900 inline-flex items-center">
+                    Visit Resource <i class="fas fa-external-link-alt text-xs ml-1"></i>
+                  </a>
+                </div>
+              </div>
+            `).join('')}
+          </div>
+        `;
+        
+        resourcesContainer.innerHTML = resourcesHtml;
+      } else {
+        resourcesContainer.innerHTML = `
+          <div class="bg-gray-50 rounded-lg p-8 text-center">
+            <i class="fas fa-info-circle text-4xl text-indigo-400 mb-4"></i>
+            <h3 class="text-xl font-semibold text-gray-800 mb-2">No Resources Yet</h3>
+            <p class="text-gray-600 mb-6">We're still gathering resources for this category.</p>
+            <a href="#contribute" class="text-indigo-700 font-semibold hover:text-indigo-900">
+              Suggest a Resource <i class="fas fa-arrow-right ml-1"></i>
+            </a>
+          </div>
+        `;
+      }
+    }
+  });
+</script> 

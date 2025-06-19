@@ -1,0 +1,44 @@
+---
+layout: null
+---
+{% assign all_resources = '' | split: '' %}
+{% for lang_data in site.data %}
+  {% if lang_data[0] == page.lang %}
+    {% for category_data in lang_data[1] %}
+      {% unless category_data[0] == 'menu' %}
+        {% for resource in category_data[1] %}
+          {% assign all_resources = all_resources | push: resource %}
+        {% endfor %}
+      {% endunless %}
+    {% endfor %}
+  {% endif %}
+{% endfor %}
+
+{% if all_resources.size > 0 %}
+  {% assign random_index = 'now' | date: '%s' | modulo: all_resources.size %}
+  {% assign random_resource = all_resources[random_index] %}
+{% else %}
+  {% assign random_resource = false %}
+{% endif %}
+
+{
+  {% if random_resource %}
+  "resource": {
+    "title": "{{ random_resource.title | escape }}",
+    "description": "{{ random_resource.description | escape }}",
+    "url": "{{ random_resource.url }}",
+    "category": "{{ random_resource.category | default: 'General' }}",
+    "type": "{{ random_resource.type | default: 'Resource' }}",
+    "added_date": "{{ random_resource.last_updated | default: 'Recently' }}"
+  }
+  {% else %}
+  "resource": {
+    "title": "Welcome to IPLibrary",
+    "description": "Start exploring our curated collection of internet resources.",
+    "url": "/{{ page.lang | default: 'en-US' }}/",
+    "category": "General",
+    "type": "Page",
+    "added_date": "2024-06-18"
+  }
+  {% endif %}
+}

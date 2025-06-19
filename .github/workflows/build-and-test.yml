@@ -1,0 +1,422 @@
+name: Build and Test
+
+on:
+  push:
+    branches: [ master, main, develop ]
+  pull_request:
+    branches: [ master, main ]
+  workflow_dispatch:
+
+env:
+  RUBY_VERSION: '3.2.2'
+  NODE_VERSION: '20'
+  BUNDLE_WITHOUT: 'production'
+  JEKYLL_ENV: development
+
+jobs:
+  # Job 1: Build and test in development environment
+  build-development:
+    name: Build (Development)
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      with:
+        submodules: recursive
+        fetch-depth: 0
+
+    - name: Setup Ruby
+      uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: ${{ env.RUBY_VERSION }}
+        bundler-cache: true
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: ${{ env.NODE_VERSION }}
+        cache: 'npm'
+
+    - name: Install Node dependencies
+      run: npm ci
+
+    - name: Cache Jekyll build
+      uses: actions/cache@v4
+      with:
+        path: |
+          .jekyll-cache
+          _site
+          .sass-cache
+        key: jekyll-build-dev-${{ runner.os }}-${{ hashFiles('_config.yml', 'Gemfile.lock', 'package-lock.json') }}-${{ github.sha }}
+        restore-keys: |
+          jekyll-build-dev-${{ runner.os }}-${{ hashFiles('_config.yml', 'Gemfile.lock', 'package-lock.json') }}-
+          jekyll-build-dev-${{ runner.os }}-
+
+    - name: Verify environment
+      run: |
+        echo "Ruby version: $(ruby --version)"
+        echo "Bundler version: $(bundle --version)"
+        echo "Node version: $(node --version)"
+        echo "NPM version: $(npm --version)"
+
+    - name: Generate pages with caching
+      run: npm run generate:pages:cached
+
+    - name: Build Jekyll site (Development)
+      run: |
+        JEKYLL_ENV=development bundle exec jekyll build --drafts --future
+      env:
+        JEKYLL_ENV: development
+
+    - name: Upload development build artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: development-site
+        path: _site/
+        retention-days: 1
+
+  # Job 2: Build and test in production environment
+  build-production:
+    name: Build (Production)
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      with:
+        submodules: recursive
+        fetch-depth: 0
+
+    - name: Setup Ruby
+      uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: ${{ env.RUBY_VERSION }}
+        bundler-cache: true
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: ${{ env.NODE_VERSION }}
+        cache: 'npm'
+
+    - name: Install Node dependencies
+      run: npm ci
+
+    - name: Cache Jekyll build
+      uses: actions/cache@v4
+      with:
+        path: |
+          .jekyll-cache
+          _site
+          .sass-cache
+        key: jekyll-build-prod-${{ runner.os }}-${{ hashFiles('_config.yml', 'Gemfile.lock', 'package-lock.json') }}-${{ github.sha }}
+        restore-keys: |
+          jekyll-build-prod-${{ runner.os }}-${{ hashFiles('_config.yml', 'Gemfile.lock', 'package-lock.json') }}-
+          jekyll-build-prod-${{ runner.os }}-
+
+    - name: Clean previous builds
+      run: npm run clean
+
+    - name: Generate pages with caching
+      run: npm run generate:pages:cached
+
+    - name: Build Jekyll site (Production)
+      run: |
+        JEKYLL_ENV=production bundle exec jekyll build
+        npm run copy:indexes
+      env:
+        JEKYLL_ENV: production
+
+    - name: Upload production build artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: production-site
+        path: _site/
+        retention-days: 30
+
+  # Job 3: HTML validation and testing
+  test-html:
+    name: HTML Validation
+    runs-on: ubuntu-latest
+    needs: [build-production]
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Setup Ruby
+      uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: ${{ env.RUBY_VERSION }}
+        bundler-cache: true
+
+    - name: Download production build
+      uses: actions/download-artifact@v4
+      with:
+        name: production-site
+        path: _site/
+
+    - name: Test HTML structure
+      run: |
+        bundle exec htmlproofer _site \
+          --check-html \
+          --check-img-http \
+          --empty-alt-ignore \
+          --disable-external \
+          --allow-hash-href \
+          --ignore-files "/vendor/"
+      continue-on-error: false
+
+    - name: Validate HTML5 compliance
+      uses: Cyb3r-Jok3r/html5validator-action@master
+      with:
+        root: _site/
+        css: true
+        format: json
+        log_level: WARNING
+
+  # Job 4: Link checking
+  test-links:
+    name: Link Validation
+    runs-on: ubuntu-latest
+    needs: [build-production]
+    if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Setup Ruby
+      uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: ${{ env.RUBY_VERSION }}
+        bundler-cache: true
+
+    - name: Download production build
+      uses: actions/download-artifact@v4
+      with:
+        name: production-site
+        path: _site/
+
+    - name: Test external links
+      run: |
+        bundle exec htmlproofer _site \
+          --check-external-hash \
+          --check-opengraph \
+          --external-only \
+          --http-status-ignore "999,403,503,429,401" \
+          --ignore-urls "/linkedin.com/,/facebook.com/,/twitter.com/,/instagram.com/" \
+          --timeout 30
+      continue-on-error: true
+
+  # Job 5: Site structure validation
+  test-structure:
+    name: Site Structure Tests
+    runs-on: ubuntu-latest
+    needs: [build-production]
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: ${{ env.NODE_VERSION }}
+
+    - name: Download production build
+      uses: actions/download-artifact@v4
+      with:
+        name: production-site
+        path: _site/
+
+    - name: Verify required files exist
+      run: |
+        # Check for essential files
+        test -f _site/index.html || (echo "Missing main index.html" && exit 1)
+        test -f _site/pt-BR/index.html || (echo "Missing pt-BR index.html" && exit 1)
+        test -d _site/en-US || (echo "Missing en-US directory" && exit 1)
+        test -d _site/pt-BR || (echo "Missing pt-BR directory" && exit 1)
+        
+        # Check for API endpoints
+        test -f _site/api/categories.json || (echo "Missing categories API" && exit 1)
+        test -f _site/api/categories/en-US.json || (echo "Missing en-US categories API" && exit 1)
+        test -f _site/api/categories/pt-BR.json || (echo "Missing pt-BR categories API" && exit 1)
+        
+        echo "All required files and directories are present"
+
+    - name: Check multilingual structure
+      run: |
+        # Verify language directories have content
+        EN_PAGES=$(find _site/en-US -name "*.html" | wc -l)
+        PT_PAGES=$(find _site/pt-BR -name "*.html" | wc -l)
+        
+        echo "English pages: $EN_PAGES"
+        echo "Portuguese pages: $PT_PAGES"
+        
+        if [ $EN_PAGES -lt 10 ]; then
+          echo "Warning: Low number of English pages ($EN_PAGES)"
+        fi
+        
+        if [ $PT_PAGES -lt 10 ]; then
+          echo "Warning: Low number of Portuguese pages ($PT_PAGES)"
+        fi
+
+    - name: Validate JSON APIs
+      run: |
+        # Validate JSON structure
+        node -e "
+          const fs = require('fs');
+          const files = [
+            '_site/api/categories.json',
+            '_site/api/categories/en-US.json',
+            '_site/api/categories/pt-BR.json'
+          ];
+          
+          files.forEach(file => {
+            try {
+              if (fs.existsSync(file)) {
+                const content = JSON.parse(fs.readFileSync(file, 'utf8'));
+                console.log(\`✓ \${file} is valid JSON\`);
+              } else {
+                console.warn(\`⚠ \${file} does not exist\`);
+              }
+            } catch (error) {
+              console.error(\`✗ \${file} has invalid JSON: \${error.message}\`);
+              process.exit(1);
+            }
+          });
+        "
+
+  # Job 6: Performance and size checks
+  test-performance:
+    name: Performance Tests
+    runs-on: ubuntu-latest
+    needs: [build-production]
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: ${{ env.NODE_VERSION }}
+
+    - name: Download production build
+      uses: actions/download-artifact@v4
+      with:
+        name: production-site
+        path: _site/
+
+    - name: Analyze bundle size
+      run: |
+        echo "=== Site Size Analysis ==="
+        echo "Total site size:"
+        du -sh _site/
+        
+        echo -e "\nLargest files:"
+        find _site/ -type f -exec du -h {} + | sort -rh | head -20
+        
+        echo -e "\nFile type distribution:"
+        find _site/ -type f | sed 's/.*\.//' | sort | uniq -c | sort -rn
+        
+        echo -e "\nPage count by language:"
+        echo "English pages: $(find _site/en-US -name '*.html' | wc -l)"
+        echo "Portuguese pages: $(find _site/pt-BR -name '*.html' | wc -l)"
+        echo "Total HTML files: $(find _site/ -name '*.html' | wc -l)"
+
+    - name: Check for large files
+      run: |
+        echo "=== Large File Detection ==="
+        LARGE_FILES=$(find _site/ -type f -size +1M)
+        if [ -n "$LARGE_FILES" ]; then
+          echo "Warning: Found files larger than 1MB:"
+          find _site/ -type f -size +1M -exec ls -lh {} \;
+        else
+          echo "No files larger than 1MB found"
+        fi
+
+  # Job 7: Security and dependency checks
+  security-check:
+    name: Security Checks
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Setup Ruby
+      uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: ${{ env.RUBY_VERSION }}
+        bundler-cache: true
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: ${{ env.NODE_VERSION }}
+        cache: 'npm'
+
+    - name: Install dependencies
+      run: npm ci
+
+    - name: Ruby security audit
+      run: |
+        gem install bundler-audit
+        bundle audit --update
+      continue-on-error: true
+
+    - name: Node.js security audit
+      run: |
+        npm audit --audit-level moderate
+      continue-on-error: true
+
+    - name: Check for sensitive files
+      run: |
+        echo "=== Checking for sensitive files ==="
+        SENSITIVE_PATTERNS=("*.key" "*.pem" "*.p12" "*.pfx" "*password*" "*secret*" "*.env")
+        
+        for pattern in "${SENSITIVE_PATTERNS[@]}"; do
+          FOUND=$(find . -name "$pattern" -not -path "./.git/*" -not -path "./node_modules/*" -not -path "./vendor/*")
+          if [ -n "$FOUND" ]; then
+            echo "Warning: Found potentially sensitive files matching $pattern:"
+            echo "$FOUND"
+          fi
+        done
+
+  # Job 8: Build summary
+  build-summary:
+    name: Build Summary
+    runs-on: ubuntu-latest
+    needs: [build-development, build-production, test-html, test-structure, test-performance, security-check]
+    if: always()
+    
+    steps:
+    - name: Build Results Summary
+      run: |
+        echo "=== IPLibrary Website Build Summary ==="
+        echo "Timestamp: $(date -u)"
+        echo "Commit: ${{ github.sha }}"
+        echo "Branch: ${{ github.ref_name }}"
+        echo "Event: ${{ github.event_name }}"
+        echo ""
+        echo "Job Results:"
+        echo "- Development Build: ${{ needs.build-development.result }}"
+        echo "- Production Build: ${{ needs.build-production.result }}"
+        echo "- HTML Validation: ${{ needs.test-html.result }}"
+        echo "- Structure Tests: ${{ needs.test-structure.result }}"
+        echo "- Performance Tests: ${{ needs.test-performance.result }}"
+        echo "- Security Checks: ${{ needs.security-check.result }}"
+        
+        # Set overall status
+        if [[ "${{ needs.build-production.result }}" == "success" && "${{ needs.test-html.result }}" == "success" ]]; then
+          echo ""
+          echo "✅ Build completed successfully!"
+          echo "The site is ready for deployment."
+        else
+          echo ""
+          echo "❌ Build failed or has issues."
+          echo "Please check the failed jobs above."
+        fi

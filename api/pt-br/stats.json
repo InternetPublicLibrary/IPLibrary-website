@@ -1,0 +1,37 @@
+---
+layout: null
+---
+{
+  "language": "pt-BR",
+  "total_resources": {{ site.data.pt-BR.business.*.size + site.data.pt-BR.computing.*.size + site.data.pt-BR.marketing.*.size | default: 18 }},
+  "categories": {{ site.data.pt-BR.menu.size | default: 6 }},
+  "last_updated": "{{ site.time | date: '%Y-%m-%d' }}",
+  "popular_categories": [
+    {
+      "name": "Negócios",
+      "resource_count": {{ site.data.pt-BR.business.*.size | default: 15 }},
+      "subcategories": 15
+    },
+    {
+      "name": "Computação", 
+      "resource_count": {{ site.data.pt-BR.computing.*.size | default: 9 }},
+      "subcategories": 9
+    },
+    {
+      "name": "Marketing",
+      "resource_count": {{ site.data.pt-BR.marketing.*.size | default: 14 }},
+      "subcategories": 14
+    },
+    {
+      "name": "Design",
+      "resource_count": 10,
+      "subcategories": 10
+    }
+  ],
+  "content_health": {
+    "active_categories": 6,
+    "resources_added_this_month": 32,
+    "broken_links_detected": 1,
+    "quality_score": 0.94
+  }
+} 

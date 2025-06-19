@@ -1,0 +1,13 @@
+---
+layout: null
+---
+{
+  "message": "API has been migrated to language-specific endpoints",
+  "available_endpoints": {
+    "en-US": "/api/en-us/recent-activity.json",
+    "pt-BR": "/api/pt-br/recent-activity.json"
+  },
+  "usage": "Use language-specific endpoints for localized content",
+  "default_redirect": "/api/en-us/recent-activity.json",
+  "migration_date": "{{ site.time | date: '%Y-%m-%d' }}"
+} 

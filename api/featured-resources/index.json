@@ -1,0 +1,48 @@
+---
+layout: null
+---
+{
+  "featured_resources": [
+    {
+      "title": "Stack Overflow",
+      "description": "Programming Q&A community",
+      "url": "https://stackoverflow.com",
+      "category": "Development",
+      "type": "Community",
+      "featured_reason": "Most popular programming community"
+    },
+    {
+      "title": "GitHub",
+      "description": "Code hosting and collaboration platform",
+      "url": "https://github.com",
+      "category": "Development", 
+      "type": "Platform",
+      "featured_reason": "Essential tool for developers"
+    },
+    {
+      "title": "Wikipedia",
+      "description": "Free online encyclopedia",
+      "url": "https://wikipedia.org",
+      "category": "Academics",
+      "type": "Encyclopedia",
+      "featured_reason": "Most comprehensive knowledge base"
+    },
+    {
+      "title": "Coursera",
+      "description": "Online learning platform",
+      "url": "https://coursera.org",
+      "category": "Personal Development",
+      "type": "Learning",
+      "featured_reason": "High-quality online courses"
+    },
+    {
+      "title": "Unsplash",
+      "description": "Free stock photography",
+      "url": "https://unsplash.com",
+      "category": "Design",
+      "type": "Media",
+      "featured_reason": "Best free photo resource"
+    }
+  ],
+  "last_updated": "{{ site.time | date: '%Y-%m-%d' }}"
+} 

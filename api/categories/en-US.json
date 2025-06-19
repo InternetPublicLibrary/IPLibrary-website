@@ -1,0 +1,27 @@
+---
+layout: null
+---
+{% assign lang_data = site.data['en-US'] %}
+{
+  "lang": "en-US",
+  "categories": [
+    {% for category in lang_data.menu %}
+    {
+      "title": "{{ category.title }}",
+      "path": "{{ category.path }}",
+      "subcategories_count": {% if category.children %}{{ category.children.size }}{% else %}0{% endif %},
+      "subcategories": [
+        {% if category.children %}
+        {% for subcategory in category.children %}
+        {
+          "title": "{{ subcategory.title }}",
+          "path": "{{ subcategory.path }}",
+          "sections_count": {% if subcategory.children %}{{ subcategory.children.size }}{% else %}0{% endif %}
+        }{% unless forloop.last %},{% endunless %}
+        {% endfor %}
+        {% endif %}
+      ]
+    }{% unless forloop.last %},{% endunless %}
+    {% endfor %}
+  ]
+} 

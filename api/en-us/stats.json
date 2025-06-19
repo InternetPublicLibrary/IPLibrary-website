@@ -1,0 +1,37 @@
+---
+layout: null
+---
+{
+  "language": "en-US",
+  "total_resources": {{ site.data.en-US.business.*.size + site.data.en-US.computing.*.size | default: 12 }},
+  "categories": {{ site.data.en-US.menu.size | default: 6 }},
+  "last_updated": "{{ site.time | date: '%Y-%m-%d' }}",
+  "popular_categories": [
+    {
+      "name": "Business",
+      "resource_count": {{ site.data.en-US.business.*.size | default: 15 }},
+      "subcategories": 15
+    },
+    {
+      "name": "Computing", 
+      "resource_count": {{ site.data.en-US.computing.*.size | default: 9 }},
+      "subcategories": 9
+    },
+    {
+      "name": "Development",
+      "resource_count": 14,
+      "subcategories": 14
+    },
+    {
+      "name": "Design",
+      "resource_count": 10,
+      "subcategories": 10
+    }
+  ],
+  "content_health": {
+    "active_categories": 6,
+    "resources_added_this_month": 45,
+    "broken_links_detected": 2,
+    "quality_score": 0.96
+  }
+} 

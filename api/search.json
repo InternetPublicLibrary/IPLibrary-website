@@ -1,0 +1,69 @@
+---
+layout: null
+---
+{
+  "search_results": [
+    {% assign lang = page.url | split: '/' | first | default: 'en-US' %}
+    {% if lang == 'pt-BR' %}
+      {
+        "title": "Desenvolvimento Web Moderno",
+        "category": "Desenvolvimento",
+        "subcategory": "Frontend",
+        "description": "Guia completo para desenvolvimento web moderno com React, Vue e Angular",
+        "url": "/pt-BR/desenvolvimento/frontend/desenvolvimento-web-moderno/",
+        "relevance": 0.95
+      },
+      {
+        "title": "Estratégias de Marketing Digital",
+        "category": "Marketing",
+        "subcategory": "Marketing Digital",
+        "description": "Técnicas avançadas de marketing digital para empresas modernas",
+        "url": "/pt-BR/marketing/marketing-digital/estrategias-avancadas/",
+        "relevance": 0.88
+      },
+      {
+        "title": "Ciência de Dados com Python",
+        "category": "Computação",
+        "subcategory": "Ciência de Dados",
+        "description": "Análise de dados e machine learning usando Python e bibliotecas populares",
+        "url": "/pt-BR/computacao/ciencia-dados/python-analise/",
+        "relevance": 0.82
+      }
+    {% else %}
+      {
+        "title": "Modern Web Development",
+        "category": "Development",
+        "subcategory": "Frontend",
+        "description": "Complete guide to modern web development with React, Vue, and Angular",
+        "url": "/en-US/development/frontend/modern-web-development/",
+        "relevance": 0.95
+      },
+      {
+        "title": "Digital Marketing Strategies",
+        "category": "Marketing",
+        "subcategory": "Digital Marketing",
+        "description": "Advanced digital marketing techniques for modern businesses",
+        "url": "/en-US/marketing/digital-marketing/advanced-strategies/",
+        "relevance": 0.88
+      },
+      {
+        "title": "Data Science with Python",
+        "category": "Computing",
+        "subcategory": "Data Science",
+        "description": "Data analysis and machine learning using Python and popular libraries",
+        "url": "/en-US/computing/data-science/python-analysis/",
+        "relevance": 0.82
+      }
+    {% endif %}
+  ],
+  "total_results": 3,
+  "search_time": "0.024s",
+  "language": "{{ lang }}",
+  "suggestions": [
+    {% if lang == 'pt-BR' %}
+      "tutoriais", "ferramentas", "cursos", "guias", "recursos"
+    {% else %}
+      "tutorials", "tools", "courses", "guides", "resources"
+    {% endif %}
+  ]
+} 

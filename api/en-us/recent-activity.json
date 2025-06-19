@@ -1,0 +1,51 @@
+---
+layout: null
+---
+{
+  "language": "en-US",
+  "recent_activity": [
+    {
+      "type": "new_resource",
+      "title": "Advanced React Patterns",
+      "category": "Development",
+      "subcategory": "Frontend Development",
+      "user": "TechExplorer",
+      "timestamp": "{{ site.time | date: '%Y-%m-%dT%H:%M:%SZ' }}",
+      "description": "Added comprehensive guide to advanced React patterns"
+    },
+    {
+      "type": "edit",
+      "title": "Machine Learning Fundamentals",
+      "category": "Computing",
+      "subcategory": "Data Science",
+      "user": "DataScientist",
+      "timestamp": "{{ site.time | date: '%Y-%m-%dT%H:%M:%SZ' | date: '%s' | plus: -3600 | date: '%Y-%m-%dT%H:%M:%SZ' }}",
+      "description": "Updated with latest ML frameworks"
+    },
+    {
+      "type": "new_category",
+      "title": "Sustainable Business Practices",
+      "category": "Business",
+      "subcategory": "Strategy",
+      "user": "GreenBusiness",
+      "timestamp": "{{ site.time | date: '%Y-%m-%dT%H:%M:%SZ' | date: '%s' | plus: -7200 | date: '%Y-%m-%dT%H:%M:%SZ' }}",
+      "description": "Created new collection of sustainability resources"
+    },
+    {
+      "type": "comment",
+      "title": "UI/UX Design Principles",
+      "category": "Design",
+      "subcategory": "User Experience",
+      "user": "DesignMaster",
+      "timestamp": "{{ site.time | date: '%Y-%m-%dT%H:%M:%SZ' | date: '%s' | plus: -10800 | date: '%Y-%m-%dT%H:%M:%SZ' }}",
+      "description": "Added discussion about accessibility guidelines"
+    }
+  ],
+  "stats": {
+    "total_activities_today": 47,
+    "new_resources": 12,
+    "edits": 23,
+    "comments": 8,
+    "new_users": 4
+  }
+} 

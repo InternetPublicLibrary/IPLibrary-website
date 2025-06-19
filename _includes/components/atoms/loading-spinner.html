@@ -1,0 +1,71 @@
+<!-- 
+  Futuristic Loading Spinner Atom Component
+  
+  Usage: 
+  {% include components/atoms/loading-spinner.html 
+       size="sm|md|lg|xl" 
+       variant="default|dots|pulse|orbit"
+       color="blue|purple|green|gray"
+       class="custom-classes" %}
+-->
+
+{% assign size = include.size | default: "md" %}
+{% assign variant = include.variant | default: "default" %}
+{% assign color = include.color | default: "blue" %}
+
+<!-- Size classes -->
+{% case size %}
+  {% when "sm" %}
+    {% assign size_classes = "w-4 h-4" %}
+  {% when "lg" %}
+    {% assign size_classes = "w-8 h-8" %}
+  {% when "xl" %}
+    {% assign size_classes = "w-12 h-12" %}
+  {% else %}
+    {% assign size_classes = "w-6 h-6" %}
+{% endcase %}
+
+<!-- Color classes -->
+{% case color %}
+  {% when "purple" %}
+    {% assign color_classes = "text-purple-600" %}
+  {% when "green" %}
+    {% assign color_classes = "text-green-600" %}
+  {% when "gray" %}
+    {% assign color_classes = "text-gray-600" %}
+  {% else %}
+    {% assign color_classes = "text-blue-600" %}
+{% endcase %}
+
+{% case variant %}
+  {% when "dots" %}
+    <!-- Three dots loading animation -->
+    <div class="flex space-x-1 {{ include.class }}">
+      <div class="w-2 h-2 {{ color_classes | replace: 'text-', 'bg-' }} rounded-full animate-bounce" style="animation-delay: 0ms;"></div>
+      <div class="w-2 h-2 {{ color_classes | replace: 'text-', 'bg-' }} rounded-full animate-bounce" style="animation-delay: 150ms;"></div>
+      <div class="w-2 h-2 {{ color_classes | replace: 'text-', 'bg-' }} rounded-full animate-bounce" style="animation-delay: 300ms;"></div>
+    </div>
+  
+  {% when "pulse" %}
+    <!-- Pulsing circle -->
+    <div class="relative {{ size_classes }} {{ include.class }}">
+      <div class="absolute inset-0 {{ color_classes | replace: 'text-', 'bg-' }} rounded-full opacity-20 animate-ping"></div>
+      <div class="absolute inset-2 {{ color_classes | replace: 'text-', 'bg-' }} rounded-full opacity-40 animate-ping" style="animation-delay: 0.5s;"></div>
+      <div class="absolute inset-4 {{ color_classes | replace: 'text-', 'bg-' }} rounded-full"></div>
+    </div>
+  
+  {% when "orbit" %}
+    <!-- Orbital animation -->
+    <div class="relative {{ size_classes }} {{ include.class }}">
+      <div class="absolute inset-0 border-2 border-transparent border-t-{{ color | append: '-600' }} rounded-full animate-spin"></div>
+      <div class="absolute inset-1 border-2 border-transparent border-b-{{ color | append: '-400' }} rounded-full animate-spin" style="animation-direction: reverse; animation-duration: 1.5s;"></div>
+      <div class="absolute inset-2 w-2 h-2 {{ color_classes | replace: 'text-', 'bg-' }} rounded-full top-0 left-1/2 transform -translate-x-1/2"></div>
+    </div>
+  
+  {% else %}
+    <!-- Default spinning circle -->
+    <svg class="animate-spin {{ size_classes }} {{ color_classes }} {{ include.class }}" fill="none" viewBox="0 0 24 24">
+      <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+      <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+    </svg>
+{% endcase %} 
