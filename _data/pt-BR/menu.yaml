@@ -54,6 +54,14 @@
           path: /pt-BR/academicos/humanidades/literatura/
         - title: Arte
           path: /pt-BR/academicos/humanidades/arte/
+        - title: Estudos Cinematográficos
+          path: /pt-BR/academicos/humanidades/estudos-cinematograficos/
+        - title: Música
+          path: /pt-BR/academicos/humanidades/musica/
+        - title: Estudos de Comunicação
+          path: /pt-BR/academicos/humanidades/estudos-de-comunicacao/
+        - title: Escrita
+          path: /pt-BR/academicos/humanidades/escrita/
     - title: Ciências Naturais
       path: /pt-BR/academicos/ciencias-naturais/
       children:
@@ -89,6 +97,13 @@
               path: /pt-BR/academicos/ciencias-naturais/biologia/ecologia-e-evolucao/
         - title: Ciências da Terra
           path: /pt-BR/academicos/ciencias-naturais/ciencias-da-terra/
+          children:
+            - title: Geografia
+              path: /pt-BR/academicos/ciencias-naturais/ciencias-da-terra/geografia/
+            - title: Geofísica
+              path: /pt-BR/academicos/ciencias-naturais/ciencias-da-terra/geofisica/
+            - title: Ciência Atmosférica
+              path: /pt-BR/academicos/ciencias-naturais/ciencias-da-terra/ciencia-atmosferica/
     - title: Ciências Sociais
       path: /pt-BR/academicos/ciencias-sociais/
       children:
@@ -107,6 +122,10 @@
           path: /pt-BR/academicos/ciencias-sociais/sociologia/
         - title: Ciência Política
           path: /pt-BR/academicos/ciencias-sociais/ciencia-politica/
+        - title: Geografia
+          path: /pt-BR/academicos/ciencias-sociais/geografia/
+        - title: Comunicação
+          path: /pt-BR/academicos/ciencias-sociais/comunicacao/
     - title: Engenharia
       path: /pt-BR/academicos/engenharia/
       children:

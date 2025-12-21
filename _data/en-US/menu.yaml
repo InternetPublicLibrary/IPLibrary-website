@@ -65,6 +65,14 @@
           path: /en-US/academics/humanities/literature/
         - title: Art
           path: /en-US/academics/humanities/art/
+        - title: Film Studies
+          path: /en-US/academics/humanities/film-studies/
+        - title: Music
+          path: /en-US/academics/humanities/music/
+        - title: Communication Studies
+          path: /en-US/academics/humanities/communication-studies/
+        - title: Writing
+          path: /en-US/academics/humanities/writing/
     - title: Natural Sciences
       path: /en-US/academics/natural-sciences/
       children:
@@ -113,6 +121,13 @@
               path: /en-US/academics/natural-sciences/biology/ecology-and-evolution/
         - title: Earth Sciences
           path: /en-US/academics/natural-sciences/earth-sciences/
+          children:
+            - title: Geography
+              path: /en-US/academics/natural-sciences/earth-sciences/geography/
+            - title: Geophysics
+              path: /en-US/academics/natural-sciences/earth-sciences/geophysics/
+            - title: Atmospheric Science
+              path: /en-US/academics/natural-sciences/earth-sciences/atmospheric-science/
     - title: Social Sciences
       path: /en-US/academics/social-sciences/
       children:
@@ -142,6 +157,10 @@
           path: /en-US/academics/social-sciences/sociology/
         - title: Political Science
           path: /en-US/academics/social-sciences/political-science/
+        - title: Geography
+          path: /en-US/academics/social-sciences/geography/
+        - title: Communication
+          path: /en-US/academics/social-sciences/communication/
     - title: Engineering
       path: /en-US/academics/engineering/
       children:
