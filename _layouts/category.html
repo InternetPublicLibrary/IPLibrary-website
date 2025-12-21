@@ -59,9 +59,16 @@ layout: default
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     {% for resource_file in resource_data %}
                     {% assign filename_key = resource_file[0] | replace: '.yaml', '' %}
+                    {% assign resources = resource_file[1] %}
+
+                    {% comment %} Skip subdirectories - they are hashes, not arrays of resources {% endcomment %}
+                    {% assign first_resource = resources | first %}
+                    {% unless first_resource.name or first_resource.url %}
+                    {% continue %}
+                    {% endunless %}
+
                     {% assign section_title = filename_key | replace: '-', ' ' | capitalize %}
                     {% assign section_icon = 'fa-folder' %}
-                    {% assign resources = resource_file[1] %}
 
                     {% case filename_key %}
                     {% when 'tools' %}
@@ -95,6 +102,10 @@ layout: default
                         </h3>
                         <ul class="space-y-4">
                             {% for resource in resources %}
+                            {% comment %} Skip placeholder resources {% endcomment %}
+                            {% if resource.name == blank or resource.name == "Example Resource" %}
+                            {% continue %}
+                            {% endif %}
                             <li class="group">
                                 <a href="{{ resource.url }}" target="_blank" rel="noopener noreferrer"
                                     class="flex items-start gap-3 group-hover:bg-gray-50 p-2 rounded-lg -mx-2 transition-colors">
@@ -173,6 +184,9 @@ layout: default
 
         <!-- Sidebar -->
         <div class="lg:col-span-1 space-y-6">
+
+            <!-- Keywords Cloud -->
+            {% include components/molecules/keywords-cloud.html %}
 
             <!-- Wikipedia -->
             <div class="bg-white rounded-xl shadow-sm border p-6">

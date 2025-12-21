@@ -14,6 +14,104 @@ description=page.description
 <meta name="description" content="{{ include.description | default: site.description }}">
 <meta name="theme-color" content="#2563eb">
 
+<!-- Canonical URL -->
+<link rel="canonical" href="{{ site.url }}{{ page.url | replace: 'index.html', '' }}">
+
+<!-- OpenGraph Meta Tags (Facebook, LinkedIn, etc.) -->
+<meta property="og:title"
+  content="{% if page.title %}{{ page.title }} - {% endif %}{{ site.title | default: 'Internet Public Library' }}">
+<meta property="og:description"
+  content="{{ page.description | default: site.description | default: 'A free encyclopedia of curated internet resources' }}">
+<meta property="og:type" content="{% if page.layout == 'category' %}website{% else %}article{% endif %}">
+<meta property="og:url" content="{{ site.url }}{{ page.url | replace: 'index.html', '' }}">
+<meta property="og:site_name" content="Internet Public Library">
+<meta property="og:image" content="{{ site.url | default: 'https://ipl.better-web.org' }}/images/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt"
+  content="Internet Public Library - {{ page.title | default: 'Free Encyclopedia of Resources' }}">
+<meta property="og:locale" content="{{ page.lang | default: 'en_US' | replace: '-', '_' }}">
+<meta property="og:updated_time" content="{{ site.time | date_to_xmlschema }}">
+
+<!-- Twitter Card Meta Tags -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@InternetPubLib">
+<meta name="twitter:creator" content="@BetterWebOrg">
+<meta name="twitter:title"
+  content="{% if page.title %}{{ page.title }} - {% endif %}{{ site.title | default: 'Internet Public Library' }}">
+<meta name="twitter:description"
+  content="{{ page.description | default: site.description | default: 'A free encyclopedia of curated internet resources' }}">
+<meta name="twitter:image" content="{{ site.url | default: 'https://ipl.better-web.org' }}/images/og-image.png">
+<meta name="twitter:image:alt"
+  content="Internet Public Library - {{ page.title | default: 'Free Encyclopedia of Resources' }}">
+
+<!-- Article Meta (for content pages) -->
+{% if page.date %}
+<meta property="article:published_time" content="{{ page.date | date_to_xmlschema }}">
+{% endif %}
+<meta property="article:modified_time" content="{{ site.time | date_to_xmlschema }}">
+<meta property="article:publisher" content="https://better-web.org">
+
+<!-- Schema.org Organization Structured Data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "Internet Public Library",
+  "alternateName": "IPL",
+  "url": "{{ site.url | default: 'https://ipl.better-web.org' }}",
+  "logo": "{{ site.url | default: 'https://ipl.better-web.org' }}/images/logo.png",
+  "description": "{{ site.description | default: 'A free encyclopedia of curated internet resources' }}",
+  "sameAs": [
+    "https://github.com/InternetPublicLibrary",
+    "https://twitter.com/InternetPubLib",
+    "https://facebook.com/InternetPublicLibrary",
+    "https://linkedin.com/company/internet-public-library",
+    "https://youtube.com/@InternetPublicLibrary"
+  ],
+  "parentOrganization": {
+    "@type": "Organization",
+    "name": "Better Web",
+    "url": "https://better-web.org"
+  }
+}
+</script>
+
+<!-- Schema.org WebSite for Search -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "Internet Public Library",
+  "url": "{{ site.url | default: 'https://ipl.better-web.org' }}",
+  "description": "{{ site.description | default: 'A free encyclopedia of curated internet resources' }}",
+  "inLanguage": "{{ page.lang | default: 'en-US' }}",
+  "potentialAction": {
+    "@type": "SearchAction",
+    "target": "{{ site.url | default: 'https://ipl.better-web.org' }}/search?q={search_term_string}",
+    "query-input": "required name=search_term_string"
+  }
+}
+</script>
+
+{% if page.layout == 'category' %}
+<!-- Schema.org CollectionPage for Category pages -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  "name": "{{ page.title }}",
+  "description": "{{ page.description | default: site.description }}",
+  "url": "{{ site.url }}{{ page.url }}",
+  "isPartOf": {
+    "@type": "WebSite",
+    "name": "Internet Public Library",
+    "url": "{{ site.url | default: 'https://ipl.better-web.org' }}"
+  }
+}
+</script>
+{% endif %}
+
 <!-- Favicon -->
 <link rel="icon" type="image/png" href="/images/favicon.png">
 <link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
@@ -24,12 +122,47 @@ description=page.description
 <!-- Font Awesome -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-<!-- Custom Fonts -->
+<!-- Custom Fonts and Responsive Styles -->
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 
   body {
     font-family: 'Inter', sans-serif;
+  }
+
+  /* Responsive Media Queries */
+  @media screen and (max-width: 640px) {
+    .container {
+      padding-left: 1rem;
+      padding-right: 1rem;
+    }
+  }
+
+  @media screen and (min-width: 641px) and (max-width: 768px) {
+    .container {
+      padding-left: 1.5rem;
+      padding-right: 1.5rem;
+    }
+  }
+
+  @media screen and (min-width: 769px) and (max-width: 1024px) {
+    .container {
+      padding-left: 2rem;
+      padding-right: 2rem;
+    }
+  }
+
+  @media screen and (min-width: 1025px) {
+    .container {
+      max-width: 1280px;
+      margin: 0 auto;
+    }
+  }
+
+  @media print {
+    .no-print {
+      display: none !important;
+    }
   }
 </style>
 

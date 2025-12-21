@@ -16,14 +16,25 @@ Usage:
         </div>
         <p class="text-gray-600 text-sm mb-4">A free encyclopedia of curated internet resources.</p>
         <div class="flex space-x-4">
-          <a href="#" class="text-gray-400 hover:text-blue-600 transition-colors duration-200">
+          <a href="https://github.com/InternetPublicLibrary" target="_blank" rel="noopener noreferrer"
+            aria-label="GitHub" class="text-gray-400 hover:text-gray-900 transition-colors duration-200">
             <i class="fab fa-github text-lg"></i>
           </a>
-          <a href="#" class="text-gray-400 hover:text-blue-600 transition-colors duration-200">
-            <i class="fab fa-twitter text-lg"></i>
+          <a href="https://twitter.com/InternetPubLib" target="_blank" rel="noopener noreferrer"
+            aria-label="X (Twitter)" class="text-gray-400 hover:text-blue-400 transition-colors duration-200">
+            <i class="fab fa-x-twitter text-lg"></i>
           </a>
-          <a href="#" class="text-gray-400 hover:text-blue-600 transition-colors duration-200">
+          <a href="https://facebook.com/InternetPublicLibrary" target="_blank" rel="noopener noreferrer"
+            aria-label="Facebook" class="text-gray-400 hover:text-blue-600 transition-colors duration-200">
             <i class="fab fa-facebook text-lg"></i>
+          </a>
+          <a href="https://linkedin.com/company/internet-public-library" target="_blank" rel="noopener noreferrer"
+            aria-label="LinkedIn" class="text-gray-400 hover:text-blue-700 transition-colors duration-200">
+            <i class="fab fa-linkedin text-lg"></i>
+          </a>
+          <a href="https://youtube.com/@InternetPublicLibrary" target="_blank" rel="noopener noreferrer"
+            aria-label="YouTube" class="text-gray-400 hover:text-red-600 transition-colors duration-200">
+            <i class="fab fa-youtube text-lg"></i>
           </a>
         </div>
       </div>
@@ -127,11 +138,58 @@ Usage:
       </div>
     </div>
 
-    <!-- Copyright -->
+    <!-- Copyright and Company Info -->
     <div class="text-center text-xs text-gray-500 mt-8 pt-6 border-t border-gray-100">
-      <p>&copy; {{ 'now' | date: "%Y" }} Internet Public Library. All rights reserved.</p>
-      <p class="mt-1">Internet Public Library is a community project. Content contributors maintain their own
-        copyrights.</p>
+      <p>&copy; 2023–{{ 'now' | date: "%Y" }} <a href="https://beopendigital.com" target="_blank"
+          rel="noopener noreferrer" class="hover:text-blue-600">Open Digital Brasil</a> Inova Simples (I.S.)</p>
+      <p class="mt-1">CNPJ: 50.748.071/0001-45</p>
+      <p class="mt-1">
+        <i class="fas fa-map-marker-alt mr-1"></i>Rua Catanduva, 138, Loja 2 – Chácara, Betim – MG, CEP 32670-334,
+        Brasil
+      </p>
+      <p class="mt-1">
+        <i class="fas fa-phone mr-1"></i><a href="tel:+5531994501907" class="hover:text-blue-600">(31) 99450-1907</a>
+        <span class="mx-2">•</span>
+        <i class="fas fa-envelope mr-1"></i><a href="mailto:contato@beopendigital.com"
+          class="hover:text-blue-600">contato@beopendigital.com</a>
+      </p>
+      <p class="mt-2 text-gray-400">{% if page.lang == 'pt-BR' %}Internet Public Library é um projeto comunitário.
+        Contribuidores de conteúdo mantêm seus próprios direitos autorais.{% else %}Internet Public Library is a
+        community project. Content contributors maintain their own copyrights.{% endif %}</p>
     </div>
+
+    <!-- LocalBusiness Schema -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "Open Digital Brasil",
+      "legalName": "Open Digital Brasil Inova Simples (I.S.)",
+      "url": "https://beopendigital.com",
+      "logo": "https://beopendigital.com/logo.png",
+      "taxID": "50.748.071/0001-45",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Rua Catanduva, 138, Loja 2 – Chácara",
+        "addressLocality": "Betim",
+        "addressRegion": "MG",
+        "postalCode": "32670-334",
+        "addressCountry": "BR"
+      },
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "telephone": "+55-31-99450-1907",
+        "contactType": "customer service",
+        "email": "contato@beopendigital.com",
+        "availableLanguage": ["Portuguese", "English"]
+      },
+      "sameAs": [
+        "https://facebook.com/OpenDigitalBrasil",
+        "https://instagram.com/OpenDigitalBrasil",
+        "https://linkedin.com/company/OpenDigitalBrasil",
+        "https://tiktok.com/@OpenDigitalBrasil"
+      ]
+    }
+    </script>
   </div>
 </footer>

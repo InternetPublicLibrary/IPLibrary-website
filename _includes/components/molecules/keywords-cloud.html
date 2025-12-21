@@ -1,0 +1,64 @@
+{% comment %}
+Keywords Cloud Component
+Usage:
+{% include components/molecules/keywords-cloud.html %}
+Displays related keywords/topics based on page content
+{% endcomment %}
+
+{% assign keywords = page.keywords | default: page.tags %}
+{% unless keywords %}
+{% comment %} Generate keywords from title, description, and subcategories {% endcomment %}
+{% assign auto_keywords = "" %}
+
+{% if page.title %}
+{% assign title_words = page.title | split: " " %}
+{% for word in title_words %}
+{% if word.size > 3 %}
+{% assign auto_keywords = auto_keywords | append: word | append: "," %}
+{% endif %}
+{% endfor %}
+{% endif %}
+
+{% if page.description %}
+{% assign desc_words = page.description | split: " " %}
+{% for word in desc_words limit: 10 %}
+{% if word.size > 4 %}
+{% assign clean_word = word | remove: "." | remove: "," | downcase %}
+{% assign auto_keywords = auto_keywords | append: clean_word | append: "," %}
+{% endif %}
+{% endfor %}
+{% endif %}
+
+{% assign keywords = auto_keywords | split: "," | uniq %}
+{% endunless %}
+
+{% if keywords and keywords.size > 0 %}
+<div class="bg-white rounded-xl shadow-sm border p-6 mb-6">
+    <h3 class="text-lg font-semibold text-gray-800 mb-4 flex items-center">
+        <i class="fas fa-tags text-blue-500 mr-2"></i>
+        {% if page.lang == 'pt-BR' %}Palavras-chave{% else %}Keywords{% endif %}
+    </h3>
+    <div class="flex flex-wrap gap-2" id="keywords-cloud">
+        {% for keyword in keywords limit: 15 %}
+        {% if keyword != "" and keyword.size > 2 %}
+        {% assign random_size = forloop.index | modulo: 3 %}
+        {% case random_size %}
+        {% when 0 %}
+        {% assign size_class = "text-sm px-3 py-1" %}
+        {% when 1 %}
+        {% assign size_class = "text-base px-4 py-1.5 font-medium" %}
+        {% when 2 %}
+        {% assign size_class = "text-xs px-2 py-1" %}
+        {% endcase %}
+        <a href="{% if page.lang == 'pt-BR' %}/pt-BR/busca{% else %}/en-US/search{% endif %}?q={{ keyword | url_encode }}"
+            class="inline-block {{ size_class }} bg-gradient-to-r from-blue-50 to-indigo-50 text-blue-700 rounded-full border border-blue-100 hover:from-blue-100 hover:to-indigo-100 hover:border-blue-200 transition-all duration-200">
+            {{ keyword | capitalize }}
+        </a>
+        {% endif %}
+        {% endfor %}
+    </div>
+
+    {% comment %} Add meta keywords for SEO {% endcomment %}
+    <meta name="keywords" content="{{ keywords | join: ', ' }}">
+</div>
+{% endif %}
