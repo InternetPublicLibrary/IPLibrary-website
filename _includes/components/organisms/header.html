@@ -55,12 +55,18 @@ Usage:
   <div class="container mx-auto px-4 py-3">
     <div class="flex justify-between items-center">
       <div class="flex items-center">
-        <a href="/{{ page.lang | default: 'en-US' }}/" class="text-2xl font-bold text-gray-800 flex items-center">
+        <a href="/{{ page.lang | default: 'en-US' }}/" class="text-2xl font-bold text-gray-800 flex items-center"
+          id="brand-link">
           <span class="bg-blue-600 text-white w-8 h-8 rounded-lg flex items-center justify-center mr-2">IP</span>
-          <span class="hidden sm:inline">Internet Public Library</span>
+          <span id="brand-full" class="hidden sm:inline transition-all duration-500">Internet Public Library</span>
+          <span id="brand-short" class="hidden transition-all duration-500 opacity-0">IPL</span>
           <span class="sm:hidden">IPL</span>
         </a>
-        <span class="hidden lg:inline-block text-gray-500 ml-3 text-sm">The Free Encyclopedia</span>
+        <div class="hidden lg:flex flex-col ml-3">
+          <span class="text-gray-500 text-sm">The Free Encyclopedia</span>
+          <a href="https://better-web.org" target="_blank" rel="noopener noreferrer"
+            class="text-xs text-gray-400 hover:text-blue-500 transition-colors">by Better Web</a>
+        </div>
       </div>
 
       <!-- Desktop search -->
@@ -194,5 +200,31 @@ Usage:
         localStorage.setItem('preferred_language', lang);
       });
     });
+
+    // Brand animation: minimize "Internet Public Library" to "IPL" after 3 seconds
+    const brandFull = document.getElementById('brand-full');
+    const brandShort = document.getElementById('brand-short');
+
+    if (brandFull && brandShort && window.innerWidth >= 640) {
+      setTimeout(() => {
+        // Fade out full name
+        brandFull.style.opacity = '0';
+        brandFull.style.transform = 'translateX(-10px)';
+
+        setTimeout(() => {
+          brandFull.classList.add('hidden');
+          brandFull.classList.remove('sm:inline');
+
+          // Show short name
+          brandShort.classList.remove('hidden');
+          brandShort.classList.add('sm:inline');
+
+          // Fade in short name
+          setTimeout(() => {
+            brandShort.style.opacity = '1';
+          }, 50);
+        }, 300);
+      }, 3000);
+    }
   });
 </script>
