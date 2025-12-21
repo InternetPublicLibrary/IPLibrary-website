@@ -77,47 +77,25 @@ layout: default
 
         <!-- Quick Navigation -->
         <div class="flex flex-wrap justify-center gap-3 mb-8">
-          {% assign nav_items = "categories,random,contribute,help" | split: "," %}
-          {% for item in nav_items %}
-          {% case item %}
-          {% when 'categories' %}
           {% if page.lang == 'pt-BR' %}
-          {% assign item_text = 'Categorias' %}
-          {% assign item_path = '/pt-BR/categories/' %}
+          <a href="/pt-BR/categorias/"
+            class="px-4 py-2 text-sm font-medium text-slate-700 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-colors duration-200">Categorias</a>
+          <a href="/pt-BR/random-resource/"
+            class="px-4 py-2 text-sm font-medium text-slate-700 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-colors duration-200">Aleatório</a>
+          <a href="/pt-BR/contribuir/"
+            class="px-4 py-2 text-sm font-medium text-slate-700 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-colors duration-200">Contribuir</a>
+          <a href="/pt-BR/ajuda/"
+            class="px-4 py-2 text-sm font-medium text-slate-700 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-colors duration-200">Ajuda</a>
           {% else %}
-          {% assign item_text = 'Categories' %}
-          {% assign item_path = '/en-US/categories/' %}
+          <a href="/en-US/categories/"
+            class="px-4 py-2 text-sm font-medium text-slate-700 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-colors duration-200">Categories</a>
+          <a href="/en-US/random-resource/"
+            class="px-4 py-2 text-sm font-medium text-slate-700 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-colors duration-200">Random</a>
+          <a href="/en-US/contribute/"
+            class="px-4 py-2 text-sm font-medium text-slate-700 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-colors duration-200">Contribute</a>
+          <a href="/en-US/help/"
+            class="px-4 py-2 text-sm font-medium text-slate-700 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-colors duration-200">Help</a>
           {% endif %}
-          {% when 'random' %}
-          {% if page.lang == 'pt-BR' %}
-          {% assign item_text = 'Aleatório' %}
-          {% assign item_path = '/pt-BR/random-resource/' %}
-          {% else %}
-          {% assign item_text = 'Random' %}
-          {% assign item_path = '/en-US/random-resource/' %}
-          {% endif %}
-          {% when 'contribute' %}
-          {% if page.lang == 'pt-BR' %}
-          {% assign item_text = 'Contribuir' %}
-          {% assign item_path = '/pt-BR/contribute/' %}
-          {% else %}
-          {% assign item_text = 'Contribute' %}
-          {% assign item_path = '/en-US/contribute/' %}
-          {% endif %}
-          {% when 'help' %}
-          {% if page.lang == 'pt-BR' %}
-          {% assign item_text = 'Ajuda' %}
-          {% assign item_path = '/pt-BR/help/' %}
-          {% else %}
-          {% assign item_text = 'Help' %}
-          {% assign item_path = '/en-US/help/' %}
-          {% endif %}
-          {% endcase %}
-          <a href="{{ item_path }}"
-            class="px-4 py-2 text-sm font-medium text-slate-700 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-colors duration-200">
-            {{ item_text }}
-          </a>
-          {% endfor %}
         </div>
       </div>
     </div>
@@ -285,14 +263,14 @@ layout: default
             {% if page.lang == 'pt-BR' %}Portal da Comunidade{% else %}Community Portal{% endif %}
           </h3>
           <div class="space-y-3">
-            <a href="/{{ page.lang }}/contribute/"
+            <a href="{% if page.lang == 'pt-BR' %}/pt-BR/contribuir/{% else %}/en-US/contribute/{% endif %}"
               class="block p-3 bg-purple-50 rounded-lg hover:bg-purple-100 transition-colors">
               <div class="font-medium text-slate-900">{% if page.lang == 'pt-BR' %}Contribuir{% else %}Contribute{%
                 endif %}</div>
               <div class="text-sm text-slate-600">{% if page.lang == 'pt-BR' %}Adicione novos recursos{% else %}Add new
                 resources{% endif %}</div>
             </a>
-            <a href="/{{ page.lang }}/community/"
+            <a href="{% if page.lang == 'pt-BR' %}/pt-BR/portal-comunidade/{% else %}/en-US/community-portal/{% endif %}"
               class="block p-3 bg-green-50 rounded-lg hover:bg-green-100 transition-colors">
               <div class="font-medium text-slate-900">{% if page.lang == 'pt-BR' %}Discussões{% else %}Discussions{%
                 endif %}</div>
@@ -308,12 +286,15 @@ layout: default
             {% if page.lang == 'pt-BR' %}Links Rápidos{% else %}Quick Links{% endif %}
           </h3>
           <div class="space-y-2">
-            <a href="/{{ page.lang }}/about/" class="block text-sm text-blue-600 hover:text-blue-800">{% if page.lang ==
-              'pt-BR' %}Sobre{% else %}About{% endif %}</a>
-            <a href="/{{ page.lang }}/help/" class="block text-sm text-blue-600 hover:text-blue-800">{% if page.lang ==
-              'pt-BR' %}Ajuda{% else %}Help{% endif %}</a>
-            <a href="/{{ page.lang }}/contact/" class="block text-sm text-blue-600 hover:text-blue-800">{% if page.lang
-              == 'pt-BR' %}Contato{% else %}Contact{% endif %}</a>
+            <a href="{% if page.lang == 'pt-BR' %}/pt-BR/sobre/{% else %}/en-US/about/{% endif %}"
+              class="block text-sm text-blue-600 hover:text-blue-800">{% if page.lang == 'pt-BR' %}Sobre{% else
+              %}About{% endif %}</a>
+            <a href="{% if page.lang == 'pt-BR' %}/pt-BR/ajuda/{% else %}/en-US/help/{% endif %}"
+              class="block text-sm text-blue-600 hover:text-blue-800">{% if page.lang == 'pt-BR' %}Ajuda{% else %}Help{%
+              endif %}</a>
+            <a href="{% if page.lang == 'pt-BR' %}/pt-BR/contato/{% else %}/en-US/contact/{% endif %}"
+              class="block text-sm text-blue-600 hover:text-blue-800">{% if page.lang == 'pt-BR' %}Contato{% else
+              %}Contact{% endif %}</a>
             <a href="/{{ page.lang }}/random-resource/" class="block text-sm text-blue-600 hover:text-blue-800">{% if
               page.lang == 'pt-BR' %}Recurso Aleatório{% else %}Random Resource{% endif %}</a>
           </div>

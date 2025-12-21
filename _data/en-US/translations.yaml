@@ -1,0 +1,131 @@
+# Translation keys for en-US
+# Usage in templates: {{ site.data['en-US'].translations.key }}
+
+# Navigation
+nav:
+  home: "Home"
+  categories: "Categories"
+  random: "Random"
+  contribute: "Contribute"
+  help: "Help"
+  about: "About"
+  contact: "Contact"
+  login: "Log In"
+  signup: "Sign Up"
+  search: "Search"
+  
+# Common UI
+ui:
+  read_more: "Read more"
+  view_all: "View all"
+  explore: "Explore"
+  submit: "Submit"
+  cancel: "Cancel"
+  save: "Save"
+  loading: "Loading..."
+  search_placeholder: "Search IPL..."
+  
+# Footer
+footer:
+  description: "A free encyclopedia of curated internet resources."
+  about_ipl: "About IPL"
+  mission: "Mission"
+  community_portal: "Community Portal"
+  recent_changes: "Recent Changes"
+  report_issues: "Report Issues"
+  content_policies: "Content Policies"
+  donate: "Donate"
+  languages: "Languages"
+  add_language: "Add your language"
+  privacy_policy: "Privacy Policy"
+  terms_of_use: "Terms of Use"
+  cookie_policy: "Cookie Policy"
+  license_text: "Content is available under"
+  license_name: "Creative Commons Attribution-ShareAlike License"
+  copyright_text: "All rights reserved."
+  community_note: "Internet Public Library is a community project. Content contributors maintain their own copyrights."
+
+# Home Page
+home:
+  featured_article: "Featured Article"
+  browse_by_category: "Browse by Category"
+  todays_resource: "Today's Resource"
+  recent_activity: "Recent Activity"
+  community_portal: "Community Portal"
+  quick_links: "Quick Links"
+  resources: "Resources"
+  contributors: "Contributors"
+  languages: "Languages"
+  edits_today: "Edits Today"
+  subcategories: "subcategories"
+  new_resource_added: "New resource added"
+  category_updated: "Category updated"
+  hours_ago: "hours ago"
+  add_new_resources: "Add new resources"
+  discussions: "Discussions"
+  join_conversations: "Join the conversations"
+  random_resource: "Random Resource"
+
+# Auth Pages
+auth:
+  welcome_back: "Welcome Back"
+  create_account: "Create Account"
+  join_community: "Join the IPL community"
+  email: "Email"
+  password: "Password"
+  full_name: "Full Name"
+  remember_me: "Remember me"
+  forgot_password: "Forgot password?"
+  no_account: "Don't have an account?"
+  have_account: "Already have an account?"
+  agree_terms: "I agree to the"
+  and: "and"
+  check_email: "Check Your Email"
+  email_sent: "We've sent a confirmation link to your email address."
+  didnt_receive: "Didn't receive the email?"
+  resend_email: "Resend confirmation email"
+  wrong_email: "Wrong email?"
+  go_back_signup: "Go back to sign up"
+  two_factor_auth: "Two-Factor Authentication"
+  extra_security: "Add an extra layer of security to your account"
+  enter_code: "Enter the 6-digit code"
+  code_from_app: "Enter the code from your authenticator app"
+  verify_code: "Verify Code"
+  lost_access: "Lost access to your authenticator?"
+  use_backup: "Use a backup code"
+
+# Categories
+categories:
+  all_categories: "All Categories"
+  view_resources: "View resources"
+  
+# Contribute
+contribute:
+  title: "Contribute to IPL"
+  subtitle: "Help us build the largest free educational resource directory. Everyone can contribute!"
+  add_resource: "Add a Resource"
+  add_resource_desc: "Share a valuable educational resource, tutorial, or documentation."
+  improve_content: "Improve Content"
+  improve_content_desc: "Edit descriptions, fix errors, update broken links, or add translations."
+  report_issues: "Report Issues"
+  report_issues_desc: "Found a broken link, outdated resource, or inaccurate information?"
+  translate: "Translate"
+  translate_desc: "Help us reach more people by translating content to your native language."
+  guidelines: "Contribution Guidelines"
+  quality_first: "Quality First"
+  quality_first_desc: "Only submit resources that are high-quality, well-maintained, and genuinely useful."
+  free_resources: "Free Resources"
+  free_resources_desc: "We prioritize free educational resources, though paid resources with exceptional value may be included."
+  accurate_categories: "Accurate Categories"
+  accurate_categories_desc: "Place resources in the most appropriate category to help users find them."
+  be_respectful: "Be Respectful"
+  be_respectful_desc: "Follow our code of conduct and be respectful in all interactions."
+
+# Time
+time:
+  just_now: "just now"
+  minutes_ago: "minutes ago"
+  hours_ago: "hours ago"
+  days_ago: "days ago"
+  today: "Today"
+  yesterday: "Yesterday"

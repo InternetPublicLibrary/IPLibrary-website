@@ -1,0 +1,131 @@
+# Translation keys for pt-BR
+# Usage in templates: {{ site.data['pt-BR'].translations.key }}
+
+# Navigation
+nav:
+  home: "Início"
+  categories: "Categorias"
+  random: "Aleatório"
+  contribute: "Contribuir"
+  help: "Ajuda"
+  about: "Sobre"
+  contact: "Contato"
+  login: "Entrar"
+  signup: "Cadastrar"
+  search: "Pesquisar"
+  
+# Common UI
+ui:
+  read_more: "Leia mais"
+  view_all: "Ver todos"
+  explore: "Explorar"
+  submit: "Enviar"
+  cancel: "Cancelar"
+  save: "Salvar"
+  loading: "Carregando..."
+  search_placeholder: "Pesquisar IPL..."
+  
+# Footer
+footer:
+  description: "Uma enciclopédia gratuita de recursos da internet curados."
+  about_ipl: "Sobre a IPL"
+  mission: "Missão"
+  community_portal: "Portal da Comunidade"
+  recent_changes: "Alterações Recentes"
+  report_issues: "Reportar Problemas"
+  content_policies: "Políticas de Conteúdo"
+  donate: "Doar"
+  languages: "Idiomas"
+  add_language: "Adicionar idioma"
+  privacy_policy: "Política de Privacidade"
+  terms_of_use: "Termos de Uso"
+  cookie_policy: "Política de Cookies"
+  license_text: "Conteúdo disponível sob"
+  license_name: "Licença Creative Commons Atribuição-CompartilhaIgual"
+  copyright_text: "Todos os direitos reservados."
+  community_note: "A Internet Public Library é um projeto comunitário. Contribuidores mantêm seus próprios direitos autorais."
+
+# Home Page
+home:
+  featured_article: "Artigo em Destaque"
+  browse_by_category: "Navegar por Categoria"
+  todays_resource: "Recurso do Dia"
+  recent_activity: "Atividade Recente"
+  community_portal: "Portal da Comunidade"
+  quick_links: "Links Rápidos"
+  resources: "Recursos"
+  contributors: "Contribuidores"
+  languages: "Idiomas"
+  edits_today: "Edições Hoje"
+  subcategories: "subcategorias"
+  new_resource_added: "Novo recurso adicionado"
+  category_updated: "Categoria atualizada"
+  hours_ago: "horas atrás"
+  add_new_resources: "Adicione novos recursos"
+  discussions: "Discussões"
+  join_conversations: "Participe das conversas"
+  random_resource: "Recurso Aleatório"
+
+# Auth Pages
+auth:
+  welcome_back: "Bem-vindo de Volta"
+  create_account: "Criar Conta"
+  join_community: "Junte-se à comunidade IPL"
+  email: "Email"
+  password: "Senha"
+  full_name: "Nome Completo"
+  remember_me: "Lembrar-me"
+  forgot_password: "Esqueceu a senha?"
+  no_account: "Não tem uma conta?"
+  have_account: "Já tem uma conta?"
+  agree_terms: "Concordo com os"
+  and: "e"
+  check_email: "Verifique Seu Email"
+  email_sent: "Enviamos um link de confirmação para seu endereço de email."
+  didnt_receive: "Não recebeu o email?"
+  resend_email: "Reenviar email de confirmação"
+  wrong_email: "Email errado?"
+  go_back_signup: "Voltar para cadastro"
+  two_factor_auth: "Autenticação em Duas Etapas"
+  extra_security: "Adicione uma camada extra de segurança à sua conta"
+  enter_code: "Digite o código de 6 dígitos"
+  code_from_app: "Digite o código do seu aplicativo autenticador"
+  verify_code: "Verificar Código"
+  lost_access: "Perdeu acesso ao seu autenticador?"
+  use_backup: "Usar código de backup"
+
+# Categories
+categories:
+  all_categories: "Todas as Categorias"
+  view_resources: "Ver recursos"
+  
+# Contribute
+contribute:
+  title: "Contribuir para a IPL"
+  subtitle: "Ajude-nos a construir o maior diretório gratuito de recursos educacionais. Todos podem contribuir!"
+  add_resource: "Adicionar Recurso"
+  add_resource_desc: "Compartilhe um recurso educacional valioso, tutorial ou documentação."
+  improve_content: "Melhorar Conteúdo"
+  improve_content_desc: "Edite descrições, corrija erros, atualize links ou adicione traduções."
+  report_issues: "Reportar Problemas"
+  report_issues_desc: "Encontrou um link quebrado, recurso desatualizado ou informação incorreta?"
+  translate: "Traduzir"
+  translate_desc: "Ajude-nos a alcançar mais pessoas traduzindo conteúdo para o seu idioma nativo."
+  guidelines: "Diretrizes de Contribuição"
+  quality_first: "Qualidade Primeiro"
+  quality_first_desc: "Envie apenas recursos de alta qualidade, bem mantidos e genuinamente úteis."
+  free_resources: "Recursos Gratuitos"
+  free_resources_desc: "Priorizamos recursos educacionais gratuitos, embora recursos pagos de valor excepcional possam ser incluídos."
+  accurate_categories: "Categorias Precisas"
+  accurate_categories_desc: "Coloque recursos na categoria mais apropriada para ajudar os usuários a encontrá-los."
+  be_respectful: "Seja Respeitoso"
+  be_respectful_desc: "Siga nosso código de conduta e seja respeitoso em todas as interações."
+
+# Time
+time:
+  just_now: "agora mesmo"
+  minutes_ago: "minutos atrás"
+  hours_ago: "horas atrás"
+  days_ago: "dias atrás"
+  today: "Hoje"
+  yesterday: "Ontem"

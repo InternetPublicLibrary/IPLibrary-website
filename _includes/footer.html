@@ -4,82 +4,129 @@
     <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
       <div>
         <h3 class="text-lg font-medium text-gray-800 mb-3">Internet Public Library</h3>
-        <p class="text-gray-600 text-sm mb-3">A free encyclopedia of curated internet resources.</p>
+        <p class="text-gray-600 text-sm mb-3">{% if page.lang == 'pt-BR' %}Uma enciclopédia gratuita de recursos da
+          internet curados.{% else %}A free encyclopedia of curated internet resources.{% endif %}</p>
         <div class="flex space-x-3">
-          <a href="#" class="text-gray-400 hover:text-gray-600">
+          <a href="https://github.com/InternetPublicLibrary" class="text-gray-400 hover:text-gray-600">
             <i class="fab fa-github text-lg"></i>
           </a>
-          <a href="#" class="text-gray-400 hover:text-gray-600">
+          <a href="https://twitter.com/internetpubliclibrary" class="text-gray-400 hover:text-gray-600">
             <i class="fab fa-twitter text-lg"></i>
-          </a>
-          <a href="#" class="text-gray-400 hover:text-gray-600">
-            <i class="fab fa-facebook text-lg"></i>
           </a>
         </div>
       </div>
-      
+
       <div>
-        <h4 class="text-base font-medium text-gray-800 mb-3">Categories</h4>
+        <h4 class="text-base font-medium text-gray-800 mb-3">{% if page.lang == 'pt-BR' %}Categorias{% else
+          %}Categories{% endif %}</h4>
         <ul class="space-y-1 text-sm">
-          {% for category in site.data.en.menu.en limit:6 %}
-          <li><a href="{{ category.path }}" class="text-gray-600 hover:text-blue-600 hover:underline">{{ category.name | capitalize }}</a></li>
+          {% assign menu = site.data[page.lang].menu %}
+          {% if menu %}
+          {% for category in menu limit:5 %}
+          <li><a href="{{ category.path }}" class="text-gray-600 hover:text-blue-600 hover:underline">{{ category.title
+              }}</a></li>
           {% endfor %}
-          <li><a href="/#categories" class="text-gray-500 hover:text-blue-600 hover:underline text-xs">View all categories →</a></li>
+          {% endif %}
+          <li><a href="/{{ page.lang }}/{% if page.lang == 'pt-BR' %}categorias{% else %}categories{% endif %}/"
+              class="text-gray-500 hover:text-blue-600 hover:underline text-xs">{% if page.lang == 'pt-BR' %}Ver todas
+              →{% else %}View all →{% endif %}</a></li>
         </ul>
       </div>
-      
+
       <div>
-        <h4 class="text-base font-medium text-gray-800 mb-3">About</h4>
+        <h4 class="text-base font-medium text-gray-800 mb-3">{% if page.lang == 'pt-BR' %}Sobre{% else %}About{% endif
+          %}</h4>
         <ul class="space-y-1 text-sm">
-          <li><a href="#" class="text-gray-600 hover:text-blue-600 hover:underline">About IPL</a></li>
-          <li><a href="#" class="text-gray-600 hover:text-blue-600 hover:underline">Mission</a></li>
-          <li><a href="#" class="text-gray-600 hover:text-blue-600 hover:underline">Community Portal</a></li>
-          <li><a href="#" class="text-gray-600 hover:text-blue-600 hover:underline">Recent Changes</a></li>
-          <li><a href="#" class="text-gray-600 hover:text-blue-600 hover:underline">Contact Us</a></li>
+          <li><a href="/{{ page.lang }}/{% if page.lang == 'pt-BR' %}sobre{% else %}about{% endif %}/"
+              class="text-gray-600 hover:text-blue-600 hover:underline">{% if page.lang == 'pt-BR' %}Sobre a IPL{% else
+              %}About IPL{% endif %}</a></li>
+          <li><a href="/{{ page.lang }}/{% if page.lang == 'pt-BR' %}missao{% else %}mission{% endif %}/"
+              class="text-gray-600 hover:text-blue-600 hover:underline">{% if page.lang == 'pt-BR' %}Missão{% else
+              %}Mission{% endif %}</a></li>
+          <li><a
+              href="/{{ page.lang }}/{% if page.lang == 'pt-BR' %}portal-comunidade{% else %}community-portal{% endif %}/"
+              class="text-gray-600 hover:text-blue-600 hover:underline">{% if page.lang == 'pt-BR' %}Portal da
+              Comunidade{% else %}Community Portal{% endif %}</a></li>
+          <li><a
+              href="/{{ page.lang }}/{% if page.lang == 'pt-BR' %}alteracoes-recentes{% else %}recent-changes{% endif %}/"
+              class="text-gray-600 hover:text-blue-600 hover:underline">{% if page.lang == 'pt-BR' %}Alterações
+              Recentes{% else %}Recent Changes{% endif %}</a></li>
+          <li><a href="/{{ page.lang }}/{% if page.lang == 'pt-BR' %}contato{% else %}contact{% endif %}/"
+              class="text-gray-600 hover:text-blue-600 hover:underline">{% if page.lang == 'pt-BR' %}Contato{% else
+              %}Contact Us{% endif %}</a></li>
         </ul>
       </div>
-      
+
       <div>
-        <h4 class="text-base font-medium text-gray-800 mb-3">Contribute</h4>
+        <h4 class="text-base font-medium text-gray-800 mb-3">{% if page.lang == 'pt-BR' %}Contribuir{% else
+          %}Contribute{% endif %}</h4>
         <ul class="space-y-1 text-sm">
-          <li><a href="#" class="text-gray-600 hover:text-blue-600 hover:underline">Help</a></li>
-          <li><a href="#" class="text-gray-600 hover:text-blue-600 hover:underline">Create Content</a></li>
-          <li><a href="#" class="text-gray-600 hover:text-blue-600 hover:underline">Report Issues</a></li>
-          <li><a href="#" class="text-gray-600 hover:text-blue-600 hover:underline">Content Policies</a></li>
-          <li><a href="#" class="text-gray-600 hover:text-blue-600 hover:underline">Donate</a></li>
+          <li><a href="/{{ page.lang }}/{% if page.lang == 'pt-BR' %}ajuda{% else %}help{% endif %}/"
+              class="text-gray-600 hover:text-blue-600 hover:underline">{% if page.lang == 'pt-BR' %}Ajuda{% else
+              %}Help{% endif %}</a></li>
+          <li><a href="/{{ page.lang }}/{% if page.lang == 'pt-BR' %}contribuir{% else %}contribute{% endif %}/"
+              class="text-gray-600 hover:text-blue-600 hover:underline">{% if page.lang == 'pt-BR' %}Contribuir{% else
+              %}Contribute{% endif %}</a></li>
+          <li><a
+              href="/{{ page.lang }}/{% if page.lang == 'pt-BR' %}reportar-problemas{% else %}report-issues{% endif %}/"
+              class="text-gray-600 hover:text-blue-600 hover:underline">{% if page.lang == 'pt-BR' %}Reportar
+              Problemas{% else %}Report Issues{% endif %}</a></li>
+          <li><a
+              href="/{{ page.lang }}/{% if page.lang == 'pt-BR' %}politicas-conteudo{% else %}content-policies{% endif %}/"
+              class="text-gray-600 hover:text-blue-600 hover:underline">{% if page.lang == 'pt-BR' %}Políticas{% else
+              %}Content Policies{% endif %}</a></li>
+          <li><a href="/{{ page.lang }}/{% if page.lang == 'pt-BR' %}doar{% else %}donate{% endif %}/"
+              class="text-gray-600 hover:text-blue-600 hover:underline">{% if page.lang == 'pt-BR' %}Doar{% else
+              %}Donate{% endif %}</a></li>
         </ul>
       </div>
     </div>
-    
+
     <!-- Language selector and legal links -->
     <div class="border-t border-gray-100 pt-6 flex flex-col md:flex-row justify-between">
       <div class="mb-4 md:mb-0">
-        <h4 class="text-sm font-medium text-gray-800 mb-2">Languages</h4>
+        <h4 class="text-sm font-medium text-gray-800 mb-2">{% if page.lang == 'pt-BR' %}Idiomas{% else %}Languages{%
+          endif %}</h4>
         <div class="flex flex-wrap gap-2 text-sm">
-          <a href="/en-US" class="text-gray-600 hover:text-blue-600 hover:underline">English</a>
-          <a href="/pt-BR" class="text-gray-600 hover:text-blue-600 hover:underline">Português</a>
+          <a href="/en-US/" class="text-gray-600 hover:text-blue-600 hover:underline">English</a>
+          <a href="/pt-BR/" class="text-gray-600 hover:text-blue-600 hover:underline">Português</a>
           <span class="text-gray-400">•</span>
-          <a href="#" class="text-gray-500 hover:text-blue-600 hover:underline text-xs">Add your language</a>
+          <a href="/{{ page.lang }}/{% if page.lang == 'pt-BR' %}adicionar-idioma{% else %}add-language{% endif %}/"
+            class="text-gray-500 hover:text-blue-600 hover:underline text-xs">{% if page.lang == 'pt-BR' %}Adicionar
+            idioma{% else %}Add your language{% endif %}</a>
         </div>
       </div>
-      
+
       <div class="text-sm text-gray-500">
         <div class="mb-2">
-          <p>Content is available under <a href="#" class="text-blue-600 hover:underline">Creative Commons Attribution-ShareAlike License</a>.</p>
+          <p>{% if page.lang == 'pt-BR' %}Conteúdo disponível sob{% else %}Content is available under{% endif %} <a
+              href="/{{ page.lang }}/{% if page.lang == 'pt-BR' %}licenca{% else %}license{% endif %}/"
+              class="text-blue-600 hover:underline">Creative Commons Attribution-ShareAlike License</a>.</p>
         </div>
         <div class="flex flex-wrap gap-x-4 gap-y-1">
-          <a href="#" class="hover:text-blue-600 hover:underline">Privacy Policy</a>
-          <a href="#" class="hover:text-blue-600 hover:underline">Terms of Use</a>
-          <a href="#" class="hover:text-blue-600 hover:underline">Cookie Policy</a>
-          <a href="#" class="hover:text-blue-600 hover:underline">Contact IPL</a>
+          <a href="/{{ page.lang }}/{% if page.lang == 'pt-BR' %}politica-privacidade{% else %}privacy-policy{% endif %}/"
+            class="hover:text-blue-600 hover:underline">{% if page.lang == 'pt-BR' %}Privacidade{% else %}Privacy
+            Policy{% endif %}</a>
+          <a href="/{{ page.lang }}/{% if page.lang == 'pt-BR' %}termos-uso{% else %}terms-of-use{% endif %}/"
+            class="hover:text-blue-600 hover:underline">{% if page.lang == 'pt-BR' %}Termos de Uso{% else %}Terms of
+            Use{% endif %}</a>
+          <a href="/{{ page.lang }}/{% if page.lang == 'pt-BR' %}politica-cookies{% else %}cookie-policy{% endif %}/"
+            class="hover:text-blue-600 hover:underline">{% if page.lang == 'pt-BR' %}Cookies{% else %}Cookie Policy{%
+            endif %}</a>
+          <a href="/{{ page.lang }}/{% if page.lang == 'pt-BR' %}contato{% else %}contact{% endif %}/"
+            class="hover:text-blue-600 hover:underline">{% if page.lang == 'pt-BR' %}Contato{% else %}Contact IPL{%
+            endif %}</a>
         </div>
       </div>
     </div>
-    
+
     <!-- Copyright -->
     <div class="text-center text-xs text-gray-500 mt-8 pt-6 border-t border-gray-100">
-      <p>&copy; {{ 'now' | date: "%Y" }} Internet Public Library. All rights reserved.</p>
-      <p class="mt-1">Internet Public Library is a community project. Content contributors maintain their own copyrights.</p>
+      <p>&copy; {{ 'now' | date: "%Y" }} Internet Public Library. {% if page.lang == 'pt-BR' %}Todos os direitos
+        reservados.{% else %}All rights reserved.{% endif %}</p>
+      <p class="mt-1">{% if page.lang == 'pt-BR' %}A Internet Public Library é um projeto comunitário. Contribuidores
+        mantêm seus próprios direitos autorais.{% else %}Internet Public Library is a community project. Content
+        contributors maintain their own copyrights.{% endif %}</p>
     </div>
   </div>
 </footer>
