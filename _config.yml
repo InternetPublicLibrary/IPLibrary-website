@@ -98,20 +98,59 @@ safe: false
 # The following items will not be processed, by default. Create a custom list
 # to override the default setting.
 exclude:
+  # Package managers and dependencies
   - Gemfile
   - Gemfile.lock
-  - node_modules
+  - package.json
+  - yarn.lock
+  - node_modules/
   - vendor/
   - vendor/bundle/
   - vendor/cache/
   - vendor/gems/
   - vendor/ruby/
+  
+  # Development and documentation files
+  - README.md
+  - AGENTS.md
+  - TODO.md
+  - claude.md
+  - LICENSE
+  - Makefile
+  - Rakefile
+  - build.sh
+  - tree.txt
+  - metadata.json
+  - redirects.json
+  
+  # Development/debug directories and files
+  - debug_data/
+  - test_debug/
+  - docs/
+  - scripts/
   - pages/
-  - pages/
-  - 404.html
-  - debug-data.html
   - _plugins_bak/
   - _en-US_bak/
+  
+  # Ruby/Jekyll development files
+  - "*.rb"
+  - fix_indices.rb
+  
+  # Editor and IDE files
+  - .vscode/
+  - .idea/
+  - "*.swp"
+  - "*.swo"
+  - .DS_Store
+  
+  # Git files (except .git which is already ignored)
+  - .gitignore
+  - .gitattributes
+  
+  # Temporary files
+  - tmp/
+  - temp/
+  - "*.log"
 
 
 

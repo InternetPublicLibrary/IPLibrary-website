@@ -40,25 +40,20 @@ Usage:
     </div>
   </div>
 
-  <!-- Language Options Accordion Panel -->
-  <div id="lang-options" class="hidden bg-gradient-to-r from-blue-50 to-indigo-50 border-b border-blue-100">
-    <div class="container mx-auto px-4 py-3">
-      <div class="flex items-center justify-center gap-6">
-        <span class="text-xs text-gray-500 mr-2">
-          <i class="fas fa-language mr-1" aria-hidden="true"></i>
-          {% if page.lang == 'pt-BR' %}Selecione o idioma:{% else %}Select language:{% endif %}
-        </span>
+  <!-- Language Options Accordion Panel (Discrete) -->
+  <div id="lang-options" class="hidden border-b border-gray-200 bg-gray-50">
+    <div class="container mx-auto px-4 py-2">
+      <div class="flex items-center justify-center gap-4">
         <a href="/en-US{{ page.url | remove_first: page.lang | remove_first: '/' }}"
-          class="flex items-center gap-2 px-4 py-2 rounded-lg transition-colors {% if page.lang == 'en-US' %}bg-blue-600 text-white{% else %}bg-white text-gray-700 hover:bg-blue-100 border border-gray-200{% endif %}">
-          <span class="text-lg">🇺🇸</span>
-          <span class="text-sm font-medium">English (US)</span>
-          {% if page.lang == 'en-US' %}<i class="fas fa-check text-xs ml-1" aria-hidden="true"></i>{% endif %}
+          class="flex items-center gap-1.5 px-3 py-1 rounded-md text-xs transition-colors {% if page.lang == 'en-US' %}bg-blue-600 text-white{% else %}text-gray-600 hover:bg-gray-100{% endif %}">
+          🇺🇸 English
+          {% if page.lang == 'en-US' %}<i class="fas fa-check text-[10px] ml-0.5" aria-hidden="true"></i>{% endif %}
         </a>
+        <span class="text-gray-300">|</span>
         <a href="/pt-BR{{ page.url | remove_first: page.lang | remove_first: '/' }}"
-          class="flex items-center gap-2 px-4 py-2 rounded-lg transition-colors {% if page.lang == 'pt-BR' %}bg-blue-600 text-white{% else %}bg-white text-gray-700 hover:bg-blue-100 border border-gray-200{% endif %}">
-          <span class="text-lg">🇧🇷</span>
-          <span class="text-sm font-medium">Português (Brasil)</span>
-          {% if page.lang == 'pt-BR' %}<i class="fas fa-check text-xs ml-1" aria-hidden="true"></i>{% endif %}
+          class="flex items-center gap-1.5 px-3 py-1 rounded-md text-xs transition-colors {% if page.lang == 'pt-BR' %}bg-blue-600 text-white{% else %}text-gray-600 hover:bg-gray-100{% endif %}">
+          🇧🇷 Português
+          {% if page.lang == 'pt-BR' %}<i class="fas fa-check text-[10px] ml-0.5" aria-hidden="true"></i>{% endif %}
         </a>
       </div>
     </div>
@@ -84,13 +79,15 @@ Usage:
 
       <!-- Desktop search -->
       <div class="hidden md:block w-1/3">
-        <div class="relative">
-          <input type="text" placeholder="Search IPL..."
+        <form action="" id="header-search-form" class="relative">
+          <input type="text" id="header-search-input"
+            placeholder="{% if page.lang == 'pt-BR' %}Pesquisar IPL...{% else %}Search IPL...{% endif %}"
             class="w-full border border-gray-300 rounded-lg px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors duration-200 pl-10">
-          <button aria-label="Search" class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400">
+          <button type="submit" aria-label="Search"
+            class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-blue-600">
             <i class="fas fa-search" aria-hidden="true"></i>
           </button>
-        </div>
+        </form>
       </div>
 
       <!-- Mobile menu toggle -->
@@ -226,6 +223,24 @@ Usage:
           langBtn.setAttribute('aria-expanded', 'false');
           langOptions.classList.add('hidden');
           langChevron.style.transform = 'rotate(0deg)';
+        }
+      });
+    }
+
+    // Header search functionality
+    const headerSearchForm = document.getElementById('header-search-form');
+    const headerSearchInput = document.getElementById('header-search-input');
+
+    if (headerSearchForm && headerSearchInput) {
+      headerSearchForm.addEventListener('submit', function (e) {
+        e.preventDefault();
+        const query = headerSearchInput.value.trim();
+        if (query) {
+          // Detect current language from URL
+          const currentPath = window.location.pathname;
+          const lang = currentPath.startsWith('/pt-BR') ? 'pt-BR' : 'en-US';
+          const searchPath = lang === 'pt-BR' ? '/pt-BR/busca/' : '/en-US/search/';
+          window.location.href = searchPath + '?q=' + encodeURIComponent(query);
         }
       });
     }
