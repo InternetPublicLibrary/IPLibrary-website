@@ -9,30 +9,19 @@ Usage:
   <div class="bg-gray-50 border-b border-gray-200">
     <div class="container mx-auto px-4">
       <div class="flex justify-between py-1.5 text-xs text-gray-600">
-        <!-- Language switcher -->
-        <div class="relative group">
-          <button class="flex items-center hover:text-blue-600 transition-colors duration-200">
-            <i class="fas fa-globe mr-1"></i>
+        <!-- Language switcher (Accordion) -->
+        <div class="relative">
+          <button id="lang-switcher-btn" class="flex items-center hover:text-blue-600 transition-colors duration-200"
+            aria-expanded="false" aria-controls="lang-options" aria-label="Select language">
+            <i class="fas fa-globe mr-1" aria-hidden="true"></i>
             {% if page.lang == 'pt-BR' %}
             Português
             {% else %}
             English
             {% endif %}
-            <i class="fas fa-chevron-down ml-1 text-xs"></i>
+            <i id="lang-chevron" class="fas fa-chevron-down ml-1 text-xs transition-transform duration-200"
+              aria-hidden="true"></i>
           </button>
-          <div
-            class="absolute left-0 mt-1 w-40 bg-white border border-gray-200 rounded-lg shadow-lg hidden group-hover:block z-10">
-            <div class="p-1">
-              <a href="/en-US/"
-                class="block px-3 py-2 rounded-md hover:bg-gray-50 {% if page.lang == 'en-US' %}font-semibold text-blue-600{% endif %}">
-                <span class="fi fi-us mr-2"></span>English (US)
-              </a>
-              <a href="/pt-BR/"
-                class="block px-3 py-2 rounded-md hover:bg-gray-50 {% if page.lang == 'pt-BR' %}font-semibold text-blue-600{% endif %}">
-                <span class="fi fi-br mr-2"></span>Português (Brasil)
-              </a>
-            </div>
-          </div>
         </div>
 
         <!-- User options -->
@@ -47,6 +36,30 @@ Usage:
             endif %}
           </a>
         </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Language Options Accordion Panel -->
+  <div id="lang-options" class="hidden bg-gradient-to-r from-blue-50 to-indigo-50 border-b border-blue-100">
+    <div class="container mx-auto px-4 py-3">
+      <div class="flex items-center justify-center gap-6">
+        <span class="text-xs text-gray-500 mr-2">
+          <i class="fas fa-language mr-1" aria-hidden="true"></i>
+          {% if page.lang == 'pt-BR' %}Selecione o idioma:{% else %}Select language:{% endif %}
+        </span>
+        <a href="/en-US{{ page.url | remove_first: page.lang | remove_first: '/' }}"
+          class="flex items-center gap-2 px-4 py-2 rounded-lg transition-colors {% if page.lang == 'en-US' %}bg-blue-600 text-white{% else %}bg-white text-gray-700 hover:bg-blue-100 border border-gray-200{% endif %}">
+          <span class="text-lg">🇺🇸</span>
+          <span class="text-sm font-medium">English (US)</span>
+          {% if page.lang == 'en-US' %}<i class="fas fa-check text-xs ml-1" aria-hidden="true"></i>{% endif %}
+        </a>
+        <a href="/pt-BR{{ page.url | remove_first: page.lang | remove_first: '/' }}"
+          class="flex items-center gap-2 px-4 py-2 rounded-lg transition-colors {% if page.lang == 'pt-BR' %}bg-blue-600 text-white{% else %}bg-white text-gray-700 hover:bg-blue-100 border border-gray-200{% endif %}">
+          <span class="text-lg">🇧🇷</span>
+          <span class="text-sm font-medium">Português (Brasil)</span>
+          {% if page.lang == 'pt-BR' %}<i class="fas fa-check text-xs ml-1" aria-hidden="true"></i>{% endif %}
+        </a>
       </div>
     </div>
   </div>
@@ -185,11 +198,35 @@ Usage:
 <script>
   // Mobile menu toggle
   document.addEventListener('DOMContentLoaded', function () {
+    // Mobile menu toggle
     const menuToggle = document.getElementById('menu-toggle');
     if (menuToggle) {
       menuToggle.addEventListener('click', function () {
         const mobileMenu = document.getElementById('mobile-menu');
         mobileMenu.classList.toggle('hidden');
+      });
+    }
+
+    // Language switcher accordion toggle
+    const langBtn = document.getElementById('lang-switcher-btn');
+    const langOptions = document.getElementById('lang-options');
+    const langChevron = document.getElementById('lang-chevron');
+
+    if (langBtn && langOptions && langChevron) {
+      langBtn.addEventListener('click', function () {
+        const isExpanded = langBtn.getAttribute('aria-expanded') === 'true';
+        langBtn.setAttribute('aria-expanded', !isExpanded);
+        langOptions.classList.toggle('hidden');
+        langChevron.style.transform = isExpanded ? 'rotate(0deg)' : 'rotate(180deg)';
+      });
+
+      // Close when clicking outside
+      document.addEventListener('click', function (e) {
+        if (!langBtn.contains(e.target) && !langOptions.contains(e.target)) {
+          langBtn.setAttribute('aria-expanded', 'false');
+          langOptions.classList.add('hidden');
+          langChevron.style.transform = 'rotate(0deg)';
+        }
       });
     }
 
