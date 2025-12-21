@@ -1,0 +1,62 @@
+<!--
+  Dashboard Sidebar Molecule
+  Sticky sidebar with navigation, stats, and actions
+  
+  Usage:
+  {% include components/molecules/dashboard-sidebar.html
+    sections=site.data.dashboard_sections
+    stats_sources=8
+  %}
+-->
+
+<div class="sticky top-24 space-y-4">
+
+    <!-- Quick Navigation -->
+    <div class="bg-white rounded-xl shadow-sm border p-4">
+        <h3 class="font-semibold text-gray-800 mb-3 text-sm uppercase tracking-wide">
+            <i class="fas fa-compass mr-2 text-blue-500"></i>
+            {% if page.lang == 'pt-BR' %}Navegação Rápida{% else %}Quick Nav{% endif %}
+        </h3>
+        <nav id="dashboard-nav" class="space-y-1 text-sm">
+            <!-- Dynamically populated or use include.sections -->
+        </nav>
+    </div>
+
+    <!-- Search Stats -->
+    <div class="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-xl border border-blue-100 p-4">
+        <h3 class="font-semibold text-gray-800 mb-3 text-sm">
+            <i class="fas fa-chart-bar mr-2 text-blue-500"></i>
+            {% if page.lang == 'pt-BR' %}Fontes de Busca{% else %}Search Sources{% endif %}
+        </h3>
+        <div class="grid grid-cols-2 gap-2 text-center">
+            <div class="bg-white/60 rounded-lg p-2">
+                <div class="text-2xl font-bold text-blue-600">{{ include.stats_sources | default: 8 }}</div>
+                <div class="text-xs text-gray-600">{% if page.lang == 'pt-BR' %}Fontes{% else %}Sources{% endif %}</div>
+            </div>
+            <div class="bg-white/60 rounded-lg p-2">
+                <div class="text-2xl font-bold text-green-600">∞</div>
+                <div class="text-xs text-gray-600">{% if page.lang == 'pt-BR' %}Recursos{% else %}Resources{% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Quick Actions -->
+    <div class="bg-white rounded-xl shadow-sm border p-4">
+        <h3 class="font-semibold text-gray-800 mb-3 text-sm">
+            <i class="fas fa-bolt mr-2 text-yellow-500"></i>
+            {% if page.lang == 'pt-BR' %}Ações Rápidas{% else %}Quick Actions{% endif %}
+        </h3>
+        <div class="space-y-2 text-sm">
+            <button onclick="performGlobalSearch()"
+                class="w-full text-left px-3 py-2 rounded-lg bg-blue-50 text-blue-700 hover:bg-blue-100">
+                <i class="fas fa-sync-alt mr-2"></i>
+                {% if page.lang == 'pt-BR' %}Atualizar Tudo{% else %}Refresh All{% endif %}
+            </button>
+            <a href="#" onclick="window.print()" class="block px-3 py-2 rounded-lg hover:bg-gray-50 text-gray-600">
+                <i class="fas fa-print mr-2"></i>
+                {% if page.lang == 'pt-BR' %}Imprimir{% else %}Print Results{% endif %}
+            </a>
+        </div>
+    </div>
+</div>

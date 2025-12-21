@@ -1,0 +1,41 @@
+<!--
+  Search Panel Molecule
+  A reusable wrapper for search sections with consistent header styling
+  
+  Usage:
+  {% include components/molecules/search-panel.html
+    id="section-id"
+    title="Section Title"
+    icon="icon-name"
+    icon_class="fab or fas"
+    badge="Badge Text"
+    bg_color="blue"
+    content_include="organisms/search-component.html"
+  %}
+-->
+
+{% assign bg_color = include.bg_color | default: "gray" %}
+{% assign icon_class = include.icon_class | default: "fas" %}
+
+<div id="{{ include.id }}" class="search-section bg-white rounded-xl shadow-sm border overflow-hidden">
+    <div class="bg-{{ bg_color }}-50 border-b border-{{ bg_color }}-100 px-6 py-3 flex items-center justify-between">
+        <h3 class="font-semibold text-{{ bg_color }}-900 flex items-center gap-2">
+            {% if include.icon_image %}
+            <img src="{{ include.icon_image }}" alt="{{ include.title }}" class="w-5 h-5">
+            {% else %}
+            <i class="{{ icon_class }} fa-{{ include.icon }} text-{{ bg_color }}-600"></i>
+            {% endif %}
+            {{ include.title }}
+        </h3>
+        <span class="text-xs font-medium bg-{{ bg_color }}-200 text-{{ bg_color }}-800 px-2 py-1 rounded">
+            {{ include.badge }}
+        </span>
+    </div>
+    <div class="p-6">
+        {% if include.content_include %}
+        {% include {{ include.content_include }} %}
+        {% else %}
+        {{ include.content }}
+        {% endif %}
+    </div>
+</div>
