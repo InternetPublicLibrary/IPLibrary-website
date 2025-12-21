@@ -170,9 +170,4 @@ defaults:
       path: "pt-BR"
     values:
       lang: "pt-BR"
-      layout: "category"
-  - scope:
-      path: "en-US"
-    values:
-      lang: "en-US"
-      layout: "category"
+
