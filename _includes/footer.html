@@ -122,8 +122,9 @@
 
     <!-- Copyright -->
     <div class="text-center text-xs text-gray-500 mt-8 pt-6 border-t border-gray-100">
-      <p>&copy; {{ 'now' | date: "%Y" }} Internet Public Library. {% if page.lang == 'pt-BR' %}Todos os direitos
-        reservados.{% else %}All rights reserved.{% endif %}</p>
+      <p><a href="/{{ page.lang }}/{% if page.lang == 'pt-BR' %}licenca{% else %}license{% endif %}/"
+          class="hover:text-blue-600 hover:underline">&copy; {{ 'now' | date: "%Y" }} Internet Public Library</a>. {% if
+        page.lang == 'pt-BR' %}Todos os direitos reservados.{% else %}All rights reserved.{% endif %}</p>
       <p class="mt-1">{% if page.lang == 'pt-BR' %}A Internet Public Library é um projeto comunitário. Contribuidores
         mantêm seus próprios direitos autorais.{% else %}Internet Public Library is a community project. Content
         contributors maintain their own copyrights.{% endif %}</p>

@@ -19,7 +19,7 @@ description: >- # this means to ignore newlines until "baseurl:"
   The Internet Public Library (IPL) is a free encyclopedia of curated internet resources,
   organized by category and maintained by a global community of contributors.
 baseurl: "" # the subpath of your site, e.g. /blog
-url: "https://iplibrary.org" # the base hostname & protocol for your site, e.g. http://example.com
+url: "https://ipl.better-web.org" # the base hostname & protocol for your site
 twitter_username: internetpubliclibrary
 github_username: InternetPublicLibrary
 
