@@ -1,5 +1,5 @@
-# Netlify Headers Configuration
-# https://docs.netlify.com/routing/headers/
+# Cloudflare Pages Headers Configuration
+# https://developers.cloudflare.com/pages/configuration/headers/
 
 # Security Headers for all pages
 /*
@@ -39,4 +39,4 @@
   Cache-Control: no-cache
 
 # Prevent directory listing (handled by custom 404)
-# Netlify doesn't show directory listings by default
+# Cloudflare Pages doesn't show directory listings by default
