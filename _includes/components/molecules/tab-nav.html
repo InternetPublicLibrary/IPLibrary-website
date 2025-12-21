@@ -1,0 +1,10 @@
+<div class="border-b border-gray-200 mb-4">
+    <nav class="-mb-px flex gap-6" aria-label="Tabs">
+        {% for tab in include.tabs %}
+        <button onclick="switchTab('{{ tab.id }}')" id="tab-{{ tab.id }}"
+            class="tab-btn {{ tab.active_class | default: 'border-transparent text-gray-500' }} w-1/4 py-4 px-1 text-center border-b-2 font-medium text-sm hover:text-gray-700 hover:border-gray-300">
+            <i class="{{ tab.icon }} mr-2"></i>{{ tab.label }}
+        </button>
+        {% endfor %}
+    </nav>
+</div>

@@ -1,5 +1,6 @@
 - title: Academics
   path: /en-US/academics/
+  data_folder: academics
   children:
     - title: Formal Sciences
       path: /en-US/academics/formal-sciences/
@@ -23,6 +24,7 @@
 
 - title: Business
   path: /en-US/business/
+  data_folder: business
   children:
     - title: Business Law
       path: /en-US/business/business-law/
@@ -57,6 +59,7 @@
 
 - title: Computing
   path: /en-US/computing/
+  data_folder: computing
   children:
     - title: Big Data
       path: /en-US/computing/big-data/
@@ -79,6 +82,7 @@
 
 - title: Design
   path: /en-US/design/
+  data_folder: design
   children:
     - title: 3D and Animation
       path: /en-US/design/3d-and-animation/
@@ -103,6 +107,7 @@
 
 - title: Development
   path: /en-US/development/
+  data_folder: development
   children:
     - title: Agile Project Management
       path: /en-US/development/agile-project-management/
@@ -135,6 +140,7 @@
 
 - title: Marketing
   path: /en-US/marketing/
+  data_folder: marketing
   children:
     - title: Advertising
       path: /en-US/marketing/advertising/
@@ -167,6 +173,7 @@
 
 - title: Personal Development
   path: /en-US/personal-development/
+  data_folder: personal-development
   children:
     - title: Career Development
       path: /en-US/personal-development/career-development/
@@ -201,6 +208,7 @@
 
 - title: Photography
   path: /en-US/photography/
+  data_folder: photography
   children:
     - title: Analogue Photography
       path: /en-US/photography/analogue-photography/

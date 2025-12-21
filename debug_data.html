@@ -1,0 +1,9 @@
+---
+layout: null
+---
+Data Debugging:
+site.data keys: {{ site.data | map: "first" | join: ", " }}
+site.data['en-US'] keys: {{ site.data['en-US'] | map: "first" | join: ", " }}
+site.data['en-US'].menu size: {{ site.data['en-US'].menu.size }}
+site.data['en-US'].menu first item: {{ site.data['en-US'].menu[0].title }}
+page.lang: {{ page.lang }}

@@ -1,0 +1,62 @@
+<div id="openalex-search-container" class="space-y-4">
+    <div id="openalex-results-list" class="space-y-4"></div>
+    {% include components/atoms/loader.html id="openalex-loader" class="hidden" %}
+</div>
+
+<script>
+    async function searchOpenAlex(query) {
+        const container = document.getElementById('openalex-results-list');
+        const loader = document.getElementById('openalex-loader');
+
+        container.innerHTML = '';
+        loader.classList.remove('hidden');
+
+        const endpoint = `https://api.openalex.org/works?search=${encodeURIComponent(query)}&per-page=5&sort=publication_year:desc`;
+
+        try {
+            const response = await fetch(endpoint);
+            const data = await response.json();
+            const results = data.results;
+
+            loader.classList.add('hidden');
+
+            if (!results || results.length === 0) {
+                container.innerHTML = '<p class="text-gray-500 text-center">No papers found.</p>';
+                return;
+            }
+
+            container.innerHTML = results.map(work => {
+                const authors = work.authorships.slice(0, 3).map(a => a.author.display_name).join(', ');
+                const year = work.publication_year;
+                const venue = work.primary_location?.source?.display_name || 'Unknown Venue';
+                const doi = work.doi;
+                const pdf = work.open_access?.oa_url;
+
+                let meta = `<span class="font-medium text-gray-700">${authors}${work.authorships.length > 3 ? ' et al.' : ''}</span>`;
+                meta += ` • ${year} • ${venue}`;
+
+                // Reconstructing result-card molecule logic in JS
+                let html = `
+      <div class="bg-white border border-gray-200 p-4 rounded-lg shadow-sm hover:shadow-md transition-shadow">
+        <h3 class="font-semibold text-lg text-gray-800 mb-1">
+          <a href="${doi || '#'}" target="_blank" rel="noopener noreferrer" class="hover:underline">
+            ${work.title}
+          </a>
+        </h3>
+        <div class="text-xs text-gray-500 mb-2">${meta}</div>
+        
+        <div class="flex gap-3 mt-3">
+          ${doi ? `<a href="${doi}" target="_blank" class="text-blue-600 text-sm hover:underline flex items-center"><i class="fas fa-external-link-alt mr-1"></i> View Paper</a>` : ''}
+          ${pdf ? `<a href="${pdf}" target="_blank" class="text-green-600 text-sm hover:underline flex items-center"><i class="fas fa-file-pdf mr-1"></i> PDF</a>` : ''}
+        </div>
+      </div>`;
+                return html;
+            }).join('');
+
+        } catch (error) {
+            console.error('OpenAlex Error:', error);
+            loader.classList.add('hidden');
+            container.innerHTML = '<p class="text-red-500 text-center">Error loading papers.</p>';
+        }
+    }
+</script>

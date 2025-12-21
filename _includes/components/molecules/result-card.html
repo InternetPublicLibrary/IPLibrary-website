@@ -1,0 +1,42 @@
+<div class="bg-white border border-gray-200 p-4 rounded-lg shadow-sm hover:shadow-md transition-shadow">
+    <h3 class="font-semibold text-lg text-blue-700 mb-1">
+        <a href="{{ include.url }}" target="_blank" rel="noopener noreferrer" class="hover:underline">
+            {{ include.title }}
+        </a>
+    </h3>
+
+    {% if include.meta %}
+    <div class="text-xs text-gray-500 mb-2">
+        {{ include.meta }}
+    </div>
+    {% endif %}
+
+    {% if include.snippet %}
+    <p class="text-sm text-gray-700 leading-relaxed">
+        {{ include.snippet }}
+    </p>
+    {% endif %}
+
+    {% if include.tags %}
+    <div class="flex flex-wrap gap-2 mt-3">
+        {% for tag in include.tags %}
+        <span class="px-2 py-0.5 bg-gray-100 text-gray-600 text-xs rounded-full border border-gray-200">
+            {{ tag }}
+        </span>
+        {% endfor %}
+    </div>
+    {% endif %}
+
+    <div class="flex gap-3 mt-3">
+        {% if include.doi %}
+        <a href="{{ include.doi }}" target="_blank" class="text-blue-600 text-sm hover:underline flex items-center">
+            <i class="fas fa-external-link-alt mr-1"></i> View
+        </a>
+        {% endif %}
+        {% if include.pdf %}
+        <a href="{{ include.pdf }}" target="_blank" class="text-green-600 text-sm hover:underline flex items-center">
+            <i class="fas fa-file-pdf mr-1"></i> PDF
+        </a>
+        {% endif %}
+    </div>
+</div>

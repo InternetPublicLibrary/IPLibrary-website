@@ -16,6 +16,10 @@ ruby '3.2.2'
 # Fix for the public_suffix dependency issue
 gem "public_suffix", "~> 5.1.1"
 
+# Faraday 2.0+ and retry middleware
+gem "faraday", "~> 2.0"
+gem "faraday-retry"
+
 gem 'html-proofer'
 
 # If you have any plugins, put them here!

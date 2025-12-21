@@ -27,10 +27,10 @@ github_username: InternetPublicLibrary
 encoding: UTF-8
 
 # Enable dynamic page generation
-enable_dynamic_pages: true
+enable_dynamic_pages: false
 
 # Intelligent page generation system
-enable_intelligent_page_generation: true
+enable_intelligent_page_generation: false
 
 # Enhanced API system
 api:
@@ -97,14 +97,28 @@ safe: false
 # Exclude from processing.
 # The following items will not be processed, by default. Create a custom list
 # to override the default setting.
-# exclude:
-#   - Gemfile
-#   - Gemfile.lock
-#   - node_modules
-#   - vendor/bundle/
-#   - vendor/cache/
-#   - vendor/gems/
-#   - vendor/ruby/
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - node_modules
+  - vendor/
+  - vendor/bundle/
+  - vendor/cache/
+  - vendor/gems/
+  - vendor/ruby/
+  - pages/
+  - pages/
+  - 404.html
+  - debug-data.html
+  - _plugins_bak/
+  - _en-US_bak/
+
+
+
+
+
+
+
 
 # PAGE GENERATION CONFIGURATION
 # Controls how pages are generated to prevent duplication
@@ -156,3 +170,9 @@ defaults:
       path: "pt-BR"
     values:
       lang: "pt-BR"
+      layout: "category"
+  - scope:
+      path: "en-US"
+    values:
+      lang: "en-US"
+      layout: "category"

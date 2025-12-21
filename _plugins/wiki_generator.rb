@@ -171,10 +171,6 @@ module Jekyll
         
         # Generate language root index.html (direct in language folder)
         create_language_root_index(lang_code)
-        
-        # Also generate in the /index subfolder for backward compatibility
-        # This can be removed later if not needed
-        create_language_index_in_subfolder(lang_code)
       end
     end
     
@@ -210,36 +206,5 @@ module Jekyll
       puts e.backtrace.join("\n")
     end
     
-    def create_language_index_in_subfolder(lang_code)
-      page_path = "#{lang_code}/index/index.html"
-      
-      # Skip if already generated
-      if @generated_pages.include?(page_path)
-        puts "Skipping already generated page: #{page_path}"
-        return
-      end
-      
-      # Create a page
-      page = Jekyll::PageWithoutAFile.new(@site, @site.source, "", page_path)
-      page.content = ""
-      page.data = {
-        'layout' => 'language_index',
-        'title' => @site.config['languages'].find { |l| l['code'] == lang_code }&.dig('name') || lang_code,
-        'lang' => lang_code,
-        'description' => "Welcome to the #{lang_code} version of Internet Public Library",
-        'last_updated' => Time.now.strftime("%Y-%m-%d")
-      }
-      
-      # Add the page to Jekyll's pages
-      @site.pages << page
-      
-      # Mark as generated
-      @generated_pages << page_path
-      
-      puts "Generated language index page in subfolder: #{page_path}"
-    rescue => e
-      puts "Error generating language index page in subfolder #{page_path}: #{e.message}"
-      puts e.backtrace.join("\n")
-    end
   end
 end 

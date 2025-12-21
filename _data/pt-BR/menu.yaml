@@ -1,230 +1,238 @@
 - title: Acadêmicos
-  path: /pt-BR/academics/
+  path: /pt-BR/academicos/
+  data_folder: academics
   children:
     - title: Ciências Formais
-      path: /pt-BR/academics/formal-sciences/
+      path: /pt-BR/academicos/ciencias-formais/
     - title: Humanidades
-      path: /pt-BR/academics/humanities/
+      path: /pt-BR/academicos/humanidades/
       children:
         - title: Antropologia
-          path: /pt-BR/academics/humanities/anthropology/
+          path: /pt-BR/academicos/humanidades/antropologia/
         - title: História
-          path: /pt-BR/academics/humanities/history/
+          path: /pt-BR/academicos/humanidades/historia/
         - title: Linguística e Idiomas
-          path: /pt-BR/academics/humanities/linguistics-and-languages/
+          path: /pt-BR/academicos/humanidades/linguistica-e-idiomas/
         - title: Filosofia
-          path: /pt-BR/academics/humanities/philosophy/
+          path: /pt-BR/academicos/humanidades/filosofia/
     - title: Ciências Naturais
-      path: /pt-BR/academics/natural-sciences/
+      path: /pt-BR/academicos/ciencias-naturais/
     - title: Profissões e Ciências Aplicadas
-      path: /pt-BR/academics/professions-and-applied-sciences/
+      path: /pt-BR/academicos/profissoes-e-ciencias-aplicadas/
     - title: Ciências Sociais
-      path: /pt-BR/academics/social-sciences/
+      path: /pt-BR/academicos/ciencias-sociais/
 
 - title: Negócios
-  path: /pt-BR/business/
+  path: /pt-BR/negocios/
+  data_folder: business
   children:
     - title: Direito Empresarial
-      path: /pt-BR/business/business-law/
+      path: /pt-BR/negocios/direito-empresarial/
     - title: Comunicações
-      path: /pt-BR/business/communications/
+      path: /pt-BR/negocios/comunicacoes/
     - title: Dados e Análises
-      path: /pt-BR/business/data-and-analytics/
+      path: /pt-BR/negocios/dados-e-analises/
     - title: Empreendedorismo
-      path: /pt-BR/business/entrepreneurship/
+      path: /pt-BR/negocios/empreendedorismo/
     - title: Finanças
-      path: /pt-BR/business/finance/
+      path: /pt-BR/negocios/financas/
     - title: Negócios Domésticos
-      path: /pt-BR/business/home-business/
+      path: /pt-BR/negocios/negocios-domesticos/
     - title: Recursos Humanos
-      path: /pt-BR/business/human-resources/
+      path: /pt-BR/negocios/recursos-humanos/
     - title: Indústria
-      path: /pt-BR/business/industry/
+      path: /pt-BR/negocios/industria/
     - title: Gestão
-      path: /pt-BR/business/management/
+      path: /pt-BR/negocios/gestao/
     - title: Mídia
-      path: /pt-BR/business/media/
+      path: /pt-BR/negocios/midia/
     - title: Operações
-      path: /pt-BR/business/operations/
+      path: /pt-BR/negocios/operacoes/
     - title: Gerenciamento de Projetos
-      path: /pt-BR/business/project-management/
+      path: /pt-BR/negocios/gerenciamento-de-projetos/
     - title: Imóveis
-      path: /pt-BR/business/real-estate/
+      path: /pt-BR/negocios/imoveis/
     - title: Vendas
-      path: /pt-BR/business/sales/
+      path: /pt-BR/negocios/vendas/
     - title: Estratégia
-      path: /pt-BR/business/strategy/
+      path: /pt-BR/negocios/estrategia/
 
 - title: Computação
-  path: /pt-BR/computing/
+  path: /pt-BR/computacao/
+  data_folder: computing
   children:
     - title: Big Data
-      path: /pt-BR/computing/big-data/
+      path: /pt-BR/computacao/big-data/
     - title: Sistemas de Informação
-      path: /pt-BR/computing/computer-information-systems/
+      path: /pt-BR/computacao/sistemas-de-informacao/
     - title: Ciência da Computação
-      path: /pt-BR/computing/computer-science/
+      path: /pt-BR/computacao/ciencia-da-computacao/
     - title: Segurança Cibernética
-      path: /pt-BR/computing/cyber-security/
+      path: /pt-BR/computacao/seguranca-cibernetica/
     - title: Ciência de Dados
-      path: /pt-BR/computing/data-science/
+      path: /pt-BR/computacao/ciencia-de-dados/
     - title: Hardware
-      path: /pt-BR/computing/hardware/
+      path: /pt-BR/computacao/hardware/
     - title: Certificação em TI
-      path: /pt-BR/computing/it-certification/
+      path: /pt-BR/computacao/certificacao-em-ti/
     - title: Redes
-      path: /pt-BR/computing/netwoking/
+      path: /pt-BR/computacao/redes/
     - title: Sistemas Operacionais
-      path: /pt-BR/computing/operating-systems/
+      path: /pt-BR/computacao/sistemas-operacionais/
 
 - title: Design
   path: /pt-BR/design/
+  data_folder: design
   children:
     - title: 3D e Animação
-      path: /pt-BR/design/3d-and-animation/
+      path: /pt-BR/design/3d-e-animacao/
     - title: Design Arquitetônico
-      path: /pt-BR/design/architectural-design/
+      path: /pt-BR/design/design-arquitetonico/
     - title: Design Thinking
       path: /pt-BR/design/design-thinking/
     - title: Ferramentas de Design
-      path: /pt-BR/design/design-tools/
+      path: /pt-BR/design/ferramentas-de-design/
     - title: Moda
-      path: /pt-BR/design/fashion/
+      path: /pt-BR/design/moda/
     - title: Design de Jogos
-      path: /pt-BR/design/game-design/
+      path: /pt-BR/design/design-de-jogos/
     - title: Design Gráfico
-      path: /pt-BR/design/graphic-design/
+      path: /pt-BR/design/design-grafico/
     - title: Design de Interiores
-      path: /pt-BR/design/interior-design/
+      path: /pt-BR/design/design-de-interiores/
     - title: Experiência do Usuário
-      path: /pt-BR/design/user-experience/
+      path: /pt-BR/design/experiencia-do-usuario/
     - title: Web Design
       path: /pt-BR/design/web-design/
 
 - title: Desenvolvimento
-  path: /pt-BR/development/
+  path: /pt-BR/desenvolvimento/
+  data_folder: development
   children:
     - title: Gerenciamento Ágil de Projetos
-      path: /pt-BR/development/agile-project-management/
+      path: /pt-BR/desenvolvimento/gerenciamento-agil-de-projetos/
     - title: Desenvolvimento Backend
-      path: /pt-BR/development/backend-development/
+      path: /pt-BR/desenvolvimento/desenvolvimento-backend/
     - title: Bancos de Dados
-      path: /pt-BR/development/databases/
+      path: /pt-BR/desenvolvimento/bancos-de-dados/
     - title: Ambiente de Desenvolvimento
-      path: /pt-BR/development/development-environment/
+      path: /pt-BR/desenvolvimento/ambiente-de-desenvolvimento/
     - title: Ferramentas de Desenvolvimento
-      path: /pt-BR/development/development-tools/
+      path: /pt-BR/desenvolvimento/ferramentas-de-desenvolvimento/
     - title: E-commerce
-      path: /pt-BR/development/e-commerce/
+      path: /pt-BR/desenvolvimento/e-commerce/
     - title: Desenvolvimento Frontend
-      path: /pt-BR/development/frontend-development/
+      path: /pt-BR/desenvolvimento/desenvolvimento-frontend/
     - title: Desenvolvimento de Jogos
-      path: /pt-BR/development/game-development/
+      path: /pt-BR/desenvolvimento/desenvolvimento-de-jogos/
     - title: Diversos
-      path: /pt-BR/development/miscellaneous/
+      path: /pt-BR/desenvolvimento/diversos/
     - title: Plataformas
-      path: /pt-BR/development/plataforms/
+      path: /pt-BR/desenvolvimento/plataformas/
     - title: Linguagens de Programação
-      path: /pt-BR/development/programming-languages/
+      path: /pt-BR/desenvolvimento/linguagens-de-programacao/
     - title: Engenharia de Software
-      path: /pt-BR/development/software-engineering/
+      path: /pt-BR/desenvolvimento/engenharia-de-software/
     - title: Testes de Software
-      path: /pt-BR/development/software-testing/
+      path: /pt-BR/desenvolvimento/testes-de-software/
     - title: Vulnerabilidades
-      path: /pt-BR/development/vulnerabilities/
+      path: /pt-BR/desenvolvimento/vulnerabilidades/
 
 - title: Marketing
   path: /pt-BR/marketing/
+  data_folder: marketing
   children:
     - title: Publicidade
-      path: /pt-BR/marketing/advertising/
+      path: /pt-BR/marketing/publicidade/
     - title: Marketing de Afiliados
-      path: /pt-BR/marketing/afiliate-marketing/
+      path: /pt-BR/marketing/marketing-de-afiliados/
     - title: Análise e Automação
-      path: /pt-BR/marketing/analytics-and-automation/
+      path: /pt-BR/marketing/analise-e-automacao/
     - title: Branding
       path: /pt-BR/marketing/branding/
     - title: Marketing de Conteúdo
-      path: /pt-BR/marketing/content-marketing/
+      path: /pt-BR/marketing/marketing-de-conteudo/
     - title: Marketing Digital
-      path: /pt-BR/marketing/digital-marketing/
+      path: /pt-BR/marketing/marketing-digital/
     - title: Growth Hacking
       path: /pt-BR/marketing/growth-hacking/
     - title: Fundamentos de Marketing
-      path: /pt-BR/marketing/marketing-fundamentals/
+      path: /pt-BR/marketing/fundamentos-de-marketing/
     - title: Marketing Não-digital
-      path: /pt-BR/marketing/non-digital-marketing/
+      path: /pt-BR/marketing/marketing-nao-digital/
     - title: Marketing de Produto
-      path: /pt-BR/marketing/product-marketing/
+      path: /pt-BR/marketing/marketing-de-produto/
     - title: Relações Públicas
-      path: /pt-BR/marketing/public-relations/
+      path: /pt-BR/marketing/relacoes-publicas/
     - title: SEO
       path: /pt-BR/marketing/seo/
     - title: Mídias Sociais
-      path: /pt-BR/marketing/social-media/
+      path: /pt-BR/marketing/midias-sociais/
     - title: Marketing de Vídeo e Mobile
-      path: /pt-BR/marketing/video-and-modile-marketing/
+      path: /pt-BR/marketing/marketing-de-video-e-mobile/
 
 - title: Desenvolvimento Pessoal
-  path: /pt-BR/personal-development/
+  path: /pt-BR/desenvolvimento-pessoal/
+  data_folder: personal-development
   children:
     - title: Desenvolvimento de Carreira
-      path: /pt-BR/personal-development/career-development/
+      path: /pt-BR/desenvolvimento-pessoal/desenvolvimento-de-carreira/
     - title: Criatividade
-      path: /pt-BR/personal-development/creativity/
+      path: /pt-BR/desenvolvimento-pessoal/criatividade/
     - title: Felicidade
-      path: /pt-BR/personal-development/happiness/
+      path: /pt-BR/desenvolvimento-pessoal/felicidade/
     - title: Influência
-      path: /pt-BR/personal-development/influence/
+      path: /pt-BR/desenvolvimento-pessoal/influencia/
     - title: Liderança
-      path: /pt-BR/personal-development/leadership/
+      path: /pt-BR/desenvolvimento-pessoal/lideranca/
     - title: Memória e Habilidades de Estudo
-      path: /pt-BR/personal-development/memory-and-study-skills/
+      path: /pt-BR/desenvolvimento-pessoal/memoria-e-habilidades-de-estudo/
     - title: Motivação
-      path: /pt-BR/personal-development/motivation/
+      path: /pt-BR/desenvolvimento-pessoal/motivacao/
     - title: Paternidade e Relacionamentos
-      path: /pt-BR/personal-development/parenting-and-relationships/
+      path: /pt-BR/desenvolvimento-pessoal/paternidade-e-relacionamentos/
     - title: Construção de Marca Pessoal
-      path: /pt-BR/personal-development/-personal-brand-building/
+      path: /pt-BR/desenvolvimento-pessoal/construcao-de-marca-pessoal/
     - title: Finanças Pessoais
-      path: /pt-BR/personal-development/personal-finance/
+      path: /pt-BR/desenvolvimento-pessoal/financas-pessoais/
     - title: Transformação Pessoal
-      path: /pt-BR/personal-development/personal-transformation/
+      path: /pt-BR/desenvolvimento-pessoal/transformacao-pessoal/
     - title: Produtividade
-      path: /pt-BR/personal-development/productivity/
+      path: /pt-BR/desenvolvimento-pessoal/produtividade/
     - title: Religião e Espiritualidade
-      path: /pt-BR/personal-development/religion-and-spirituality/
+      path: /pt-BR/desenvolvimento-pessoal/religiao-e-espiritualidade/
     - title: Autoestima
-      path: /pt-BR/personal-development/self-esteem/
+      path: /pt-BR/desenvolvimento-pessoal/autoestima/
     - title: Gerenciamento de Estresse
-      path: /pt-BR/personal-development/stress-management/
+      path: /pt-BR/desenvolvimento-pessoal/gerenciamento-de-estresse/
 
 - title: Fotografia
-  path: /pt-BR/photography/
+  path: /pt-BR/fotografia/
+  data_folder: photography
   children:
     - title: Fotografia Analógica
-      path: /pt-BR/photography/analogue-photography/
+      path: /pt-BR/fotografia/fotografia-analogica/
     - title: Preto e Branco
-      path: /pt-BR/photography/blank-and-white/
+      path: /pt-BR/fotografia/preto-e-branco/
     - title: Fotografia Comercial
-      path: /pt-BR/photography/commercial-photography/
+      path: /pt-BR/fotografia/fotografia-comercial/
     - title: Fotografia Digital
-      path: /pt-BR/photography/digital-photography/
+      path: /pt-BR/fotografia/fotografia-digital/
     - title: Paisagem
-      path: /pt-BR/photography/landscape/
+      path: /pt-BR/fotografia/paisagem/
     - title: Fotografia Mobile
-      path: /pt-BR/photography/mobile-photography/
+      path: /pt-BR/fotografia/fotografia-mobile/
     - title: Fundamentos de Fotografia
-      path: /pt-BR/photography/photography-fundamentals/
+      path: /pt-BR/fotografia/fundamentos-de-fotografia/
     - title: Ferramentas de Fotografia
-      path: /pt-BR/photography/photography-tools/
+      path: /pt-BR/fotografia/ferramentas-de-fotografia/
     - title: Retratos
-      path: /pt-BR/photography/portraits/
+      path: /pt-BR/fotografia/retratos/
     - title: Fotografia de Viagem
-      path: /pt-BR/photography/travel-photography/
+      path: /pt-BR/fotografia/fotografia-de-viagem/
     - title: Design de Vídeo
-      path: /pt-BR/photography/video-design/
+      path: /pt-BR/fotografia/design-de-video/
     - title: Fotografia de Casamento
-      path: /pt-BR/photography/wedding-photography/
+      path: /pt-BR/fotografia/fotografia-de-casamento/
     - title: Fotografia de Vida Selvagem
-      path: /pt-BR/photography/wild-life-photography/ 
+      path: /pt-BR/fotografia/fotografia-de-vida-selvagem/

@@ -1,0 +1,24 @@
+- name: "Zotero"
+  url: "https://www.zotero.org/"
+  description: "Uma ferramenta gratuita e fácil de usar para coletar, organizar, citar e compartilhar pesquisas."
+  tags: ["Gerenciamento de Referências", "Código Aberto"]
+
+- name: "Mendeley"
+  url: "https://www.mendeley.com/"
+  description: "Gerenciador de referências e rede social acadêmica para organizar sua pesquisa."
+  tags: ["Gerenciamento de Referências", "Colaboração"]
+
+- name: "Overleaf"
+  url: "https://www.overleaf.com/"
+  description: "Editor de LaTeX online fácil de usar. Sem instalação, colaboração em tempo real."
+  tags: ["Escrita", "LaTeX"]
+
+- name: "ORCID"
+  url: "https://orcid.org/"
+  description: "Um identificador digital persistente que distingue você de todos os outros pesquisadores."
+  tags: ["Identidade", "Padrões"]
+
+- name: "Lattes (CNPq)"
+  url: "http://lattes.cnpq.br/"
+  description: "Plataforma Curricular nacional do Brasil, essencial para pesquisadores brasileiros."
+  tags: ["Currículo", "Brasil"]

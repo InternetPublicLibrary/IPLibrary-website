@@ -1,0 +1,19 @@
+- name: "Nature"
+  url: "https://www.nature.com/"
+  description: "Uma das revistas científicas multidisciplinares mais citadas e prestigiadas do mundo."
+  tags: ["Jornal", "Multidisciplinar"]
+
+- name: "Science"
+  url: "https://www.science.org/"
+  description: "Revista acadêmica da Associação Americana para o Avanço da Ciência (AAAS)."
+  tags: ["Jornal", "Ciência"]
+
+- name: "Revista Pesquisa FAPESP"
+  url: "https://revistapesquisa.fapesp.br/"
+  description: "Principal publicação jornalística do Brasil especializada em cobertura de ciência e tecnologia."
+  tags: ["Brasil", "Jornalismo Científico"]
+
+- name: "Ciência Hoje"
+  url: "https://cienciahoje.org.br/"
+  description: "Revista de divulgação científica criada pela Sociedade Brasileira para o Progresso da Ciência (SBPC)."
+  tags: ["Divulgação", "Brasil"]

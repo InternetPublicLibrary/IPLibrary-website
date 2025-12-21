@@ -1,0 +1,19 @@
+- name: "Coursera"
+  url: "https://www.coursera.org/"
+  description: "Cursos online de universidades de ponta como Stanford e Yale, muitos com legendas em português."
+  tags: ["Cursos Online", "MOOC"]
+
+- name: "Veduca"
+  url: "https://veduca.org/"
+  description: "Plataforma brasileira de cursos online gratuitos e pagos, com foco em habilidades profissionais e acadêmicas."
+  tags: ["Brasil", "Educação Aberta"]
+
+- name: "Escola Virtual Gov (EV.G)"
+  url: "https://www.escolavirtual.gov.br/"
+  description: "Portal de cursos a distância gratuitos oferecidos pela administração pública federal brasileira."
+  tags: ["Governo", "Capacitação"]
+
+- name: "MIT OpenCourseWare"
+  url: "https://ocw.mit.edu/"
+  description: "Materiais de cursos do MIT disponíveis gratuitamente para qualquer pessoa (recurso em inglês)."
+  tags: ["MIT", "Recursos Educacionais Abertos"]

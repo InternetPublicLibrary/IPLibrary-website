@@ -1,0 +1,90 @@
+<div id="wiki-preview-container" class="hidden mb-12">
+    <div
+        class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-md transition-shadow duration-300">
+        <!-- Wiki Header -->
+        <div class="bg-gray-50 px-6 py-4 border-b border-gray-100 flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <i class="fab fa-wikipedia-w text-2xl text-gray-700"></i>
+                <h3 class="font-bold text-gray-900 text-lg">Wikipedia Summary</h3>
+            </div>
+            <a id="wiki-link" href="#" target="_blank" rel="noopener noreferrer"
+                class="text-sm font-medium text-blue-600 hover:text-blue-800 transition-colors flex items-center">
+                Read full article <i class="fas fa-external-link-alt ml-1 text-xs"></i>
+            </a>
+        </div>
+
+        <!-- Wiki Content -->
+        <div class="p-6 md:p-8">
+            <div class="flex flex-col md:flex-row gap-8">
+                <div class="flex-1">
+                    <h4 id="wiki-title" class="text-2xl font-bold text-gray-800 mb-4 font-serif"></h4>
+                    <div id="wiki-extract" class="prose prose-lg text-gray-600 leading-relaxed max-w-none">
+                        <div class="animate-pulse space-y-3">
+                            <div class="h-4 bg-gray-100 rounded w-3/4"></div>
+                            <div class="h-4 bg-gray-100 rounded"></div>
+                            <div class="h-4 bg-gray-100 rounded w-5/6"></div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Optional Image Placeholder if needed later -->
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const title = "{{ page.title | escape }}";
+        // Map site lang code to Wiki lang code (pt-BR -> pt, en-US -> en)
+        const siteLang = "{{ page.lang | default: 'en-US' }}";
+        const wikiLang = siteLang.split('-')[0];
+
+        if (!title) return;
+
+        const endpoint = `https://${wikiLang}.wikipedia.org/w/api.php`;
+        const params = new URLSearchParams({
+            action: 'query',
+            format: 'json',
+            prop: 'extracts',
+            titles: title,
+            exintro: 1,
+            explaintext: 1,
+            origin: '*' // Required for CORS
+        });
+
+        fetch(`${endpoint}?${params.toString()}`)
+            .then(response => response.json())
+            .then(data => {
+                const pages = data.query.pages;
+                const pageId = Object.keys(pages)[0];
+
+                if (pageId === '-1') {
+                    console.log('No Wikipedia article found for:', title);
+                    return; // No page found
+                }
+
+                const page = pages[pageId];
+                if (page.extract) {
+                    // Determine localized link text
+                    const readMoreText = wikiLang === 'pt' ? 'Ler artigo completo' : 'Read full article';
+
+                    // Update DOM
+                    const container = document.getElementById('wiki-preview-container');
+                    const titleEl = document.getElementById('wiki-title');
+                    const extractEl = document.getElementById('wiki-extract');
+                    const linkEl = document.getElementById('wiki-link');
+
+                    titleEl.textContent = page.title;
+                    extractEl.textContent = page.extract;
+                    linkEl.href = `https://${wikiLang}.wikipedia.org/wiki/${encodeURIComponent(page.title)}`;
+                    linkEl.innerHTML = `${readMoreText} <i class="fas fa-external-link-alt ml-1 text-xs"></i>`;
+
+                    // Show container
+                    container.classList.remove('hidden');
+                }
+            })
+            .catch(error => {
+                console.error('Error fetching Wikipedia data:', error);
+            });
+    });
+</script>

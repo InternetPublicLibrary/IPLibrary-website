@@ -136,7 +136,8 @@ module Jekyll
         
         resource_files.each do |file|
           begin
-            resources = YAML.load_file(file)
+            # Use safe load with permitted classes for Dates
+            resources = YAML.load_file(file, permitted_classes: [Date, Time])
             next unless resources.is_a?(Array)
             
             resources.each do |resource|

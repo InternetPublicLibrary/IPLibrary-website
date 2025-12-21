@@ -2,4 +2,61 @@
 layout: default
 ---
 
-{{ content }} 
+<div class="container mx-auto px-4 py-8">
+        <div class="max-w-4xl mx-auto">
+                <div class="flex items-center text-sm text-gray-600 mb-6">
+                        <a href="/{{ page.lang }}" class="hover:underline">Home</a>
+                        <span class="mx-2">›</span>
+                        <a href="{{ page.parent_category_path }}" class="hover:underline">{{ page.parent_category }}</a>
+                        <span class="mx-2">›</span>
+                        <span>{{ page.title }}</span>
+                </div>
+
+                <h1 class="text-3xl font-bold text-gray-800 mb-6">{{ page.title }}</h1>
+
+                <div class="bg-white rounded-lg shadow-sm p-8 mb-8">
+                        <div class="prose max-w-none">
+                                {{ content }}
+                        </div>
+
+                        <div class="mt-6 flex flex-wrap gap-2">
+                                {% if page.parent_category %}
+                                <a href="{{ page.parent_category_path }}"
+                                        class="inline-flex items-center px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm hover:bg-gray-200 transition">
+                                        <i class="fas fa-arrow-up mr-2"></i> Back to {{ page.parent_category }}
+                                </a>
+                                {% endif %}
+                        </div>
+                </div>
+
+                {% include components/wiki_preview.html %}
+
+                {% if page.children and page.children.size > 0 %}
+                <h2 class="text-2xl font-bold text-gray-800 mb-6">Sections in {{ page.title }}</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                        {% for child in page.children %}
+                        <a href="{{ child.path }}"
+                                class="block p-6 bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow border border-gray-100 group">
+                                <div class="flex items-center mb-3">
+                                        <div
+                                                class="w-10 h-10 rounded-lg bg-blue-50 text-blue-600 flex items-center justify-center mr-4 group-hover:bg-blue-600 group-hover:text-white transition-colors">
+                                                <i class="fas fa-book-open"></i>
+                                        </div>
+                                        <h3
+                                                class="text-xl font-semibold text-gray-800 group-hover:text-blue-600 transition-colors">
+                                                {{ child.title }}</h3>
+                                </div>
+                                <p class="text-gray-600 text-sm ml-14">Detailed guides, wikis, and resources for {{
+                                        child.title }}.</p>
+                        </a>
+                        {% endfor %}
+                </div>
+                {% endif %}
+
+                {% if page.show_discussion %}
+                <div class="mt-12">
+                        {% include components/discussion.html %}
+                </div>
+                {% endif %}
+        </div>
+</div>

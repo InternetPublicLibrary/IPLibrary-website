@@ -1,0 +1,19 @@
+- name: "Zotero"
+  url: "https://www.zotero.org/"
+  description: "A free, easy-to-use tool to help you collect, organize, cite, and share research."
+  tags: ["Reference Management", "Open Source"]
+
+- name: "Mendeley"
+  url: "https://www.mendeley.com/"
+  description: "Reference manager and academic social network that can help you organize your research."
+  tags: ["Reference Management", "Collaboration"]
+
+- name: "Overleaf"
+  url: "https://www.overleaf.com/"
+  description: "An online LaTeX editor that's easy to use. No installation, real-time collaboration."
+  tags: ["Writing", "LaTeX"]
+
+- name: "ORCID"
+  url: "https://orcid.org/"
+  description: "A persistent digital identifier that distinguishes you from every other researcher."
+  tags: ["Identity", "Standards"]

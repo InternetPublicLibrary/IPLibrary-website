@@ -1,0 +1,50 @@
+<div id="wikipedia-search-container" class="space-y-4">
+    <div id="wiki-results-list" class="space-y-4"></div>
+    {% include components/atoms/loader.html id="wiki-loader" class="hidden" %}
+</div>
+
+<script>
+    async function searchWikipedia(query) {
+        const container = document.getElementById('wiki-results-list');
+        const loader = document.getElementById('wiki-loader');
+
+        container.innerHTML = '';
+        loader.classList.remove('hidden');
+
+        const lang = document.documentElement.lang.split('-')[0] || 'en';
+        const endpoint = `https://${lang}.wikipedia.org/w/api.php?action=query&list=search&prop=info&inprop=url&utf8=&format=json&origin=*&srlimit=5&srsearch=${encodeURIComponent(query)}`;
+
+        try {
+            const response = await fetch(endpoint);
+            const data = await response.json();
+            const results = data.query.search;
+
+            loader.classList.add('hidden');
+
+            if (!results || results.length === 0) {
+                container.innerHTML = '<p class="text-gray-500 text-center">No results found.</p>';
+                return;
+            }
+
+            // Since Liquid runs at build time, we construct the HTML string using JS but mimicking the atom structure
+            // Ideally, we would use client-side templates, but for simplicity here we use template literals
+            container.innerHTML = results.map(result => `
+      <div class="bg-white border border-gray-200 p-4 rounded-lg shadow-sm hover:shadow-md transition-shadow">
+        <h3 class="font-semibold text-lg text-blue-700 mb-1">
+          <a href="https://${lang}.wikipedia.org/?curid=${result.pageid}" target="_blank" rel="noopener" class="hover:underline">
+            ${result.title}
+          </a>
+        </h3>
+        <p class="text-sm text-gray-700 leading-relaxed">
+          ${result.snippet.replace(/<[^>]*>/g, '')}...
+        </p>
+      </div>
+    `).join('');
+
+        } catch (error) {
+            console.error('Wiki Error:', error);
+            loader.classList.add('hidden');
+            container.innerHTML = '<p class="text-red-500 text-center">Error loading Wikipedia results.</p>';
+        }
+    }
+</script>

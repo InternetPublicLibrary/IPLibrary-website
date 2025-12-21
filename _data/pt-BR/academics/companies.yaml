@@ -1,0 +1,14 @@
+- name: "Elsevier"
+  url: "https://www.elsevier.com/pt-br"
+  description: "Líder global em informações e análises, ajudando pesquisadores e profissionais de saúde a avançar a ciência."
+  tags: ["Editora", "Análise de Dados"]
+
+- name: "Clarivate"
+  url: "https://clarivate.com/"
+  description: "Empresa global que oferece insights e análises confiáveis para acelerar o ritmo da inovação."
+  tags: ["Propriedade Intelectual", "Ciência"]
+
+- name: "Springer Nature"
+  url: "https://www.springernature.com/"
+  description: "Empresa editorial acadêmica global, publicando pesquisas de alta qualidade em todos os formatos."
+  tags: ["Editora", "Pesquisa"]

@@ -1,0 +1,24 @@
+- name: "Google Acadêmico"
+  url: "https://scholar.google.com.br/"
+  description: "Mecanismo de pesquisa gratuito que indexa o texto completo ou metadados da literatura acadêmica."
+  tags: ["Motor de Busca", "Gratuito"]
+
+- name: "SciELO (Scientific Electronic Library Online)"
+  url: "https://scielo.org/"
+  description: "Biblioteca eletrônica que abrange uma coleção selecionada de periódicos científicos brasileiros e de outros países."
+  tags: ["Acesso Aberto", "América Latina"]
+
+- name: "Portal de Periódicos CAPES"
+  url: "https://www-periodicos-capes-gov-br.ezl.periodicos.capes.gov.br/"
+  description: "Maior acervo de publicações científicas do Brasil, oferecendo acesso a textos completos e bases de dados."
+  tags: ["Governo", "Multidisciplinar"]
+
+- name: "PubMed"
+  url: "https://pubmed.ncbi.nlm.nih.gov/"
+  description: "Banco de dados gratuito de referências e resumos sobre ciências da vida e tópicos biomédicos."
+  tags: ["Biomédica", "Saúde"]
+
+- name: "Redalyc"
+  url: "https://www.redalyc.org/"
+  description: "Rede de Revistas Científicas da América Latina e Caribe, Espanha e Portugal."
+  tags: ["Acesso Aberto", "Ibero-américa"]

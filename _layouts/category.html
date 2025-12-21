@@ -2,4 +2,133 @@
 layout: default
 ---
 
-{{ content }} 
+<div class="container mx-auto px-4 py-8">
+    <div class="max-w-4xl mx-auto">
+        <div class="flex items-center text-sm text-gray-600 mb-6">
+            <a href="/{{ page.lang }}" class="hover:underline">Home</a>
+            <span class="mx-2">›</span>
+            <span>{{ page.title }}</span>
+        </div>
+
+        <h1 class="text-3xl font-bold text-gray-800 mb-6">{{ page.title }}</h1>
+
+        <div class="bg-white rounded-lg shadow-sm p-8 mb-8">
+            <div class="prose max-w-none">
+                {{ content }}
+            </div>
+        </div>
+
+        {% include components/wiki_preview.html %}
+
+        {% include components/templates/academic-dashboard.html search_query=page.title %}
+
+        {% if page.data_folder %}
+        {% assign resource_data = site.data[page.lang][page.data_folder] %}
+        {% if resource_data %}
+        <div class="mb-12">
+            <h2 class="text-2xl font-bold text-gray-800 mb-6 flex items-center gap-2">
+                <i class="fas fa-star text-yellow-500"></i>
+                {% if page.lang == 'pt-BR' %}Recursos em Destaque{% else %}Featured Resources{% endif %}
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                {% for resource_file in resource_data %}
+                {% assign filename_key = resource_file[0] | replace: '.yaml', '' %}
+                {% assign section_title = filename_key | replace: '-', ' ' | capitalize %}
+                {% assign section_icon = 'fa-folder' %}
+                {% assign resources = resource_file[1] %}
+
+                {% case filename_key %}
+                {% when 'tools' %}
+                {% assign section_icon = 'fa-tools' %}
+                {% if page.lang == 'pt-BR' %}{% assign section_title = 'Ferramentas' %}{% endif %}
+                {% when 'databases' %}
+                {% assign section_icon = 'fa-database' %}
+                {% if page.lang == 'pt-BR' %}{% assign section_title = 'Bases de Dados' %}{% endif %}
+                {% when 'companies' %}
+                {% assign section_icon = 'fa-building' %}
+                {% if page.lang == 'pt-BR' %}{% assign section_title = 'Empresas' %}{% endif %}
+                {% when 'events-and-conferences' %}
+                {% assign section_icon = 'fa-calendar-alt' %}
+                {% if page.lang == 'pt-BR' %}{% assign section_title = 'Eventos e Conferências' %}{% endif %}
+                {% when 'learn' %}
+                {% assign section_icon = 'fa-graduation-cap' %}
+                {% if page.lang == 'pt-BR' %}{% assign section_title = 'Educação' %}{% endif %}
+                {% when 'publications' %}
+                {% assign section_icon = 'fa-newspaper' %}
+                {% if page.lang == 'pt-BR' %}{% assign section_title = 'Publicações' %}{% endif %}
+                {% when 'blogs-and-sites' %}
+                {% assign section_icon = 'fa-blog' %}
+                {% if page.lang == 'pt-BR' %}{% assign section_title = 'Blogs e Sites' %}{% endif %}
+                {% endcase %}
+
+                <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-6 hover:shadow-md transition-shadow">
+                    <h3
+                        class="text-lg font-semibold text-gray-800 mb-4 flex items-center gap-2 pb-3 border-b border-gray-50">
+                        <div class="w-8 h-8 rounded-lg bg-blue-50 flex items-center justify-center text-blue-600">
+                            <i class="fas {{ section_icon }}"></i>
+                        </div>
+                        {{ section_title }}
+                    </h3>
+                    <ul class="space-y-4">
+                        {% for resource in resources %}
+                        <li class="group">
+                            <a href="{{ resource.url }}" target="_blank" rel="noopener noreferrer"
+                                class="flex items-start gap-3 group-hover:bg-gray-50 p-2 rounded-lg -mx-2 transition-colors">
+                                <i
+                                    class="fas fa-external-link-alt text-gray-400 mt-1 text-xs group-hover:text-blue-500"></i>
+                                <div>
+                                    <div class="font-medium text-gray-800 group-hover:text-blue-700 transition-colors">
+                                        {{ resource.name }}
+                                    </div>
+                                    {% if resource.description %}
+                                    <p class="text-sm text-gray-500 mt-0.5 line-clamp-2">{{ resource.description }}</p>
+                                    {% endif %}
+                                </div>
+                            </a>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        {% endif %}
+        {% endif %}
+
+
+        {% assign items = page.children %}
+        {% unless items %}
+        {% assign nav_items = site.data[page.lang].menu %}
+        {% for item in nav_items %}
+        {% if item.path == page.url %}
+        {% assign items = item.children %}
+        {% endif %}
+        {% endfor %}
+        {% endunless %}
+
+        {% if items and items.size > 0 %}
+        <h2 class="text-2xl font-bold text-gray-800 mb-6">Subcategories in {{ page.title }}</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+            {% for child in items %}
+            <a href="{{ child.path }}"
+                class="block p-6 bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow border border-gray-100 h-full flex flex-col">
+                <div class="flex items-center justify-between mb-3">
+                    <h3 class="text-xl font-semibold text-blue-600">{{ child.title }}</h3>
+                    <i class="fas fa-folder text-blue-100"></i>
+                </div>
+                <p class="text-gray-600 text-sm flex-grow">Access resources and sections within {{ child.title }}.</p>
+                <div class="mt-4 text-xs font-medium text-blue-500 flex items-center">
+                    Explore <i class="fas fa-arrow-right ml-1"></i>
+                </div>
+            </a>
+            {% endfor %}
+        </div>
+        {% endif %}
+
+        {% if page.show_discussion %}
+        <div class="mt-12">
+            {% include components/discussion.html %}
+        </div>
+        {% endif %}
+    </div>
+</div>

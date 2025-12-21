@@ -1,0 +1,24 @@
+- name: "Google Scholar"
+  url: "https://scholar.google.com/"
+  description: "Freely accessible web search engine that indexes the full text or metadata of scholarly literature."
+  tags: ["Search Engine", "Free"]
+
+- name: "PubMed"
+  url: "https://pubmed.ncbi.nlm.nih.gov/"
+  description: "Free search engine accessing primarily the MEDLINE database of references and abstracts on life sciences and biomedical topics."
+  tags: ["Biomedical", "Health"]
+
+- name: "Scopus"
+  url: "https://www.scopus.com/"
+  description: "Elsevier's abstract and citation database launched in 2004."
+  tags: ["Database", "Citations"]
+
+- name: "Web of Science"
+  url: "https://clarivate.com/webofsciencegroup/solutions/web-of-science/"
+  description: "Platform consisting of several literature search databases designed to support scientific and scholarly research."
+  tags: ["Database", "Multidisciplinary"]
+
+- name: "ERIC (Education Resources Information Center)"
+  url: "https://eric.ed.gov/"
+  description: "Comprehensive, easy-to-use, searchable, Internet-based bibliographic and full-text database of education research and information."
+  tags: ["Education", "Government"]

@@ -1,0 +1,14 @@
+- name: "Reunião Anual da SBPC"
+  url: "http://portal.sbpcnet.org.br/"
+  description: "O maior evento científico do Brasil e da América Latina, reunindo pesquisadores de todas as áreas."
+  tags: ["Conferência", "Multidisciplinar", "Brasil"]
+
+- name: "Congresso Nacional de Pós-Graduandos (CNPG)"
+  url: "https://www.anpg.org.br/"
+  description: "Evento organizado pela ANPG para discutir os rumos da pós-graduação e da ciência no Brasil."
+  tags: ["Estudantes", "Política Científica"]
+
+- name: "Semana Nacional de Ciência e Tecnologia (SNCT)"
+  url: "https://semanact.mcti.gov.br/"
+  description: "Evento anual coordenado pelo MCTI para promover a divulgação científica em todo o país."
+  tags: ["Divulgação", "Governo"]

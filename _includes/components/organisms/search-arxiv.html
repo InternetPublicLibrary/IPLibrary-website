@@ -1,0 +1,61 @@
+<div id="arxiv-search-container" class="space-y-4">
+    <div id="arxiv-results-list" class="space-y-4"></div>
+    {% include components/atoms/loader.html id="arxiv-loader" class="hidden" %}
+</div>
+
+<script>
+    async function searchArxiv(query) {
+        const container = document.getElementById('arxiv-results-list');
+        const loader = document.getElementById('arxiv-loader');
+
+        container.innerHTML = '';
+        loader.classList.remove('hidden');
+
+        // Using OpenAlex filtered for preprints/ArXiv likelihood
+        const endpoint = `https://api.openalex.org/works?search=${encodeURIComponent(query)}&filter=type:preprint&per-page=5&sort=publication_year:desc`;
+
+        try {
+            const response = await fetch(endpoint);
+            const data = await response.json();
+            const results = data.results;
+
+            loader.classList.add('hidden');
+
+            if (!results || results.length === 0) {
+                container.innerHTML = '<p class="text-gray-500 text-center">No ArXiv preprints found.</p>';
+                return;
+            }
+
+            container.innerHTML = results.map(work => {
+                const authors = work.authorships.slice(0, 3).map(a => a.author.display_name).join(', ');
+                const year = work.publication_year;
+                const id = work.id.replace('https://openalex.org/', '');
+                const pdf = work.open_access?.oa_url;
+                const landing = work.primary_location?.landing_page_url || work.doi;
+
+                let meta = `<span class="font-medium text-gray-700">${authors}</span> • ${year} • <span class="text-xs bg-red-100 text-red-800 px-1 rounded">ArXiv/Preprint</span>`;
+
+                let html = `
+      <div class="bg-white border border-gray-200 p-4 rounded-lg shadow-sm hover:shadow-md transition-shadow">
+        <h3 class="font-semibold text-lg text-gray-800 mb-1">
+          <a href="${landing || '#'}" target="_blank" rel="noopener noreferrer" class="hover:underline">
+            ${work.title}
+          </a>
+        </h3>
+        <div class="text-xs text-gray-500 mb-2">${meta}</div>
+        
+        <div class="flex gap-3 mt-3">
+          ${landing ? `<a href="${landing}" target="_blank" class="text-blue-600 text-sm hover:underline flex items-center"><i class="fas fa-external-link-alt mr-1"></i> View Abstract</a>` : ''}
+          ${pdf ? `<a href="${pdf}" target="_blank" class="text-green-600 text-sm hover:underline flex items-center"><i class="fas fa-file-pdf mr-1"></i> PDF</a>` : ''}
+        </div>
+      </div>`;
+                return html;
+            }).join('');
+
+        } catch (error) {
+            console.error('ArXiv Error:', error);
+            loader.classList.add('hidden');
+            container.innerHTML = '<p class="text-red-500 text-center">Error loading ArXiv results.</p>';
+        }
+    }
+</script>

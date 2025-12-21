@@ -1,0 +1,5 @@
+<div class="flex justify-center items-center py-8 text-gray-500 {{ include.class }}" {% if include.id
+    %}id="{{ include.id }}" {% endif %}>
+    <i class="fas fa-spinner fa-spin text-2xl mr-3"></i>
+    <span>{{ include.text | default: 'Loading...' }}</span>
+</div>

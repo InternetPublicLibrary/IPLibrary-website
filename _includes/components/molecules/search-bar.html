@@ -1,0 +1,13 @@
+<div class="flex gap-2 mb-6" itemscope itemtype="http://schema.org/SearchAction">
+    {% include components/atoms/input.html
+    id=include.input_id
+    placeholder=include.placeholder
+    value=include.value
+    class="flex-1"
+    %}
+    {% include components/atoms/button.html
+    text="Search"
+    onclick=include.onclick
+    type="submit"
+    %}
+</div>

@@ -1,0 +1,19 @@
+- name: "Pós-Graduando"
+  url: "https://posgraduando.com/"
+  description: "Blog com dicas, notícias e informações relevantes para estudantes de pós-graduação no Brasil."
+  tags: ["Blog", "Dicas", "Brasil"]
+
+- name: "ScienceBlogs Brasil"
+  url: "https://scienceblogs.com.br/"
+  description: "A maior rede de blogs de ciência em língua portuguesa, cobrindo diversos temas científicos com rigor e acessibilidade."
+  tags: ["Ciência", "Divulgação Científica"]
+
+- name: "Blog da CAPES"
+  url: "https://www.gov.br/capes/pt-br/assuntos/noticias"
+  description: "Notícias oficiais e atualizações sobre bolsas, programas e avaliações da pós-graduação brasileira."
+  tags: ["Oficial", "Governo", "Notícias"]
+
+- name: "The Thesis Whisperer"
+  url: "https://thesiswhisperer.com/"
+  description: "Blog focado em ajudar estudantes de doutorado a terminarem suas teses (Conteúdo em inglês, mas essencial)."
+  tags: ["Tese", "Doutorado", "Internacional"]
