@@ -1,0 +1,41 @@
+<div id="meetup-search-container" class="space-y-4">
+    <div id="meetup-results-list" class="space-y-4"></div>
+    {% include components/atoms/loader.html id="meetup-loader" class="hidden" %}
+</div>
+
+<script>
+    async function searchMeetup(query) {
+        const container = document.getElementById('meetup-results-list');
+        const loader = document.getElementById('meetup-loader');
+
+        container.innerHTML = '';
+        loader.classList.remove('hidden');
+
+        // Note: Meetup API requires OAuth, so we display a search link instead
+        // For full integration, a backend proxy would be needed
+
+        loader.classList.add('hidden');
+
+        const searchUrl = `https://www.meetup.com/find/?keywords=${encodeURIComponent(query)}&source=EVENTS`;
+
+        container.innerHTML = `
+      <div class="bg-white border border-gray-200 p-6 rounded-lg shadow-sm text-center">
+        <div class="mb-4">
+          <i class="fab fa-meetup text-red-500 text-4xl"></i>
+        </div>
+        <h3 class="font-semibold text-lg text-gray-800 mb-2">Find "${query}" Events</h3>
+        <p class="text-gray-600 text-sm mb-4">
+          Discover meetups, conferences, and community events related to this topic.
+        </p>
+        <a href="${searchUrl}" target="_blank" rel="noopener noreferrer" 
+           class="inline-flex items-center px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition-colors">
+          <i class="fab fa-meetup mr-2"></i>
+          Search Meetup Events
+          <i class="fas fa-external-link-alt ml-2 text-xs"></i>
+        </a>
+        <p class="text-xs text-gray-400 mt-3">
+          Opens Meetup.com in a new tab
+        </p>
+      </div>`;
+    }
+</script>

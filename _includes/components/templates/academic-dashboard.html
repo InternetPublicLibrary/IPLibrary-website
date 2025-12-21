@@ -64,6 +64,34 @@
         </div>
     </div>
 
+    <!-- Section: ORCID (Researchers) -->
+    <div class="search-section bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
+        <div class="bg-green-50 border-b border-green-100 px-6 py-4 flex items-center justify-between">
+            <h3 class="text-xl font-semibold text-green-900 flex items-center gap-2">
+                <img src="https://orcid.org/assets/vectors/orcid.logo.icon.svg" alt="ORCID" class="w-6 h-6">
+                Researchers & Authors
+            </h3>
+            <span class="text-xs font-medium bg-green-200 text-green-800 px-2 py-1 rounded">ORCID</span>
+        </div>
+        <div class="p-6">
+            {% include components/organisms/search-orcid.html %}
+        </div>
+    </div>
+
+    <!-- Section: Meetup (Events) -->
+    <div class="search-section bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
+        <div class="bg-orange-50 border-b border-orange-100 px-6 py-4 flex items-center justify-between">
+            <h3 class="text-xl font-semibold text-orange-900 flex items-center gap-2">
+                {% include components/atoms/icon.html name="meetup" class="fab text-red-500" %}
+                Events & Meetups
+            </h3>
+            <span class="text-xs font-medium bg-orange-200 text-orange-800 px-2 py-1 rounded">Meetup</span>
+        </div>
+        <div class="p-6">
+            {% include components/organisms/search-meetup.html %}
+        </div>
+    </div>
+
 </div>
 
 <script>
@@ -78,6 +106,8 @@
         searchWikipedia(currentGlobalQuery);
         searchOpenAlex(currentGlobalQuery);
         searchArxiv(currentGlobalQuery);
+        searchOrcid(currentGlobalQuery);
+        searchMeetup(currentGlobalQuery);
     }
 
     document.addEventListener('DOMContentLoaded', () => {

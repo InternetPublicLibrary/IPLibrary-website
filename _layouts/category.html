@@ -19,7 +19,7 @@ layout: default
             <span class="text-white">{{ page.title }}</span>
         </div>
 
-        <h1 class="text-4xl font-bold mb-4">{{ page.title }}</h1>
+        <h1 id="category-title" data-query="{{ page.title }}" class="text-4xl font-bold mb-4">{{ page.title }}</h1>
         {% if page.description %}
         <p class="text-xl text-blue-100 max-w-3xl">{{ page.description }}</p>
         {% endif %}
@@ -174,70 +174,64 @@ layout: default
         <!-- Sidebar -->
         <div class="lg:col-span-1 space-y-6">
 
-            <!-- ORCID Academic Papers -->
+            <!-- Wikipedia -->
+            <div class="bg-white rounded-xl shadow-sm border p-6">
+                <h3 class="text-lg font-semibold text-gray-900 mb-4 flex items-center">
+                    <i class="fab fa-wikipedia-w text-gray-800 mr-2"></i>
+                    Wikipedia
+                </h3>
+                <div id="wikipedia-content">
+                    <div class="animate-pulse h-20 bg-gray-100 rounded"></div>
+                </div>
+            </div>
+
+            <!-- arXiv Papers -->
+            <div class="bg-white rounded-xl shadow-sm border p-6">
+                <h3 class="text-lg font-semibold text-gray-900 mb-4 flex items-center">
+                    <i class="fas fa-file-alt text-red-600 mr-2"></i>
+                    arXiv
+                </h3>
+                <div id="arxiv-content">
+                    <div class="animate-pulse space-y-2">
+                        <div class="h-4 bg-gray-100 rounded w-full"></div>
+                        <div class="h-4 bg-gray-100 rounded w-3/4"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ORCID Researchers -->
             <div class="bg-white rounded-xl shadow-sm border p-6">
                 <h3 class="text-lg font-semibold text-gray-900 mb-4 flex items-center">
                     <img src="https://orcid.org/assets/vectors/orcid.logo.icon.svg" alt="ORCID" class="w-5 h-5 mr-2">
-                    {% if page.lang == 'pt-BR' %}Artigos Acadêmicos{% else %}Academic Papers{% endif %}
+                    ORCID
                 </h3>
-                <div id="orcid-articles" class="space-y-3">
-                    <p class="text-sm text-gray-500">
-                        {% if page.lang == 'pt-BR' %}Pesquise artigos relacionados no ORCID.{% else %}Search related
-                        papers on ORCID.{% endif %}
-                    </p>
-                    <a href="https://orcid.org/orcid-search/search?searchQuery={{ page.title | url_encode }}"
-                        target="_blank" class="inline-flex items-center text-sm text-green-600 hover:text-green-800">
-                        {% if page.lang == 'pt-BR' %}Buscar no ORCID{% else %}Search ORCID{% endif %}
-                        <i class="fas fa-external-link-alt ml-2"></i>
-                    </a>
+                <div id="orcid-content">
+                    <div class="animate-pulse h-10 bg-gray-100 rounded"></div>
                 </div>
             </div>
 
-            <!-- Meetup Events -->
-            <div class="bg-white rounded-xl shadow-sm border p-6">
-                <h3 class="text-lg font-semibold text-gray-900 mb-4 flex items-center">
-                    <i class="fab fa-meetup text-red-500 mr-2"></i>
-                    {% if page.lang == 'pt-BR' %}Eventos{% else %}Events{% endif %}
-                </h3>
-                <div id="meetup-events" class="space-y-3">
-                    <p class="text-sm text-gray-500">
-                        {% if page.lang == 'pt-BR' %}Encontre eventos sobre este tema.{% else %}Find events about this
-                        topic.{% endif %}
-                    </p>
-                    <a href="https://www.meetup.com/find/?keywords={{ page.title | url_encode }}" target="_blank"
-                        class="inline-flex items-center text-sm text-red-600 hover:text-red-800">
-                        {% if page.lang == 'pt-BR' %}Buscar no Meetup{% else %}Find on Meetup{% endif %}
-                        <i class="fas fa-external-link-alt ml-2"></i>
-                    </a>
-                </div>
-            </div>
-
-            <!-- Related Resources -->
+            <!-- External Links -->
             <div class="bg-white rounded-xl shadow-sm border p-6">
                 <h3 class="text-lg font-semibold text-gray-900 mb-4 flex items-center">
                     <i class="fas fa-link text-blue-500 mr-2"></i>
-                    {% if page.lang == 'pt-BR' %}Recursos Relacionados{% else %}Related Resources{% endif %}
+                    {% if page.lang == 'pt-BR' %}Mais Recursos{% else %}More Resources{% endif %}
                 </h3>
                 <div class="space-y-2 text-sm">
-                    <a href="https://arxiv.org/search/?query={{ page.title | url_encode }}&searchtype=all"
-                        target="_blank" class="flex items-center text-gray-600 hover:text-blue-600">
-                        <i class="fas fa-file-alt w-5"></i> arXiv
-                    </a>
-                    <a href="https://en.wikipedia.org/wiki/Special:Search?search={{ page.title | url_encode }}"
-                        target="_blank" class="flex items-center text-gray-600 hover:text-blue-600">
-                        <i class="fab fa-wikipedia-w w-5"></i> Wikipedia
-                    </a>
                     <a href="https://scholar.google.com/scholar?q={{ page.title | url_encode }}" target="_blank"
-                        class="flex items-center text-gray-600 hover:text-blue-600">
+                        class="flex items-center text-gray-600 hover:text-blue-600 py-1">
                         <i class="fas fa-graduation-cap w-5"></i> Google Scholar
                     </a>
                     <a href="https://www.coursera.org/search?query={{ page.title | url_encode }}" target="_blank"
-                        class="flex items-center text-gray-600 hover:text-blue-600">
+                        class="flex items-center text-gray-600 hover:text-blue-600 py-1">
                         <i class="fas fa-book w-5"></i> Coursera
                     </a>
                     <a href="https://www.youtube.com/results?search_query={{ page.title | url_encode }}" target="_blank"
-                        class="flex items-center text-gray-600 hover:text-blue-600">
+                        class="flex items-center text-gray-600 hover:text-blue-600 py-1">
                         <i class="fab fa-youtube w-5"></i> YouTube
+                    </a>
+                    <a href="https://www.meetup.com/find/?keywords={{ page.title | url_encode }}" target="_blank"
+                        class="flex items-center text-gray-600 hover:text-blue-600 py-1">
+                        <i class="fab fa-meetup w-5"></i> Meetup
                     </a>
                 </div>
             </div>

@@ -1,0 +1,61 @@
+<div id="orcid-search-container" class="space-y-4">
+    <div id="orcid-results-list" class="space-y-4"></div>
+    {% include components/atoms/loader.html id="orcid-loader" class="hidden" %}
+</div>
+
+<script>
+    async function searchOrcid(query) {
+        const container = document.getElementById('orcid-results-list');
+        const loader = document.getElementById('orcid-loader');
+
+        container.innerHTML = '';
+        loader.classList.remove('hidden');
+
+        const endpoint = `https://pub.orcid.org/v3.0/search/?q=${encodeURIComponent(query)}&rows=5`;
+
+        try {
+            const response = await fetch(endpoint, {
+                headers: { 'Accept': 'application/json' }
+            });
+            const data = await response.json();
+            const results = data.result || [];
+
+            loader.classList.add('hidden');
+
+            if (!results || results.length === 0) {
+                container.innerHTML = '<p class="text-gray-500 text-center">No researchers found.</p>';
+                return;
+            }
+
+            container.innerHTML = results.map(result => {
+                const orcidId = result['orcid-identifier']?.path;
+                const uri = result['orcid-identifier']?.uri;
+
+                return `
+      <div class="bg-white border border-gray-200 p-4 rounded-lg shadow-sm hover:shadow-md transition-shadow">
+        <div class="flex items-center gap-3">
+          <img src="https://orcid.org/assets/vectors/orcid.logo.icon.svg" alt="ORCID" class="w-8 h-8">
+          <div>
+            <h3 class="font-semibold text-lg text-gray-800">
+              <a href="${uri}" target="_blank" rel="noopener noreferrer" class="hover:underline text-green-600">
+                ${orcidId}
+              </a>
+            </h3>
+            <p class="text-xs text-gray-500">ORCID Researcher Profile</p>
+          </div>
+        </div>
+        <div class="flex gap-3 mt-3">
+          <a href="${uri}" target="_blank" class="text-green-600 text-sm hover:underline flex items-center">
+            <i class="fas fa-external-link-alt mr-1"></i> View Profile
+          </a>
+        </div>
+      </div>`;
+            }).join('');
+
+        } catch (error) {
+            console.error('ORCID Error:', error);
+            loader.classList.add('hidden');
+            container.innerHTML = '<p class="text-red-500 text-center">Error loading researchers.</p>';
+        }
+    }
+</script>
