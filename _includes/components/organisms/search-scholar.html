@@ -1,0 +1,58 @@
+<div id="scholar-search-container" class="space-y-4">
+    <div id="scholar-results-list" class="space-y-4"></div>
+    {% include components/atoms/loader.html id="scholar-loader" class="hidden" %}
+</div>
+
+<script>
+    async function searchScholar(query) {
+        const container = document.getElementById('scholar-results-list');
+        const loader = document.getElementById('scholar-loader');
+
+        container.innerHTML = '';
+        loader.classList.remove('hidden');
+
+        // Google Scholar doesn't have a public API, so we show search links
+        loader.classList.add('hidden');
+
+        const searchUrl = `https://scholar.google.com/scholar?q=${encodeURIComponent(query)}`;
+        const recentUrl = `https://scholar.google.com/scholar?q=${encodeURIComponent(query)}&as_ylo=${new Date().getFullYear() - 2}`;
+        const citedUrl = `https://scholar.google.com/scholar?q=${encodeURIComponent(query)}&as_sdt=0,5&sort=cited`;
+
+        container.innerHTML = `
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <a href="${searchUrl}" target="_blank" rel="noopener noreferrer" 
+           class="block bg-white border border-gray-200 p-4 rounded-lg shadow-sm hover:shadow-md transition-shadow group">
+          <div class="flex items-center gap-3 mb-2">
+            <i class="fas fa-search text-blue-600 text-xl"></i>
+            <h4 class="font-semibold text-gray-800 group-hover:text-blue-600">All Results</h4>
+          </div>
+          <p class="text-xs text-gray-600">Search all scholarly articles</p>
+        </a>
+        
+        <a href="${recentUrl}" target="_blank" rel="noopener noreferrer" 
+           class="block bg-white border border-gray-200 p-4 rounded-lg shadow-sm hover:shadow-md transition-shadow group">
+          <div class="flex items-center gap-3 mb-2">
+            <i class="fas fa-clock text-green-600 text-xl"></i>
+            <h4 class="font-semibold text-gray-800 group-hover:text-green-600">Recent</h4>
+          </div>
+          <p class="text-xs text-gray-600">Last 2 years only</p>
+        </a>
+        
+        <a href="${citedUrl}" target="_blank" rel="noopener noreferrer" 
+           class="block bg-white border border-gray-200 p-4 rounded-lg shadow-sm hover:shadow-md transition-shadow group">
+          <div class="flex items-center gap-3 mb-2">
+            <i class="fas fa-quote-right text-purple-600 text-xl"></i>
+            <h4 class="font-semibold text-gray-800 group-hover:text-purple-600">Most Cited</h4>
+          </div>
+          <p class="text-xs text-gray-600">Sort by citations</p>
+        </a>
+      </div>
+      
+      <div class="bg-blue-50 rounded-lg p-4 mt-4">
+        <p class="text-sm text-blue-800">
+          <i class="fas fa-info-circle mr-2"></i>
+          Google Scholar indexes academic papers, theses, books, and court opinions from various sources.
+        </p>
+      </div>`;
+    }
+</script>

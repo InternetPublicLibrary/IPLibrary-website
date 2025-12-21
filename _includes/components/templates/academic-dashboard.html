@@ -1,97 +1,229 @@
-<!-- Academic Dashboard: Stacked Layout (Long Scroll) -->
-<div class="academic-dashboard space-y-12 my-12" itemscope itemtype="http://schema.org/SearchResultsPage">
+<!-- Academic Dashboard: Wiki-style with sidebar navigation -->
+<div class="academic-dashboard my-8" itemscope itemtype="http://schema.org/SearchResultsPage">
 
-    <!-- Header Section -->
-    <div class="text-center mb-10">
-        <h2 class="text-3xl font-bold text-gray-800 flex items-center justify-center gap-3">
-            {% include components/atoms/icon.html name="graduation-cap" class="text-blue-600" %}
-            {{ include.title | default: "Academic Research Assistant" }}
-        </h2>
-        <p class="text-lg text-gray-600 mt-2 max-w-2xl mx-auto">
-            Access global knowledge bases using specialized search tools. All resources at your fingertips.
-        </p>
+    <div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
 
-        <!-- Unified Search Bar -->
-        <div class="max-w-xl mx-auto mt-8">
-            {% include components/molecules/search-bar.html
-            input_id="global-academic-search"
-            placeholder="Enter research topic for all sources..."
-            value=include.search_query
-            onclick="performGlobalSearch()"
-            %}
-        </div>
+        <!-- Sidebar Navigation -->
+        <aside class="lg:col-span-1 order-2 lg:order-1">
+            <div class="sticky top-24 space-y-4">
+
+                <!-- Quick Navigation -->
+                <div class="bg-white rounded-xl shadow-sm border p-4">
+                    <h3 class="font-semibold text-gray-800 mb-3 text-sm uppercase tracking-wide">
+                        <i class="fas fa-compass mr-2 text-blue-500"></i>Quick Nav
+                    </h3>
+                    <nav class="space-y-1 text-sm">
+                        <a href="#section-wikipedia"
+                            class="block px-3 py-2 rounded-lg hover:bg-gray-50 text-gray-600 hover:text-blue-600">
+                            <i class="fab fa-wikipedia-w w-5"></i> Encyclopedia
+                        </a>
+                        <a href="#section-openalex"
+                            class="block px-3 py-2 rounded-lg hover:bg-gray-50 text-gray-600 hover:text-blue-600">
+                            <i class="fas fa-book-open w-5"></i> Research Papers
+                        </a>
+                        <a href="#section-arxiv"
+                            class="block px-3 py-2 rounded-lg hover:bg-gray-50 text-gray-600 hover:text-blue-600">
+                            <i class="fas fa-atom w-5"></i> Preprints
+                        </a>
+                        <a href="#section-scholar"
+                            class="block px-3 py-2 rounded-lg hover:bg-gray-50 text-gray-600 hover:text-blue-600">
+                            <i class="fas fa-graduation-cap w-5"></i> Google Scholar
+                        </a>
+                        <a href="#section-orcid"
+                            class="block px-3 py-2 rounded-lg hover:bg-gray-50 text-gray-600 hover:text-blue-600">
+                            <i class="fas fa-user-graduate w-5"></i> Researchers
+                        </a>
+                        <a href="#section-coursera"
+                            class="block px-3 py-2 rounded-lg hover:bg-gray-50 text-gray-600 hover:text-blue-600">
+                            <i class="fas fa-chalkboard-teacher w-5"></i> Courses
+                        </a>
+                        <a href="#section-youtube"
+                            class="block px-3 py-2 rounded-lg hover:bg-gray-50 text-gray-600 hover:text-blue-600">
+                            <i class="fab fa-youtube w-5"></i> Videos
+                        </a>
+                        <a href="#section-meetup"
+                            class="block px-3 py-2 rounded-lg hover:bg-gray-50 text-gray-600 hover:text-blue-600">
+                            <i class="fab fa-meetup w-5"></i> Events
+                        </a>
+                    </nav>
+                </div>
+
+                <!-- Search Stats -->
+                <div class="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-xl border border-blue-100 p-4">
+                    <h3 class="font-semibold text-gray-800 mb-3 text-sm">
+                        <i class="fas fa-chart-bar mr-2 text-blue-500"></i>Search Sources
+                    </h3>
+                    <div class="grid grid-cols-2 gap-2 text-center">
+                        <div class="bg-white/60 rounded-lg p-2">
+                            <div class="text-2xl font-bold text-blue-600">8</div>
+                            <div class="text-xs text-gray-600">Sources</div>
+                        </div>
+                        <div class="bg-white/60 rounded-lg p-2">
+                            <div class="text-2xl font-bold text-green-600">∞</div>
+                            <div class="text-xs text-gray-600">Resources</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quick Actions -->
+                <div class="bg-white rounded-xl shadow-sm border p-4">
+                    <h3 class="font-semibold text-gray-800 mb-3 text-sm">
+                        <i class="fas fa-bolt mr-2 text-yellow-500"></i>Quick Actions
+                    </h3>
+                    <div class="space-y-2 text-sm">
+                        <button onclick="performGlobalSearch()"
+                            class="w-full text-left px-3 py-2 rounded-lg bg-blue-50 text-blue-700 hover:bg-blue-100">
+                            <i class="fas fa-sync-alt mr-2"></i>Refresh All
+                        </button>
+                        <a href="#" onclick="window.print()"
+                            class="block px-3 py-2 rounded-lg hover:bg-gray-50 text-gray-600">
+                            <i class="fas fa-print mr-2"></i>Print Results
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="lg:col-span-3 order-1 lg:order-2 space-y-8">
+
+            <!-- Header & Search -->
+            <div class="bg-white rounded-xl shadow-sm border p-6">
+                <div class="flex items-center gap-4 mb-4">
+                    {% include components/atoms/icon.html name="graduation-cap" class="text-blue-600 text-3xl" %}
+                    <div>
+                        <h2 class="text-2xl font-bold text-gray-800">
+                            {{ include.title | default: "Academic Research Assistant" }}
+                        </h2>
+                        <p class="text-gray-600">Search 8 knowledge sources simultaneously</p>
+                    </div>
+                </div>
+
+                <div class="max-w-2xl">
+                    {% include components/molecules/search-bar.html
+                    input_id="global-academic-search"
+                    placeholder="Enter research topic..."
+                    value=include.search_query
+                    onclick="performGlobalSearch()"
+                    %}
+                </div>
+            </div>
+
+            <!-- Section: Wikipedia -->
+            <div id="section-wikipedia" class="search-section bg-white rounded-xl shadow-sm border overflow-hidden">
+                <div class="bg-gray-50 border-b px-6 py-3 flex items-center justify-between">
+                    <h3 class="font-semibold text-gray-800 flex items-center gap-2">
+                        {% include components/atoms/icon.html name="wikipedia-w" class="fab text-gray-600" %}
+                        Encyclopedia
+                    </h3>
+                    <span class="text-xs font-medium bg-gray-200 text-gray-700 px-2 py-1 rounded">Wikipedia</span>
+                </div>
+                <div class="p-6">
+                    {% include components/organisms/search-wikipedia.html %}
+                </div>
+            </div>
+
+            <!-- Section: OpenAlex -->
+            <div id="section-openalex" class="search-section bg-white rounded-xl shadow-sm border overflow-hidden">
+                <div class="bg-blue-50 border-b border-blue-100 px-6 py-3 flex items-center justify-between">
+                    <h3 class="font-semibold text-blue-900 flex items-center gap-2">
+                        {% include components/atoms/icon.html name="book-open" class="text-blue-600" %}
+                        Research Papers
+                    </h3>
+                    <span class="text-xs font-medium bg-blue-200 text-blue-800 px-2 py-1 rounded">OpenAlex</span>
+                </div>
+                <div class="p-6">
+                    {% include components/organisms/search-openalex.html %}
+                </div>
+            </div>
+
+            <!-- Section: ArXiv -->
+            <div id="section-arxiv" class="search-section bg-white rounded-xl shadow-sm border overflow-hidden">
+                <div class="bg-red-50 border-b border-red-100 px-6 py-3 flex items-center justify-between">
+                    <h3 class="font-semibold text-red-900 flex items-center gap-2">
+                        {% include components/atoms/icon.html name="atom" class="text-red-600" %}
+                        Preprints & Technical Reports
+                    </h3>
+                    <span class="text-xs font-medium bg-red-200 text-red-800 px-2 py-1 rounded">ArXiv</span>
+                </div>
+                <div class="p-6">
+                    {% include components/organisms/search-arxiv.html %}
+                </div>
+            </div>
+
+            <!-- Section: Google Scholar -->
+            <div id="section-scholar" class="search-section bg-white rounded-xl shadow-sm border overflow-hidden">
+                <div class="bg-indigo-50 border-b border-indigo-100 px-6 py-3 flex items-center justify-between">
+                    <h3 class="font-semibold text-indigo-900 flex items-center gap-2">
+                        {% include components/atoms/icon.html name="graduation-cap" class="text-indigo-600" %}
+                        Scholarly Articles
+                    </h3>
+                    <span class="text-xs font-medium bg-indigo-200 text-indigo-800 px-2 py-1 rounded">Google
+                        Scholar</span>
+                </div>
+                <div class="p-6">
+                    {% include components/organisms/search-scholar.html %}
+                </div>
+            </div>
+
+            <!-- Section: ORCID -->
+            <div id="section-orcid" class="search-section bg-white rounded-xl shadow-sm border overflow-hidden">
+                <div class="bg-green-50 border-b border-green-100 px-6 py-3 flex items-center justify-between">
+                    <h3 class="font-semibold text-green-900 flex items-center gap-2">
+                        <img src="https://orcid.org/assets/vectors/orcid.logo.icon.svg" alt="ORCID" class="w-5 h-5">
+                        Researchers & Authors
+                    </h3>
+                    <span class="text-xs font-medium bg-green-200 text-green-800 px-2 py-1 rounded">ORCID</span>
+                </div>
+                <div class="p-6">
+                    {% include components/organisms/search-orcid.html %}
+                </div>
+            </div>
+
+            <!-- Section: Coursera -->
+            <div id="section-coursera" class="search-section bg-white rounded-xl shadow-sm border overflow-hidden">
+                <div class="bg-cyan-50 border-b border-cyan-100 px-6 py-3 flex items-center justify-between">
+                    <h3 class="font-semibold text-cyan-900 flex items-center gap-2">
+                        {% include components/atoms/icon.html name="chalkboard-teacher" class="text-cyan-600" %}
+                        Online Courses
+                    </h3>
+                    <span class="text-xs font-medium bg-cyan-200 text-cyan-800 px-2 py-1 rounded">Coursera</span>
+                </div>
+                <div class="p-6">
+                    {% include components/organisms/search-coursera.html %}
+                </div>
+            </div>
+
+            <!-- Section: YouTube -->
+            <div id="section-youtube" class="search-section bg-white rounded-xl shadow-sm border overflow-hidden">
+                <div class="bg-red-50 border-b border-red-100 px-6 py-3 flex items-center justify-between">
+                    <h3 class="font-semibold text-red-900 flex items-center gap-2">
+                        {% include components/atoms/icon.html name="youtube" class="fab text-red-600" %}
+                        Video Content
+                    </h3>
+                    <span class="text-xs font-medium bg-red-200 text-red-800 px-2 py-1 rounded">YouTube</span>
+                </div>
+                <div class="p-6">
+                    {% include components/organisms/search-youtube.html %}
+                </div>
+            </div>
+
+            <!-- Section: Meetup -->
+            <div id="section-meetup" class="search-section bg-white rounded-xl shadow-sm border overflow-hidden">
+                <div class="bg-orange-50 border-b border-orange-100 px-6 py-3 flex items-center justify-between">
+                    <h3 class="font-semibold text-orange-900 flex items-center gap-2">
+                        {% include components/atoms/icon.html name="meetup" class="fab text-red-500" %}
+                        Events & Meetups
+                    </h3>
+                    <span class="text-xs font-medium bg-orange-200 text-orange-800 px-2 py-1 rounded">Meetup</span>
+                </div>
+                <div class="p-6">
+                    {% include components/organisms/search-meetup.html %}
+                </div>
+            </div>
+
+        </main>
     </div>
-
-    <!-- Section: Wikipedia (Encyclopedia) -->
-    <div class="search-section bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
-        <div class="bg-gray-50 border-b border-gray-100 px-6 py-4 flex items-center justify-between">
-            <h3 class="text-xl font-semibold text-gray-800 flex items-center gap-2">
-                {% include components/atoms/icon.html name="wikipedia-w" class="fab text-gray-600" %}
-                Encyclopedia
-            </h3>
-            <span class="text-xs font-medium bg-gray-200 text-gray-700 px-2 py-1 rounded">Wikipedia</span>
-        </div>
-        <div class="p-6">
-            {% include components/organisms/search-wikipedia.html %}
-        </div>
-    </div>
-
-    <!-- Section: OpenAlex (General Research) -->
-    <div class="search-section bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
-        <div class="bg-blue-50 border-b border-blue-100 px-6 py-4 flex items-center justify-between">
-            <h3 class="text-xl font-semibold text-blue-900 flex items-center gap-2">
-                {% include components/atoms/icon.html name="book-open" class="text-blue-600" %}
-                Global Research Papers
-            </h3>
-            <span class="text-xs font-medium bg-blue-200 text-blue-800 px-2 py-1 rounded">OpenAlex</span>
-        </div>
-        <div class="p-6">
-            {% include components/organisms/search-openalex.html %}
-        </div>
-    </div>
-
-    <!-- Section: ArXiv (Preprints) -->
-    <div class="search-section bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
-        <div class="bg-red-50 border-b border-red-100 px-6 py-4 flex items-center justify-between">
-            <h3 class="text-xl font-semibold text-red-900 flex items-center gap-2">
-                {% include components/atoms/icon.html name="atom" class="text-red-600" %}
-                Preprints & Technical Reports
-            </h3>
-            <span class="text-xs font-medium bg-red-200 text-red-800 px-2 py-1 rounded">ArXiv</span>
-        </div>
-        <div class="p-6">
-            {% include components/organisms/search-arxiv.html %}
-        </div>
-    </div>
-
-    <!-- Section: ORCID (Researchers) -->
-    <div class="search-section bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
-        <div class="bg-green-50 border-b border-green-100 px-6 py-4 flex items-center justify-between">
-            <h3 class="text-xl font-semibold text-green-900 flex items-center gap-2">
-                <img src="https://orcid.org/assets/vectors/orcid.logo.icon.svg" alt="ORCID" class="w-6 h-6">
-                Researchers & Authors
-            </h3>
-            <span class="text-xs font-medium bg-green-200 text-green-800 px-2 py-1 rounded">ORCID</span>
-        </div>
-        <div class="p-6">
-            {% include components/organisms/search-orcid.html %}
-        </div>
-    </div>
-
-    <!-- Section: Meetup (Events) -->
-    <div class="search-section bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
-        <div class="bg-orange-50 border-b border-orange-100 px-6 py-4 flex items-center justify-between">
-            <h3 class="text-xl font-semibold text-orange-900 flex items-center gap-2">
-                {% include components/atoms/icon.html name="meetup" class="fab text-red-500" %}
-                Events & Meetups
-            </h3>
-            <span class="text-xs font-medium bg-orange-200 text-orange-800 px-2 py-1 rounded">Meetup</span>
-        </div>
-        <div class="p-6">
-            {% include components/organisms/search-meetup.html %}
-        </div>
-    </div>
-
 </div>
 
 <script>
@@ -102,11 +234,14 @@
         currentGlobalQuery = input.value;
         if (!currentGlobalQuery) return;
 
-        // Trigger all engines
+        // Trigger all 8 search engines
         searchWikipedia(currentGlobalQuery);
         searchOpenAlex(currentGlobalQuery);
         searchArxiv(currentGlobalQuery);
+        searchScholar(currentGlobalQuery);
         searchOrcid(currentGlobalQuery);
+        searchCoursera(currentGlobalQuery);
+        searchYouTube(currentGlobalQuery);
         searchMeetup(currentGlobalQuery);
     }
 

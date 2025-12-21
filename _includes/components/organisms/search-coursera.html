@@ -1,0 +1,50 @@
+<div id="coursera-search-container" class="space-y-4">
+    <div id="coursera-results-list" class="space-y-4"></div>
+    {% include components/atoms/loader.html id="coursera-loader" class="hidden" %}
+</div>
+
+<script>
+    async function searchCoursera(query) {
+        const container = document.getElementById('coursera-results-list');
+        const loader = document.getElementById('coursera-loader');
+
+        container.innerHTML = '';
+        loader.classList.remove('hidden');
+
+        loader.classList.add('hidden');
+
+        const courseUrl = `https://www.coursera.org/search?query=${encodeURIComponent(query)}`;
+        const freeUrl = `https://www.coursera.org/search?query=${encodeURIComponent(query)}&productTypeDescription=Free%20Courses`;
+        const certUrl = `https://www.coursera.org/search?query=${encodeURIComponent(query)}&productTypeDescription=Professional%20Certificates`;
+
+        container.innerHTML = `
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <a href="${courseUrl}" target="_blank" rel="noopener noreferrer" 
+           class="block bg-white border border-gray-200 p-4 rounded-lg shadow-sm hover:shadow-md transition-shadow group">
+          <div class="flex items-center gap-3 mb-2">
+            <i class="fas fa-graduation-cap text-blue-600 text-xl"></i>
+            <h4 class="font-semibold text-gray-800 group-hover:text-blue-600">All Courses</h4>
+          </div>
+          <p class="text-xs text-gray-600">Browse all courses</p>
+        </a>
+        
+        <a href="${freeUrl}" target="_blank" rel="noopener noreferrer" 
+           class="block bg-white border border-gray-200 p-4 rounded-lg shadow-sm hover:shadow-md transition-shadow group">
+          <div class="flex items-center gap-3 mb-2">
+            <i class="fas fa-gift text-green-600 text-xl"></i>
+            <h4 class="font-semibold text-gray-800 group-hover:text-green-600">Free Courses</h4>
+          </div>
+          <p class="text-xs text-gray-600">No payment required</p>
+        </a>
+        
+        <a href="${certUrl}" target="_blank" rel="noopener noreferrer" 
+           class="block bg-white border border-gray-200 p-4 rounded-lg shadow-sm hover:shadow-md transition-shadow group">
+          <div class="flex items-center gap-3 mb-2">
+            <i class="fas fa-certificate text-yellow-600 text-xl"></i>
+            <h4 class="font-semibold text-gray-800 group-hover:text-yellow-600">Certificates</h4>
+          </div>
+          <p class="text-xs text-gray-600">Professional credentials</p>
+        </a>
+      </div>`;
+    }
+</script>

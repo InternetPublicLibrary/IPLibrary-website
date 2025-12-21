@@ -1,0 +1,49 @@
+<div id="youtube-search-container" class="space-y-4">
+    <div id="youtube-results-list" class="space-y-4"></div>
+    {% include components/atoms/loader.html id="youtube-loader" class="hidden" %}
+</div>
+
+<script>
+    async function searchYouTube(query) {
+        const container = document.getElementById('youtube-results-list');
+        const loader = document.getElementById('youtube-loader');
+
+        container.innerHTML = '';
+        loader.classList.remove('hidden');
+
+        // YouTube Data API requires API key, so we show search links
+        loader.classList.add('hidden');
+
+        const searchUrl = `https://www.youtube.com/results?search_query=${encodeURIComponent(query)}`;
+        const educationalUrl = `https://www.youtube.com/results?search_query=${encodeURIComponent(query + ' tutorial course lecture')}`;
+
+        container.innerHTML = `
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <a href="${searchUrl}" target="_blank" rel="noopener noreferrer" 
+           class="block bg-white border border-gray-200 p-4 rounded-lg shadow-sm hover:shadow-md transition-shadow group">
+          <div class="flex items-center gap-3 mb-2">
+            <i class="fab fa-youtube text-red-600 text-2xl"></i>
+            <h4 class="font-semibold text-gray-800 group-hover:text-red-600">All Videos</h4>
+          </div>
+          <p class="text-sm text-gray-600">Search all YouTube videos about "${query}"</p>
+        </a>
+        
+        <a href="${educationalUrl}" target="_blank" rel="noopener noreferrer" 
+           class="block bg-white border border-gray-200 p-4 rounded-lg shadow-sm hover:shadow-md transition-shadow group">
+          <div class="flex items-center gap-3 mb-2">
+            <i class="fas fa-graduation-cap text-blue-600 text-2xl"></i>
+            <h4 class="font-semibold text-gray-800 group-hover:text-blue-600">Educational</h4>
+          </div>
+          <p class="text-sm text-gray-600">Find tutorials, courses, and lectures</p>
+        </a>
+      </div>
+      
+      <div class="text-center mt-4">
+        <a href="${searchUrl}" target="_blank" class="inline-flex items-center text-red-600 hover:text-red-700 font-medium">
+          <i class="fab fa-youtube mr-2"></i>
+          Open YouTube Search
+          <i class="fas fa-external-link-alt ml-2 text-xs"></i>
+        </a>
+      </div>`;
+    }
+</script>
