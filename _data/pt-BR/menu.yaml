@@ -2,8 +2,43 @@
   path: /pt-BR/academicos/
   data_folder: academics
   children:
+    - title: Teoria da Computação
+      path: /pt-BR/academicos/teoria-da-computacao/
+      children:
+        - title: Algoritmos e Complexidade
+          path: /pt-BR/academicos/teoria-da-computacao/algoritmos-e-complexidade/
+        - title: Linguagens Formais e Autômatos
+          path: /pt-BR/academicos/teoria-da-computacao/linguagens-formais-e-automatos/
+        - title: Lógica em Ciência da Computação
+          path: /pt-BR/academicos/teoria-da-computacao/logica-em-ciencia-da-computacao/
+        - title: Teoria da Informação
+          path: /pt-BR/academicos/teoria-da-computacao/teoria-da-informacao/
+        - title: Teoria da Criptografia
+          path: /pt-BR/academicos/teoria-da-computacao/teoria-da-criptografia/
     - title: Ciências Formais
       path: /pt-BR/academicos/ciencias-formais/
+      children:
+        - title: Matemática
+          path: /pt-BR/academicos/ciencias-formais/matematica/
+          children:
+            - title: Álgebra
+              path: /pt-BR/academicos/ciencias-formais/matematica/algebra/
+            - title: Análise
+              path: /pt-BR/academicos/ciencias-formais/matematica/analise/
+            - title: Geometria e Topologia
+              path: /pt-BR/academicos/ciencias-formais/matematica/geometria-e-topologia/
+            - title: Teoria dos Números
+              path: /pt-BR/academicos/ciencias-formais/matematica/teoria-dos-numeros/
+            - title: Combinatória
+              path: /pt-BR/academicos/ciencias-formais/matematica/combinatoria/
+            - title: Probabilidade
+              path: /pt-BR/academicos/ciencias-formais/matematica/probabilidade/
+            - title: Matemática Aplicada
+              path: /pt-BR/academicos/ciencias-formais/matematica/matematica-aplicada/
+        - title: Estatística
+          path: /pt-BR/academicos/ciencias-formais/estatistica/
+        - title: Lógica
+          path: /pt-BR/academicos/ciencias-formais/logica/
     - title: Humanidades
       path: /pt-BR/academicos/humanidades/
       children:
@@ -15,12 +50,81 @@
           path: /pt-BR/academicos/humanidades/linguistica-e-idiomas/
         - title: Filosofia
           path: /pt-BR/academicos/humanidades/filosofia/
+        - title: Literatura
+          path: /pt-BR/academicos/humanidades/literatura/
+        - title: Arte
+          path: /pt-BR/academicos/humanidades/arte/
     - title: Ciências Naturais
       path: /pt-BR/academicos/ciencias-naturais/
-    - title: Profissões e Ciências Aplicadas
-      path: /pt-BR/academicos/profissoes-e-ciencias-aplicadas/
+      children:
+        - title: Física
+          path: /pt-BR/academicos/ciencias-naturais/fisica/
+          children:
+            - title: Física Clássica
+              path: /pt-BR/academicos/ciencias-naturais/fisica/fisica-classica/
+            - title: Física Quântica
+              path: /pt-BR/academicos/ciencias-naturais/fisica/fisica-quantica/
+            - title: Matéria Condensada
+              path: /pt-BR/academicos/ciencias-naturais/fisica/materia-condensada/
+            - title: Física de Altas Energias
+              path: /pt-BR/academicos/ciencias-naturais/fisica/fisica-de-altas-energias/
+            - title: Física Nuclear
+              path: /pt-BR/academicos/ciencias-naturais/fisica/fisica-nuclear/
+            - title: Óptica
+              path: /pt-BR/academicos/ciencias-naturais/fisica/optica/
+        - title: Astronomia e Astrofísica
+          path: /pt-BR/academicos/ciencias-naturais/astronomia/
+        - title: Química
+          path: /pt-BR/academicos/ciencias-naturais/quimica/
+        - title: Biologia
+          path: /pt-BR/academicos/ciencias-naturais/biologia/
+          children:
+            - title: Biologia Molecular
+              path: /pt-BR/academicos/ciencias-naturais/biologia/biologia-molecular/
+            - title: Genômica
+              path: /pt-BR/academicos/ciencias-naturais/biologia/genomica/
+            - title: Neurociência
+              path: /pt-BR/academicos/ciencias-naturais/biologia/neurociencia/
+            - title: Ecologia e Evolução
+              path: /pt-BR/academicos/ciencias-naturais/biologia/ecologia-e-evolucao/
+        - title: Ciências da Terra
+          path: /pt-BR/academicos/ciencias-naturais/ciencias-da-terra/
     - title: Ciências Sociais
       path: /pt-BR/academicos/ciencias-sociais/
+      children:
+        - title: Economia
+          path: /pt-BR/academicos/ciencias-sociais/economia/
+          children:
+            - title: Econometria
+              path: /pt-BR/academicos/ciencias-sociais/economia/econometria/
+            - title: Economia Teórica
+              path: /pt-BR/academicos/ciencias-sociais/economia/economia-teorica/
+        - title: Finanças Quantitativas
+          path: /pt-BR/academicos/ciencias-sociais/financas-quantitativas/
+        - title: Psicologia
+          path: /pt-BR/academicos/ciencias-sociais/psicologia/
+        - title: Sociologia
+          path: /pt-BR/academicos/ciencias-sociais/sociologia/
+        - title: Ciência Política
+          path: /pt-BR/academicos/ciencias-sociais/ciencia-politica/
+    - title: Engenharia
+      path: /pt-BR/academicos/engenharia/
+      children:
+        - title: Engenharia Elétrica
+          path: /pt-BR/academicos/engenharia/engenharia-eletrica/
+        - title: Engenharia Mecânica
+          path: /pt-BR/academicos/engenharia/engenharia-mecanica/
+        - title: Engenharia Civil
+          path: /pt-BR/academicos/engenharia/engenharia-civil/
+    - title: Profissões e Ciências Aplicadas
+      path: /pt-BR/academicos/profissoes-e-ciencias-aplicadas/
+      children:
+        - title: Medicina e Saúde
+          path: /pt-BR/academicos/profissoes-e-ciencias-aplicadas/medicina-e-saude/
+        - title: Direito
+          path: /pt-BR/academicos/profissoes-e-ciencias-aplicadas/direito/
+        - title: Educação
+          path: /pt-BR/academicos/profissoes-e-ciencias-aplicadas/educacao/
 
 - title: Negócios
   path: /pt-BR/negocios/
@@ -36,6 +140,19 @@
       path: /pt-BR/negocios/empreendedorismo/
     - title: Finanças
       path: /pt-BR/negocios/financas/
+      children:
+        - title: Finanças Corporativas
+          path: /pt-BR/negocios/financas/financas-corporativas/
+        - title: Banco de Investimento
+          path: /pt-BR/negocios/financas/banco-de-investimento/
+        - title: Gestão de Portfólio
+          path: /pt-BR/negocios/financas/gestao-de-portfolio/
+        - title: Gestão de Riscos
+          path: /pt-BR/negocios/financas/gestao-de-riscos/
+        - title: Trading
+          path: /pt-BR/negocios/financas/trading/
+        - title: Finanças Quantitativas
+          path: /pt-BR/negocios/financas/financas-quantitativas/
     - title: Negócios Domésticos
       path: /pt-BR/negocios/negocios-domesticos/
     - title: Recursos Humanos
@@ -61,24 +178,42 @@
   path: /pt-BR/computacao/
   data_folder: computing
   children:
+    - title: Inteligência Artificial
+      path: /pt-BR/computacao/inteligencia-artificial/
+    - title: Aprendizado de Máquina
+      path: /pt-BR/computacao/aprendizado-de-maquina/
     - title: Big Data
       path: /pt-BR/computacao/big-data/
     - title: Sistemas de Informação
       path: /pt-BR/computacao/sistemas-de-informacao/
     - title: Ciência da Computação
       path: /pt-BR/computacao/ciencia-da-computacao/
+    - title: Visão Computacional
+      path: /pt-BR/computacao/visao-computacional/
     - title: Segurança Cibernética
       path: /pt-BR/computacao/seguranca-cibernetica/
     - title: Ciência de Dados
       path: /pt-BR/computacao/ciencia-de-dados/
+    - title: Bancos de Dados
+      path: /pt-BR/computacao/bancos-de-dados/
+    - title: Computação Distribuída
+      path: /pt-BR/computacao/computacao-distribuida/
     - title: Hardware
       path: /pt-BR/computacao/hardware/
+    - title: Interação Humano-Computador
+      path: /pt-BR/computacao/interacao-humano-computador/
     - title: Certificação em TI
       path: /pt-BR/computacao/certificacao-em-ti/
+    - title: Processamento de Linguagem Natural
+      path: /pt-BR/computacao/processamento-de-linguagem-natural/
     - title: Redes
       path: /pt-BR/computacao/redes/
     - title: Sistemas Operacionais
       path: /pt-BR/computacao/sistemas-operacionais/
+    - title: Robótica
+      path: /pt-BR/computacao/robotica/
+    - title: Engenharia de Software
+      path: /pt-BR/computacao/engenharia-de-software/
 
 - title: Design
   path: /pt-BR/design/
