@@ -15,35 +15,140 @@
 
         <!-- Sidebar -->
         <aside class="lg:col-span-1 order-2 lg:order-1">
-            {% include components/molecules/dashboard-sidebar.html stats_sources=8 %}
+            <div class="sticky top-24 space-y-4">
+
+                <!-- Quick Navigation -->
+                <div class="bg-white rounded-xl shadow-sm border p-4">
+                    <h3 class="font-semibold text-gray-800 mb-3 text-sm uppercase tracking-wide">
+                        <i class="fas fa-compass mr-2 text-blue-500"></i>
+                        {% if page.lang == 'pt-BR' %}Navegação Rápida{% else %}Quick Nav{% endif %}
+                    </h3>
+                    <nav id="dashboard-nav" class="space-y-1 text-sm">
+                        <a href="#section-wikipedia"
+                            class="block px-3 py-2 rounded-lg hover:bg-gray-50 text-gray-600 hover:text-blue-600">
+                            <i class="fab fa-wikipedia-w w-5"></i> {% if page.lang == 'pt-BR' %}Enciclopédia{% else
+                            %}Encyclopedia{% endif %}
+                        </a>
+                        <a href="#section-openalex"
+                            class="block px-3 py-2 rounded-lg hover:bg-gray-50 text-gray-600 hover:text-blue-600">
+                            <i class="fas fa-book-open w-5"></i> {% if page.lang == 'pt-BR' %}Artigos{% else %}Papers{%
+                            endif %}
+                        </a>
+                        <a href="#section-arxiv"
+                            class="block px-3 py-2 rounded-lg hover:bg-gray-50 text-gray-600 hover:text-blue-600">
+                            <i class="fas fa-atom w-5"></i> Preprints
+                        </a>
+                        <a href="#section-scholar"
+                            class="block px-3 py-2 rounded-lg hover:bg-gray-50 text-gray-600 hover:text-blue-600">
+                            <i class="fas fa-graduation-cap w-5"></i> Scholar
+                        </a>
+                        <a href="#section-orcid"
+                            class="block px-3 py-2 rounded-lg hover:bg-gray-50 text-gray-600 hover:text-blue-600">
+                            <i class="fas fa-user-graduate w-5"></i> {% if page.lang == 'pt-BR' %}Pesquisadores{% else
+                            %}Researchers{% endif %}
+                        </a>
+                        <a href="#section-coursera"
+                            class="block px-3 py-2 rounded-lg hover:bg-gray-50 text-gray-600 hover:text-blue-600">
+                            <i class="fas fa-chalkboard-teacher w-5"></i> {% if page.lang == 'pt-BR' %}Cursos{% else
+                            %}Courses{% endif %}
+                        </a>
+                        <a href="#section-youtube"
+                            class="block px-3 py-2 rounded-lg hover:bg-gray-50 text-gray-600 hover:text-blue-600">
+                            <i class="fab fa-youtube w-5"></i> {% if page.lang == 'pt-BR' %}Vídeos{% else %}Videos{%
+                            endif %}
+                        </a>
+                        <a href="#section-meetup"
+                            class="block px-3 py-2 rounded-lg hover:bg-gray-50 text-gray-600 hover:text-blue-600">
+                            <i class="fab fa-meetup w-5"></i> {% if page.lang == 'pt-BR' %}Eventos{% else %}Events{%
+                            endif %}
+                        </a>
+                    </nav>
+                </div>
+
+                <!-- Search Stats -->
+                <div class="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-xl border border-blue-100 p-4">
+                    <h3 class="font-semibold text-gray-800 mb-3 text-sm">
+                        <i class="fas fa-chart-bar mr-2 text-blue-500"></i>
+                        {% if page.lang == 'pt-BR' %}Fontes de Busca{% else %}Search Sources{% endif %}
+                    </h3>
+                    <div class="grid grid-cols-2 gap-2 text-center">
+                        <div class="bg-white/60 rounded-lg p-2">
+                            <div class="text-2xl font-bold text-blue-600">8</div>
+                            <div class="text-xs text-gray-600">{% if page.lang == 'pt-BR' %}Fontes{% else %}Sources{%
+                                endif %}</div>
+                        </div>
+                        <div class="bg-white/60 rounded-lg p-2">
+                            <div class="text-2xl font-bold text-green-600">∞</div>
+                            <div class="text-xs text-gray-600">{% if page.lang == 'pt-BR' %}Recursos{% else
+                                %}Resources{% endif %}</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quick Actions -->
+                <div class="bg-white rounded-xl shadow-sm border p-4">
+                    <h3 class="font-semibold text-gray-800 mb-3 text-sm">
+                        <i class="fas fa-bolt mr-2 text-yellow-500"></i>
+                        {% if page.lang == 'pt-BR' %}Ações Rápidas{% else %}Quick Actions{% endif %}
+                    </h3>
+                    <div class="space-y-2 text-sm">
+                        <button onclick="performGlobalSearch()"
+                            class="w-full text-left px-3 py-2 rounded-lg bg-blue-50 text-blue-700 hover:bg-blue-100">
+                            <i class="fas fa-sync-alt mr-2"></i>
+                            {% if page.lang == 'pt-BR' %}Atualizar Tudo{% else %}Refresh All{% endif %}
+                        </button>
+                        <a href="#" onclick="window.print()"
+                            class="block px-3 py-2 rounded-lg hover:bg-gray-50 text-gray-600">
+                            <i class="fas fa-print mr-2"></i>
+                            {% if page.lang == 'pt-BR' %}Imprimir{% else %}Print Results{% endif %}
+                        </a>
+                    </div>
+                </div>
+            </div>
         </aside>
 
         <!-- Main Content -->
         <main class="lg:col-span-3 order-1 lg:order-2 space-y-6">
 
-            <!-- Header Card with Search -->
-            {% include components/atoms/card.html variant="default" padding="lg" content="
-            <div class='flex items-center gap-4 mb-4'>
-                <i class='fas fa-graduation-cap text-blue-600 text-3xl'></i>
-                <div>
-                    <h2 class='text-2xl font-bold text-gray-800'>Academic Research Assistant</h2>
-                    <p class='text-gray-600'>Search 8 knowledge sources simultaneously</p>
-                </div>
-            </div>
-            " %}
-
-            <!-- Search Bar -->
+            <!-- Header & Search -->
             <div class="bg-white rounded-xl shadow-sm border p-6">
-                {% include components/molecules/search-bar.html
-                input_id="global-academic-search"
-                placeholder="Enter research topic..."
-                value=include.search_query
-                onclick="performGlobalSearch()"
-                %}
+                <div class="flex items-center gap-4 mb-4">
+                    <i class="fas fa-graduation-cap text-blue-600 text-3xl"></i>
+                    <div>
+                        <h2 class="text-2xl font-bold text-gray-800">
+                            {% if page.lang == 'pt-BR' %}Assistente de Pesquisa Acadêmica{% else %}Academic Research
+                            Assistant{% endif %}
+                        </h2>
+                        <p class="text-gray-600">{% if page.lang == 'pt-BR' %}Busque em 8 fontes simultaneamente{% else
+                            %}Search 8 knowledge sources simultaneously{% endif %}</p>
+                    </div>
+                </div>
 
-                <!-- Wiki Summary -->
-                <div class="mt-4">
-                    {% include components/molecules/wiki-summary-box.html %}
+                <div class="max-w-2xl mb-6">
+                    <div class="relative">
+                        <input type="text" id="global-academic-search"
+                            placeholder="{% if page.lang == 'pt-BR' %}Digite o tema de pesquisa...{% else %}Enter research topic...{% endif %}"
+                            value="{{ include.search_query }}"
+                            class="w-full px-4 py-3 pr-12 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                            onkeypress="if(event.key==='Enter') performGlobalSearch()">
+                        <button onclick="performGlobalSearch()"
+                            class="absolute right-3 top-1/2 -translate-y-1/2 text-blue-600 hover:text-blue-700">
+                            <i class="fas fa-search text-xl"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Wiki Summary Box -->
+                <div id="wiki-summary-box" class="bg-gray-50 rounded-lg p-4 border border-gray-200">
+                    <div class="flex items-start gap-4">
+                        <i class="fab fa-wikipedia-w text-gray-600 text-2xl flex-shrink-0"></i>
+                        <div id="wiki-summary-content" class="flex-1">
+                            <p class="text-gray-500">
+                                {% if page.lang == 'pt-BR' %}Pesquise um tema para ver o resumo da Wikipedia...{% else
+                                %}Search for a topic to see its Wikipedia summary...{% endif %}
+                            </p>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -168,13 +273,47 @@
 <script>
     let currentGlobalQuery = "{{ include.search_query | escape }}";
 
+    // Fetch and display Wikipedia summary in header box
+    async function fetchWikiSummary(query) {
+        const container = document.getElementById('wiki-summary-content');
+        if (!container) return;
+
+        container.innerHTML = '<div class="animate-pulse h-4 bg-gray-200 rounded w-3/4"></div>';
+
+        const lang = document.documentElement.lang?.split('-')[0] || 'en';
+        const endpoint = `https://${lang}.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(query)}`;
+
+        try {
+            const response = await fetch(endpoint);
+            if (response.ok) {
+                const data = await response.json();
+                const readMore = lang === 'pt' ? 'Ler mais na Wikipedia →' : 'Read more on Wikipedia →';
+                container.innerHTML = `
+                    <h4 class="font-semibold text-gray-800 mb-1">${data.title}</h4>
+                    <p class="text-sm text-gray-600 line-clamp-3">${data.extract}</p>
+                    ${data.thumbnail ? `<img src="${data.thumbnail.source}" alt="${data.title}" class="mt-3 rounded-lg max-h-32 object-cover">` : ''}
+                    <a href="${data.content_urls?.desktop?.page || '#'}" target="_blank" class="text-sm text-blue-600 hover:underline mt-2 inline-block">
+                        ${readMore}
+                    </a>
+                `;
+            } else {
+                const notFound = lang === 'pt' ? `Artigo não encontrado para "${query}"` : `No Wikipedia article found for "${query}"`;
+                container.innerHTML = `<p class="text-gray-500">${notFound}</p>`;
+            }
+        } catch (error) {
+            console.error('Wiki summary error:', error);
+            const errorMsg = lang === 'pt' ? 'Erro ao carregar resumo da Wikipedia' : 'Could not load Wikipedia summary';
+            container.innerHTML = `<p class="text-gray-500">${errorMsg}</p>`;
+        }
+    }
+
     function performGlobalSearch() {
         const input = document.getElementById('global-academic-search');
         currentGlobalQuery = input.value;
         if (!currentGlobalQuery) return;
 
         // Fetch Wikipedia summary for header
-        if (typeof fetchWikiSummary === 'function') fetchWikiSummary(currentGlobalQuery);
+        fetchWikiSummary(currentGlobalQuery);
 
         // Trigger all 8 search engines with safety checks
         if (typeof searchWikipedia === 'function') searchWikipedia(currentGlobalQuery);
@@ -187,26 +326,7 @@
         if (typeof searchMeetup === 'function') searchMeetup(currentGlobalQuery);
     }
 
-    // Build sidebar navigation from sections
     document.addEventListener('DOMContentLoaded', () => {
-        const nav = document.getElementById('dashboard-nav');
-        const sections = document.querySelectorAll('.search-section');
-
-        if (nav && sections.length > 0) {
-            const lang = document.documentElement.lang || 'en-US';
-            nav.innerHTML = Array.from(sections).map(section => {
-                const id = section.id;
-                const header = section.querySelector('h3');
-                const icon = header?.querySelector('i, img');
-                const title = header?.textContent?.trim() || id;
-                const iconHtml = icon?.outerHTML || '';
-
-                return `<a href="#${id}" class="block px-3 py-2 rounded-lg hover:bg-gray-50 text-gray-600 hover:text-blue-600 text-sm">
-                    ${iconHtml} ${title}
-                </a>`;
-            }).join('');
-        }
-
         // Auto-search if query provided
         if (currentGlobalQuery) {
             performGlobalSearch();
