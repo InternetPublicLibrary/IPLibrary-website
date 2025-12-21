@@ -85,7 +85,7 @@
         </aside>
 
         <!-- Main Content -->
-        <main class="lg:col-span-3 order-1 lg:order-2 space-y-8">
+        <main class="lg:col-span-3 order-1 lg:order-2 space-y-6">
 
             <!-- Header & Search -->
             <div class="bg-white rounded-xl shadow-sm border p-6">
@@ -99,13 +99,23 @@
                     </div>
                 </div>
 
-                <div class="max-w-2xl">
+                <div class="max-w-2xl mb-6">
                     {% include components/molecules/search-bar.html
                     input_id="global-academic-search"
                     placeholder="Enter research topic..."
                     value=include.search_query
                     onclick="performGlobalSearch()"
                     %}
+                </div>
+
+                <!-- Wikipedia Summary Box -->
+                <div id="wiki-summary-box" class="bg-gray-50 rounded-lg p-4 border border-gray-200">
+                    <div class="flex items-start gap-4">
+                        <i class="fab fa-wikipedia-w text-gray-600 text-2xl flex-shrink-0"></i>
+                        <div id="wiki-summary-content" class="flex-1">
+                            <p class="text-gray-500">Search for a topic to see its Wikipedia summary...</p>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -229,20 +239,54 @@
 <script>
     let currentGlobalQuery = "{{ include.search_query | escape }}";
 
+    // Fetch and display Wikipedia summary in header box
+    async function fetchWikiSummary(query) {
+        const container = document.getElementById('wiki-summary-content');
+        if (!container) return;
+
+        container.innerHTML = '<div class="animate-pulse h-4 bg-gray-200 rounded w-3/4"></div>';
+
+        const lang = document.documentElement.lang?.split('-')[0] || 'en';
+        const endpoint = `https://${lang}.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(query)}`;
+
+        try {
+            const response = await fetch(endpoint);
+            if (response.ok) {
+                const data = await response.json();
+                container.innerHTML = `
+                    <h4 class="font-semibold text-gray-800 mb-1">${data.title}</h4>
+                    <p class="text-sm text-gray-600 line-clamp-3">${data.extract}</p>
+                    ${data.thumbnail ? `<img src="${data.thumbnail.source}" alt="${data.title}" class="mt-3 rounded-lg max-h-32 object-cover">` : ''}
+                    <a href="${data.content_urls?.desktop?.page || '#'}" target="_blank" class="text-sm text-blue-600 hover:underline mt-2 inline-block">
+                        Read more on Wikipedia →
+                    </a>
+                `;
+            } else {
+                container.innerHTML = `<p class="text-gray-500">No Wikipedia article found for "${query}"</p>`;
+            }
+        } catch (error) {
+            console.error('Wiki summary error:', error);
+            container.innerHTML = `<p class="text-gray-500">Could not load Wikipedia summary</p>`;
+        }
+    }
+
     function performGlobalSearch() {
         const input = document.getElementById('global-academic-search');
         currentGlobalQuery = input.value;
         if (!currentGlobalQuery) return;
 
+        // Fetch Wikipedia summary for header
+        fetchWikiSummary(currentGlobalQuery);
+
         // Trigger all 8 search engines
-        searchWikipedia(currentGlobalQuery);
-        searchOpenAlex(currentGlobalQuery);
-        searchArxiv(currentGlobalQuery);
-        searchScholar(currentGlobalQuery);
-        searchOrcid(currentGlobalQuery);
-        searchCoursera(currentGlobalQuery);
-        searchYouTube(currentGlobalQuery);
-        searchMeetup(currentGlobalQuery);
+        if (typeof searchWikipedia === 'function') searchWikipedia(currentGlobalQuery);
+        if (typeof searchOpenAlex === 'function') searchOpenAlex(currentGlobalQuery);
+        if (typeof searchArxiv === 'function') searchArxiv(currentGlobalQuery);
+        if (typeof searchScholar === 'function') searchScholar(currentGlobalQuery);
+        if (typeof searchOrcid === 'function') searchOrcid(currentGlobalQuery);
+        if (typeof searchCoursera === 'function') searchCoursera(currentGlobalQuery);
+        if (typeof searchYouTube === 'function') searchYouTube(currentGlobalQuery);
+        if (typeof searchMeetup === 'function') searchMeetup(currentGlobalQuery);
     }
 
     document.addEventListener('DOMContentLoaded', () => {

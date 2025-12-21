@@ -1,61 +1,68 @@
 <div id="orcid-search-container" class="space-y-4">
-    <div id="orcid-results-list" class="space-y-4"></div>
-    {% include components/atoms/loader.html id="orcid-loader" class="hidden" %}
+  <div id="orcid-results-list" class="space-y-4"></div>
+  {% include components/atoms/loader.html id="orcid-loader" class="hidden" %}
 </div>
 
 <script>
-    async function searchOrcid(query) {
-        const container = document.getElementById('orcid-results-list');
-        const loader = document.getElementById('orcid-loader');
+  async function searchOrcid(query) {
+    const container = document.getElementById('orcid-results-list');
+    const loader = document.getElementById('orcid-loader');
 
-        container.innerHTML = '';
-        loader.classList.remove('hidden');
+    container.innerHTML = '';
+    loader.classList.remove('hidden');
 
-        const endpoint = `https://pub.orcid.org/v3.0/search/?q=${encodeURIComponent(query)}&rows=5`;
+    const endpoint = `https://pub.orcid.org/v3.0/expanded-search/?q=${encodeURIComponent(query)}&rows=5`;
 
-        try {
-            const response = await fetch(endpoint, {
-                headers: { 'Accept': 'application/json' }
-            });
-            const data = await response.json();
-            const results = data.result || [];
+    try {
+      const response = await fetch(endpoint, {
+        headers: { 'Accept': 'application/json' }
+      });
+      const data = await response.json();
+      const results = data['expanded-result'] || [];
 
-            loader.classList.add('hidden');
+      loader.classList.add('hidden');
 
-            if (!results || results.length === 0) {
-                container.innerHTML = '<p class="text-gray-500 text-center">No researchers found.</p>';
-                return;
-            }
+      if (!results || results.length === 0) {
+        container.innerHTML = '<p class="text-gray-500 text-center">No researchers found.</p>';
+        return;
+      }
 
-            container.innerHTML = results.map(result => {
-                const orcidId = result['orcid-identifier']?.path;
-                const uri = result['orcid-identifier']?.uri;
+      container.innerHTML = results.map(result => {
+        const orcidId = result['orcid-id'];
+        const givenNames = result['given-names'] || '';
+        const familyName = result['family-names'] || '';
+        const fullName = `${givenNames} ${familyName}`.trim() || orcidId;
+        const institution = result['institution-name']?.[0] || '';
 
-                return `
+        return `
       <div class="bg-white border border-gray-200 p-4 rounded-lg shadow-sm hover:shadow-md transition-shadow">
-        <div class="flex items-center gap-3">
-          <img src="https://orcid.org/assets/vectors/orcid.logo.icon.svg" alt="ORCID" class="w-8 h-8">
-          <div>
+        <div class="flex items-start gap-3">
+          <img src="https://orcid.org/assets/vectors/orcid.logo.icon.svg" alt="ORCID" class="w-10 h-10 flex-shrink-0">
+          <div class="flex-1">
             <h3 class="font-semibold text-lg text-gray-800">
-              <a href="${uri}" target="_blank" rel="noopener noreferrer" class="hover:underline text-green-600">
-                ${orcidId}
+              <a href="https://orcid.org/${orcidId}" target="_blank" rel="noopener noreferrer" class="hover:text-green-600">
+                ${fullName}
               </a>
             </h3>
-            <p class="text-xs text-gray-500">ORCID Researcher Profile</p>
+            ${institution ? `<p class="text-sm text-gray-600">${institution}</p>` : ''}
+            <p class="text-xs text-gray-400 mt-1">ORCID: ${orcidId}</p>
           </div>
         </div>
         <div class="flex gap-3 mt-3">
-          <a href="${uri}" target="_blank" class="text-green-600 text-sm hover:underline flex items-center">
+          <a href="https://orcid.org/${orcidId}" target="_blank" class="text-green-600 text-sm hover:underline flex items-center">
             <i class="fas fa-external-link-alt mr-1"></i> View Profile
+          </a>
+          <a href="https://scholar.google.com/citations?user=${encodeURIComponent(fullName)}" target="_blank" class="text-blue-600 text-sm hover:underline flex items-center">
+            <i class="fas fa-search mr-1"></i> Find Publications
           </a>
         </div>
       </div>`;
-            }).join('');
+      }).join('');
 
-        } catch (error) {
-            console.error('ORCID Error:', error);
-            loader.classList.add('hidden');
-            container.innerHTML = '<p class="text-red-500 text-center">Error loading researchers.</p>';
-        }
+    } catch (error) {
+      console.error('ORCID Error:', error);
+      loader.classList.add('hidden');
+      container.innerHTML = '<p class="text-red-500 text-center">Error loading researchers.</p>';
     }
+  }
 </script>
