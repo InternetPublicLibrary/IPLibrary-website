@@ -98,6 +98,9 @@ auth:
 categories:
   all_categories: "All Categories"
   view_resources: "View resources"
+  browse_category: "Browse Category"
+  subcategories_label: "subcategories"
+  explore_related_prefix: "Explore resources related to"
   
 # Contribute
 contribute:
@@ -129,3 +132,28 @@ time:
   days_ago: "days ago"
   today: "Today"
   yesterday: "Yesterday"
+
+# Layout specific
+layout:
+  jump_to: "Jump to:"
+  wiki: "Wiki"
+  research: "Research"
+  on_this_page: "On this page"
+  external_links: "External Links"
+  curated_resources: "Curated Resources"
+  research_dashboard: "Research Dashboard"
+  research_dashboard_desc: "Access real-time academic literature, preprints, and research data."
+  related_sections: "Related Sections"
+  keywords: "Keywords"
+
+# Academic Dashboard
+academic_dashboard:
+  title: "Academic Research Assistant"
+  subtitle: "Search 8 knowledge sources simultaneously"
+  placeholder: "Enter research topic..."
+  wiki_placeholder: "Search for a topic to see its Wikipedia summary..."
+  encyclopedia: "Encyclopedia"
+  research_papers: "Research Papers"
+  online_courses: "Online Courses"
+  videos: "Videos"
+  events: "Events"

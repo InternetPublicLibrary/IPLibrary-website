@@ -8,265 +8,164 @@ title="Custom Title"
 search_query="initial query"
 {% endcomment %}
 
+{% assign t = site.data[page.lang].translations %}
 
-<div class="academic-dashboard my-8" itemscope itemtype="http://schema.org/SearchResultsPage">
+<div class="academic-dashboard" itemscope itemtype="http://schema.org/SearchResultsPage">
 
-    <div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
+    <div class="space-y-6">
 
-        <!-- Sidebar -->
-        <aside class="lg:col-span-1 order-2 lg:order-1">
-            <div class="sticky top-24 space-y-4">
-
-                <!-- Quick Navigation -->
-                <div class="bg-white rounded-xl shadow-sm border p-4">
-                    <h3 class="font-semibold text-gray-800 mb-3 text-sm uppercase tracking-wide">
-                        <i class="fas fa-compass mr-2 text-blue-500"></i>
-                        {% if page.lang == 'pt-BR' %}Navegação Rápida{% else %}Quick Nav{% endif %}
-                    </h3>
-                    <nav id="dashboard-nav" class="space-y-1 text-sm">
-                        <a href="#section-wikipedia"
-                            class="block px-3 py-2 rounded-lg hover:bg-gray-50 text-gray-600 hover:text-blue-600">
-                            <i class="fab fa-wikipedia-w w-5"></i> {% if page.lang == 'pt-BR' %}Enciclopédia{% else
-                            %}Encyclopedia{% endif %}
-                        </a>
-                        <a href="#section-openalex"
-                            class="block px-3 py-2 rounded-lg hover:bg-gray-50 text-gray-600 hover:text-blue-600">
-                            <i class="fas fa-book-open w-5"></i> {% if page.lang == 'pt-BR' %}Artigos{% else %}Papers{%
-                            endif %}
-                        </a>
-                        <a href="#section-arxiv"
-                            class="block px-3 py-2 rounded-lg hover:bg-gray-50 text-gray-600 hover:text-blue-600">
-                            <i class="fas fa-atom w-5"></i> Preprints
-                        </a>
-                        <a href="#section-scholar"
-                            class="block px-3 py-2 rounded-lg hover:bg-gray-50 text-gray-600 hover:text-blue-600">
-                            <i class="fas fa-graduation-cap w-5"></i> Scholar
-                        </a>
-                        <a href="#section-orcid"
-                            class="block px-3 py-2 rounded-lg hover:bg-gray-50 text-gray-600 hover:text-blue-600">
-                            <i class="fas fa-user-graduate w-5"></i> {% if page.lang == 'pt-BR' %}Pesquisadores{% else
-                            %}Researchers{% endif %}
-                        </a>
-                        <a href="#section-coursera"
-                            class="block px-3 py-2 rounded-lg hover:bg-gray-50 text-gray-600 hover:text-blue-600">
-                            <i class="fas fa-chalkboard-teacher w-5"></i> {% if page.lang == 'pt-BR' %}Cursos{% else
-                            %}Courses{% endif %}
-                        </a>
-                        <a href="#section-youtube"
-                            class="block px-3 py-2 rounded-lg hover:bg-gray-50 text-gray-600 hover:text-blue-600">
-                            <i class="fab fa-youtube w-5"></i> {% if page.lang == 'pt-BR' %}Vídeos{% else %}Videos{%
-                            endif %}
-                        </a>
-                        <a href="#section-meetup"
-                            class="block px-3 py-2 rounded-lg hover:bg-gray-50 text-gray-600 hover:text-blue-600">
-                            <i class="fab fa-meetup w-5"></i> {% if page.lang == 'pt-BR' %}Eventos{% else %}Events{%
-                            endif %}
-                        </a>
-                    </nav>
+        <!-- Header & Search -->
+        <div class="bg-white rounded-xl shadow-sm border p-6">
+            <div class="flex items-center gap-4 mb-4">
+                <i class="fas fa-graduation-cap text-blue-600 text-3xl"></i>
+                <div>
+                    <h2 class="text-2xl font-bold text-gray-800">
+                        {{ t.academic_dashboard.title }}
+                    </h2>
+                    <p class="text-gray-600">{{ t.academic_dashboard.subtitle }}</p>
                 </div>
+            </div>
 
-                <!-- Search Stats -->
-                <div class="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-xl border border-blue-100 p-4">
-                    <h3 class="font-semibold text-gray-800 mb-3 text-sm">
-                        <i class="fas fa-chart-bar mr-2 text-blue-500"></i>
-                        {% if page.lang == 'pt-BR' %}Fontes de Busca{% else %}Search Sources{% endif %}
-                    </h3>
-                    <div class="grid grid-cols-2 gap-2 text-center">
-                        <div class="bg-white/60 rounded-lg p-2">
-                            <div class="text-2xl font-bold text-blue-600">8</div>
-                            <div class="text-xs text-gray-600">{% if page.lang == 'pt-BR' %}Fontes{% else %}Sources{%
-                                endif %}</div>
-                        </div>
-                        <div class="bg-white/60 rounded-lg p-2">
-                            <div class="text-2xl font-bold text-green-600">∞</div>
-                            <div class="text-xs text-gray-600">{% if page.lang == 'pt-BR' %}Recursos{% else
-                                %}Resources{% endif %}</div>
-                        </div>
-                    </div>
+            <div class="max-w-2xl mb-6">
+                <div class="relative">
+                    <input type="text" id="global-academic-search" placeholder="{{ t.academic_dashboard.placeholder }}"
+                        value="{{ include.search_query }}"
+                        class="w-full px-4 py-3 pr-12 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                        onkeypress="if(event.key==='Enter') performGlobalSearch()">
+                    <button onclick="performGlobalSearch()"
+                        class="absolute right-3 top-1/2 -translate-y-1/2 text-blue-600 hover:text-blue-700">
+                        <i class="fas fa-search text-xl"></i>
+                    </button>
                 </div>
+            </div>
 
-                <!-- Quick Actions -->
-                <div class="bg-white rounded-xl shadow-sm border p-4">
-                    <h3 class="font-semibold text-gray-800 mb-3 text-sm">
-                        <i class="fas fa-bolt mr-2 text-yellow-500"></i>
-                        {% if page.lang == 'pt-BR' %}Ações Rápidas{% else %}Quick Actions{% endif %}
-                    </h3>
-                    <div class="space-y-2 text-sm">
-                        <button onclick="performGlobalSearch()"
-                            class="w-full text-left px-3 py-2 rounded-lg bg-blue-50 text-blue-700 hover:bg-blue-100">
-                            <i class="fas fa-sync-alt mr-2"></i>
-                            {% if page.lang == 'pt-BR' %}Atualizar Tudo{% else %}Refresh All{% endif %}
-                        </button>
-                        <a href="#" onclick="window.print()"
-                            class="block px-3 py-2 rounded-lg hover:bg-gray-50 text-gray-600">
-                            <i class="fas fa-print mr-2"></i>
-                            {% if page.lang == 'pt-BR' %}Imprimir{% else %}Print Results{% endif %}
-                        </a>
+            <!-- Wiki Summary Box -->
+            <div id="wiki-summary-box" class="bg-gray-50 rounded-lg p-4 border border-gray-200">
+                <div class="flex items-start gap-4">
+                    <i class="fab fa-wikipedia-w text-gray-600 text-2xl flex-shrink-0"></i>
+                    <div id="wiki-summary-content" class="flex-1">
+                        <p class="text-gray-500">
+                            {{ t.academic_dashboard.wiki_placeholder }}
+                        </p>
                     </div>
                 </div>
             </div>
-        </aside>
+        </div>
 
-        <!-- Main Content -->
-        <main class="lg:col-span-3 order-1 lg:order-2 space-y-6">
+        <!-- Search Sections -->
 
-            <!-- Header & Search -->
-            <div class="bg-white rounded-xl shadow-sm border p-6">
-                <div class="flex items-center gap-4 mb-4">
-                    <i class="fas fa-graduation-cap text-blue-600 text-3xl"></i>
-                    <div>
-                        <h2 class="text-2xl font-bold text-gray-800">
-                            {% if page.lang == 'pt-BR' %}Assistente de Pesquisa Acadêmica{% else %}Academic Research
-                            Assistant{% endif %}
-                        </h2>
-                        <p class="text-gray-600">{% if page.lang == 'pt-BR' %}Busque em 8 fontes simultaneamente{% else
-                            %}Search 8 knowledge sources simultaneously{% endif %}</p>
-                    </div>
-                </div>
-
-                <div class="max-w-2xl mb-6">
-                    <div class="relative">
-                        <input type="text" id="global-academic-search"
-                            placeholder="{% if page.lang == 'pt-BR' %}Digite o tema de pesquisa...{% else %}Enter research topic...{% endif %}"
-                            value="{{ include.search_query }}"
-                            class="w-full px-4 py-3 pr-12 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                            onkeypress="if(event.key==='Enter') performGlobalSearch()">
-                        <button onclick="performGlobalSearch()"
-                            class="absolute right-3 top-1/2 -translate-y-1/2 text-blue-600 hover:text-blue-700">
-                            <i class="fas fa-search text-xl"></i>
-                        </button>
-                    </div>
-                </div>
-
-                <!-- Wiki Summary Box -->
-                <div id="wiki-summary-box" class="bg-gray-50 rounded-lg p-4 border border-gray-200">
-                    <div class="flex items-start gap-4">
-                        <i class="fab fa-wikipedia-w text-gray-600 text-2xl flex-shrink-0"></i>
-                        <div id="wiki-summary-content" class="flex-1">
-                            <p class="text-gray-500">
-                                {% if page.lang == 'pt-BR' %}Pesquise um tema para ver o resumo da Wikipedia...{% else
-                                %}Search for a topic to see its Wikipedia summary...{% endif %}
-                            </p>
-                        </div>
-                    </div>
-                </div>
+        <!-- Wikipedia -->
+        <div id="section-wikipedia" class="search-section bg-white rounded-xl shadow-sm border overflow-hidden">
+            <div class="bg-gray-50 border-b px-6 py-3 flex items-center justify-between">
+                <h3 class="font-semibold text-gray-800 flex items-center gap-2">
+                    <i class="fab fa-wikipedia-w text-gray-600"></i>
+                    {{ t.academic_dashboard.encyclopedia }}
+                </h3>
+                <span class="text-xs font-medium bg-gray-200 text-gray-700 px-2 py-1 rounded">Wikipedia</span>
             </div>
-
-            <!-- Search Sections -->
-
-            <!-- Wikipedia -->
-            <div id="section-wikipedia" class="search-section bg-white rounded-xl shadow-sm border overflow-hidden">
-                <div class="bg-gray-50 border-b px-6 py-3 flex items-center justify-between">
-                    <h3 class="font-semibold text-gray-800 flex items-center gap-2">
-                        <i class="fab fa-wikipedia-w text-gray-600"></i>
-                        {% if page.lang == 'pt-BR' %}Enciclopédia{% else %}Encyclopedia{% endif %}
-                    </h3>
-                    <span class="text-xs font-medium bg-gray-200 text-gray-700 px-2 py-1 rounded">Wikipedia</span>
-                </div>
-                <div class="p-6">
-                    {% include components/organisms/search-wikipedia.html %}
-                </div>
+            <div class="p-6">
+                {% include components/organisms/search-wikipedia.html %}
             </div>
+        </div>
 
-            <!-- OpenAlex -->
-            <div id="section-openalex" class="search-section bg-white rounded-xl shadow-sm border overflow-hidden">
-                <div class="bg-blue-50 border-b border-blue-100 px-6 py-3 flex items-center justify-between">
-                    <h3 class="font-semibold text-blue-900 flex items-center gap-2">
-                        <i class="fas fa-book-open text-blue-600"></i>
-                        {% if page.lang == 'pt-BR' %}Artigos Científicos{% else %}Research Papers{% endif %}
-                    </h3>
-                    <span class="text-xs font-medium bg-blue-200 text-blue-800 px-2 py-1 rounded">OpenAlex</span>
-                </div>
-                <div class="p-6">
-                    {% include components/organisms/search-openalex.html %}
-                </div>
+        <!-- OpenAlex -->
+        <div id="section-openalex" class="search-section bg-white rounded-xl shadow-sm border overflow-hidden">
+            <div class="bg-blue-50 border-b border-blue-100 px-6 py-3 flex items-center justify-between">
+                <h3 class="font-semibold text-blue-900 flex items-center gap-2">
+                    <i class="fas fa-book-open text-blue-600"></i>
+                    {{ t.academic_dashboard.research_papers }}
+                </h3>
+                <span class="text-xs font-medium bg-blue-200 text-blue-800 px-2 py-1 rounded">OpenAlex</span>
             </div>
-
-            <!-- ArXiv -->
-            <div id="section-arxiv" class="search-section bg-white rounded-xl shadow-sm border overflow-hidden">
-                <div class="bg-red-50 border-b border-red-100 px-6 py-3 flex items-center justify-between">
-                    <h3 class="font-semibold text-red-900 flex items-center gap-2">
-                        <i class="fas fa-atom text-red-600"></i>
-                        Preprints
-                    </h3>
-                    <span class="text-xs font-medium bg-red-200 text-red-800 px-2 py-1 rounded">ArXiv</span>
-                </div>
-                <div class="p-6">
-                    {% include components/organisms/search-arxiv.html %}
-                </div>
+            <div class="p-6">
+                {% include components/organisms/search-openalex.html %}
             </div>
+        </div>
 
-            <!-- Google Scholar -->
-            <div id="section-scholar" class="search-section bg-white rounded-xl shadow-sm border overflow-hidden">
-                <div class="bg-indigo-50 border-b border-indigo-100 px-6 py-3 flex items-center justify-between">
-                    <h3 class="font-semibold text-indigo-900 flex items-center gap-2">
-                        <i class="fas fa-graduation-cap text-indigo-600"></i>
-                        Google Scholar
-                    </h3>
-                    <span class="text-xs font-medium bg-indigo-200 text-indigo-800 px-2 py-1 rounded">Scholar</span>
-                </div>
-                <div class="p-6">
-                    {% include components/organisms/search-scholar.html %}
-                </div>
+        <!-- ArXiv -->
+        <div id="section-arxiv" class="search-section bg-white rounded-xl shadow-sm border overflow-hidden">
+            <div class="bg-red-50 border-b border-red-100 px-6 py-3 flex items-center justify-between">
+                <h3 class="font-semibold text-red-900 flex items-center gap-2">
+                    <i class="fas fa-atom text-red-600"></i>
+                    Preprints
+                </h3>
+                <span class="text-xs font-medium bg-red-200 text-red-800 px-2 py-1 rounded">ArXiv</span>
             </div>
-
-            <!-- ORCID -->
-            <div id="section-orcid" class="search-section bg-white rounded-xl shadow-sm border overflow-hidden">
-                <div class="bg-green-50 border-b border-green-100 px-6 py-3 flex items-center justify-between">
-                    <h3 class="font-semibold text-green-900 flex items-center gap-2">
-                        <img src="https://orcid.org/assets/vectors/orcid.logo.icon.svg" alt="ORCID" class="w-5 h-5">
-                        {% if page.lang == 'pt-BR' %}Pesquisadores{% else %}Researchers{% endif %}
-                    </h3>
-                    <span class="text-xs font-medium bg-green-200 text-green-800 px-2 py-1 rounded">ORCID</span>
-                </div>
-                <div class="p-6">
-                    {% include components/organisms/search-orcid.html %}
-                </div>
+            <div class="p-6">
+                {% include components/organisms/search-arxiv.html %}
             </div>
+        </div>
 
-            <!-- Coursera -->
-            <div id="section-coursera" class="search-section bg-white rounded-xl shadow-sm border overflow-hidden">
-                <div class="bg-cyan-50 border-b border-cyan-100 px-6 py-3 flex items-center justify-between">
-                    <h3 class="font-semibold text-cyan-900 flex items-center gap-2">
-                        <i class="fas fa-chalkboard-teacher text-cyan-600"></i>
-                        {% if page.lang == 'pt-BR' %}Cursos Online{% else %}Online Courses{% endif %}
-                    </h3>
-                    <span class="text-xs font-medium bg-cyan-200 text-cyan-800 px-2 py-1 rounded">Coursera</span>
-                </div>
-                <div class="p-6">
-                    {% include components/organisms/search-coursera.html %}
-                </div>
+        <!-- Google Scholar -->
+        <div id="section-scholar" class="search-section bg-white rounded-xl shadow-sm border overflow-hidden">
+            <div class="bg-indigo-50 border-b border-indigo-100 px-6 py-3 flex items-center justify-between">
+                <h3 class="font-semibold text-indigo-900 flex items-center gap-2">
+                    <i class="fas fa-graduation-cap text-indigo-600"></i>
+                    Google Scholar
+                </h3>
+                <span class="text-xs font-medium bg-indigo-200 text-indigo-800 px-2 py-1 rounded">Scholar</span>
             </div>
-
-            <!-- YouTube -->
-            <div id="section-youtube" class="search-section bg-white rounded-xl shadow-sm border overflow-hidden">
-                <div class="bg-red-50 border-b border-red-100 px-6 py-3 flex items-center justify-between">
-                    <h3 class="font-semibold text-red-900 flex items-center gap-2">
-                        <i class="fab fa-youtube text-red-600"></i>
-                        {% if page.lang == 'pt-BR' %}Vídeos{% else %}Videos{% endif %}
-                    </h3>
-                    <span class="text-xs font-medium bg-red-200 text-red-800 px-2 py-1 rounded">YouTube</span>
-                </div>
-                <div class="p-6">
-                    {% include components/organisms/search-youtube.html %}
-                </div>
+            <div class="p-6">
+                {% include components/organisms/search-scholar.html %}
             </div>
+        </div>
 
-            <!-- Meetup -->
-            <div id="section-meetup" class="search-section bg-white rounded-xl shadow-sm border overflow-hidden">
-                <div class="bg-orange-50 border-b border-orange-100 px-6 py-3 flex items-center justify-between">
-                    <h3 class="font-semibold text-orange-900 flex items-center gap-2">
-                        <i class="fab fa-meetup text-red-500"></i>
-                        {% if page.lang == 'pt-BR' %}Eventos{% else %}Events{% endif %}
-                    </h3>
-                    <span class="text-xs font-medium bg-orange-200 text-orange-800 px-2 py-1 rounded">Meetup</span>
-                </div>
-                <div class="p-6">
-                    {% include components/organisms/search-meetup.html %}
-                </div>
+        <!-- ORCID -->
+        <div id="section-orcid" class="search-section bg-white rounded-xl shadow-sm border overflow-hidden">
+            <div class="bg-green-50 border-b border-green-100 px-6 py-3 flex items-center justify-between">
+                <h3 class="font-semibold text-green-900 flex items-center gap-2">
+                    <img src="https://orcid.org/assets/vectors/orcid.logo.icon.svg" alt="ORCID" class="w-5 h-5">
+                    {% if page.lang == 'pt-BR' %}Pesquisadores{% else %}Researchers{% endif %}
+                </h3>
+                <span class="text-xs font-medium bg-green-200 text-green-800 px-2 py-1 rounded">ORCID</span>
             </div>
+            <div class="p-6">
+                {% include components/organisms/search-orcid.html %}
+            </div>
+        </div>
 
-        </main>
+        <!-- Coursera -->
+        <div id="section-coursera" class="search-section bg-white rounded-xl shadow-sm border overflow-hidden">
+            <div class="bg-cyan-50 border-b border-cyan-100 px-6 py-3 flex items-center justify-between">
+                <h3 class="font-semibold text-cyan-900 flex items-center gap-2">
+                    <i class="fas fa-chalkboard-teacher text-cyan-600"></i>
+                    {{ t.academic_dashboard.online_courses }}
+                </h3>
+                <span class="text-xs font-medium bg-cyan-200 text-cyan-800 px-2 py-1 rounded">Coursera</span>
+            </div>
+            <div class="p-6">
+                {% include components/organisms/search-coursera.html %}
+            </div>
+        </div>
+
+        <!-- YouTube -->
+        <div id="section-youtube" class="search-section bg-white rounded-xl shadow-sm border overflow-hidden">
+            <div class="bg-red-50 border-b border-red-100 px-6 py-3 flex items-center justify-between">
+                <h3 class="font-semibold text-red-900 flex items-center gap-2">
+                    <i class="fab fa-youtube text-red-600"></i>
+                    {{ t.academic_dashboard.videos }}
+                </h3>
+                <span class="text-xs font-medium bg-red-200 text-red-800 px-2 py-1 rounded">YouTube</span>
+            </div>
+            <div class="p-6">
+                {% include components/organisms/search-youtube.html %}
+            </div>
+        </div>
+
+        <!-- Meetup -->
+        <div id="section-meetup" class="search-section bg-white rounded-xl shadow-sm border overflow-hidden">
+            <div class="bg-orange-50 border-b border-orange-100 px-6 py-3 flex items-center justify-between">
+                <h3 class="font-semibold text-orange-900 flex items-center gap-2">
+                    <i class="fab fa-meetup text-red-500"></i>
+                    {{ t.academic_dashboard.events }}
+                </h3>
+                <span class="text-xs font-medium bg-orange-200 text-orange-800 px-2 py-1 rounded">Meetup</span>
+            </div>
+            <div class="p-6">
+                {% include components/organisms/search-meetup.html %}
+            </div>
+        </div>
+
     </div>
 </div>
 

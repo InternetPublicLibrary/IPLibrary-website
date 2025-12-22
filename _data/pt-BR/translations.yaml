@@ -98,6 +98,9 @@ auth:
 categories:
   all_categories: "Todas as Categorias"
   view_resources: "Ver recursos"
+  browse_category: "Navegar na Categoria"
+  subcategories_label: "subcategorias"
+  explore_related_prefix: "Explore recursos relacionados a"
   
 # Contribute
 contribute:
@@ -129,3 +132,28 @@ time:
   days_ago: "dias atrás"
   today: "Hoje"
   yesterday: "Ontem"
+
+# Layout specific
+layout:
+  jump_to: "Ir para:"
+  wiki: "Wiki"
+  research: "Pesquisa"
+  on_this_page: "Nesta página"
+  external_links: "Links Externos"
+  curated_resources: "Recursos Curados"
+  research_dashboard: "Painel de Pesquisa"
+  research_dashboard_desc: "Acesse literatura acadêmica, preprints e dados de pesquisa em tempo real."
+  related_sections: "Seções Relacionadas"
+  keywords: "Palavras-chave"
+
+# Academic Dashboard
+academic_dashboard:
+  title: "Assistente de Pesquisa Acadêmica"
+  subtitle: "Busque em 8 fontes simultaneamente"
+  placeholder: "Digite o tema de pesquisa..."
+  wiki_placeholder: "Pesquise um tema para ver o resumo da Wikipedia..."
+  encyclopedia: "Enciclopédia"
+  research_papers: "Artigos Científicos"
+  online_courses: "Cursos Online"
+  videos: "Vídeos"
+  events: "Eventos"
