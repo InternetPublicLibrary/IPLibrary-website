@@ -97,8 +97,8 @@ module Jekyll
       end
       
       # Create the wiki page
-      page = Jekyll::PageWithoutAFile.new(@site, @site.source, File.dirname(page_path), File.basename(page_path))
-      page.content = generate_wiki_content(category, subcategory, section)
+      page = Jekyll::PageWithoutAFile.new(@site, @site.source, File.dirname(page_path), 'index.md')
+      page.content = generate_wiki_content(lang_code, category, subcategory, section)
       page.data = {
         'layout' => 'wiki',
         'title' => "Wiki: #{section['title']}",
@@ -110,8 +110,8 @@ module Jekyll
         'parent_subcategory_path' => subcategory['path'],
         'parent_section' => section['title'],
         'parent_section_path' => "/#{section_path}/",
-        'description' => "Community wiki for #{section['title']}",
-        'last_updated' => Time.now.strftime("%Y-%m-%d"),
+        'description' => lang_code == 'pt-BR' ? "Wiki da comunidade sobre #{section['title']} em #{subcategory['title']}" : "Community wiki for #{section['title']} in #{subcategory['title']}",
+        'resources' => section['resources'] || [],
         'editable' => true,
         'show_discussion' => true
       }
@@ -128,40 +128,45 @@ module Jekyll
       puts e.backtrace.join("\n")
     end
     
-    def generate_wiki_content(category, subcategory, section)
-      <<~CONTENT
-        # #{section['title']} Wiki
-        
-        This is the community-maintained wiki page for #{section['title']} in the #{category['title']} > #{subcategory['title']} category.
-        
-        ## Overview
-        
-        Add an overview of #{section['title']} here.
-        
-        ## Key Concepts
-        
-        * Concept 1
-        * Concept 2
-        * Concept 3
-        
-        ## Resources
-        
-        * Resource 1
-        * Resource 2
-        * Resource 3
-        
-        ## Related Topics
-        
-        * Topic 1
-        * Topic 2
-        * Topic 3
-        
-        ---
-        
-        This wiki is maintained by the Internet Public Library community. You can contribute by clicking the "Edit Wiki" button.
-      CONTENT
+    def generate_wiki_content(lang_code, category, subcategory, section)
+      cryptography = section['title'] == 'Cryptography Theory' || section['title'] == 'Teoria da Criptografia'
+      if lang_code == 'pt-BR'
+        topic_note = cryptography ? 'A teoria da criptografia investiga definições de confidencialidade e autenticidade, modelos de adversário e as hipóteses matemáticas usadas nas provas de segurança. Uma prova por redução relaciona a segurança de um esquema à dificuldade de um problema computacional.' : ''
+        <<~CONTENT
+          ## Contexto do tema
+
+          **#{section['title']}** integra [#{subcategory['title']}](#{subcategory['path']}) na categoria [#{category['title']}](#{category['path']}). A [página da seção](#{section['path']}) organiza seus recursos e links para temas relacionados.
+
+          #{topic_note}
+
+          ## Referências e explicações
+
+          As contribuições para esta wiki devem identificar suas fontes e distinguir definições, exemplos e aplicações. Ao propor uma explicação sobre #{section['title']}, inclua referências que permitam verificar as afirmações.
+
+          ## Como contribuir
+
+          Use “Editar” para propor uma correção ou explicação no GitHub. Para indicar um material de estudo, use “Sugerir um recurso” e informe o endereço, a autoria quando conhecida e a relação com #{section['title']}.
+        CONTENT
+      else
+        topic_note = cryptography ? 'Cryptography theory examines definitions of confidentiality and authenticity, adversary models, and the mathematical assumptions used in security proofs. A reduction proof relates the security of a scheme to the difficulty of a computational problem.' : ''
+        <<~CONTENT
+          ## Topic context
+
+          **#{section['title']}** belongs to [#{subcategory['title']}](#{subcategory['path']}) in [#{category['title']}](#{category['path']}). The [section page](#{section['path']}) organizes its resources and links to related topics.
+
+          #{topic_note}
+
+          ## References and explanations
+
+          Contributions to this wiki should identify their sources and distinguish definitions, examples, and applications. When proposing an explanation about #{section['title']}, include references that readers can use to verify its claims.
+
+          ## Contributing
+
+          Use “Edit” to propose a correction or explanation on GitHub. To recommend study material, use “Suggest a resource” and include its address, authorship when known, and relevance to #{section['title']}.
+        CONTENT
+      end
     end
-    
+
     def generate_language_indexes
       @generated_pages = []
       
@@ -196,8 +201,7 @@ module Jekyll
         'layout' => 'language_index',
         'title' => @site.config['languages'].find { |l| l['code'] == lang_code }&.dig('name') || lang_code,
         'lang' => lang_code,
-        'description' => "Welcome to the #{lang_code} version of Internet Public Library",
-        'last_updated' => Time.now.strftime("%Y-%m-%d")
+        'description' => "Welcome to the #{lang_code} version of Internet Public Library"
       }
       
       # Add the page to Jekyll's pages
