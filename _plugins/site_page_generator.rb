@@ -167,8 +167,7 @@ module Jekyll
         'layout' => 'language_index',
         'title' => @site.config['languages'].find { |l| l['code'] == lang_code }&.dig('name') || lang_code,
         'lang' => lang_code,
-        'description' => "Welcome to the #{lang_code} version of Internet Public Library",
-        'last_updated' => Time.now.strftime("%Y-%m-%d")
+        'description' => "Welcome to the #{lang_code} version of Internet Public Library"
       }
       
       # Thread-safe page creation
@@ -191,7 +190,6 @@ module Jekyll
         'title' => category['title'],
         'lang' => lang_code,
         'description' => "Explore resources related to #{category['title']}",
-        'last_updated' => Time.now.strftime("%Y-%m-%d"),
         'show_discussion' => true,
         'children' => category['children'], # Pass subcategories
         'data_folder' => category['data_folder'] # Pass data folder mapping
@@ -218,7 +216,6 @@ module Jekyll
         'parent_category' => parent_category['title'],
         'parent_category_path' => parent_category['path'],
         'description' => "Resources on #{subcategory['title']} within #{parent_category['title']}",
-        'last_updated' => Time.now.strftime("%Y-%m-%d"),
         'show_discussion' => true,
         'children' => subcategory['children'], # Pass sections
         'data_folder' => subcategory['data_folder'] # Pass data folder mapping
@@ -246,9 +243,8 @@ module Jekyll
         'parent_category_path' => parent_category['path'],
         'parent_subcategory' => parent_subcategory['title'],
         'parent_subcategory_path' => parent_subcategory['path'],
-        'description' => "Specialized resources on #{section['title']} in #{parent_subcategory['title']}",
-        'last_updated' => Time.now.strftime("%Y-%m-%d"),
-        'resources' => [],
+        'description' => lang_code == 'pt-BR' ? "Recursos sobre #{section['title']} em #{parent_subcategory['title']}, na categoria #{parent_category['title']}." : "Resources on #{section['title']} within #{parent_subcategory['title']}, in #{parent_category['title']}.",
+        'resources' => section['resources'] || [],
         'show_discussion' => true
       }
       
@@ -357,5 +353,63 @@ module Jekyll
     def log_error(message)
       puts "[SitePageGenerator] ERROR: #{message}"
     end
+  end
+end
+
+# Only existing language-submodule files get a direct edit link; generated pages use issues.
+Jekyll::Hooks.register :site, :post_read do |site|
+  require 'uri'
+  site.pages.each do |page|
+    lang = page.data['lang']
+    next unless %w[en-US pt-BR].include?(lang)
+
+    relative_path = page.path.to_s
+    next unless relative_path.start_with?("#{lang}/")
+
+    source_path = File.expand_path(relative_path, site.source)
+    language_root = File.expand_path(lang, site.source) + File::SEPARATOR
+    next unless source_path.start_with?(language_root) && File.file?(source_path)
+
+    escaped_path = relative_path.delete_prefix("#{lang}/").split('/').map do |part|
+      URI.encode_www_form_component(part).gsub('+', '%20')
+    end.join('/')
+    page.data['github_edit_url'] = "https://github.com/InternetPublicLibrary/#{lang}/edit/master/#{escaped_path}"
+  end
+end
+
+# Some language-submodule stubs use a category layout for menu sections.
+# Normalize their metadata without replacing the source content or writing to submodules.
+Jekyll::Hooks.register :site, :post_read do |site|
+  sections = {}
+  site.data.each do |lang, data|
+    next unless data.is_a?(Hash) && data['menu'].is_a?(Array)
+
+    data['menu'].each do |category|
+      Array(category['children']).each do |subcategory|
+        Array(subcategory['children']).each do |section|
+          sections[section['path']] = {
+            'layout' => 'section',
+            'lang' => lang,
+            'title' => section['title'],
+            'parent_category' => category['title'],
+            'parent_category_path' => category['path'],
+            'parent_subcategory' => subcategory['title'],
+            'parent_subcategory_path' => subcategory['path'],
+            'resources' => section['resources'] || [],
+            'show_discussion' => true
+          }
+        end
+      end
+    end
+  end
+  site.pages.each do |page|
+    metadata = sections[page.url]
+    next unless metadata
+
+    %w[layout lang title parent_category parent_category_path parent_subcategory parent_subcategory_path].each do |key|
+      page.data[key] = metadata[key]
+    end
+    page.data['resources'] ||= metadata['resources']
+    page.data['show_discussion'] = metadata['show_discussion'] unless page.data.key?('show_discussion')
   end
 end

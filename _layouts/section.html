@@ -1,277 +1,125 @@
 ---
 layout: default
 ---
-{% comment %} Sections outside the menu have no generated wiki page {% endcomment %}
-{% assign section_wiki_url = page.url | append: 'wiki/' %}
-{% assign section_wiki_pages = site.pages | where: 'url', section_wiki_url %}
-{% assign section_wiki_edit_url = section_wiki_url | append: '#edit-wiki' %}
-{% if section_wiki_pages.size == 0 %}{% assign section_wiki_url = '#wiki' %}{% assign section_wiki_edit_url = '#wiki' %}{% endif %}
+{% include templates/article-context.md %}
 
-<div class="container mx-auto px-4 py-8">
-  <div class="flex flex-col md:flex-row gap-8">
-    <!-- Left sidebar with navigation -->
-    <div class="md:w-1/4">
-      <div class="sticky top-4">
-        {% assign current_path = page.url | remove: 'index.html' %}
-        {% for lang in site.data %}
-        {% if lang[0] == page.lang %}
-        {% for category in lang[1].menu %}
-        {% for subcategory in category.children %}
-        {% for section in subcategory.children %}
-        {% if section.path == current_path %}
-        {% assign current_section = section %}
-        {% assign parent_subcategory = subcategory %}
-        {% assign parent_category = category %}
-
-        <div class="mb-6">
-          <a href="{{ parent_subcategory.path }}" class="flex items-center text-blue-600 hover:underline mb-4">
-            <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
-            </svg>
-            Back to {{ parent_subcategory.title }}
-          </a>
-
-          <h3 class="text-lg font-semibold text-gray-800 mb-4">{{ current_section.title }}</h3>
-
-          <div class="mt-4">
-            <h4 class="text-sm font-medium text-gray-600 mb-2">Other Sections</h4>
-            <ul class="space-y-2">
-              {% for sibling in parent_subcategory.children %}
-              <li>
-                <a href="{{ sibling.path }}"
-                  class="text-blue-600 hover:underline {% if sibling.path == current_path %}font-bold{% endif %}">
-                  {{ sibling.title }}
-                </a>
-              </li>
-              {% endfor %}
-            </ul>
-          </div>
-        </div>
-        {% endif %}
-        {% endfor %}
-        {% endfor %}
-        {% endfor %}
-        {% endif %}
-        {% endfor %}
-
-        <!-- Quick navigation -->
-        <div class="bg-white rounded-lg shadow-sm p-4 mb-6">
-          <h3 class="text-base font-semibold text-gray-800 mb-3">On This Page</h3>
-          <div id="quick-nav" class="text-sm space-y-2">
-            <a href="#overview" class="block text-blue-600 hover:underline">Overview</a>
-            <a href="#resources" class="block text-blue-600 hover:underline">Resources</a>
-            <a href="#wiki" class="block text-blue-600 hover:underline">Wiki</a>
-            <a href="#discussion" class="block text-blue-600 hover:underline">Discussion</a>
-          </div>
-        </div>
-
-        <!-- Tags and metadata -->
-        <div class="bg-white rounded-lg shadow-sm p-4">
-          <h3 class="text-base font-semibold text-gray-800 mb-3">Information</h3>
-          <div class="text-sm text-gray-600">
-            <p class="mb-2">
-              <span class="font-medium">Last updated:</span> {{ page.last_updated }}
-            </p>
-            {% if page.tags and page.tags.size > 0 %}
-            <div class="mb-2">
-              <span class="font-medium">Tags:</span>
-              <div class="flex flex-wrap gap-1 mt-1">
-                {% for tag in page.tags %}
-                <span class="px-2 py-1 bg-gray-100 rounded-full text-xs">{{ tag }}</span>
-                {% endfor %}
-              </div>
-            </div>
-            {% endif %}
-            <p class="mt-4">
-              <a href="{{ page.parent_subcategory_path }}" class="text-blue-600 hover:underline">
-                <i class="fas fa-arrow-up mr-1"></i> Back to {{ page.parent_subcategory }}
-              </a>
-            </p>
-          </div>
-        </div>
+<div class="container mx-auto px-4 py-5 lg:py-8 text-gray-900">
+  <div class="grid grid-cols-1 lg:grid-cols-12 gap-5 lg:gap-6">
+    <!-- Article title and lead precede all local navigation on mobile. -->
+    <header class="lg:col-start-3 lg:col-span-10 min-w-0">
+      <nav aria-label="Breadcrumb" class="text-sm text-gray-600 mb-3">
+        <ol class="flex flex-wrap gap-x-2 gap-y-1">
+          <li><a href="{{ '/' | append: lang | append: '/' | relative_url }}" class="text-blue-600 hover:underline">{{ t.nav.home | default: 'Home' }}</a></li>
+          {% if page.parent_category_path %}<li><span aria-hidden="true">› </span><a href="{{ page.parent_category_path | relative_url }}" class="text-blue-600 hover:underline">{{ page.parent_category | escape }}</a></li>{% endif %}
+          {% if page.parent_subcategory_path %}<li><span aria-hidden="true">› </span><a href="{{ page.parent_subcategory_path | relative_url }}" class="text-blue-600 hover:underline">{{ page.parent_subcategory | escape }}</a></li>{% endif %}
+          {% if is_wiki %}<li><span aria-hidden="true">› </span><a href="{{ topic_path | relative_url }}" class="text-blue-600 hover:underline">{{ topic_title | escape }}</a></li>{% endif %}
+          <li><span aria-hidden="true">› </span><span aria-current="page">{% if is_wiki %}Wiki{% else %}{{ page.title | escape }}{% endif %}</span></li>
+        </ol>
+      </nav>
+      <h1 id="article-title" class="text-3xl lg:text-4xl font-semibold leading-tight mb-2">{{ page.title | escape }}</h1>
+      <nav aria-label="{% if pt %}Ações do artigo{% else %}Article actions{% endif %}" class="flex flex-wrap border-b border-gray-200 mb-4 text-sm">
+        <a href="#overview" aria-current="location" class="inline-flex items-center min-h-11 px-4 border-b-2 border-blue-600 text-blue-700 font-semibold">{% if pt %}Artigo{% else %}Article{% endif %}</a>
+        <a href="#discussion" class="inline-flex items-center min-h-11 px-4 text-blue-600 hover:bg-blue-50">{% if pt %}Discussão{% else %}Talk{% endif %}</a>
+        <a href="{{ edit_url | escape }}" class="inline-flex items-center min-h-11 px-4 text-blue-600 hover:bg-blue-50">{% if pt %}Editar{% else %}Edit{% endif %}</a>
+      </nav>
+      <div class="max-w-prose text-base lg:text-lg leading-relaxed">
+        <p class="m-0">{% if page.description %}{{ page.description | escape }}{% elsif pt %}Recursos e conhecimento da comunidade sobre {{ topic_title | escape }}.{% else %}Resources and community knowledge about {{ topic_title | escape }}.{% endif %}</p>
       </div>
+    </header>
+
+    <!-- Information remains a compact card beside the article on desktop. -->
+    <div class="lg:col-start-10 lg:col-span-3 lg:row-start-2 min-w-0">
+      {% include templates/article-infobox.md %}
     </div>
 
-    <!-- Main content -->
-    <div class="md:w-3/4">
-      <!-- Breadcrumbs -->
-      <div class="flex items-center text-sm text-gray-600 mb-4">
-        <a href="/{{ page.lang }}" class="hover:underline">Home</a>
-        <span class="mx-2">›</span>
-        <a href="{{ page.parent_category_path }}" class="hover:underline">{{ page.parent_category }}</a>
-        <span class="mx-2">›</span>
-        <a href="{{ page.parent_subcategory_path }}" class="hover:underline">{{ page.parent_subcategory }}</a>
-        <span class="mx-2">›</span>
-        <span>{{ page.title }}</span>
-      </div>
+    <article aria-labelledby="article-title" data-ipl-article class="lg:col-start-3 lg:col-span-7 lg:row-start-2 min-w-0">
+      <nav aria-labelledby="contents-title" class="bg-gray-50 border border-gray-200 rounded-lg p-4 mb-5 text-sm">
+        <h2 id="contents-title" class="font-semibold text-base mb-2">{% if pt %}Conteúdo{% else %}Contents{% endif %}</h2>
+        <ul data-article-contents class="space-y-1">
+          <li><a href="#overview" class="text-blue-600 hover:underline">{% if pt %}Visão geral{% else %}Overview{% endif %}</a></li>
+          <li><a href="#resources" class="text-blue-600 hover:underline">{{ t.layout.curated_resources | default: 'Curated resources' }}</a></li>
+          <li><a href="#wiki" class="text-blue-600 hover:underline">Wiki</a></li>
+          <li><a href="#discussion" class="text-blue-600 hover:underline">{% if pt %}Discussão{% else %}Discussion{% endif %}</a></li>
+          <li><a href="#related" class="text-blue-600 hover:underline">{{ t.layout.related_sections | default: 'Related sections' }}</a></li>
+        </ul>
+      </nav>
 
-      <!-- Overview section -->
-      <div id="overview" class="bg-white rounded-lg shadow-md p-8 mb-8">
-        <h1 class="text-3xl font-bold text-gray-800 mb-6">{{ page.title }}</h1>
-
-        <div class="prose max-w-none">
-          {{ content }}
-
-          {% if page.description %}
-          <p class="text-lg text-gray-600 mb-6">{{ page.description }}</p>
-          {% endif %}
-
-          <!-- Quick links -->
-          <div class="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <a href="#resources" class="flex items-center p-4 bg-blue-50 rounded-lg hover:bg-blue-100 transition">
-              <i class="fas fa-book-open text-blue-600 text-2xl mr-3"></i>
-              <div>
-                <h3 class="font-semibold text-blue-700">Resources</h3>
-                <p class="text-sm text-blue-600">Find learning materials</p>
-              </div>
-            </a>
-            <a href="#wiki" class="flex items-center p-4 bg-green-50 rounded-lg hover:bg-green-100 transition">
-              <i class="fas fa-book text-green-600 text-2xl mr-3"></i>
-              <div>
-                <h3 class="font-semibold text-green-700">Wiki</h3>
-                <p class="text-sm text-green-600">Community knowledge</p>
-              </div>
-            </a>
-            <a href="{{ section_wiki_url }}"
-              class="flex items-center p-4 bg-purple-50 rounded-lg hover:bg-purple-100 transition">
-              <i class="fas fa-edit text-purple-600 text-2xl mr-3"></i>
-              <div>
-                <h3 class="font-semibold text-purple-700">Edit Wiki</h3>
-                <p class="text-sm text-purple-600">Contribute your knowledge</p>
-              </div>
-            </a>
-            <a href="#discussion" class="flex items-center p-4 bg-yellow-50 rounded-lg hover:bg-yellow-100 transition">
-              <i class="fas fa-comments text-yellow-600 text-2xl mr-3"></i>
-              <div>
-                <h3 class="font-semibold text-yellow-700">Discussion</h3>
-                <p class="text-sm text-yellow-600">Join the conversation</p>
-              </div>
-            </a>
+      <div class="ipl-prose">
+        <!-- Overview and quick links -->
+        <section aria-labelledby="overview" class="bg-white border border-gray-200 rounded-lg p-4 sm:p-5">
+          <h2 id="overview">{% if pt %}Visão geral{% else %}Overview{% endif %}</h2>
+          {{ content | markdownify }}
+          <div class="mt-4 flex flex-wrap gap-x-4 text-sm">
+            <a href="#resources" class="inline-flex items-center min-h-11">{% if pt %}Materiais de estudo{% else %}Learning materials{% endif %}</a>
+            <a href="#wiki" class="inline-flex items-center min-h-11">{% if pt %}Conhecimento da comunidade{% else %}Community knowledge{% endif %}</a>
+            <a href="{{ edit_url | escape }}" class="inline-flex items-center min-h-11">{% if pt %}Editar este artigo{% else %}Edit this article{% endif %}</a>
+            <a href="#discussion" class="inline-flex items-center min-h-11">{% if pt %}Participe da conversa{% else %}Join the conversation{% endif %}</a>
           </div>
-        </div>
-      </div>
+        </section>
 
-      <!-- Resources section -->
-      <div id="resources" class="bg-white rounded-lg shadow-md p-8 mb-8">
-        <div class="flex items-center justify-between mb-6">
-          <h2 class="text-2xl font-bold text-gray-800">Resources</h2>
-          <a href="#" class="text-blue-600 hover:text-blue-800 flex items-center">
-            <i class="fas fa-filter mr-1"></i> Filter
-          </a>
-        </div>
+        {% include templates/article-resources.md %}
 
-        {% if page.resources and page.resources.size > 0 %}
-        {% include resource-grid.html resources=page.resources columns=2 %}
-        {% else %}
-        <div class="bg-gray-50 rounded-lg p-8 text-center">
-          <i class="fas fa-info-circle text-4xl text-indigo-400 mb-4"></i>
-          <h3 class="text-xl font-semibold text-gray-800 mb-2">No Resources Yet</h3>
-          <p class="text-gray-600 mb-6">We're still gathering resources for this section.</p>
-          <a href="#contribute" class="inline-block px-4 py-2 bg-indigo-600 text-white rounded hover:bg-indigo-700">
-            Suggest a Resource <i class="fas fa-arrow-right ml-1"></i>
-          </a>
-        </div>
-        {% endif %}
-      </div>
-
-      <!-- Wiki section with Wikipedia-like style -->
-      <div id="wiki" class="bg-white rounded-lg shadow-md p-8 mb-8">
-        <div class="flex items-center justify-between mb-6">
-          <h2 class="text-2xl font-bold text-gray-800">Wiki</h2>
-          <a href="{{ section_wiki_url }}" class="text-blue-600 hover:text-blue-800 flex items-center">
-            <i class="fas fa-external-link-alt mr-1"></i> Full Wiki
-          </a>
-        </div>
-
-        <div class="wiki-content border-b border-gray-200 pb-6 mb-6">
-          <p>This is a community-maintained wiki section for {{ page.title }}. Below is a preview of the wiki content.
-          </p>
-
-          <!-- Wiki preview content -->
-          <div class="mt-4 prose max-w-none">
-            <h3>About {{ page.title }}</h3>
-            <p>This section covers resources related to {{ page.title }} within the {{ page.parent_subcategory }}
-              category.</p>
-
-            <h3>Key Topics</h3>
-            <ul>
-              <li>Topic 1</li>
-              <li>Topic 2</li>
-              <li>Topic 3</li>
-            </ul>
+        <!-- Community wiki preview, with real topic context -->
+        <section aria-labelledby="wiki" class="bg-white border border-gray-200 rounded-lg p-4 sm:p-5 mt-5">
+          <h2 id="wiki">{{ t.layout.wiki | default: 'Wiki' }}</h2>
+          <p>{% if pt %}A wiki reúne contribuições da comunidade sobre {{ topic_title | escape }} em {{ page.parent_subcategory | escape }}. Proponha explicações, referências ou correções pelo GitHub.{% else %}The wiki collects community contributions about {{ topic_title | escape }} within {{ page.parent_subcategory | escape }}. Propose explanations, references, or corrections through GitHub.{% endif %}</p>
+          <div class="flex flex-wrap gap-x-4">
+            {% if wiki_pages.size > 0 and is_wiki == false %}<a href="{{ wiki_url | relative_url }}" class="inline-flex items-center min-h-11">{% if pt %}Ler a wiki completa{% else %}Read full wiki{% endif %}</a>{% endif %}
+            {% if is_wiki %}<a href="{{ topic_path | relative_url }}" class="inline-flex items-center min-h-11">{% if pt %}Voltar para {{ topic_title | escape }}{% else %}Back to {{ topic_title | escape }}{% endif %}</a>{% endif %}
+            <a href="{{ wiki_edit_url | escape }}" class="inline-flex items-center min-h-11">{% if pt %}Editar a wiki{% else %}Edit wiki{% endif %}</a>
           </div>
-        </div>
-
-        <div class="flex justify-end">
-          <a href="{{ section_wiki_url }}"
-            class="inline-flex items-center px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">
-            <i class="fas fa-book mr-2"></i> Read Full Wiki
-          </a>
-          <a href="{{ section_wiki_edit_url }}"
-            class="inline-flex items-center px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700 ml-3">
-            <i class="fas fa-edit mr-2"></i> Edit Wiki
-          </a>
-        </div>
+        </section>
       </div>
 
-      <!-- Discussion section -->
-      <div id="discussion">
+      <!-- Discussion keeps its existing provider and community content. -->
+      <div id="discussion" class="mt-5">
         {% if page.show_discussion %}
         {% include components/discussion.html %}
+        {% else %}
+        <section class="ipl-prose bg-white border border-gray-200 rounded-lg p-4 sm:p-5">
+          <h2>{% if pt %}Discussão{% else %}Discussion{% endif %}</h2>
+          <p>{% if pt %}Discuta correções e sugestões no GitHub.{% else %}Discuss corrections and suggestions on GitHub.{% endif %}</p>
+          <a href="{{ edit_url | escape }}">{% if pt %}Abrir uma discussão sobre este artigo{% else %}Discuss this article{% endif %}</a>
+        </section>
         {% endif %}
       </div>
 
       <!-- Related content -->
-      <div class="bg-white rounded-lg shadow-md p-8 mt-8">
-        <h2 class="text-2xl font-bold text-gray-800 mb-6">Related Sections</h2>
+      <section class="ipl-prose bg-white border border-gray-200 rounded-lg p-4 sm:p-5 mt-5" aria-labelledby="related">
+        <h2 id="related">{{ t.layout.related_sections | default: 'Related sections' }}</h2>
+        <ul>
+          {% for sibling in parent_subcategory.children %}{% if sibling.path != topic_path %}
+          <li><a href="{{ sibling.path | relative_url }}">{{ sibling.title | escape }}</a></li>
+          {% endif %}{% endfor %}
+        </ul>
+        {% if page.parent_category_path %}<p><a href="{{ page.parent_category_path | relative_url }}">{{ page.parent_category | escape }}</a> · <a href="{{ page.parent_subcategory_path | relative_url }}">{{ page.parent_subcategory | escape }}</a></p>{% endif %}
+      </section>
+    </article>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-          {% for lang in site.data %}
-          {% if lang[0] == page.lang %}
-          {% for category in lang[1].menu %}
-          {% for subcategory in category.children %}
-          {% if subcategory.path == page.parent_subcategory_path and subcategory.children.size > 1 %}
-          {% for section in subcategory.children limit:4 %}
-          {% if section.path != current_path %}
-          <a href="{{ section.path }}" class="flex p-4 border rounded-lg hover:bg-gray-50">
-            <i class="fas fa-link text-gray-400 mr-3 mt-1"></i>
-            <div>
-              <h3 class="font-semibold text-gray-800">{{ section.title }}</h3>
-              <p class="text-sm text-gray-600">
-                {{ page.parent_subcategory }} section
-              </p>
-            </div>
-          </a>
-          {% endif %}
-          {% endfor %}
-          {% endif %}
-          {% endfor %}
-          {% endfor %}
-          {% endif %}
-          {% endfor %}
-        </div>
+    <!-- Local navigation comes after the title, lead and article in source order. -->
+    <aside aria-label="{% if pt %}Navegação local{% else %}Local navigation{% endif %}" class="lg:col-start-1 lg:col-span-2 lg:row-start-2 min-w-0">
+      <div class="lg:sticky lg:top-4 space-y-5">
+        {% if parent_subcategory %}
+        <nav aria-labelledby="siblings-title" class="bg-white border border-gray-200 rounded-lg p-4 text-sm">
+          <a href="{{ parent_subcategory.path | relative_url }}" class="text-blue-600 hover:underline">{% if pt %}Voltar para{% else %}Back to{% endif %} {{ parent_subcategory.title | escape }}</a>
+          <h2 id="siblings-title" class="font-semibold text-base my-3">{% if pt %}Seções nesta subcategoria{% else %}Sections in this subcategory{% endif %}</h2>
+          <ul class="space-y-2">
+            {% for sibling in parent_subcategory.children %}<li><a href="{{ sibling.path | relative_url }}" {% if sibling.path == topic_path %}aria-current="{% if is_wiki %}location{% else %}page{% endif %}"{% endif %} class="text-blue-600 hover:underline {% if sibling.path == topic_path %}font-semibold{% endif %}">{{ sibling.title | escape }}</a></li>{% endfor %}
+          </ul>
+        </nav>
+        {% endif %}
+        <nav aria-labelledby="on-this-page-title" class="bg-white border border-gray-200 rounded-lg p-4 text-sm">
+          <h2 id="on-this-page-title" class="font-semibold text-base mb-3">{{ t.layout.on_this_page | default: 'On this page' }}</h2>
+          <ul data-article-contents class="space-y-2">
+            <li><a href="#overview" class="text-blue-600 hover:underline">{% if pt %}Visão geral{% else %}Overview{% endif %}</a></li>
+            <li><a href="#resources" class="text-blue-600 hover:underline">{{ t.layout.curated_resources | default: 'Curated resources' }}</a></li>
+            <li><a href="#wiki" class="text-blue-600 hover:underline">Wiki</a></li>
+            <li><a href="#discussion" class="text-blue-600 hover:underline">{% if pt %}Discussão{% else %}Discussion{% endif %}</a></li>
+            <li><a href="#related" class="text-blue-600 hover:underline">{{ t.layout.related_sections | default: 'Related sections' }}</a></li>
+          </ul>
+        </nav>
       </div>
-    </div>
+    </aside>
   </div>
 </div>
-
-<script>
-  document.addEventListener('DOMContentLoaded', function () {
-    // Smooth scrolling for anchor links
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-      anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-
-        const targetId = this.getAttribute('href').substring(1);
-        const targetElement = document.getElementById(targetId);
-
-        if (targetElement) {
-          window.scrollTo({
-            top: targetElement.offsetTop - 80,
-            behavior: 'smooth'
-          });
-        }
-      });
-    });
-  });
-</script>
+<script src="{{ '/javascript/ipl-article.js' | relative_url }}" defer></script>
