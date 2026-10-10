@@ -33,20 +33,20 @@
                 const pdf = work.open_access?.oa_url;
                 const landing = work.primary_location?.landing_page_url || work.doi;
 
-                let meta = `<span class="font-medium text-gray-700">${authors}</span> • ${year} • <span class="text-xs bg-red-100 text-red-800 px-1 rounded">ArXiv/Preprint</span>`;
+                let meta = `<span class="font-medium text-gray-700">${iplEsc(authors)}</span> • ${iplEsc(year)} • <span class="text-xs bg-red-100 text-red-800 px-1 rounded">ArXiv/Preprint</span>`;
 
                 let html = `
       <div class="bg-white border border-gray-200 p-4 rounded-lg shadow-sm hover:shadow-md transition-shadow">
         <h3 class="font-semibold text-lg text-gray-800 mb-1">
-          <a href="${landing || '#'}" target="_blank" rel="noopener noreferrer" class="hover:underline">
-            ${work.title}
+          <a href="${iplUrl(landing)}" target="_blank" rel="noopener noreferrer" class="hover:underline">
+            ${iplEsc(work.title)}
           </a>
         </h3>
         <div class="text-xs text-gray-500 mb-2">${meta}</div>
         
         <div class="flex gap-3 mt-3">
-          ${landing ? `<a href="${landing}" target="_blank" class="text-blue-600 text-sm hover:underline flex items-center"><i class="fas fa-external-link-alt mr-1"></i> View Abstract</a>` : ''}
-          ${pdf ? `<a href="${pdf}" target="_blank" class="text-green-600 text-sm hover:underline flex items-center"><i class="fas fa-file-pdf mr-1"></i> PDF</a>` : ''}
+          ${landing ? `<a href="${iplUrl(landing)}" target="_blank" class="text-blue-600 text-sm hover:underline flex items-center"><i class="fas fa-external-link-alt mr-1"></i> View Abstract</a>` : ''}
+          ${pdf ? `<a href="${iplUrl(pdf)}" target="_blank" class="text-green-600 text-sm hover:underline flex items-center"><i class="fas fa-file-pdf mr-1"></i> PDF</a>` : ''}
         </div>
       </div>`;
                 return html;

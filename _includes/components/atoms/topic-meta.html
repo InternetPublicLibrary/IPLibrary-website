@@ -1,0 +1,27 @@
+{%- comment -%}
+Topic meta — the authoritative title of the current topic page, from _data/<lang>/menu.yaml.
+Many pt-BR pages in the content submodule carry slug-derived titles ("Teoria Da Computacao"); the menu has
+the real one ("Teoria da Computação"). The en-US and pt-BR menus are aligned position by position, so the
+English equivalent is found at the same indexes (used for English-only research services).
+Usage: {% include components/atoms/topic-meta.html %}
+Sets: topic_title (menu title, falling back to page.title), topic_title_en (English title, or topic_title)
+{%- endcomment -%}
+{%- assign topic_title = page.title -%}
+{%- assign topic_title_en = page.title -%}
+{%- assign topic_lang = page.lang | default: 'en-US' -%}
+{%- assign topic_menu = site.data[topic_lang].menu -%}
+{%- assign topic_en_menu = site.data['en-US'].menu -%}
+{%- if topic_menu and page.url -%}
+  {%- for category in topic_menu -%}
+    {%- assign ci = forloop.index0 -%}
+    {%- if category.path == page.url -%}{%- assign topic_title = category.title -%}{%- assign topic_title_en = topic_en_menu[ci].title -%}{%- break -%}{%- endif -%}
+    {%- for subcategory in category.children -%}
+      {%- assign si = forloop.index0 -%}
+      {%- if subcategory.path == page.url -%}{%- assign topic_title = subcategory.title -%}{%- assign topic_title_en = topic_en_menu[ci].children[si].title -%}{%- break -%}{%- endif -%}
+      {%- for section in subcategory.children -%}
+        {%- if section.path == page.url -%}{%- assign topic_title = section.title -%}{%- assign topic_title_en = topic_en_menu[ci].children[si].children[forloop.index0].title -%}{%- break -%}{%- endif -%}
+      {%- endfor -%}
+    {%- endfor -%}
+  {%- endfor -%}
+{%- endif -%}
+{%- if topic_title_en == nil or topic_title_en == '' -%}{%- assign topic_title_en = topic_title -%}{%- endif -%}

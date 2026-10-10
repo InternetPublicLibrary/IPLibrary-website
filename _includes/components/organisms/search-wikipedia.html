@@ -31,12 +31,12 @@
             container.innerHTML = results.map(result => `
       <div class="bg-white border border-gray-200 p-4 rounded-lg shadow-sm hover:shadow-md transition-shadow">
         <h3 class="font-semibold text-lg text-blue-700 mb-1">
-          <a href="https://${lang}.wikipedia.org/?curid=${result.pageid}" target="_blank" rel="noopener" class="hover:underline">
-            ${result.title}
+          <a href="https://${lang}.wikipedia.org/?curid=${encodeURIComponent(result.pageid)}" target="_blank" rel="noopener" class="hover:underline">
+            ${iplEsc(result.title)}
           </a>
         </h3>
         <p class="text-sm text-gray-700 leading-relaxed">
-          ${result.snippet.replace(/<[^>]*>/g, '')}...
+          ${iplEsc(iplText(result.snippet))}...
         </p>
       </div>
     `).join('');

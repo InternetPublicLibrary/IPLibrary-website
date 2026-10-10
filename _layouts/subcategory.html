@@ -215,26 +215,10 @@ layout: default
                                 {%- endif %}
                         </section>
 
-                        <!-- Academic Dashboard (Research) -->
-                        <section id="academic-dashboard" class="scroll-mt-24">
-                                <div class="bg-slate-50 rounded-3xl border border-slate-200 p-2 md:p-8">
-                                        <div class="mb-8 px-2">
-                                                <h2 class="text-2xl font-bold text-slate-800 flex items-center gap-3">
-                                                        <div
-                                                                class="w-8 h-8 rounded-lg bg-slate-200 text-slate-700 flex items-center justify-center">
-                                                                <i class="fas fa-microscope"></i>
-                                                        </div>
-                                                        {{ t.layout.research_dashboard }}
-                                                </h2>
-                                                <p class="text-slate-600 mt-2 ml-11 max-w-2xl">
-                                                        {% if page.lang == 'pt-BR' %}Aprofunde-se em {{ topic_title }}
-                                                        com ferramentas de pesquisa.{% else %}Deep dive into {{ topic_title }} with research tools.{% endif %}
-                                                </p>
-                                        </div>
-                                        {% include components/templates/academic-dashboard.html search_query=topic_title search_query_en=topic_title_en
-                                        %}
-                                </div>
-                        </section>
+                        <!-- Research panel: live external sources in tabs (loads on demand) -->
+            <section id="academic-dashboard" class="scroll-mt-24">
+                {% include components/templates/academic-dashboard.html search_query=topic_title search_query_en=topic_title_en %}
+            </section>
 
                         <!-- Discussion -->
                         {% if page.show_discussion %}

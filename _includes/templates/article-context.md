@@ -4,7 +4,8 @@
 {% assign pt = false %}{% if lang == 'pt-BR' %}{% assign pt = true %}{% endif %}
 {% assign is_wiki = false %}{% if page.layout == 'wiki' %}{% assign is_wiki = true %}{% endif %}
 {% assign topic_path = page.parent_section_path | default: page.url | remove: 'index.html' %}
-{% assign topic_title = page.section_title | default: page.title %}
+{% comment %} topic_title comes from atoms/topic-meta.html (menu title); wiki pages carry their section's title. {% endcomment %}
+{% if page.section_title %}{% assign topic_title = page.section_title %}{% elsif topic_title == nil %}{% assign topic_title = page.title %}{% endif %}
 {% for category in site.data[lang].menu %}
   {% for subcategory in category.children %}
     {% for section in subcategory.children %}
@@ -39,8 +40,8 @@
 {% assign wiki_url = topic_path | append: 'wiki/' %}
 {% assign wiki_pages = site.pages | where: 'url', wiki_url %}
 {% assign issue_base = 'https://github.com/InternetPublicLibrary/' | append: lang | append: '/issues/new?title=' %}
-{% assign edit_title = 'Edit: ' | append: page.title | url_encode %}
-{% assign suggestion_title = 'Resource suggestion: ' | append: page.title | url_encode %}
+{% assign edit_title = 'Edit: ' | append: topic_title | url_encode %}
+{% assign suggestion_title = 'Resource suggestion: ' | append: topic_title | url_encode %}
 {% assign issue_body = page.url | absolute_url | url_encode %}
 {% assign edit_url = issue_base | append: edit_title | append: '&body=' | append: issue_body %}
 {% if page.github_edit_url %}{% assign edit_url = page.github_edit_url %}{% endif %}

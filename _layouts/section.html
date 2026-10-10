@@ -1,6 +1,7 @@
 ---
 layout: default
 ---
+{%- include components/atoms/topic-meta.html -%}
 {% include templates/article-context.md %}
 
 <div class="container mx-auto px-4 py-5 lg:py-8 text-gray-900">
@@ -13,10 +14,10 @@ layout: default
           {% if page.parent_category_path %}<li><span aria-hidden="true">› </span><a href="{{ page.parent_category_path | relative_url }}" class="text-blue-600 hover:underline">{{ page.parent_category | escape }}</a></li>{% endif %}
           {% if page.parent_subcategory_path %}<li><span aria-hidden="true">› </span><a href="{{ page.parent_subcategory_path | relative_url }}" class="text-blue-600 hover:underline">{{ page.parent_subcategory | escape }}</a></li>{% endif %}
           {% if is_wiki %}<li><span aria-hidden="true">› </span><a href="{{ topic_path | relative_url }}" class="text-blue-600 hover:underline">{{ topic_title | escape }}</a></li>{% endif %}
-          <li><span aria-hidden="true">› </span><span aria-current="page">{% if is_wiki %}Wiki{% else %}{{ page.title | escape }}{% endif %}</span></li>
+          <li><span aria-hidden="true">› </span><span aria-current="page">{% if is_wiki %}Wiki{% else %}{{ topic_title | escape }}{% endif %}</span></li>
         </ol>
       </nav>
-      <h1 id="article-title" class="text-3xl lg:text-4xl font-semibold leading-tight mb-2">{{ page.title | escape }}</h1>
+      <h1 id="article-title" class="text-3xl lg:text-4xl font-semibold leading-tight mb-2">{{ topic_title | escape }}</h1>
       <nav aria-label="{% if pt %}Ações do artigo{% else %}Article actions{% endif %}" class="flex flex-wrap border-b border-gray-200 mb-4 text-sm">
         <a href="#overview" aria-current="location" class="inline-flex items-center min-h-11 px-4 border-b-2 border-blue-600 text-blue-700 font-semibold">{% if pt %}Artigo{% else %}Article{% endif %}</a>
         <a href="#discussion" class="inline-flex items-center min-h-11 px-4 text-blue-600 hover:bg-blue-50">{% if pt %}Discussão{% else %}Talk{% endif %}</a>
