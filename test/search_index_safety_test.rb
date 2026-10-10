@@ -15,7 +15,8 @@ class SearchIndexSafetyTest < Minitest::Test
   end
 
   def test_unsafe_url_schemes_are_rejected
-    %w[javascript:alert(1) data:text/html,x //evil.example].each do |url|
+    ['javascript:alert(1)', 'data:text/html,x', '//evil.example', '/\\evil.example',
+     'https://x"onmouseover="alert(1)', "https://x'><script>", 'https://x`y'].each do |url|
       assert_nil Jekyll::SearchIndexGenerator.safe_entry('title' => 't', 'url' => url), url
     end
     refute_nil Jekyll::SearchIndexGenerator.safe_entry('title' => 't', 'url' => '/en-US/computing/')

@@ -8,7 +8,9 @@ module Jekyll
     safe true
     priority :low  # Run after all other generators
     
-    SAFE_URL = %r{\A(https?://[^\s]+|/(?!/)[^\s]*)\z}.freeze
+    # http(s) or site-relative; no protocol-relative ("//", "/\\") and no characters that could break
+    # out of an HTML attribute when the search page builds href="..." with innerHTML.
+    SAFE_URL = %r{\A(https?://[^\s"'<>`\\]+|/(?![/\\])[^\s"'<>`\\]*)\z}.freeze
 
     # The search pages insert index fields with innerHTML: escape text, allow only http(s) or
     # site-relative URLs. Returns nil for entries that cannot be made safe.
@@ -17,7 +19,7 @@ module Jekyll
       return nil unless url.match?(SAFE_URL)
 
       entry.merge(
-        'url' => url,
+        'url' => CGI.escapeHTML(url),
         'title' => CGI.escapeHTML(entry['title'].to_s),
         'description' => CGI.escapeHTML(entry['description'].to_s),
         'category' => CGI.escapeHTML(entry['category'].to_s)

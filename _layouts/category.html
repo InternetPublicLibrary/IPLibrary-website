@@ -1,6 +1,7 @@
 ---
 layout: default
 ---
+{%- include components/atoms/topic-meta.html -%}
 
 {% assign t = site.data[page.lang].translations %}
 {%- assign pt = false -%}{%- if page.lang == 'pt-BR' -%}{%- assign pt = true -%}{%- endif -%}
@@ -10,7 +11,7 @@ layout: default
 {%- assign items = page.children -%}
 {%- unless items -%}{%- for item in site.data[page.lang].menu -%}{%- if item.path == page.url -%}{%- assign items = item.children -%}{%- endif -%}{%- endfor -%}{%- endunless -%}
 {%- assign section_total = 0 -%}{%- for child in items -%}{%- assign section_total = section_total | plus: child.children.size -%}{%- endfor -%}
-{%- capture suggest_title -%}{% if pt %}Sugestão de recurso: {% else %}Resource suggestion: {% endif %}{{ page.title }}{%- endcapture -%}
+{%- capture suggest_title -%}{% if pt %}Sugestão de recurso: {% else %}Resource suggestion: {% endif %}{{ topic_title }}{%- endcapture -%}
 {%- capture suggest_body -%}{{ site.url }}{{ page.url }}{%- endcapture -%}
 {%- assign suggest_title_enc = suggest_title | url_encode -%}{%- assign suggest_body_enc = suggest_body | url_encode -%}
 {%- assign suggest_url = 'https://github.com/InternetPublicLibrary/' | append: page.lang | append: '/issues/new?title=' | append: suggest_title_enc | append: '&body=' | append: suggest_body_enc -%}
@@ -36,14 +37,14 @@ layout: default
             <a href="{{ page.parent_path }}" class="hover:text-white transition-colors">{{ page.parent_category }}</a>
             {% endif %}
             <span class="mx-2 text-blue-300">›</span>
-            <span class="text-white font-medium">{{ page.title }}</span>
+            <span class="text-white font-medium">{{ topic_title }}</span>
         </div>
 
         <div class="flex flex-col md:flex-row md:items-end justify-between gap-6">
             <div>
-                <h1 id="category-title" data-query="{{ page.title }}"
+                <h1 id="category-title" data-query="{{ topic_title }}"
                     class="text-4xl md:text-5xl font-bold mb-4 tracking-tight">
-                    {{ page.title }}
+                    {{ topic_title }}
                 </h1>
                 {% if page.description %}
                 <p class="text-xl text-blue-100 max-w-2xl leading-relaxed">{{ page.description }}</p>
@@ -239,7 +240,7 @@ layout: default
                             <ul class="space-y-4">
                                 {% for resource in resources limit:5 %}
                                 <li class="group/item">
-                                    <a href="{{ resource.url }}" target="_blank" rel="noopener noreferrer"
+                                    <a href="{{ resource.url | escape }}" target="_blank" rel="noopener noreferrer"
                                         class="flex items-start gap-3">
                                         <div
                                             class="mt-1 text-gray-400 group-hover/item:text-blue-500 transition-colors">
@@ -265,7 +266,7 @@ layout: default
                                 </summary>
                                 <ul class="space-y-4 mt-4">
                                     {% for resource in resources offset:5 %}
-                                    <li><a href="{{ resource.url }}" rel="noopener" class="font-medium text-gray-800 hover:text-blue-600">{{ resource.name | escape }}</a>
+                                    <li><a href="{{ resource.url | escape }}" rel="noopener" class="font-medium text-gray-800 hover:text-blue-600">{{ resource.name | escape }}</a>
                                         {% if resource.description %}<p class="text-sm text-gray-600 mt-1">{{ resource.description | escape }}</p>{% endif %}</li>
                                     {% endfor %}
                                 </ul>
@@ -296,7 +297,7 @@ layout: default
                     </div>
 
                     <!-- Include the existing dashboard template but wrapped to fit the style -->
-                    {% include components/templates/academic-dashboard.html search_query=page.title %}
+                    {% include components/templates/academic-dashboard.html search_query=topic_title search_query_en=topic_title_en %}
                 </div>
             </section>
 
@@ -315,7 +316,7 @@ layout: default
 
                 <!-- Infobox (Wikipedia-style topic facts) -->
                 <aside class="bg-white rounded-2xl shadow-sm border border-gray-200 overflow-hidden" aria-labelledby="infobox-title">
-                    <h2 id="infobox-title" class="bg-blue-50 border-b border-blue-100 px-5 py-2 text-sm font-semibold text-blue-900 text-center">{{ page.title }}</h2>
+                    <h2 id="infobox-title" class="bg-blue-50 border-b border-blue-100 px-5 py-2 text-sm font-semibold text-blue-900 text-center">{{ topic_title }}</h2>
                     <dl class="divide-y divide-gray-100 text-sm">
                         <div class="flex justify-between gap-3 px-5 py-2"><dt class="text-gray-600">{% if pt %}Tipo{% else %}Type{% endif %}</dt><dd class="font-medium text-gray-900">{% if pt %}Categoria{% else %}Category{% endif %}</dd></div>
                         <div class="flex justify-between gap-3 px-5 py-2"><dt class="text-gray-600">{% if pt %}Subcategorias{% else %}Subcategories{% endif %}</dt><dd class="font-medium text-gray-900">{{ items.size | default: 0 }}</dd></div>
@@ -335,7 +336,7 @@ layout: default
                             class="block w-full text-center bg-white text-blue-700 hover:bg-blue-50 font-medium py-2.5 px-4 rounded-xl transition-all shadow-sm">
                             <i class="fas fa-plus-circle mr-2"></i> {{ t.contribute.add_resource }}
                         </a>
-                        <a href="{% if page.lang == 'pt-BR' %}/pt-BR/reportar-problemas/{% else %}/en-US/report-issues/{% endif %}?page={{ page.title | url_encode }}&url={{ page.url | url_encode }}"
+                        <a href="{% if page.lang == 'pt-BR' %}/pt-BR/reportar-problemas/{% else %}/en-US/report-issues/{% endif %}?page={{ topic_title | url_encode }}&url={{ page.url | url_encode }}"
                             class="block w-full text-center bg-white/10 hover:bg-white/20 text-white font-medium py-2.5 px-4 rounded-xl border border-white/20 transition-all">
                             <i class="fas fa-flag mr-2"></i> {{ t.footer.report_issues }}
                         </a>
@@ -386,7 +387,7 @@ layout: default
                         {{ t.layout.external_links }}
                     </h3>
                     <div class="space-y-3">
-                        <a href="https://scholar.google.com/scholar?q={{ page.title | url_encode }}" target="_blank"
+                        <a href="https://scholar.google.com/scholar?q={{ topic_title | url_encode }}" target="_blank"
                             class="flex items-center p-2 rounded-lg hover:bg-blue-50 group transition-colors">
                             <div
                                 class="w-8 h-8 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center mr-3 group-hover:bg-blue-200">
@@ -395,7 +396,7 @@ layout: default
                             <span class="text-sm font-medium text-gray-700 group-hover:text-blue-700">Google
                                 Scholar</span>
                         </a>
-                        <a href="https://www.coursera.org/search?query={{ page.title | url_encode }}" target="_blank"
+                        <a href="https://www.coursera.org/search?query={{ topic_title | url_encode }}" target="_blank"
                             class="flex items-center p-2 rounded-lg hover:bg-blue-50 group transition-colors">
                             <div
                                 class="w-8 h-8 rounded-full bg-cyan-100 text-cyan-600 flex items-center justify-center mr-3 group-hover:bg-cyan-200">
@@ -403,7 +404,7 @@ layout: default
                             </div>
                             <span class="text-sm font-medium text-gray-700 group-hover:text-cyan-700">Coursera</span>
                         </a>
-                        <a href="https://www.youtube.com/results?search_query={{ page.title | url_encode }}"
+                        <a href="https://www.youtube.com/results?search_query={{ topic_title | url_encode }}"
                             target="_blank"
                             class="flex items-center p-2 rounded-lg hover:bg-red-50 group transition-colors">
                             <div

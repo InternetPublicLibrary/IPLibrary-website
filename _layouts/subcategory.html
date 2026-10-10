@@ -1,6 +1,7 @@
 ---
 layout: default
 ---
+{%- include components/atoms/topic-meta.html -%}
 
 {% assign t = site.data[page.lang].translations %}
 {%- assign pt = false -%}{%- if page.lang == 'pt-BR' -%}{%- assign pt = true -%}{%- endif -%}
@@ -8,7 +9,7 @@ layout: default
 {%- assign url_parts = page.url | split: '/' -%}
 {%- assign topic_data = site.data[page.lang][url_parts[2]][url_parts[3]] -%}
 {%- include components/atoms/real-resources.html node=topic_data -%}
-{%- capture suggest_title -%}{% if pt %}Sugestão de recurso: {% else %}Resource suggestion: {% endif %}{{ page.title }}{%- endcapture -%}
+{%- capture suggest_title -%}{% if pt %}Sugestão de recurso: {% else %}Resource suggestion: {% endif %}{{ topic_title }}{%- endcapture -%}
 {%- capture suggest_body -%}{{ site.url }}{{ page.url }}{%- endcapture -%}
 {%- assign suggest_title_enc = suggest_title | url_encode -%}{%- assign suggest_body_enc = suggest_body | url_encode -%}
 {%- assign suggest_url = 'https://github.com/InternetPublicLibrary/' | append: page.lang | append: '/issues/new?title=' | append: suggest_title_enc | append: '&body=' | append: suggest_body_enc -%}
@@ -33,21 +34,21 @@ layout: default
                         <a href="{{ page.parent_category_path }}" class="hover:text-white transition-colors">{{
                                 page.parent_category }}</a>
                         <span class="mx-2 text-blue-300">›</span>
-                        <span class="text-white font-medium">{{ page.title }}</span>
+                        <span class="text-white font-medium">{{ topic_title }}</span>
                 </div>
 
                 <div class="flex flex-col md:flex-row md:items-end justify-between gap-6">
                         <div>
-                                <h1 id="category-title" data-query="{{ page.title }}"
+                                <h1 id="category-title" data-query="{{ topic_title }}"
                                         class="text-4xl md:text-5xl font-bold mb-4 tracking-tight">
-                                        {{ page.title }}
+                                        {{ topic_title }}
                                 </h1>
                                 <p class="text-xl text-blue-100 max-w-2xl leading-relaxed">
                                         {% if page.description %}
                                         {{ page.description }}
                                         {% else %}
-                                        {% if page.lang == 'pt-BR' %}Recursos e curadoria sobre {{ page.title }}{% else
-                                        %}Curated resources about {{ page.title }}{% endif %}
+                                        {% if page.lang == 'pt-BR' %}Recursos e curadoria sobre {{ topic_title }}{% else
+                                        %}Curated resources about {{ topic_title }}{% endif %}
                                         {% endif %}
                                 </p>
                         </div>
@@ -195,7 +196,7 @@ layout: default
                                                 <ul class="divide-y divide-gray-100" role="list">
                                                         {%- for resource in listed %}
                                                         <li class="px-5 py-3">
-                                                                <a href="{{ resource.url }}" rel="noopener" class="font-medium text-gray-900 hover:text-blue-600">{{ resource.name | escape }}</a>
+                                                                <a href="{{ resource.url | escape }}" rel="noopener" class="font-medium text-gray-900 hover:text-blue-600">{{ resource.name | escape }}</a>
                                                                 <span class="text-xs text-gray-600 ml-1">{{ resource.url | split: '//' | last | split: '/' | first | remove_first: 'www.' }}</span>
                                                                 {%- if resource.access %}<span class="ml-1 text-xs px-1.5 py-0.5 rounded bg-green-50 text-green-700">{{ resource.access }}</span>{% endif %}
                                                                 {%- if resource.description %}<p class="text-sm text-gray-600 mt-0.5">{{ resource.description | escape }}</p>{% endif %}
@@ -208,7 +209,7 @@ layout: default
                                 </div>
                                 {%- else %}
                                 <div class="bg-white rounded-2xl border border-dashed border-gray-300 p-6 text-gray-700">
-                                        <p>{% if pt %}Ainda não há recursos selecionados para {{ page.title }}.{% else %}There are no curated resources for {{ page.title }} yet.{% endif %}</p>
+                                        <p>{% if pt %}Ainda não há recursos selecionados para {{ topic_title }}.{% else %}There are no curated resources for {{ topic_title }} yet.{% endif %}</p>
                                         <a href="{{ suggest_url }}" rel="noopener" class="inline-flex items-center gap-2 mt-3 px-4 py-2 rounded-lg bg-blue-600 text-white font-medium hover:bg-blue-700"><i class="fas fa-plus" aria-hidden="true"></i>{% if pt %}Sugerir um recurso{% else %}Suggest a resource{% endif %}</a>
                                 </div>
                                 {%- endif %}
@@ -226,12 +227,11 @@ layout: default
                                                         {{ t.layout.research_dashboard }}
                                                 </h2>
                                                 <p class="text-slate-600 mt-2 ml-11 max-w-2xl">
-                                                        {% if page.lang == 'pt-BR' %}Aprofunde-se em {{ page.title }}
-                                                        com ferramentas de pesquisa.{% else %}Deep dive into {{
-                                                        page.title }} with research tools.{% endif %}
+                                                        {% if page.lang == 'pt-BR' %}Aprofunde-se em {{ topic_title }}
+                                                        com ferramentas de pesquisa.{% else %}Deep dive into {{ topic_title }} with research tools.{% endif %}
                                                 </p>
                                         </div>
-                                        {% include components/templates/academic-dashboard.html search_query=page.title
+                                        {% include components/templates/academic-dashboard.html search_query=topic_title search_query_en=topic_title_en
                                         %}
                                 </div>
                         </section>
@@ -251,7 +251,7 @@ layout: default
 
                                 <!-- Infobox (Wikipedia-style topic facts) -->
                                 <aside class="bg-white rounded-2xl shadow-sm border border-gray-200 overflow-hidden" aria-labelledby="infobox-title">
-                                        <h2 id="infobox-title" class="bg-blue-50 border-b border-blue-100 px-5 py-2 text-sm font-semibold text-blue-900 text-center">{{ page.title }}</h2>
+                                        <h2 id="infobox-title" class="bg-blue-50 border-b border-blue-100 px-5 py-2 text-sm font-semibold text-blue-900 text-center">{{ topic_title }}</h2>
                                         <dl class="divide-y divide-gray-100 text-sm">
                                                 {% if page.parent_category %}<div class="flex justify-between gap-3 px-5 py-2"><dt class="text-gray-600">{% if pt %}Categoria{% else %}Category{% endif %}</dt><dd class="font-medium text-right"><a href="{{ page.parent_category_path }}" class="text-blue-600 hover:underline">{{ page.parent_category }}</a></dd></div>{% endif %}
                                                 <div class="flex justify-between gap-3 px-5 py-2"><dt class="text-gray-600">{% if pt %}Seções{% else %}Sections{% endif %}</dt><dd class="font-medium text-gray-900">{{ page.children.size | default: 0 }}</dd></div>
@@ -272,7 +272,7 @@ layout: default
                                                         <i class="fas fa-plus-circle mr-2"></i> {{
                                                         t.contribute.add_resource }}
                                                 </a>
-                                                <a href="{% if page.lang == 'pt-BR' %}/pt-BR/reportar-problemas/{% else %}/en-US/report-issues/{% endif %}?page={{ page.title | url_encode }}&url={{ page.url | url_encode }}"
+                                                <a href="{% if page.lang == 'pt-BR' %}/pt-BR/reportar-problemas/{% else %}/en-US/report-issues/{% endif %}?page={{ topic_title | url_encode }}&url={{ page.url | url_encode }}"
                                                         class="block w-full text-center bg-white/10 hover:bg-white/20 text-white font-medium py-2.5 px-4 rounded-xl border border-white/20 transition-all">
                                                         <i class="fas fa-flag mr-2"></i> {{ t.footer.report_issues }}
                                                 </a>
@@ -327,7 +327,7 @@ layout: default
                                                 {{ t.layout.external_links }}
                                         </h3>
                                         <div class="space-y-3">
-                                                <a href="https://scholar.google.com/scholar?q={{ page.title | url_encode }}"
+                                                <a href="https://scholar.google.com/scholar?q={{ topic_title | url_encode }}"
                                                         target="_blank"
                                                         class="flex items-center p-2 rounded-lg hover:bg-blue-50 group transition-colors">
                                                         <div
@@ -338,7 +338,7 @@ layout: default
                                                                 class="text-sm font-medium text-gray-700 group-hover:text-blue-700">Google
                                                                 Scholar</span>
                                                 </a>
-                                                <a href="https://www.coursera.org/search?query={{ page.title | url_encode }}"
+                                                <a href="https://www.coursera.org/search?query={{ topic_title | url_encode }}"
                                                         target="_blank"
                                                         class="flex items-center p-2 rounded-lg hover:bg-blue-50 group transition-colors">
                                                         <div
