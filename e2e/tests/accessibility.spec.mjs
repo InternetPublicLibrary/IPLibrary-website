@@ -17,8 +17,9 @@ const PAGES = [
 
 const BLOCKING = ['serious', 'critical'];
 
-for (const [name, path] of PAGES) {
-  test(`${name} has no serious or critical WCAG 2.2 AA violations`, async ({ page }, testInfo) => {
+for (const scheme of ['light', 'dark']) for (const [name, path] of PAGES) {
+  test(`${name} (${scheme}) has no serious or critical WCAG 2.2 AA violations`, async ({ page }, testInfo) => {
+    await page.emulateMedia({ colorScheme: scheme });
     await page.goto(path);
     const results = await new AxeBuilder({ page })
       .withTags(['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa', 'wcag22aa'])

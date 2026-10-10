@@ -62,7 +62,7 @@ Tailwind template and, worse, undermines its own credibility:
       desktop and mobile, in light and dark appearance.
 - [ ] AC2 — Header and footer of every page show the globe mark, "Internet Public Library" and "by Better Web";
       `site.author`/structured data agree. No "IP" tile, no "Open Digital Brasil" credit in the shell.
-- [ ] AC3 — Built HTML contains none of: "5,000+", "Edits Today", "Topic 1", "Concept 1", "Resource 1",
+- [ ] AC3 — HTML rendered by v1 layouts and generators (not submodule content pages) contains none of: "5,000+", "Edits Today", "Topic 1", "Concept 1", "Resource 1",
       `action="#"`, `href="#"` on primary actions; no "Last updated" value equal to the build date.
 - [ ] AC4 — Section and wiki pages: exactly one `<h1>`; content `h2` rendered in the serif family; article body
       max width ≤ 75ch; body text 18 px at ≥ 1024 px viewport.
