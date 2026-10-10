@@ -3,6 +3,15 @@ layout: default
 ---
 
 {% assign t = site.data[page.lang].translations %}
+{%- assign pt = false -%}{%- if page.lang == 'pt-BR' -%}{%- assign pt = true -%}{%- endif -%}
+{%- comment -%} Resources live in _data/<lang>/<category>/<subcategory>/<type>.yaml (spec 002). {%- endcomment -%}
+{%- assign url_parts = page.url | split: '/' -%}
+{%- assign topic_data = site.data[page.lang][url_parts[2]][url_parts[3]] -%}
+{%- include components/atoms/real-resources.html node=topic_data -%}
+{%- capture suggest_title -%}{% if pt %}Sugestão de recurso: {% else %}Resource suggestion: {% endif %}{{ page.title }}{%- endcapture -%}
+{%- capture suggest_body -%}{{ site.url }}{{ page.url }}{%- endcapture -%}
+{%- assign suggest_title_enc = suggest_title | url_encode -%}{%- assign suggest_body_enc = suggest_body | url_encode -%}
+{%- assign suggest_url = 'https://github.com/InternetPublicLibrary/' | append: page.lang | append: '/issues/new?title=' | append: suggest_title_enc | append: '&body=' | append: suggest_body_enc -%}
 
 <!-- Hero Section -->
 <section class="bg-gradient-to-r from-blue-600 to-indigo-700 text-white py-12 relative overflow-hidden">
@@ -49,9 +58,15 @@ layout: default
                                 <div
                                         class="bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl px-4 py-2 text-center">
                                         <span class="block text-2xl font-bold">{{ page.children.size }}</span>
-                                        <span class="text-xs text-blue-200 uppercase tracking-wider">
+                                        <span class="text-xs text-blue-100 uppercase tracking-wider">
                                                 {{ t.layout.related_sections | default: "Sections" }}
                                         </span>
+                                </div>
+                                {% endif %}
+                                {% if real_resource_total > 0 %}
+                                <div class="bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl px-4 py-2 text-center">
+                                        <span class="block text-2xl font-bold">{{ real_resource_total }}</span>
+                                        <span class="text-xs text-blue-100 uppercase tracking-wider">{{ t.home.resources }}</span>
                                 </div>
                                 {% endif %}
                         </div>
@@ -70,6 +85,10 @@ layout: default
                                 <i class="fas fa-th-large"></i> {{ t.layout.related_sections | default: "Sections" }}
                         </a>
                         {% endif %}
+                        <a href="#curated-resources"
+                                class="bg-white/10 hover:bg-white/20 text-white px-3 py-1 rounded-full border border-white/20 transition-all flex items-center gap-1">
+                                <i class="fas fa-star"></i> {% if pt %}Recursos{% else %}Resources{% endif %}
+                        </a>
                         <a href="#academic-dashboard"
                                 class="bg-white/10 hover:bg-white/20 text-white px-3 py-1 rounded-full border border-white/20 transition-all flex items-center gap-1">
                                 <i class="fas fa-graduation-cap"></i> {{ t.layout.research }}
@@ -132,24 +151,68 @@ layout: default
                                                                 <i class="fas fa-book-open text-lg"></i>
                                                         </div>
                                                         <h3
-                                                                class="font-semibold text-gray-900 group-hover:text-blue-600 transition-colors line-clamp-1">
+                                                                class="font-semibold text-gray-900 group-hover:text-blue-600 transition-colors">
                                                                 {{ child.title }}
                                                         </h3>
                                                 </div>
-                                                <p class="text-sm text-gray-500 mb-4 line-clamp-2 flex-grow">
-                                                        {% if page.lang == 'pt-BR' %}Detalhes e recursos sobre {{
-                                                        child.title }}.{% else %}Details and resources about {{
-                                                        child.title }}.{% endif %}
+                                                <p class="text-sm text-gray-600 mb-4 flex-grow">
+                                                        {% if pt %}Artigo, recursos, wiki e discussão sobre {{ child.title }}.{% else %}Article, resources, wiki and discussion about {{ child.title }}.{% endif %}
                                                 </p>
                                                 <div
-                                                        class="pt-3 border-t border-gray-50 flex items-center text-xs font-medium text-blue-600 opacity-0 group-hover:opacity-100 transition-opacity transform translate-y-2 group-hover:translate-y-0 duration-300">
-                                                        {{ t.ui.read_more }} <i class="fas fa-arrow-right ml-1"></i>
+                                                        class="pt-3 border-t border-gray-100 flex items-center text-xs font-medium text-blue-600">
+                                                        {{ t.ui.read_more }} <i class="fas fa-arrow-right ml-1" aria-hidden="true"></i>
                                                 </div>
                                         </a>
                                         {% endfor %}
                                 </div>
                         </section>
                         {% endif %}
+
+                        <!-- Curated resources, grouped by type (spec 002 data) -->
+                        <section id="curated-resources" class="scroll-mt-24" aria-labelledby="curated-title">
+                                <h2 id="curated-title" class="text-2xl font-bold text-gray-800 flex items-center gap-3 mb-6">
+                                        <span class="w-8 h-8 rounded-lg bg-purple-100 text-purple-700 flex items-center justify-center"><i class="fas fa-star" aria-hidden="true"></i></span>
+                                        {% if pt %}Recursos selecionados{% else %}Curated resources{% endif %}
+                                        {% if real_resource_total > 0 %}<span class="bg-gray-100 text-gray-700 text-xs font-semibold px-2.5 py-0.5 rounded-full">{{ real_resource_total }}</span>{% endif %}
+                                </h2>
+                                {%- if real_resource_total > 0 %}
+                                {%- if pt -%}
+                                  {%- assign resource_types = "tools|fa-tools|Ferramentas;databases|fa-database|Bases de dados;learn|fa-graduation-cap|Aprender;publications|fa-book|Publicações;blogs-and-sites|fa-globe|Blogs e sites;events-and-conferences|fa-calendar-alt|Eventos e conferências" | split: ';' -%}
+                                {%- else -%}
+                                  {%- assign resource_types = "tools|fa-tools|Tools;databases|fa-database|Databases;learn|fa-graduation-cap|Learn;publications|fa-book|Publications;blogs-and-sites|fa-globe|Blogs and sites;events-and-conferences|fa-calendar-alt|Events and conferences" | split: ';' -%}
+                                {%- endif %}
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                                        {%- for resource_type in resource_types -%}
+                                        {%- assign rt = resource_type | split: '|' -%}
+                                        {%- assign listed = '' | split: '' -%}
+                                        {%- for r in topic_data[rt[0]] -%}{%- if r.url -%}{%- unless r.url contains 'example.com' -%}{%- assign listed = listed | push: r -%}{%- endunless -%}{%- endif -%}{%- endfor -%}
+                                        {%- if listed.size > 0 %}
+                                        <div class="bg-white rounded-2xl shadow-sm border border-gray-200 overflow-hidden">
+                                                <h3 class="px-5 py-3 border-b border-gray-100 font-bold text-gray-800 flex items-center gap-2">
+                                                        <i class="fas {{ rt[1] }} text-blue-600" aria-hidden="true"></i>{{ rt[2] }}
+                                                        <span class="ml-auto text-xs font-medium text-gray-600">{{ listed.size }}</span>
+                                                </h3>
+                                                <ul class="divide-y divide-gray-100" role="list">
+                                                        {%- for resource in listed %}
+                                                        <li class="px-5 py-3">
+                                                                <a href="{{ resource.url }}" rel="noopener" class="font-medium text-gray-900 hover:text-blue-600">{{ resource.name }}</a>
+                                                                <span class="text-xs text-gray-600 ml-1">{{ resource.url | split: '//' | last | split: '/' | first | remove_first: 'www.' }}</span>
+                                                                {%- if resource.access %}<span class="ml-1 text-xs px-1.5 py-0.5 rounded bg-green-50 text-green-700">{{ resource.access }}</span>{% endif %}
+                                                                {%- if resource.description %}<p class="text-sm text-gray-600 mt-0.5">{{ resource.description }}</p>{% endif %}
+                                                        </li>
+                                                        {%- endfor %}
+                                                </ul>
+                                        </div>
+                                        {%- endif -%}
+                                        {%- endfor %}
+                                </div>
+                                {%- else %}
+                                <div class="bg-white rounded-2xl border border-dashed border-gray-300 p-6 text-gray-700">
+                                        <p>{% if pt %}Ainda não há recursos selecionados para {{ page.title }}.{% else %}There are no curated resources for {{ page.title }} yet.{% endif %}</p>
+                                        <a href="{{ suggest_url }}" rel="noopener" class="inline-flex items-center gap-2 mt-3 px-4 py-2 rounded-lg bg-blue-600 text-white font-medium hover:bg-blue-700"><i class="fas fa-plus" aria-hidden="true"></i>{% if pt %}Sugerir um recurso{% else %}Suggest a resource{% endif %}</a>
+                                </div>
+                                {%- endif %}
+                        </section>
 
                         <!-- Academic Dashboard (Research) -->
                         <section id="academic-dashboard" class="scroll-mt-24">
@@ -186,6 +249,17 @@ layout: default
                 <div class="lg:col-span-3">
                         <div class="sticky top-24 space-y-6">
 
+                                <!-- Infobox (Wikipedia-style topic facts) -->
+                                <aside class="bg-white rounded-2xl shadow-sm border border-gray-200 overflow-hidden" aria-labelledby="infobox-title">
+                                        <h2 id="infobox-title" class="bg-blue-50 border-b border-blue-100 px-5 py-2 text-sm font-semibold text-blue-900 text-center">{{ page.title }}</h2>
+                                        <dl class="divide-y divide-gray-100 text-sm">
+                                                {% if page.parent_category %}<div class="flex justify-between gap-3 px-5 py-2"><dt class="text-gray-600">{% if pt %}Categoria{% else %}Category{% endif %}</dt><dd class="font-medium text-right"><a href="{{ page.parent_category_path }}" class="text-blue-600 hover:underline">{{ page.parent_category }}</a></dd></div>{% endif %}
+                                                <div class="flex justify-between gap-3 px-5 py-2"><dt class="text-gray-600">{% if pt %}Seções{% else %}Sections{% endif %}</dt><dd class="font-medium text-gray-900">{{ page.children.size | default: 0 }}</dd></div>
+                                                <div class="flex justify-between gap-3 px-5 py-2"><dt class="text-gray-600">{% if pt %}Recursos selecionados{% else %}Curated resources{% endif %}</dt><dd class="font-medium text-gray-900">{{ real_resource_total }}</dd></div>
+                                                <div class="flex justify-between gap-3 px-5 py-2"><dt class="text-gray-600">{% if pt %}Idiomas{% else %}Languages{% endif %}</dt><dd class="font-medium text-gray-900">English · Português</dd></div>
+                                        </dl>
+                                </aside>
+
                                 <!-- Primary Actions -->
                                 <div
                                         class="bg-gradient-to-br from-blue-600 to-indigo-700 rounded-2xl shadow-lg p-5 text-white">
@@ -193,7 +267,7 @@ layout: default
                                                 <i class="fas fa-hands-helping"></i> {{ t.nav.contribute }}
                                         </h3>
                                         <div class="space-y-3">
-                                                <a href="{% if page.lang == 'pt-BR' %}/pt-BR/enviar-recurso/{% else %}/en-US/submit-resource/{% endif %}?category={{ page.title | url_encode }}&path={{ page.url | url_encode }}"
+                                                <a href="{{ suggest_url }}" rel="noopener"
                                                         class="block w-full text-center bg-white text-blue-700 hover:bg-blue-50 font-medium py-2.5 px-4 rounded-xl transition-all shadow-sm">
                                                         <i class="fas fa-plus-circle mr-2"></i> {{
                                                         t.contribute.add_resource }}

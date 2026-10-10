@@ -3,6 +3,17 @@ layout: default
 ---
 
 {% assign t = site.data[page.lang].translations %}
+{%- assign pt = false -%}{%- if page.lang == 'pt-BR' -%}{%- assign pt = true -%}{%- endif -%}
+{%- comment -%} Real counts and resources for this topic (placeholders excluded, spec 002). {%- endcomment -%}
+{%- assign real_resource_total = 0 -%}
+{%- if page.data_folder -%}{%- assign topic_data = site.data[page.lang][page.data_folder] -%}{% include components/atoms/real-resources.html node=topic_data %}{%- endif -%}
+{%- assign items = page.children -%}
+{%- unless items -%}{%- for item in site.data[page.lang].menu -%}{%- if item.path == page.url -%}{%- assign items = item.children -%}{%- endif -%}{%- endfor -%}{%- endunless -%}
+{%- assign section_total = 0 -%}{%- for child in items -%}{%- assign section_total = section_total | plus: child.children.size -%}{%- endfor -%}
+{%- capture suggest_title -%}{% if pt %}Sugestão de recurso: {% else %}Resource suggestion: {% endif %}{{ page.title }}{%- endcapture -%}
+{%- capture suggest_body -%}{{ site.url }}{{ page.url }}{%- endcapture -%}
+{%- assign suggest_title_enc = suggest_title | url_encode -%}{%- assign suggest_body_enc = suggest_body | url_encode -%}
+{%- assign suggest_url = 'https://github.com/InternetPublicLibrary/' | append: page.lang | append: '/issues/new?title=' | append: suggest_title_enc | append: '&body=' | append: suggest_body_enc -%}
 
 <!-- Hero Section -->
 <section class="bg-gradient-to-r from-blue-600 to-indigo-700 text-white py-12 relative overflow-hidden">
@@ -54,29 +65,23 @@ layout: default
                 {% if items and items.size > 0 %}
                 <div class="bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl px-4 py-2 text-center">
                     <span class="block text-2xl font-bold">{{ items.size }}</span>
-                    <span class="text-xs text-blue-200 uppercase tracking-wider">
+                    <span class="text-xs text-blue-100 uppercase tracking-wider">
                         {{ t.categories.subcategories_label }}
                     </span>
                 </div>
                 {% endif %}
 
-                {% if page.data_folder %}
-                {% assign resource_count = 0 %}
-                {% assign resource_data = site.data[page.lang][page.data_folder] %}
-                {% if resource_data %}
-                {% for resource_file in resource_data %}
-                {% assign resources = resource_file[1] %}
-                {% assign resource_count = resource_count | plus: resources.size %}
-                {% endfor %}
-                {% endif %}
-                {% if resource_count > 0 %}
+                {% if section_total > 0 %}
                 <div class="bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl px-4 py-2 text-center">
-                    <span class="block text-2xl font-bold">{{ resource_count }}</span>
-                    <span class="text-xs text-blue-200 uppercase tracking-wider">
-                        {{ t.home.resources }}
-                    </span>
+                    <span class="block text-2xl font-bold">{{ section_total }}</span>
+                    <span class="text-xs text-blue-100 uppercase tracking-wider">{% if pt %}seções{% else %}sections{% endif %}</span>
                 </div>
                 {% endif %}
+                {% if real_resource_total > 0 %}
+                <div class="bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl px-4 py-2 text-center">
+                    <span class="block text-2xl font-bold">{{ real_resource_total }}</span>
+                    <span class="text-xs text-blue-100 uppercase tracking-wider">{{ t.home.resources }}</span>
+                </div>
                 {% endif %}
             </div>
         </div>
@@ -92,10 +97,10 @@ layout: default
                 class="bg-white/10 hover:bg-white/20 text-white px-3 py-1 rounded-full border border-white/20 transition-all flex items-center gap-1">
                 <i class="fas fa-th-large"></i> {{ t.categories.subcategories_label | capitalize }}
             </a>
-            <a href="#featured-resources"
+            {% if real_resource_total > 0 %}<a href="#featured-resources"
                 class="bg-white/10 hover:bg-white/20 text-white px-3 py-1 rounded-full border border-white/20 transition-all flex items-center gap-1">
                 <i class="fas fa-star"></i> {{ t.home.resources }}
-            </a>
+            </a>{% endif %}
             <a href="#academic-dashboard"
                 class="bg-white/10 hover:bg-white/20 text-white px-3 py-1 rounded-full border border-white/20 transition-all flex items-center gap-1">
                 <i class="fas fa-graduation-cap"></i> {{ t.layout.research }}
@@ -147,17 +152,22 @@ layout: default
                                 class="w-10 h-10 rounded-lg bg-blue-50 text-blue-600 flex items-center justify-center group-hover:bg-blue-600 group-hover:text-white transition-colors duration-300">
                                 <i class="fas fa-folder-open text-lg"></i>
                             </div>
-                            <h3
-                                class="font-semibold text-gray-900 group-hover:text-blue-600 transition-colors line-clamp-1">
+                            <h3 class="font-semibold text-gray-900 group-hover:text-blue-600 transition-colors">
                                 {{ child.title }}
                             </h3>
                         </div>
-                        <p class="text-sm text-gray-500 mb-4 line-clamp-2 flex-grow">
-                            {{ t.categories.explore_related_prefix }} {{ child.title }}.
-                        </p>
-                        <div
-                            class="pt-3 border-t border-gray-50 flex items-center text-xs font-medium text-blue-600 opacity-0 group-hover:opacity-100 transition-opacity transform translate-y-2 group-hover:translate-y-0 duration-300">
-                            {{ t.ui.explore }} <i class="fas fa-arrow-right ml-1"></i>
+                        {% if child.children and child.children.size > 0 %}
+                        <p class="text-xs text-gray-600 mb-2">{{ child.children.size }} {% if pt %}seções{% else %}sections{% endif %}</p>
+                        <ul class="flex flex-wrap gap-1.5 mb-4 flex-grow" role="list">
+                            {% for grandchild in child.children %}
+                            <li class="text-xs px-2 py-0.5 rounded-full bg-blue-50 text-blue-700">{{ grandchild.title }}</li>
+                            {% endfor %}
+                        </ul>
+                        {% else %}
+                        <p class="text-sm text-gray-600 mb-4 flex-grow">{% if pt %}Recursos, wiki e discussão sobre {{ child.title }}.{% else %}Resources, wiki and discussion about {{ child.title }}.{% endif %}</p>
+                        {% endif %}
+                        <div class="pt-3 border-t border-gray-100 flex items-center text-xs font-medium text-blue-600">
+                            {{ t.ui.explore }} <i class="fas fa-arrow-right ml-1" aria-hidden="true"></i>
                         </div>
                     </a>
                     {% endfor %}
@@ -185,6 +195,10 @@ layout: default
                     {% assign resources = resource_file[1] %}
                     {% assign first_resource = resources | first %}
                     {% unless first_resource.name or first_resource.url %}{% continue %}{% endunless %}
+                    {% assign resources = resources | where_exp: 'r', 'r.url' %}
+                    {% assign listed = '' | split: '' %}{% for r in resources %}{% unless r.url contains 'example.com' %}{% assign listed = listed | push: r %}{% endunless %}{% endfor %}
+                    {% assign resources = listed %}
+                    {% if resources.size == 0 %}{% continue %}{% endif %}
 
                     {% assign section_icon = 'fa-folder' %}
                     {% assign section_color = 'bg-gray-50 text-gray-600' %}
@@ -224,8 +238,6 @@ layout: default
                         <div class="p-6">
                             <ul class="space-y-4">
                                 {% for resource in resources limit:5 %}
-                                {% if resource.name == blank or resource.name == "Example Resource" %}{% continue %}{%
-                                endif %}
                                 <li class="group/item">
                                     <a href="{{ resource.url }}" target="_blank" rel="noopener noreferrer"
                                         class="flex items-start gap-3">
@@ -239,7 +251,7 @@ layout: default
                                                 {{ resource.name }}
                                             </div>
                                             {% if resource.description %}
-                                            <p class="text-sm text-gray-500 mt-1 line-clamp-1">{{ resource.description
+                                            <p class="text-sm text-gray-600 mt-1">{{ resource.description
                                                 }}</p>
                                             {% endif %}
                                         </div>
@@ -248,12 +260,17 @@ layout: default
                                 {% endfor %}
                             </ul>
                             {% if resources.size > 5 %}
-                            <div class="mt-4 pt-4 border-t border-gray-50 text-center">
-                                <button class="text-sm font-medium text-blue-600 hover:text-blue-800 transition-colors">
-                                    {% if page.lang == 'pt-BR' %}Ver todos os {{ resources.size }} recursos{% else
-                                    %}View all {{ resources.size }} resources{% endif %}
-                                </button>
-                            </div>
+                            <details class="mt-4 pt-4 border-t border-gray-100">
+                                <summary class="text-sm font-medium text-blue-600 hover:text-blue-800 cursor-pointer">
+                                    {% if pt %}Ver todos os {{ resources.size }} recursos{% else %}View all {{ resources.size }} resources{% endif %}
+                                </summary>
+                                <ul class="space-y-4 mt-4">
+                                    {% for resource in resources offset:5 %}
+                                    <li><a href="{{ resource.url }}" rel="noopener" class="font-medium text-gray-800 hover:text-blue-600">{{ resource.name }}</a>
+                                        {% if resource.description %}<p class="text-sm text-gray-600 mt-1">{{ resource.description }}</p>{% endif %}</li>
+                                    {% endfor %}
+                                </ul>
+                            </details>
                             {% endif %}
                         </div>
                     </div>
@@ -297,13 +314,25 @@ layout: default
         <div class="lg:col-span-3">
             <div class="sticky top-24 space-y-6">
 
+                <!-- Infobox (Wikipedia-style topic facts) -->
+                <aside class="bg-white rounded-2xl shadow-sm border border-gray-200 overflow-hidden" aria-labelledby="infobox-title">
+                    <h2 id="infobox-title" class="bg-blue-50 border-b border-blue-100 px-5 py-2 text-sm font-semibold text-blue-900 text-center">{{ page.title }}</h2>
+                    <dl class="divide-y divide-gray-100 text-sm">
+                        <div class="flex justify-between gap-3 px-5 py-2"><dt class="text-gray-600">{% if pt %}Tipo{% else %}Type{% endif %}</dt><dd class="font-medium text-gray-900">{% if pt %}Categoria{% else %}Category{% endif %}</dd></div>
+                        <div class="flex justify-between gap-3 px-5 py-2"><dt class="text-gray-600">{% if pt %}Subcategorias{% else %}Subcategories{% endif %}</dt><dd class="font-medium text-gray-900">{{ items.size | default: 0 }}</dd></div>
+                        <div class="flex justify-between gap-3 px-5 py-2"><dt class="text-gray-600">{% if pt %}Seções{% else %}Sections{% endif %}</dt><dd class="font-medium text-gray-900">{{ section_total }}</dd></div>
+                        <div class="flex justify-between gap-3 px-5 py-2"><dt class="text-gray-600">{% if pt %}Recursos selecionados{% else %}Curated resources{% endif %}</dt><dd class="font-medium text-gray-900">{{ real_resource_total }}</dd></div>
+                        <div class="flex justify-between gap-3 px-5 py-2"><dt class="text-gray-600">{% if pt %}Idiomas{% else %}Languages{% endif %}</dt><dd class="font-medium text-gray-900">English · Português</dd></div>
+                    </dl>
+                </aside>
+
                 <!-- Primary Actions -->
                 <div class="bg-gradient-to-br from-blue-600 to-indigo-700 rounded-2xl shadow-lg p-5 text-white">
                     <h3 class="font-bold text-lg mb-4 flex items-center gap-2">
                         <i class="fas fa-hands-helping"></i> {{ t.nav.contribute }}
                     </h3>
                     <div class="space-y-3">
-                        <a href="{% if page.lang == 'pt-BR' %}/pt-BR/enviar-recurso/{% else %}/en-US/submit-resource/{% endif %}?category={{ page.title | url_encode }}&path={{ page.url | url_encode }}"
+                        <a href="{{ suggest_url }}" rel="noopener"
                             class="block w-full text-center bg-white text-blue-700 hover:bg-blue-50 font-medium py-2.5 px-4 rounded-xl transition-all shadow-sm">
                             <i class="fas fa-plus-circle mr-2"></i> {{ t.contribute.add_resource }}
                         </a>
@@ -335,7 +364,7 @@ layout: default
                             </a>
                         </li>
                         {% endif %}
-                        {% if page.data_folder %}
+                        {% if real_resource_total > 0 %}
                         <li>
                             <a href="#featured-resources"
                                 class="flex items-center text-gray-600 hover:text-blue-600 py-1 transition-colors">
