@@ -79,7 +79,7 @@ Tailwind template and, worse, undermines its own credibility:
       "crypto" from the home lands on the search page with results from the JSON index.
 - [ ] AC7 — "Edit" and "Suggest a resource" links point to `github.com/InternetPublicLibrary/...` URLs that
       include the page path/title; no login/sign-up links in the shell.
-- [ ] AC8 — Appearance control: System/Light/Dark, persisted across reloads, no flash of the wrong theme,
+- [ ] AC8 — Light by default; a "Dark mode" toggle (aria-pressed), persisted across reloads, no flash of the wrong theme,
       keyboard operable; discussion widget follows the theme.
 - [ ] AC9 — No horizontal scroll at 320 px; skip link is the first focusable element; all menus expose
       `aria-expanded`; animations disabled under `prefers-reduced-motion`.

@@ -57,7 +57,7 @@ test.describe('AC4 article typography', () => {
         };
       });
       expect(metrics.widthInCh).toBeLessThanOrEqual(75);
-      expect(metrics.headingFont).toMatch(/Source Serif/);
+      expect(metrics.headingFont).toMatch(/Source Sans/);
       if (!isMobile) expect(metrics.bodySize).toBe('18px');
     });
   }
@@ -119,11 +119,14 @@ test.describe('AC7 honest actions', () => {
 });
 
 test.describe('AC8 appearance', () => {
-  test('dark choice persists across reloads', async ({ page }) => {
+  test('light by default; dark choice persists across reloads', async ({ page }) => {
     await page.goto('/en-US/');
-    await page.getByRole('button', { name: /appearance/i }).click();
-    await page.getByRole('menuitemradio', { name: /dark/i }).click();
+    await expect(page.locator('html')).not.toHaveAttribute('data-theme', 'dark');
+    const toggle = page.getByRole('button', { name: /dark mode/i });
+    await expect(toggle).toHaveAttribute('aria-pressed', 'false');
+    await toggle.click();
     await expect(page.locator('html')).toHaveAttribute('data-theme', 'dark');
+    await expect(toggle).toHaveAttribute('aria-pressed', 'true');
     await page.reload();
     await expect(page.locator('html')).toHaveAttribute('data-theme', 'dark');
     const background = await page.evaluate(() => getComputedStyle(document.body).backgroundColor);
