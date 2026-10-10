@@ -1,6 +1,6 @@
 # 0001 — Own CSS with design tokens instead of the Tailwind runtime
 
-Date: 2026-10-10 · Status: Accepted · Spec: [001 Design System v1.0](../specs/001-design-system-v1/spec.md)
+Date: 2026-10-10 · Status: Superseded by [0002](0002-keep-tailwind-remap-palette.md) · Spec: [001 Design System v1.0](../specs/001-design-system-v1/spec.md)
 
 ## Context
 

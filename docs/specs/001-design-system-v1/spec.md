@@ -2,7 +2,14 @@
 
 Status: approved direction, in implementation · Owner: maintainer (Matheus Breguêz) · Implementers: Claude + Codex
 Research: [`research/claude-audit.md`](research/claude-audit.md), [`research/codex-audit.md`](research/codex-audit.md)
-Decision record: [ADR 0001 — own CSS with tokens instead of the Tailwind runtime](../../adr/0001-own-css-tokens.md)
+Decision records: [ADR 0002 — keep Tailwind, remap the palette](../../adr/0002-keep-tailwind-remap-palette.md) (supersedes [0001](../../adr/0001-own-css-tokens.md))
+
+> **Revision 2026-10-10 (maintainer review).** The first implementation (own CSS, serif headings, rebuilt
+> pages) was rejected as too custom, retro and content-losing. Binding direction from now on:
+> **evolve the existing Tailwind layout**, keep every section and its content, **high content density**,
+> **Wikipedia-style** structure (main page portal boxes; article pages with tabs, infobox, contents),
+> **light by default** with an optional dark mode, **Source Sans 3 without serif**. Requirements 1–3 below are
+> read through ADR 0002; AC10 is dropped.
 
 ## Why
 
