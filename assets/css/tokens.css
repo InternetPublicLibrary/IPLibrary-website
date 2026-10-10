@@ -43,7 +43,7 @@
 
   /* Type */
   --font-ui: 'Source Sans 3', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
-  --font-heading: 'Source Serif 4', Georgia, 'Times New Roman', serif;
+  --font-heading: var(--font-ui);
   --font-code: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
   --text-xs: 0.875rem;   /* 14px metadata */
   --text-sm: 1rem;       /* 16px UI */
@@ -118,32 +118,7 @@
   --shadow-overlay: 0 4px 16px rgb(0 0 0 / 32%);
 }
 
-/* Dark: system preference when no explicit choice */
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme='light']) {
-    color-scheme: dark;
-    --color-page: #151C22;
-    --color-surface: #1E2932;
-    --color-surface-raised: #24313B;
-    --color-text: #E6EDF2;
-    --color-muted: #AEBCC6;
-    --color-primary: #7CCBFF;
-    --color-primary-hover: #A6DCFF;
-    --color-on-primary: #151C22;
-    --color-primary-soft: #1E2932;
-    --color-visited: #C6A5E9;
-    --color-secondary: #97C7CC;
-    --color-secondary-soft: #1E2932;
-    --color-success: #69CD99;
-    --color-success-soft: #1E2932;
-    --color-warning: #F1CC78;
-    --color-warning-soft: #1E2932;
-    --color-danger: #FFAAA4;
-    --color-danger-soft: #1E2932;
-    --color-divider: #3D4D59;
-    --shadow-overlay: 0 4px 16px rgb(0 0 0 / 32%);
-  }
-}
+/* Light is the default; dark applies only by explicit choice (maintainer decision 2026-10-10). */
 
 /* Windows high contrast and similar: let the system palette win */
 @media (forced-colors: active) {

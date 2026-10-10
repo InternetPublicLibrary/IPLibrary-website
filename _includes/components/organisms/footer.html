@@ -10,9 +10,11 @@ Usage:
     <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-10">
       <div>
         <div class="flex items-center mb-3">
-          <span
-            class="bg-blue-600 text-white w-8 h-8 rounded-lg flex items-center justify-center mr-2 text-xs font-bold">IP</span>
-          <h3 class="text-lg font-medium text-gray-800">Internet Public Library</h3>
+          <span class="mr-2 flex">{% include components/atoms/brand-mark.html size="32" id_suffix="footer" %}</span>
+          <div>
+            <h3 class="text-lg font-medium text-gray-800 leading-tight">Internet Public Library</h3>
+            <a href="https://better-web.org" rel="noopener" class="text-xs text-gray-600 hover:text-blue-600">by Better Web</a>
+          </div>
         </div>
         <p class="text-gray-600 text-sm mb-4">A free encyclopedia of curated internet resources.</p>
         <div class="flex space-x-4">
@@ -40,12 +42,12 @@ Usage:
       </div>
 
       <div>
-        <h4 class="text-base font-medium text-gray-800 mb-4">Categories</h4>
+        {%- assign footer_lang = page.lang | default: 'en-US' %}
+        <h4 class="text-base font-medium text-gray-800 mb-4">{% if footer_lang == 'pt-BR' %}Categorias{% else %}Categories{% endif %}</h4>
         <ul class="space-y-2 text-sm">
-          {% for category in site.data.en.menu.en limit:6 %}
+          {% for category in site.data[footer_lang].menu %}
           <li><a href="{{ category.path }}"
-              class="text-gray-600 hover:text-blue-600 hover:underline transition-colors duration-200">{{ category.name
-              | capitalize }}</a></li>
+              class="text-gray-600 hover:text-blue-600 hover:underline transition-colors duration-200">{{ category.title }}</a></li>
           {% endfor %}
           <li class="pt-1"><a href="{% if page.lang == 'pt-BR' %}/pt-BR/categorias/{% else %}/en-US/categories/{% endif %}" class="text-blue-600 hover:underline text-xs flex items-center">View
               all categories <i class="fas fa-arrow-right ml-1 text-xs"></i></a></li>
@@ -271,7 +273,7 @@ Usage:
         if (btn && details && icon) {
           btn.addEventListener('click', function () {
             const isExpanded = btn.getAttribute('aria-expanded') === 'true';
-            btn.setAttribute('aria-expanded', !isExpanded);
+            btn.setAttribute('aria-expanded', String(!isExpanded));
             details.classList.toggle('hidden');
             icon.style.transform = isExpanded ? 'rotate(0deg)' : 'rotate(180deg)';
           });

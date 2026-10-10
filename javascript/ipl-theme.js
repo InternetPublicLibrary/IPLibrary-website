@@ -1,129 +1,45 @@
 /*
- * Appearance control (System / Light / Dark) — spec 001 AC8.
- * The inline snippet in head.html applies a stored choice before first paint; this file wires the control.
+ * Dark mode toggle — spec 001 AC8. Light is the default; dark applies only by explicit choice.
+ * The inline snippet in head.html applies a stored choice before first paint; this file wires the toggle.
  *
- * Markup contract (rendered by the shell, slice S2):
- *   <div data-ipl-appearance>
- *     <button type="button" aria-haspopup="menu" aria-expanded="false" aria-controls="ipl-appearance-menu"
- *             data-ipl-appearance-toggle>…<span class="ipl-visually-hidden">Appearance</span></button>
- *     <ul id="ipl-appearance-menu" role="menu" hidden>
- *       <li role="none"><button type="button" role="menuitemradio" aria-checked="false" data-theme-value="system">System</button></li>
- *       <li role="none"><button type="button" role="menuitemradio" aria-checked="false" data-theme-value="light">Light</button></li>
- *       <li role="none"><button type="button" role="menuitemradio" aria-checked="false" data-theme-value="dark">Dark</button></li>
- *     </ul>
- *   </div>
- *
- * Fires `ipl:themechange` on document with detail { choice, theme } so embeds (discussion) can follow.
+ * Markup contract: <button type="button" data-ipl-theme-toggle aria-pressed="false">Dark mode</button>
+ * The label stays fixed; aria-pressed carries the on/off state (WAI-ARIA toggle button pattern).
+ * Fires `ipl:themechange` on document with detail { theme } so embeds (discussion) can follow.
  */
 (function () {
   'use strict';
 
   var STORAGE_KEY = 'ipl-theme';
-  var CHOICES = ['system', 'light', 'dark'];
-  var systemDark = window.matchMedia ? window.matchMedia('(prefers-color-scheme: dark)') : null;
 
-  function readChoice() {
-    try {
-      var stored = localStorage.getItem(STORAGE_KEY);
-      return CHOICES.indexOf(stored) > -1 ? stored : 'system';
-    } catch (error) {
-      return 'system';
-    }
+  function current() {
+    return document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'light';
   }
 
-  function effectiveTheme(choice) {
-    if (choice === 'light' || choice === 'dark') return choice;
-    return systemDark && systemDark.matches ? 'dark' : 'light';
-  }
-
-  function apply(choice) {
-    var root = document.documentElement;
-    if (choice === 'system') root.removeAttribute('data-theme');
-    else root.setAttribute('data-theme', choice);
+  function apply(theme) {
+    document.documentElement.setAttribute('data-theme', theme);
     try {
-      if (choice === 'system') localStorage.removeItem(STORAGE_KEY);
-      else localStorage.setItem(STORAGE_KEY, choice);
+      localStorage.setItem(STORAGE_KEY, theme);
     } catch (error) { /* storage unavailable: the choice lasts for this page only */ }
-    document.dispatchEvent(new CustomEvent('ipl:themechange', {
-      detail: { choice: choice, theme: effectiveTheme(choice) },
-    }));
+    document.dispatchEvent(new CustomEvent('ipl:themechange', { detail: { theme: theme } }));
   }
 
-  function setup(control) {
-    var toggle = control.querySelector('[data-ipl-appearance-toggle]');
-    var menu = document.getElementById(toggle && toggle.getAttribute('aria-controls'));
-    if (!toggle || !menu) return;
-    var items = Array.prototype.slice.call(menu.querySelectorAll('[role="menuitemradio"]'));
-
-    function sync(choice) {
-      items.forEach(function (item) {
-        item.setAttribute('aria-checked', String(item.getAttribute('data-theme-value') === choice));
-      });
-    }
-
-    function open(focusIndex) {
-      menu.hidden = false;
-      toggle.setAttribute('aria-expanded', 'true');
-      var checked = items.findIndex(function (item) { return item.getAttribute('aria-checked') === 'true'; });
-      var index = typeof focusIndex === 'number' ? focusIndex : Math.max(checked, 0);
-      items[(index + items.length) % items.length].focus();
-    }
-
-    function close(returnFocus) {
-      menu.hidden = true;
-      toggle.setAttribute('aria-expanded', 'false');
-      if (returnFocus) toggle.focus();
-    }
-
-    toggle.addEventListener('click', function () {
-      if (menu.hidden) open(); else close(false);
-    });
-
-    toggle.addEventListener('keydown', function (event) {
-      if (event.key === 'ArrowDown') { event.preventDefault(); open(); }
-      if (event.key === 'ArrowUp') { event.preventDefault(); open(items.length - 1); }
-    });
-
-    menu.addEventListener('keydown', function (event) {
-      var index = items.indexOf(document.activeElement);
-      if (event.key === 'ArrowDown') { event.preventDefault(); items[(index + 1) % items.length].focus(); }
-      else if (event.key === 'ArrowUp') { event.preventDefault(); items[(index - 1 + items.length) % items.length].focus(); }
-      else if (event.key === 'Home') { event.preventDefault(); items[0].focus(); }
-      else if (event.key === 'End') { event.preventDefault(); items[items.length - 1].focus(); }
-      else if (event.key === 'Escape') { event.preventDefault(); close(true); }
-      else if (event.key === 'Tab') { close(false); }
-    });
-
-    items.forEach(function (item) {
-      item.addEventListener('click', function () {
-        var choice = item.getAttribute('data-theme-value');
-        apply(choice);
-        sync(choice);
-        close(true);
-      });
-    });
-
-    document.addEventListener('click', function (event) {
-      if (!menu.hidden && !control.contains(event.target)) close(false);
-    });
-
-    sync(readChoice());
+  function sync(toggles) {
+    var dark = current() === 'dark';
+    toggles.forEach(function (toggle) { toggle.setAttribute('aria-pressed', String(dark)); });
   }
 
   function init() {
-    Array.prototype.forEach.call(document.querySelectorAll('[data-ipl-appearance]'), setup);
-    if (systemDark && systemDark.addEventListener) {
-      systemDark.addEventListener('change', function () {
-        if (readChoice() === 'system') {
-          document.dispatchEvent(new CustomEvent('ipl:themechange', {
-            detail: { choice: 'system', theme: effectiveTheme('system') },
-          }));
-        }
+    var toggles = Array.prototype.slice.call(document.querySelectorAll('[data-ipl-theme-toggle]'));
+    toggles.forEach(function (toggle) {
+      toggle.addEventListener('click', function () {
+        apply(current() === 'dark' ? 'light' : 'dark');
+        sync(toggles);
       });
-    }
+    });
+    sync(toggles);
   }
 
-  window.IPLTheme = { current: function () { return effectiveTheme(readChoice()); } };
+  window.IPLTheme = { current: current };
 
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
   else init();

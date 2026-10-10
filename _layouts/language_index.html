@@ -1,6 +1,28 @@
 ---
 layout: default
 ---
+{%- comment -%}
+Language home (spec 001, revised: evolve the existing layout, dense real content).
+All numbers are counted from _data at build time; nothing is invented.
+{%- endcomment -%}
+{%- assign lang = page.lang | default: 'en-US' -%}
+{%- assign pt = false -%}{%- if lang == 'pt-BR' -%}{%- assign pt = true -%}{%- endif -%}
+{%- assign menu = site.data[lang].menu -%}
+{%- assign search_path = '/en-US/search/' -%}{%- if pt -%}{%- assign search_path = '/pt-BR/busca/' -%}{%- endif -%}
+{%- comment -%} Real resources only: the data still holds generated placeholders (example.com). {%- endcomment -%}
+{%- assign all_resources = '' | split: '' -%}
+{%- for folder in site.data[lang] -%}
+  {%- if folder[0] == 'menu' or folder[0] == 'translations' -%}{%- continue -%}{%- endif -%}
+  {%- for entry in folder[1] -%}
+    {%- if entry[1].first.url -%}{%- assign lists = entry[1] | where_exp: 'r', 'r.url' | group_by: 'url' -%}{%- for g in lists -%}{%- unless g.name contains 'example.com' -%}{%- assign all_resources = all_resources | push: g.items.first -%}{%- endunless -%}{%- endfor -%}
+    {%- else -%}{%- for file in entry[1] -%}{%- if file[1].first.url -%}{%- assign lists = file[1] | where_exp: 'r', 'r.url' | group_by: 'url' -%}{%- for g in lists -%}{%- unless g.name contains 'example.com' -%}{%- assign all_resources = all_resources | push: g.items.first -%}{%- endunless -%}{%- endfor -%}{%- endif -%}{%- endfor -%}{%- endif -%}
+  {%- endfor -%}
+{%- endfor -%}
+{%- assign subcategory_total = 0 -%}{%- assign section_total = 0 -%}
+{%- for category in menu -%}
+  {%- assign subcategory_total = subcategory_total | plus: category.children.size -%}
+  {%- for subcategory in category.children -%}{%- assign section_total = section_total | plus: subcategory.children.size -%}{%- endfor -%}
+{%- endfor -%}
 
 <div class="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50">
   <!-- Wikipedia-style Header -->
@@ -11,69 +33,58 @@ layout: default
         <!-- Main Title Section -->
         <div class="text-center mb-8">
           <div class="flex items-center justify-center mb-4">
-            <div class="p-3 bg-gradient-to-br from-blue-600 to-purple-600 rounded-2xl shadow-lg">
-              <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                  d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253">
-                </path>
-              </svg>
-            </div>
+            {% include components/atoms/brand-mark.html size="64" id_suffix="hero" %}
           </div>
           <h1
             class="text-4xl md:text-5xl lg:text-6xl font-bold bg-gradient-to-r from-slate-900 via-blue-900 to-purple-900 bg-clip-text text-transparent mb-4">
             Internet Public Library
           </h1>
-          <div class="text-sm text-slate-500 mb-2">{{ page.lang }}</div>
-          <h2 class="text-xl md:text-2xl text-slate-700 mb-6 max-w-4xl mx-auto leading-relaxed">
+          <p class="text-xl md:text-2xl text-slate-700 mb-6 max-w-4xl mx-auto leading-relaxed">
             {{ page.description }}
-          </h2>
+          </p>
 
-          <!-- Real-time Stats Bar -->
-          <div class="flex flex-wrap justify-center gap-6 md:gap-8 mb-8">
+          <!-- Library facts, counted from _data at build time -->
+          <dl class="flex flex-wrap justify-center gap-6 md:gap-10 mb-8">
             <div class="text-center">
-              <div class="text-2xl md:text-3xl font-bold text-blue-600">{{ site.data[page.lang].menu | map: 'children' |
-                flatten | size | default: 50 }}+</div>
-              <div class="text-sm text-slate-600">{% if page.lang == 'pt-BR' %}Recursos{% else %}Resources{% endif %}
-              </div>
+              <dd class="text-2xl md:text-3xl font-bold text-blue-600">{{ all_resources.size }}</dd>
+              <dt class="text-sm text-slate-600">{% if pt %}Recursos selecionados{% else %}Curated resources{% endif %}</dt>
             </div>
             <div class="text-center">
-              <div class="text-2xl md:text-3xl font-bold text-green-600">5,000+</div>
-              <div class="text-sm text-slate-600">{% if page.lang == 'pt-BR' %}Contribuidores{% else %}Contributors{%
-                endif %}</div>
+              <dd class="text-2xl md:text-3xl font-bold text-green-600">{{ menu.size }}</dd>
+              <dt class="text-sm text-slate-600">{% if pt %}Categorias{% else %}Categories{% endif %}</dt>
             </div>
             <div class="text-center">
-              <div class="text-2xl md:text-3xl font-bold text-purple-600">{{ site.languages.size | default: 2 }}</div>
-              <div class="text-sm text-slate-600">{% if page.lang == 'pt-BR' %}Idiomas{% else %}Languages{% endif %}
-              </div>
+              <dd class="text-2xl md:text-3xl font-bold text-purple-600">{{ subcategory_total }}</dd>
+              <dt class="text-sm text-slate-600">{% if pt %}Subcategorias{% else %}Subcategories{% endif %}</dt>
             </div>
             <div class="text-center">
-              <div class="text-2xl md:text-3xl font-bold text-orange-600">{{ 'now' | date: '%d' }}</div>
-              <div class="text-sm text-slate-600">{% if page.lang == 'pt-BR' %}Edições Hoje{% else %}Edits Today{% endif
-                %}</div>
+              <dd class="text-2xl md:text-3xl font-bold text-orange-600">{{ section_total }}</dd>
+              <dt class="text-sm text-slate-600">{% if pt %}Seções{% else %}Sections{% endif %}</dt>
             </div>
-          </div>
+            <div class="text-center">
+              <dd class="text-2xl md:text-3xl font-bold text-blue-600">{{ site.languages.size | default: 2 }}</dd>
+              <dt class="text-sm text-slate-600">{% if pt %}Idiomas{% else %}Languages{% endif %}</dt>
+            </div>
+          </dl>
         </div>
 
         <!-- Search Section -->
-        <div class="max-w-2xl mx-auto mb-8">
-          <div class="relative">
-            <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-              <svg class="h-5 w-5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                  d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
-              </svg>
+        <search class="block max-w-2xl mx-auto mb-8">
+          <form method="get" action="{{ search_path }}" class="relative flex gap-2">
+            <label for="main-search" class="ipl-visually-hidden">{% if pt %}Pesquisar na biblioteca{% else %}Search the library{% endif %}</label>
+            <div class="relative flex-1">
+              <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                <i class="fas fa-search text-slate-500" aria-hidden="true"></i>
+              </div>
+              <input type="search" name="q" id="main-search"
+                placeholder="{% if pt %}Pesquise um tema, site ou livro...{% else %}Search for a topic, site or book...{% endif %}"
+                class="w-full pl-12 pr-4 py-4 text-lg border-2 border-slate-200 rounded-2xl focus:border-blue-500 focus:outline-none focus:ring-4 focus:ring-blue-500/20 transition-all duration-200 bg-white shadow-sm">
             </div>
-            <input type="text" id="main-search"
-              placeholder="{% if page.lang == 'pt-BR' %}Pesquisar IPL...{% else %}Search IPL...{% endif %}"
-              class="w-full pl-12 pr-4 py-4 text-lg border-2 border-slate-200 rounded-2xl focus:border-blue-500 focus:outline-none focus:ring-4 focus:ring-blue-500/20 transition-all duration-200 bg-white shadow-sm"
-              hx-get="/api/search" hx-trigger="keyup changed delay:300ms" hx-target="#search-results"
-              hx-indicator="#search-spinner">
-            <div id="search-spinner" class="absolute right-4 top-1/2 transform -translate-y-1/2 htmx-indicator">
-              <div class="animate-spin h-5 w-5 border-2 border-blue-500 border-t-transparent rounded-full"></div>
-            </div>
-          </div>
-          <div id="search-results" class="mt-2"></div>
-        </div>
+            <button type="submit" class="px-6 rounded-2xl bg-blue-600 text-white font-semibold hover:bg-blue-700 transition-colors">
+              {% if pt %}Pesquisar{% else %}Search{% endif %}
+            </button>
+          </form>
+        </search>
 
         <!-- Quick Navigation -->
         <div class="flex flex-wrap justify-center gap-3 mb-8">
@@ -137,82 +148,100 @@ layout: default
           </div>
         </section>
 
-        <!-- Categories Section (Compact Wiki Style) -->
-        <section class="mb-8">
-          <h2 class="text-3xl font-bold text-slate-900 mb-6">
-            {% if page.lang == 'pt-BR' %}Navegar por Categoria{% else %}Browse by Category{% endif %}
+        <!-- Categories: every category with its subcategories and real counts -->
+        <section class="mb-8" aria-labelledby="browse-title">
+          <h2 id="browse-title" class="text-3xl font-bold text-slate-900 mb-6">
+            {% if pt %}Navegar por Categoria{% else %}Browse by Category{% endif %}
           </h2>
 
-          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            {% assign current_lang = page.lang | default: "en-US" %}
-            {% assign menu_data = site.data[current_lang].menu %}
-            {% if menu_data %}
-            {% for category in menu_data limit: 6 %}
-            <article
-              class="group relative bg-white rounded-xl shadow-sm border border-slate-200 hover:shadow-lg hover:border-blue-300 transition-all duration-300 overflow-hidden">
-              <div class="relative p-6">
-                <header class="flex items-center mb-3">
-                  <div
-                    class="flex-shrink-0 w-10 h-10 bg-gradient-to-br from-blue-500 to-blue-600 rounded-lg flex items-center justify-center shadow-sm">
-                    <i class="fas fa-folder text-white text-sm"></i>
-                  </div>
-                  <div class="ml-3 flex-1">
-                    <h3
-                      class="text-lg font-semibold text-slate-900 group-hover:text-blue-600 transition-colors duration-200">
-                      {{ category.title }}
-                    </h3>
-                    <p class="text-xs text-slate-500">
-                      {% if category.children %}{{ category.children.size }}{% else %}0{% endif %}
-                      {% if current_lang == "pt-BR" %}subcategorias{% else %}subcategories{% endif %}
-                    </p>
-                  </div>
-                </header>
-
-                <footer class="flex items-center justify-between">
-                  <span class="text-xs text-slate-500">
-                    {% if current_lang == "pt-BR" %}recursos{% else %}resources{% endif %}
-                  </span>
-                  <a href="{{ category.path }}"
-                    class="inline-flex items-center text-blue-600 hover:text-blue-800 font-medium text-sm group-hover:translate-x-1 transition-all duration-200">
-                    {% if current_lang == "pt-BR" %}Explorar{% else %}Explore{% endif %}
-                    <svg class="w-3 h-3 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                        d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
-                    </svg>
-                  </a>
-                </footer>
-              </div>
+          <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
+            {%- for category in menu %}
+            {%- assign data_key = category.path | split: '/' | last -%}
+            {%- assign category_resources = 0 -%}
+            {%- for entry in site.data[lang][data_key] -%}
+              {%- if entry[1].first.url -%}{%- for r in entry[1] -%}{%- if r.url and r.url contains 'example.com' -%}{%- elsif r.url -%}{%- assign category_resources = category_resources | plus: 1 -%}{%- endif -%}{%- endfor -%}
+              {%- else -%}{%- for file in entry[1] -%}{%- if file[1].first.url -%}{%- for r in file[1] -%}{%- if r.url and r.url contains 'example.com' -%}{%- elsif r.url -%}{%- assign category_resources = category_resources | plus: 1 -%}{%- endif -%}{%- endfor -%}{%- endif -%}{%- endfor -%}{%- endif -%}
+            {%- endfor -%}
+            {%- assign category_sections = 0 -%}
+            {%- for subcategory in category.children -%}{%- assign category_sections = category_sections | plus: subcategory.children.size -%}{%- endfor %}
+            <article class="bg-white rounded-xl shadow-sm border border-slate-200 hover:border-blue-300 hover:shadow-md transition-all duration-200 p-5 flex flex-col">
+              <header class="flex items-center mb-3">
+                <div class="flex-shrink-0 w-10 h-10 bg-gradient-to-br from-blue-500 to-purple-500 rounded-lg flex items-center justify-center shadow-sm">
+                  <i class="fas fa-folder text-white text-sm" aria-hidden="true"></i>
+                </div>
+                <div class="ml-3 flex-1 min-w-0">
+                  <h3 class="text-lg font-semibold text-slate-900">
+                    <a href="{{ category.path }}" class="hover:text-blue-600">{{ category.title }}</a>
+                  </h3>
+                  <p class="text-xs text-slate-600">
+                    {{ category.children.size }} {% if pt %}subcategorias{% else %}subcategories{% endif %}{% if category_sections > 0 %} · {{ category_sections }} {% if pt %}seções{% else %}sections{% endif %}{% endif %}{% if category_resources > 0 %} · {{ category_resources }} {% if pt %}recursos{% else %}resources{% endif %}{% endif %}
+                  </p>
+                </div>
+              </header>
+              {%- if category.children.size > 0 %}
+              <ul class="flex flex-wrap gap-1.5 mb-3" role="list">
+                {%- for subcategory in category.children limit: 8 %}
+                <li><a href="{{ subcategory.path }}" class="inline-flex items-center min-h-6 px-2.5 py-1 text-xs rounded-full bg-blue-50 text-blue-700 hover:bg-blue-100">{{ subcategory.title }}</a></li>
+                {%- endfor %}
+              </ul>
+              {%- endif %}
+              <a href="{{ category.path }}" class="mt-auto inline-flex items-center text-blue-600 hover:text-blue-800 font-medium text-sm">
+                {% if pt %}Explorar {{ category.title }}{% else %}Explore {{ category.title }}{% endif %}{% if category.children.size > 8 %} ({{ category.children.size }}){% endif %}
+                <i class="fas fa-arrow-right text-xs ml-1" aria-hidden="true"></i>
+              </a>
             </article>
-            {% endfor %}
-            {% endif %}
+            {%- endfor %}
           </div>
         </section>
+
+        <!-- Every section as a direct entry point -->
+        {%- if section_total > 0 %}
+        <section class="mb-8 bg-white rounded-2xl shadow-sm border border-slate-200 p-6" aria-labelledby="sections-title">
+          <h2 id="sections-title" class="text-xl font-bold text-slate-900 mb-1">
+            {% if pt %}Todas as seções{% else %}All sections{% endif %}
+          </h2>
+          <p class="text-sm text-slate-600 mb-4">{% if pt %}Acesso direto aos {{ section_total }} temas mais específicos da biblioteca.{% else %}Jump straight to the library's {{ section_total }} most specific topics.{% endif %}</p>
+          <ul class="flex flex-wrap gap-2" role="list">
+            {%- for category in menu %}{%- for subcategory in category.children %}{%- for section in subcategory.children %}
+            <li><a href="{{ section.path }}" class="inline-flex items-center min-h-6 px-3 py-1 text-sm rounded-lg border border-slate-200 text-slate-700 hover:border-blue-300 hover:text-blue-700" title="{{ category.title }} › {{ subcategory.title }}">{{ section.title }}</a></li>
+            {%- endfor %}{%- endfor %}{%- endfor %}
+          </ul>
+        </section>
+        {%- endif %}
       </div>
 
       <!-- Sidebar (Wiki Style) -->
       <div class="lg:col-span-1 space-y-6">
 
-        <!-- Today's Featured Resource -->
+        <!-- Resource of the day: a real curated resource, rotated by build date -->
+        {%- if all_resources.size > 0 -%}
+        {%- assign day = site.time | date: '%j' | plus: 0 -%}
+        {%- assign pick = day | modulo: all_resources.size -%}
+        {%- assign featured = all_resources[pick] %}
         <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-6">
-          <h3 class="text-lg font-semibold text-slate-900 mb-4 flex items-center">
-            <i class="fas fa-calendar-day text-blue-600 mr-2"></i>
-            {% if page.lang == 'pt-BR' %}Recurso do Dia{% else %}Today's Resource{% endif %}
-          </h3>
-          <div class="space-y-3">
-            <div class="p-3 bg-blue-50 rounded-lg">
-              <h4 class="font-medium text-slate-900 mb-1">Modern CSS Grid</h4>
-              <p class="text-sm text-slate-600">Complete guide to CSS Grid layout system</p>
-              <a href="#" class="text-xs text-blue-600 hover:text-blue-800">View resource →</a>
-            </div>
+          <h2 class="text-lg font-semibold text-slate-900 mb-4 flex items-center">
+            <i class="fas fa-calendar-day text-blue-600 mr-2" aria-hidden="true"></i>
+            {% if pt %}Recurso do Dia{% else %}Resource of the Day{% endif %}
+          </h2>
+          <div class="p-3 bg-blue-50 rounded-lg">
+            <h3 class="font-medium text-slate-900 mb-1">{{ featured.name | default: featured.title }}</h3>
+            {%- if featured.description %}<p class="text-sm text-slate-600 mb-2">{{ featured.description | truncate: 140 }}</p>{% endif %}
+            <a href="{{ featured.url }}" rel="noopener" class="text-sm text-blue-700 hover:text-blue-800 font-medium">
+              {{ featured.url | split: '//' | last | split: '/' | first | remove_first: 'www.' }} <i class="fas fa-external-link-alt text-xs" aria-hidden="true"></i>
+            </a>
           </div>
+          <a href="/{{ lang }}/random-resource/" class="inline-block mt-3 text-sm text-blue-600 hover:text-blue-800">
+            {% if pt %}Outro recurso aleatório →{% else %}Another random resource →{% endif %}
+          </a>
         </div>
+        {%- endif %}
 
         <!-- Recent Activity (Dynamic - GitHub Commits) -->
         <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-6">
-          <h3 class="text-lg font-semibold text-slate-900 mb-4 flex items-center">
+          <h2 class="text-lg font-semibold text-slate-900 mb-4 flex items-center">
             <i class="fab fa-github text-slate-800 mr-2"></i>
             {% if page.lang == 'pt-BR' %}Commits Recentes{% else %}Recent Commits{% endif %}
-          </h3>
+          </h2>
           <div id="recent-changes-content" class="space-y-2">
             <!-- Dynamic content loaded by JavaScript -->
             <div class="animate-pulse space-y-2">
@@ -229,10 +258,10 @@ layout: default
 
         <!-- Community Portal -->
         <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-6">
-          <h3 class="text-lg font-semibold text-slate-900 mb-4 flex items-center">
+          <h2 class="text-lg font-semibold text-slate-900 mb-4 flex items-center">
             <i class="fas fa-users text-purple-600 mr-2"></i>
             {% if page.lang == 'pt-BR' %}Portal da Comunidade{% else %}Community Portal{% endif %}
-          </h3>
+          </h2>
           <div class="space-y-3">
             <a href="{% if page.lang == 'pt-BR' %}/pt-BR/contribuir/{% else %}/en-US/contribute/{% endif %}"
               class="block p-3 bg-purple-50 rounded-lg hover:bg-purple-100 transition-colors">
@@ -253,9 +282,9 @@ layout: default
 
         <!-- Quick Links -->
         <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-6">
-          <h3 class="text-lg font-semibold text-slate-900 mb-4">
+          <h2 class="text-lg font-semibold text-slate-900 mb-4">
             {% if page.lang == 'pt-BR' %}Links Rápidos{% else %}Quick Links{% endif %}
-          </h3>
+          </h2>
           <div class="space-y-2">
             <a href="{% if page.lang == 'pt-BR' %}/pt-BR/sobre/{% else %}/en-US/about/{% endif %}"
               class="block text-sm text-blue-600 hover:text-blue-800">{% if page.lang == 'pt-BR' %}Sobre{% else

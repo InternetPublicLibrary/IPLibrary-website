@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ page.lang | default: site.lang | default: " en" }}">
+<html lang="{{ page.lang | default: site.lang | default: "en" }}">
 
 <head>
   <meta charset="UTF-8">
@@ -24,7 +24,7 @@
   {% include components/organisms/header.html %}
 
   <!-- Main content -->
-  <main class="flex-grow">
+  <main id="main-content" tabindex="-1" class="flex-grow">
     {{ content }}
   </main>
 
