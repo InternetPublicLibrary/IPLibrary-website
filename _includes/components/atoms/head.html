@@ -9,10 +9,20 @@ description=page.description
 
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+{%- comment -%} Resolve the explicit appearance choice before first paint (spec 001 AC8). {%- endcomment %}
+<script>
+  (function () {
+    try {
+      var theme = localStorage.getItem('ipl-theme');
+      if (theme === 'light' || theme === 'dark') document.documentElement.setAttribute('data-theme', theme);
+    } catch (error) { /* storage unavailable: follow the system preference */ }
+  })();
+</script>
 <title>{% if include.title %}{{ include.title }} - {% endif %}{{ site.title | default: "Internet Public Library" }}
 </title>
 <meta name="description" content="{{ include.description | default: site.description }}">
-<meta name="theme-color" content="#2563eb">
+<meta name="theme-color" content="#F7F9FA" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#151C22" media="(prefers-color-scheme: dark)">
 
 <!-- Canonical URL -->
 <link rel="canonical" href="{{ site.url }}{{ page.url | replace: 'index.html', '' }}">
@@ -60,7 +70,7 @@ description=page.description
   "name": "Internet Public Library",
   "alternateName": "IPL",
   "url": "{{ site.url | default: 'https://ipl.better-web.org' }}",
-  "logo": "{{ site.url | default: 'https://ipl.better-web.org' }}/images/logo.png",
+  "logo": "{{ site.url | default: 'https://ipl.better-web.org' }}/images/ipl-logo-512.png",
   "description": "{{ site.description | default: 'A free encyclopedia of curated internet resources' }}",
   "sameAs": [
     "https://github.com/InternetPublicLibrary",
@@ -117,83 +127,25 @@ description=page.description
 <link rel="icon" href="/images/favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
 
-<!-- Tailwind CSS -->
+<!-- Design System v1.0 (spec 001). base.css declares the lowest cascade layer, so it must load
+     before the legacy Tailwind runtime; v1 components are unlayered and win (ADR 0001). -->
+<link rel="preload" href="/assets/fonts/source-sans-3-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/fonts/source-serif-4-latin-600-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/assets/css/tokens.css">
+<link rel="stylesheet" href="/assets/css/base.css">
+<link rel="stylesheet" href="/assets/css/primitives.css">
+<link rel="stylesheet" href="/assets/css/shell.css">
+<link rel="stylesheet" href="/assets/css/discovery.css">
+<link rel="stylesheet" href="/assets/css/article.css">
+<link rel="stylesheet" href="/assets/css/interactions.css">
+<script src="/javascript/ipl-theme.js" defer></script>
+
+<!-- Legacy compatibility shim for pages not yet migrated to v1 (removal tracked in spec 001). -->
 <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-
-<!-- Font Awesome -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
-<!-- Custom Fonts and Responsive Styles -->
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
-
-  body {
-    font-family: 'Inter', sans-serif;
-  }
-
-  /* Responsive Media Queries */
-  @media screen and (max-width: 640px) {
-    .container {
-      padding-left: 1rem;
-      padding-right: 1rem;
-    }
-  }
-
-  @media screen and (min-width: 641px) and (max-width: 768px) {
-    .container {
-      padding-left: 1.5rem;
-      padding-right: 1.5rem;
-    }
-  }
-
-  @media screen and (min-width: 769px) and (max-width: 1024px) {
-    .container {
-      padding-left: 2rem;
-      padding-right: 2rem;
-    }
-  }
-
-  @media screen and (min-width: 1025px) {
-    .container {
-      max-width: 1280px;
-      margin: 0 auto;
-    }
-  }
-
   @media print {
-    .no-print {
-      display: none !important;
-    }
-  }
-</style>
-
-<!-- Custom CSS -->
-<style>
-  /* Custom scrollbar */
-  ::-webkit-scrollbar {
-    width: 8px;
-    height: 8px;
-  }
-
-  ::-webkit-scrollbar-track {
-    background: #f1f1f1;
-    border-radius: 10px;
-  }
-
-  ::-webkit-scrollbar-thumb {
-    background: #c1c1c1;
-    border-radius: 10px;
-  }
-
-  ::-webkit-scrollbar-thumb:hover {
-    background: #a8a8a8;
-  }
-
-  /* Smooth transitions */
-  * {
-    transition-property: background-color, border-color, color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
-    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-    transition-duration: 150ms;
+    .no-print { display: none !important; }
   }
 </style>
 

@@ -1,6 +1,26 @@
-<button type="{{ include.type | default: 'button' }}"
-  class="px-4 py-2 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 transition-colors {{ include.class }}"
-  {% if include.id %}id="{{ include.id }}" {% endif %} {% if include.onclick %}onclick="{{ include.onclick }}" {% endif
-  %}>
-  {{ include.text }}
-</button>
+{%- comment -%}
+Button (spec 001) — the only button. Renders <a> when href is given, <button> otherwise.
+Usage: {% include components/atoms/button.html text="Search" variant="primary" icon="search" %}
+Params:
+  text     (required) visible label; for icon-only buttons pass `label` and `icon_only="true"`
+  variant  primary | secondary (default) | tertiary
+  href     optional; renders a link styled as a button
+  type     button (default) | submit | reset — ignored for links
+  icon     optional icon name (see atoms/icon.html), shown before the text
+  icon_only optional "true": hides the text visually (still announced)
+  id, class, onclick, aria_controls, aria_expanded  optional pass-through
+{%- endcomment -%}
+{%- assign ipl_btn_class = 'ipl-button' -%}
+{%- if include.variant == 'primary' -%}{%- assign ipl_btn_class = ipl_btn_class | append: ' ipl-button--primary' -%}
+{%- elsif include.variant == 'tertiary' -%}{%- assign ipl_btn_class = ipl_btn_class | append: ' ipl-button--tertiary' -%}{%- endif -%}
+{%- if include.icon_only == 'true' -%}{%- assign ipl_btn_class = ipl_btn_class | append: ' ipl-button--icon' -%}{%- endif -%}
+{%- if include.class -%}{%- assign ipl_btn_class = ipl_btn_class | append: ' ' | append: include.class -%}{%- endif -%}
+{%- capture ipl_btn_body -%}
+{%- if include.icon -%}{% include components/atoms/icon.html name=include.icon %}{%- endif -%}
+{%- if include.icon_only == 'true' -%}<span class="ipl-visually-hidden">{{ include.text }}</span>{%- else -%}<span>{{ include.text }}</span>{%- endif -%}
+{%- endcapture -%}
+{%- if include.href -%}
+<a class="{{ ipl_btn_class }}" href="{{ include.href }}"{% if include.id %} id="{{ include.id }}"{% endif %}>{{ ipl_btn_body }}</a>
+{%- else -%}
+<button type="{{ include.type | default: 'button' }}" class="{{ ipl_btn_class }}"{% if include.id %} id="{{ include.id }}"{% endif %}{% if include.onclick %} onclick="{{ include.onclick }}"{% endif %}{% if include.aria_controls %} aria-controls="{{ include.aria_controls }}"{% endif %}{% if include.aria_expanded %} aria-expanded="{{ include.aria_expanded }}"{% endif %}>{{ ipl_btn_body }}</button>
+{%- endif -%}
