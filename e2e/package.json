@@ -1,0 +1,17 @@
+{
+  "name": "iplibrary-e2e",
+  "private": true,
+  "description": "End-to-end browser tests for the IPLibrary website (Playwright)",
+  "type": "module",
+  "packageManager": "yarn@4.9.2",
+  "scripts": {
+    "test": "playwright test",
+    "test:headed": "playwright test --headed",
+    "report": "playwright show-report",
+    "install:browsers": "playwright install chromium"
+  },
+  "devDependencies": {
+    "@axe-core/playwright": "^4.13.0",
+    "@playwright/test": "^1.64.0"
+  }
+}
