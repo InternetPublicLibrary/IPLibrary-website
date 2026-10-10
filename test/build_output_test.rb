@@ -62,6 +62,9 @@ class BuildOutputTest < Minitest::Test
       refute_nil entry, "#{title} not indexed for #{lang}"
       assert entry['url'].start_with?("/#{lang}/"), entry['url']
       refute index.any? { |item| item['url'].to_s.include?('example.com') }, 'placeholder resources indexed'
+      # The search pages render these fields with innerHTML: they must be inert text and safe URLs.
+      refute index.any? { |item| "#{item['title']}#{item['description']}#{item['category']}".match?(/[<>]/) }, 'unescaped HTML in index'
+      assert index.all? { |item| item['url'].to_s.match?(%r{\A(https?://|/)}) }, 'unsafe URL scheme in index'
     end
   end
 

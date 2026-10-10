@@ -1,4 +1,5 @@
 require 'json'
+require 'cgi'
 require 'digest'
 require 'fileutils'
 
@@ -7,6 +8,22 @@ module Jekyll
     safe true
     priority :low  # Run after all other generators
     
+    SAFE_URL = %r{\A(https?://[^\s]+|/(?!/)[^\s]*)\z}.freeze
+
+    # The search pages insert index fields with innerHTML: escape text, allow only http(s) or
+    # site-relative URLs. Returns nil for entries that cannot be made safe.
+    def self.safe_entry(entry)
+      url = entry['url'].to_s.strip
+      return nil unless url.match?(SAFE_URL)
+
+      entry.merge(
+        'url' => url,
+        'title' => CGI.escapeHTML(entry['title'].to_s),
+        'description' => CGI.escapeHTML(entry['description'].to_s),
+        'category' => CGI.escapeHTML(entry['category'].to_s)
+      )
+    end
+
     def generate(site)
       puts "Starting SearchIndexGenerator..."
       @site = site
@@ -114,7 +131,7 @@ module Jekyll
       end
 
       page = Jekyll::PageWithoutAFile.new(@site, @site.source, File.join('api', lang_code), 'search-index.json')
-      page.content = JSON.generate(entries)
+      page.content = JSON.generate(entries.filter_map { |entry| self.class.safe_entry(entry) })
       page.data = { 'layout' => nil, 'sitemap' => false, 'render_with_liquid' => false }
       @site.pages << page
     end

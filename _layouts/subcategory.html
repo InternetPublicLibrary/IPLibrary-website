@@ -195,10 +195,10 @@ layout: default
                                                 <ul class="divide-y divide-gray-100" role="list">
                                                         {%- for resource in listed %}
                                                         <li class="px-5 py-3">
-                                                                <a href="{{ resource.url }}" rel="noopener" class="font-medium text-gray-900 hover:text-blue-600">{{ resource.name }}</a>
+                                                                <a href="{{ resource.url }}" rel="noopener" class="font-medium text-gray-900 hover:text-blue-600">{{ resource.name | escape }}</a>
                                                                 <span class="text-xs text-gray-600 ml-1">{{ resource.url | split: '//' | last | split: '/' | first | remove_first: 'www.' }}</span>
                                                                 {%- if resource.access %}<span class="ml-1 text-xs px-1.5 py-0.5 rounded bg-green-50 text-green-700">{{ resource.access }}</span>{% endif %}
-                                                                {%- if resource.description %}<p class="text-sm text-gray-600 mt-0.5">{{ resource.description }}</p>{% endif %}
+                                                                {%- if resource.description %}<p class="text-sm text-gray-600 mt-0.5">{{ resource.description | escape }}</p>{% endif %}
                                                         </li>
                                                         {%- endfor %}
                                                 </ul>

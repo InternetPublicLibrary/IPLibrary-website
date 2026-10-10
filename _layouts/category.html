@@ -248,11 +248,10 @@ layout: default
                                         <div>
                                             <div
                                                 class="font-medium text-gray-800 group-hover/item:text-blue-600 transition-colors">
-                                                {{ resource.name }}
+                                                {{ resource.name | escape }}
                                             </div>
                                             {% if resource.description %}
-                                            <p class="text-sm text-gray-600 mt-1">{{ resource.description
-                                                }}</p>
+                                            <p class="text-sm text-gray-600 mt-1">{{ resource.description | escape }}</p>
                                             {% endif %}
                                         </div>
                                     </a>
@@ -266,8 +265,8 @@ layout: default
                                 </summary>
                                 <ul class="space-y-4 mt-4">
                                     {% for resource in resources offset:5 %}
-                                    <li><a href="{{ resource.url }}" rel="noopener" class="font-medium text-gray-800 hover:text-blue-600">{{ resource.name }}</a>
-                                        {% if resource.description %}<p class="text-sm text-gray-600 mt-1">{{ resource.description }}</p>{% endif %}</li>
+                                    <li><a href="{{ resource.url }}" rel="noopener" class="font-medium text-gray-800 hover:text-blue-600">{{ resource.name | escape }}</a>
+                                        {% if resource.description %}<p class="text-sm text-gray-600 mt-1">{{ resource.description | escape }}</p>{% endif %}</li>
                                     {% endfor %}
                                 </ul>
                             </details>
