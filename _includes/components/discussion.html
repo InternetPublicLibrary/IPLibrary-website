@@ -229,8 +229,9 @@ This component automatically detects the current page language and loads the app
           {% endif %}
         </p>
 
+        {% assign issue_title = page.title | url_encode %}
         {% assign issue_url = "https://github.com/" | append: giscus_config.repo | append:
-        "/issues/new?template=content-issue.md&title=" | append: page.title | url_encode | append: "&labels=content,bug"
+        "/issues/new?template=content-issue.md&title=" | append: issue_title | append: "&labels=content,bug"
         %}
 
         {% if current_lang == "pt-BR" %}

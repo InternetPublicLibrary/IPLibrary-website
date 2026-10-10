@@ -1,6 +1,11 @@
 ---
 layout: default
 ---
+{% comment %} Sections outside the menu have no generated wiki page {% endcomment %}
+{% assign section_wiki_url = page.url | append: 'wiki/' %}
+{% assign section_wiki_pages = site.pages | where: 'url', section_wiki_url %}
+{% assign section_wiki_edit_url = section_wiki_url | append: '#edit-wiki' %}
+{% if section_wiki_pages.size == 0 %}{% assign section_wiki_url = '#wiki' %}{% assign section_wiki_edit_url = '#wiki' %}{% endif %}
 
 <div class="container mx-auto px-4 py-8">
   <div class="flex flex-col md:flex-row gap-8">
@@ -127,7 +132,7 @@ layout: default
                 <p class="text-sm text-green-600">Community knowledge</p>
               </div>
             </a>
-            <a href="{{ page.parent_section_path }}/wiki"
+            <a href="{{ section_wiki_url }}"
               class="flex items-center p-4 bg-purple-50 rounded-lg hover:bg-purple-100 transition">
               <i class="fas fa-edit text-purple-600 text-2xl mr-3"></i>
               <div>
@@ -173,7 +178,7 @@ layout: default
       <div id="wiki" class="bg-white rounded-lg shadow-md p-8 mb-8">
         <div class="flex items-center justify-between mb-6">
           <h2 class="text-2xl font-bold text-gray-800">Wiki</h2>
-          <a href="{{ page.parent_section_path }}/wiki" class="text-blue-600 hover:text-blue-800 flex items-center">
+          <a href="{{ section_wiki_url }}" class="text-blue-600 hover:text-blue-800 flex items-center">
             <i class="fas fa-external-link-alt mr-1"></i> Full Wiki
           </a>
         </div>
@@ -198,11 +203,11 @@ layout: default
         </div>
 
         <div class="flex justify-end">
-          <a href="{{ page.parent_section_path }}/wiki"
+          <a href="{{ section_wiki_url }}"
             class="inline-flex items-center px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">
             <i class="fas fa-book mr-2"></i> Read Full Wiki
           </a>
-          <a href="{{ page.parent_section_path }}/wiki#edit-wiki"
+          <a href="{{ section_wiki_edit_url }}"
             class="inline-flex items-center px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700 ml-3">
             <i class="fas fa-edit mr-2"></i> Edit Wiki
           </a>

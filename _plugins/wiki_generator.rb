@@ -97,7 +97,7 @@ module Jekyll
       end
       
       # Create the wiki page
-      page = Jekyll::PageWithoutAFile.new(@site, @site.source, "", page_path)
+      page = Jekyll::PageWithoutAFile.new(@site, @site.source, File.dirname(page_path), File.basename(page_path))
       page.content = generate_wiki_content(category, subcategory, section)
       page.data = {
         'layout' => 'wiki',
@@ -109,7 +109,7 @@ module Jekyll
         'parent_subcategory' => subcategory['title'],
         'parent_subcategory_path' => subcategory['path'],
         'parent_section' => section['title'],
-        'parent_section_path' => section_path,
+        'parent_section_path' => "/#{section_path}/",
         'description' => "Community wiki for #{section['title']}",
         'last_updated' => Time.now.strftime("%Y-%m-%d"),
         'editable' => true,
@@ -182,9 +182,15 @@ module Jekyll
         puts "Skipping already generated page: #{page_path}"
         return
       end
-      
+
+      # Never shadow a language home that exists as a real file
+      if %w[index.html index.md].any? { |name| File.exist?(File.join(@site.source, lang_code, name)) }
+        puts "Skipping physical page: #{page_path}"
+        return
+      end
+
       # Create a page
-      page = Jekyll::PageWithoutAFile.new(@site, @site.source, "", page_path)
+      page = Jekyll::PageWithoutAFile.new(@site, @site.source, File.dirname(page_path), File.basename(page_path))
       page.content = ""
       page.data = {
         'layout' => 'language_index',

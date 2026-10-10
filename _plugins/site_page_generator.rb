@@ -269,7 +269,8 @@ module Jekyll
         # Double-check pattern to avoid race conditions
         return if already_generated?(page_path)
         
-        page = Jekyll::PageWithoutAFile.new(@site, @site.source, "", page_path)
+        # Templates are Markdown: an .md name makes Jekyll convert them (output is still index.html)
+        page = Jekyll::PageWithoutAFile.new(@site, @site.source, File.dirname(page_path), File.basename(page_path, '.html') + '.md')
         page.content = content
         page.data = data
         

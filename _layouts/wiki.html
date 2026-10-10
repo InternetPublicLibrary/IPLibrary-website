@@ -88,7 +88,7 @@ layout: default
       <div class="flex items-center text-sm text-gray-600 mb-4">
         <a href="/" class="hover:underline">Home</a>
         <span class="mx-2">›</span>
-        <a href="/{{ page.lang }}/categories" class="hover:underline">Categories</a>
+        <a href="{% if page.lang == 'pt-BR' %}/pt-BR/categorias/{% else %}/en-US/categories/{% endif %}" class="hover:underline">{% if page.lang == 'pt-BR' %}Categorias{% else %}Categories{% endif %}</a>
         <span class="mx-2">›</span>
         <a href="{{ page.parent_category_path }}" class="hover:underline">{{ page.parent_category }}</a>
         <span class="mx-2">›</span>

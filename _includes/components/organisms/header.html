@@ -44,13 +44,13 @@ Usage:
   <div id="lang-options" class="hidden border-b border-gray-200 bg-gray-50">
     <div class="container mx-auto px-4 py-2">
       <div class="flex items-center justify-center gap-4">
-        <a href="/en-US{{ page.url | remove_first: page.lang | remove_first: '/' }}"
+        <a href="{% include lang-switch-url.html lang="en-US" %}{{ lang_switch_url }}"
           class="flex items-center gap-1.5 px-3 py-1 rounded-md text-xs transition-colors {% if page.lang == 'en-US' %}bg-blue-600 text-white{% else %}text-gray-600 hover:bg-gray-100{% endif %}">
           🇺🇸 English
           {% if page.lang == 'en-US' %}<i class="fas fa-check text-[10px] ml-0.5" aria-hidden="true"></i>{% endif %}
         </a>
         <span class="text-gray-300">|</span>
-        <a href="/pt-BR{{ page.url | remove_first: page.lang | remove_first: '/' }}"
+        <a href="{% include lang-switch-url.html lang="pt-BR" %}{{ lang_switch_url }}"
           class="flex items-center gap-1.5 px-3 py-1 rounded-md text-xs transition-colors {% if page.lang == 'pt-BR' %}bg-blue-600 text-white{% else %}text-gray-600 hover:bg-gray-100{% endif %}">
           🇧🇷 Português
           {% if page.lang == 'pt-BR' %}<i class="fas fa-check text-[10px] ml-0.5" aria-hidden="true"></i>{% endif %}
@@ -126,7 +126,7 @@ Usage:
           </a>
         </div>
         <div class="ml-auto flex">
-          <a href="{% if page.lang == 'pt-BR' %}/pt-BR/recurso-aleatorio/{% else %}/en-US/random-resource/{% endif %}"
+          <a href="{% if page.lang == 'pt-BR' %}/pt-BR/random-resource/{% else %}/en-US/random-resource/{% endif %}"
             class="px-4 py-2.5 border-l border-gray-200 text-sm hover:bg-white hover:text-blue-600 transition-colors duration-200">
             <i class="fas fa-random mr-1"></i>{% if page.lang == 'pt-BR' %}Aleatório{% else %}Random{% endif %}
           </a>
@@ -171,7 +171,7 @@ Usage:
         Changes{% endif %}
       </a>
 
-      <a href="{% if page.lang == 'pt-BR' %}/pt-BR/recurso-aleatorio/{% else %}/en-US/random-resource/{% endif %}"
+      <a href="{% if page.lang == 'pt-BR' %}/pt-BR/random-resource/{% else %}/en-US/random-resource/{% endif %}"
         class="flex items-center px-4 py-3 hover:bg-gray-50 border-b border-gray-100 hover:text-blue-600 transition-colors duration-200">
         <i class="fas fa-random w-6 text-gray-500"></i>{% if page.lang == 'pt-BR' %}Aleatório{% else %}Random Resource{%
         endif %}

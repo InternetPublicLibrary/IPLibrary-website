@@ -47,7 +47,7 @@ Usage:
               class="text-gray-600 hover:text-blue-600 hover:underline transition-colors duration-200">{{ category.name
               | capitalize }}</a></li>
           {% endfor %}
-          <li class="pt-1"><a href="/#categories" class="text-blue-600 hover:underline text-xs flex items-center">View
+          <li class="pt-1"><a href="{% if page.lang == 'pt-BR' %}/pt-BR/categorias/{% else %}/en-US/categories/{% endif %}" class="text-blue-600 hover:underline text-xs flex items-center">View
               all categories <i class="fas fa-arrow-right ml-1 text-xs"></i></a></li>
         </ul>
       </div>
@@ -106,9 +106,9 @@ Usage:
         <h4 class="text-sm font-medium text-gray-800 mb-3">{% if page.lang == 'pt-BR' %}Idiomas{% else %}Languages{%
           endif %}</h4>
         <div class="flex flex-wrap gap-4 text-sm">
-          <a href="/en-US{{ page.url | remove_first: page.lang | remove_first: '/' }}"
+          <a href="{% include lang-switch-url.html lang="en-US" %}{{ lang_switch_url }}"
             class="{% if page.lang == 'en-US' %}font-medium{% endif %} text-gray-600 hover:text-blue-600 hover:underline transition-colors duration-200">English</a>
-          <a href="/pt-BR{{ page.url | remove_first: page.lang | remove_first: '/' }}"
+          <a href="{% include lang-switch-url.html lang="pt-BR" %}{{ lang_switch_url }}"
             class="{% if page.lang == 'pt-BR' %}font-medium{% endif %} text-gray-600 hover:text-blue-600 hover:underline transition-colors duration-200">Português</a>
           <a href="{% if page.lang == 'pt-BR' %}/pt-BR/adicionar-idioma{% else %}/en-US/add-language{% endif %}"
             class="text-blue-600 hover:underline text-xs flex items-center">{% if page.lang == 'pt-BR' %}Adicionar seu
