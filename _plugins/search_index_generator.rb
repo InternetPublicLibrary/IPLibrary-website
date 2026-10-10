@@ -80,10 +80,64 @@ module Jekyll
       output_path = File.join(@site.dest, 'api', 'search', "#{lang_code}.json")
       FileUtils.mkdir_p(File.dirname(output_path))
       File.write(output_path, JSON.generate(search_data))
+
+      # The search pages fetch /api/<lang>/search-index.json. Files written straight into _site are
+      # removed by Jekyll's cleanup, so publish the flat index as a page of the site instead.
+      publish_flat_index(lang_code, lang_data['menu'])
       
       puts "Generated search index for #{lang_code}: #{search_data['total_entries']} entries"
     end
     
+    # Flat list consumed by en-US/search.html and pt-BR/busca.html: [{title, description, category, url, type}]
+    def publish_flat_index(lang_code, menu)
+      entries = []
+      menu.each do |category|
+        entries << { 'title' => category['title'], 'url' => category['path'], 'type' => 'category',
+                     'category' => category['title'], 'description' => '' }
+        (category['children'] || []).each do |subcategory|
+          entries << { 'title' => subcategory['title'], 'url' => subcategory['path'], 'type' => 'subcategory',
+                       'category' => category['title'], 'description' => '' }
+          (subcategory['children'] || []).each do |section|
+            entries << { 'title' => section['title'], 'url' => section['path'], 'type' => 'section',
+                         'category' => "#{category['title']} › #{subcategory['title']}", 'description' => '' }
+          end
+        end
+      end
+      seen = {}
+      each_real_resource(@site.data[lang_code]) do |resource, trail|
+        key = resource['name'].to_s.downcase
+        next if key.empty? || seen[key]
+
+        seen[key] = true
+        entries << { 'title' => resource['name'], 'url' => resource['url'], 'type' => 'resource',
+                     'category' => trail, 'description' => resource['description'].to_s }
+      end
+
+      page = Jekyll::PageWithoutAFile.new(@site, @site.source, File.join('api', lang_code), 'search-index.json')
+      page.content = JSON.generate(entries)
+      page.data = { 'layout' => nil, 'sitemap' => false, 'render_with_liquid' => false }
+      @site.pages << page
+    end
+
+    # Walks a language's _data tree and yields curated resources, skipping generated placeholders.
+    def each_real_resource(node, trail = [], &block)
+      case node
+      when Hash
+        node.each do |key, value|
+          next if %w[menu translations].include?(key)
+
+          each_real_resource(value, trail + [key], &block)
+        end
+      when Array
+        node.each do |item|
+          next unless item.is_a?(Hash) && item['url'].to_s.start_with?('http')
+          next if item['url'].include?('example.com')
+
+          yield item, trail.reject { |part| part.end_with?('.yaml') }.map { |part| part.tr('-', ' ').capitalize }.join(' › ')
+        end
+      end
+    end
+
     def extract_category_data(lang_code, category)
       {
         'id' => generate_id(category['path']),

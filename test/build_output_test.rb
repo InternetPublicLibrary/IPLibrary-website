@@ -1,3 +1,4 @@
+require 'json'
 require_relative 'test_helper'
 
 class BuildOutputTest < Minitest::Test
@@ -47,6 +48,21 @@ class BuildOutputTest < Minitest::Test
 
     report = offenders.map { |rule, files| "#{rule}: #{files.size} pages, e.g. #{files.first.delete_prefix(SiteBuild.site.dest)}" }
     assert_empty offenders, "Fabricated content:\n#{report.join("\n")}"
+  end
+
+  # The search pages (en-US/search.html, pt-BR/busca.html) fetch these flat indexes.
+  def test_search_index_is_published_for_each_language
+    { 'en-US' => 'Cryptography Theory', 'pt-BR' => 'Teoria da Criptografia' }.each do |lang, title|
+      path = File.join(SiteBuild.site.dest, 'api', lang, 'search-index.json')
+      assert File.file?(path), "missing /api/#{lang}/search-index.json"
+
+      index = JSON.parse(File.read(path))
+      assert_kind_of Array, index
+      entry = index.find { |item| item['title'] == title }
+      refute_nil entry, "#{title} not indexed for #{lang}"
+      assert entry['url'].start_with?("/#{lang}/"), entry['url']
+      refute index.any? { |item| item['url'].to_s.include?('example.com') }, 'placeholder resources indexed'
+    end
   end
 
   # The submodule LICENSE files collide with /<lang>/license/ on
