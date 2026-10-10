@@ -2,109 +2,51 @@
 layout: null
 ---
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>Internet Public Library - Redirecting...</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Internet Public Library</title>
+  <meta name="description" content="A free, curated and multilingual library of internet resources, maintained by volunteers.">
+  <link rel="alternate" hreflang="en-US" href="/en-US/">
+  <link rel="alternate" hreflang="pt-BR" href="/pt-BR/">
+  <link rel="icon" href="/favicon.ico" sizes="32x32">
+  <link rel="icon" href="/images/favicon.svg" type="image/svg+xml">
   <script>
-    // Function to detect browser language and redirect accordingly
-    function redirectToLocalizedPage() {
-      // Get browser language
-      var language = navigator.language || navigator.userLanguage;
-      language = language.toLowerCase();
-      
-      // Default path
-      var redirectPath = '/en-US/';
-      
-      // Check if language is Portuguese (Brazil)
-      if (language.indexOf('pt-br') !== -1 || language.indexOf('pt') !== -1) {
-        redirectPath = '/pt-BR/';
-      }
-      
-      // Get user's preferred language from localStorage if available
-      var storedLanguage = localStorage.getItem('preferred_language');
-      if (storedLanguage) {
-        redirectPath = '/' + storedLanguage + '/';
-      }
-      
-      // Redirect to the appropriate language version
-      window.location.href = redirectPath;
-    }
-    
-    // Execute redirection on page load
-    window.onload = redirectToLocalizedPage;
+    // Send readers to their language edition. replace() keeps this page out of the history, so Back works.
+    (function () {
+      var editions = ['en-US', 'pt-BR'];
+      var target = 'en-US';
+      var browser = (navigator.language || navigator.userLanguage || '').toLowerCase();
+      if (browser.indexOf('pt') === 0) target = 'pt-BR';
+      try {
+        var stored = localStorage.getItem('preferred_language');
+        if (editions.indexOf(stored) > -1) target = stored;
+      } catch (error) { /* storage unavailable: use the browser language */ }
+      window.location.replace('/' + target + '/');
+    })();
   </script>
+  <link rel="stylesheet" href="/assets/css/tokens.css">
+  <link rel="stylesheet" href="/assets/css/base.css">
+  <link rel="stylesheet" href="/assets/css/primitives.css">
   <style>
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-      background-color: #f8f9fa;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      height: 100vh;
-      margin: 0;
-      padding: 20px;
-      box-sizing: border-box;
-    }
-    .container {
-      max-width: 600px;
-      text-align: center;
-      background-color: white;
-      padding: 30px;
-      border-radius: 8px;
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    }
-    h1 {
-      color: #2563eb;
-      margin-top: 0;
-    }
-    p {
-      color: #4b5563;
-      margin-bottom: 20px;
-      line-height: 1.5;
-    }
-    .links {
-      margin-top: 30px;
-    }
-    a {
-      display: inline-block;
-      margin: 0 10px;
-      padding: 10px 20px;
-      background-color: #2563eb;
-      color: white;
-      text-decoration: none;
-      border-radius: 4px;
-      font-weight: 500;
-      transition: background-color 0.2s;
-    }
-    a:hover {
-      background-color: #1d4ed8;
-    }
-    .spinner {
-      border: 4px solid rgba(0, 0, 0, 0.1);
-      border-radius: 50%;
-      border-top: 4px solid #2563eb;
-      width: 40px;
-      height: 40px;
-      animation: spin 1s linear infinite;
-      margin: 20px auto;
-    }
-    @keyframes spin {
-      0% { transform: rotate(0deg); }
-      100% { transform: rotate(360deg); }
-    }
+    .ipl-gate { min-height: 100vh; display: grid; place-items: center; padding: var(--space-4); }
+    .ipl-gate__box { max-width: 32rem; text-align: center; }
+    .ipl-gate__title { margin: var(--space-4) 0 var(--space-2); font: var(--weight-semibold) var(--text-2xl) / var(--leading-tight) var(--font-heading); }
+    .ipl-gate__text { margin: 0 0 var(--space-6); color: var(--color-muted); }
   </style>
 </head>
 <body>
-  <div class="container">
-    <h1>Internet Public Library</h1>
-    <p>Redirecting you to the appropriate language version...</p>
-    <div class="spinner"></div>
-    <p>If you are not redirected automatically, please choose your language:</p>
-    <div class="links">
-      <a href="/en-US/">English (US)</a>
-      <a href="/pt-BR/">Português (Brasil)</a>
+  <main class="ipl-gate">
+    <div class="ipl-gate__box">
+      {% include components/atoms/brand-mark.html size="64" %}
+      <h1 class="ipl-gate__title">Internet Public Library</h1>
+      <p class="ipl-gate__text">Choose your language · <span lang="pt-BR">Escolha seu idioma</span></p>
+      <div class="ipl-cluster" style="justify-content: center">
+        <a class="ipl-button ipl-button--primary" href="/en-US/" hreflang="en-US">English</a>
+        <a class="ipl-button" href="/pt-BR/" hreflang="pt-BR" lang="pt-BR">Português</a>
+      </div>
     </div>
-  </div>
+  </main>
 </body>
 </html>
