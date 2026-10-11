@@ -114,7 +114,7 @@ The level is derived from the menu: a topic with a parent category is a subcateg
       <div class="ipl-prose">
         <section aria-labelledby="overview" class="bg-white border border-gray-200 rounded-lg p-4 sm:p-5">
           <h2 id="overview">{% if pt %}Visão geral{% else %}Overview{% endif %}</h2>
-          {%- if intro != '' %}{{ content }}{% else %}<p>{% if pt %}{{ topic_title | escape }} reúne {{ children.size }} {{ children_label | downcase }} com recursos selecionados, wiki e discussão da comunidade.{% else %}{{ topic_title | escape }} brings together {{ children.size }} {{ children_label | downcase }} with curated resources, wiki and community discussion.{% endif %}</p>{% endif %}
+          {%- if intro != '' %}{{ content | markdownify }}{% else %}<p>{% if pt %}{{ topic_title | escape }} reúne {{ children.size }} {{ children_label | downcase }} com recursos selecionados, wiki e discussão da comunidade.{% else %}{{ topic_title | escape }} brings together {{ children.size }} {{ children_label | downcase }} with curated resources, wiki and community discussion.{% endif %}</p>{% endif %}
         </section>
       </div>
 
