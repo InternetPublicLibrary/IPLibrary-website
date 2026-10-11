@@ -8,11 +8,9 @@
     </radialGradient>
   </defs>
   <circle cx="32" cy="32" r="32" fill="url(#globe)"/>
-  <g fill="#fff" transform="translate(-2 0)">
-    <circle cx="19" cy="19.5" r="3.7"/>
-    <rect x="15.8" y="26" width="6.4" height="19" rx="3.2"/>
-    <rect x="26" y="26" width="6.4" height="26" rx="3.2"/>
-    <circle cx="37.6" cy="35.6" r="7.3" fill="none" stroke="#fff" stroke-width="6.4"/>
-    <rect x="48.4" y="17" width="6.4" height="28" rx="3.2"/>
+  <g fill="none" stroke="#004B80" stroke-width="4" stroke-linecap="round">
+    <path d="M32 5C16 17 16 47 32 59C48 47 48 17 32 5Z"/>
+    <path d="M8 20Q32 30 56 20M8 44Q32 34 56 44"/>
   </g>
+  <path fill="#fff" d="M12 26Q22 23 30 30V49Q22 42 12 45ZM34 30Q42 23 52 26V45Q42 42 34 49Z"/>
 </svg>
