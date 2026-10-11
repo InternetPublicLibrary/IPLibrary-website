@@ -1,4 +1,13 @@
-# Placeholder - Add resources here
-- name: "Example Resource"
-  url: "https://example.com"
-  description: "Add a description here."
+- name: "CISSP Verification Registry"
+  url: "https://www.isc2.org/member-verification"
+  description: "An online credential database for confirming the active certification status of ISC2 members."
+  type: "database"
+  access: "free"
+  organization: "ISC2"
+
+- name: "Cisco Certification Verification"
+  url: "https://www.cisco.com/c/en/us/training-events/training-certifications/certifications.html"
+  description: "A database and tracking system for verifying Cisco career credentials and certified professional statuses."
+  type: "database"
+  access: "free"
+  organization: "Cisco Systems"

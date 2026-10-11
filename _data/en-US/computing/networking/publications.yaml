@@ -1,4 +1,13 @@
-# Placeholder - Add resources here
-- name: "Example Resource"
-  url: "https://example.com"
-  description: "Add a description here."
+- name: "IEEE/ACM Transactions on Networking"
+  url: "https://www.computer.org/csdl/trans/nt"
+  description: "A premier bimonthly peer-reviewed journal publishing research on the theory, algorithms, and architectures of computer networks."
+  type: "journal"
+  access: "paid"
+  organization: "IEEE and ACM"
+
+- name: "IEEE Communications Surveys & Tutorials"
+  url: "https://www.comsoc.org/publications/journals/ieee-comst"
+  description: "An archival online journal publishing comprehensive peer-reviewed tutorials and surveys covering all aspects of communications networks."
+  type: "journal"
+  access: "paid"
+  organization: "IEEE Communications Society"
