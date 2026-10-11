@@ -112,6 +112,8 @@ exclude:
   
   # Development and documentation files
   - README.md
+  - en-US/README.md
+  - pt-BR/README.md
   - AGENTS.md
   - TODO.md
   - claude.md
