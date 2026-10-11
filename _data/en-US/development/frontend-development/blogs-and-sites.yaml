@@ -18,3 +18,10 @@
   type: "blog"
   access: "free"
   organization: "Google"
+
+- name: "Mozilla Hacks"
+  url: "https://hacks.mozilla.org/"
+  description: "Mozilla's blog for web developers, covering new browser features, web standards, performance and tooling changes in Firefox and the wider web platform."
+  type: "blog"
+  access: "free"
+  organization: "Mozilla"

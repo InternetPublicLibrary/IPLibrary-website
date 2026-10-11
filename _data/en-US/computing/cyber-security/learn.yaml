@@ -25,3 +25,17 @@
   type: "course"
   access: "free"
   organization: "Professor Messer"
+
+- name: "Encryption with GPG Tutorial"
+  url: "https://hashrocket.com/blog/posts/encryption-with-gpg-a-story-really-a-tutorial"
+  description: "Narrative tutorial explaining public key encryption with GnuPG, from generating keys to encrypting, signing and exchanging files, for newcomers to secure communication."
+  type: "tutorial"
+  access: "free"
+  organization: "Hashrocket"
+
+- name: "SameSite Cookies Explained"
+  url: "https://web.dev/articles/samesite-cookies-explained"
+  description: "Article explaining how the SameSite cookie attribute separates first-party and third-party use and how Strict and Lax values reduce cross-site request risks."
+  type: "reference"
+  access: "free"
+  organization: "Google"

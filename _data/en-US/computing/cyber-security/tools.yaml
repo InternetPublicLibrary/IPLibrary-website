@@ -25,3 +25,10 @@
   type: "tool"
   access: "free"
   organization: "Center for Internet Security"
+
+- name: "Postmark DMARC Monitoring"
+  url: "https://dmarc.postmarkapp.com/"
+  description: "Free service that collects DMARC aggregate reports and sends weekly digests, helping domain owners check email authentication and detect spoofing of their domain."
+  type: "tool"
+  access: "free"
+  organization: "Postmark"
