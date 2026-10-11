@@ -13,11 +13,3 @@
   language: "en"
   access: "paid"
   organization: "Elsevier"
-
-- name: "Intercom: Revista Brasileira de Ciências da Comunicação"
-  url: "https://www.scielo.br/j/intercom/"
-  description: "Periódico brasileiro com estudos empíricos e teóricos sobre formatos de comunicação, redação informativa e circulação de mensagens."
-  type: "journal"
-  language: "pt-BR"
-  access: "free"
-  organization: "Intercom / SciELO"

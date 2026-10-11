@@ -13,11 +13,3 @@
   language: "pt-BR"
   access: "free"
   organization: "Semrush"
-
-- name: "Universidade RD Station"
-  url: "https://universidade.rdstation.com.br/"
-  description: "Trilhas de aprendizagem em inbound marketing, redação para web e jornada de compra do consumidor digital."
-  type: "course"
-  language: "pt-BR"
-  access: "free"
-  organization: "RD Station"

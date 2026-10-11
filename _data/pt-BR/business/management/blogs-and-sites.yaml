@@ -6,14 +6,6 @@
   access: "freemium"
   organization: "Exame"
 
-- name: "Harvard Business Review Brasil"
-  url: "https://hbrbr.uol.com.br"
-  description: "Artigos e ensaios traduzidos e comentados por especialistas sobre as melhores práticas mundiais em liderança e gestão."
-  type: "blog"
-  language: "pt-BR"
-  access: "paid"
-  organization: "Harvard Business Publishing"
-
 - name: "Portal Administradores"
   url: "https://administradores.com.br"
   description: "Comunidade e portal brasileiro de artigos, notícias e colunas sobre carreira gerencial e boas práticas de administração."
