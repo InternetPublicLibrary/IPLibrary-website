@@ -1,8 +1,8 @@
 # 005 — Tasks
 
 ## Phase 1 — Safety and hygiene
-- [ ] T1 Tests: third-party assets pinned with SRI (AC1); no Google Analytics in built pages (AC2) — RED first.
-- [ ] T2 Pin Tailwind browser 4.3.3 and Font Awesome 6.4.0 with integrity hashes; remove GA snippets.
+- [x] T1 Tests: third-party assets pinned with SRI (AC1); no Google Analytics in built pages (AC2) — RED first.
+- [x] T2 Pin Tailwind browser 4.3.3 and Font Awesome 6.4.0 with integrity hashes; remove GA snippets.
 - [ ] T3 Dependabot (bundler, npm for root and `e2e/`, GitHub Actions) and CodeQL (JavaScript, Ruby).
 - [ ] T4 Deletion list (vendor/bundle, debug files, unused JS/images, legacy includes) → maintainer approval → remove.
 ## Phase 2 — Toolchain
