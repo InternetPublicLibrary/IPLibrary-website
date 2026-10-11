@@ -25,3 +25,10 @@
   type: "tool"
   access: "paid"
   organization: "Sketch B.V."
+
+- name: "Playground"
+  url: "https://playgroundai.com/"
+  description: "Web-based design tool that uses generative AI to produce logos, social media graphics and print designs from text prompts and editable templates."
+  type: "tool"
+  access: "freemium"
+  organization: "Playground"

@@ -25,3 +25,10 @@
   type: "tool"
   access: "free"
   organization: "Tailwind Labs"
+
+- name: "Lit"
+  url: "https://lit.dev/"
+  description: "Open-source JavaScript library for building lightweight, standards-based web components with reactive properties and declarative templates, maintained with documentation and tutorials."
+  type: "tool"
+  access: "free"
+  organization: "Lit"

@@ -25,3 +25,10 @@
   type: "course"
   access: "free"
   organization: "Complexly"
+
+- name: "Everything I Know"
+  url: "https://www.bfi.org/about-fuller/everything-i-know/"
+  description: "Recordings and transcripts of a 1975 lecture series in which Buckminster Fuller surveyed his life's work on design, science and philosophy, published by his institute."
+  type: "reference"
+  access: "free"
+  organization: "Buckminster Fuller Institute"

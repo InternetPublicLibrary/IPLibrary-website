@@ -2,3 +2,10 @@
 - name: "Example Resource"
   url: "https://example.com"
   description: "Add a description here."
+
+- name: "Typewolf"
+  url: "https://www.typewolf.com/"
+  description: "Typography website showing typefaces used on real websites, with suggested font pairings and free alternatives to help designers choose type for their projects."
+  type: "site"
+  access: "free"
+  organization: "Typewolf"

@@ -25,3 +25,17 @@
   type: "reference"
   access: "free"
   organization: "Cybersecurity and Infrastructure Security Agency"
+
+- name: "Compromising LLM-Integrated Applications with Indirect Prompt Injection"
+  url: "https://arxiv.org/abs/2302.12173"
+  description: "Research paper showing how instructions hidden in retrieved web content can hijack applications built on language models, and classifying the resulting threats."
+  type: "publication"
+  access: "free"
+  organization: "arXiv"
+
+- name: "Universal and Transferable Attacks on Aligned Language Models"
+  url: "https://llm-attacks.org/"
+  description: "Project site for research demonstrating automatically generated adversarial suffixes that bypass safety training across many language models, with paper and code."
+  type: "publication"
+  access: "free"
+  organization: "Carnegie Mellon University"

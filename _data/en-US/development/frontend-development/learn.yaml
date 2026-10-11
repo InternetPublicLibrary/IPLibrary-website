@@ -25,3 +25,10 @@
   type: "reference"
   access: "free"
   organization: "Web Hypertext Application Technology Working Group"
+
+- name: "Jank Busting for Better Rendering Performance"
+  url: "https://web.dev/articles/speed-rendering"
+  description: "Article explaining why browser animations stutter and how to use requestAnimationFrame and related techniques to keep rendering smooth, aimed at front-end developers."
+  type: "reference"
+  access: "free"
+  organization: "Google"

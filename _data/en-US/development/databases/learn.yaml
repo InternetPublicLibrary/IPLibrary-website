@@ -18,3 +18,17 @@
   type: "textbook"
   access: "paid"
   organization: "Martin Kleppmann"
+
+- name: "PostgreSQL Privileges Documentation"
+  url: "https://www.postgresql.org/docs/current/ddl-priv.html"
+  description: "Section of the official PostgreSQL manual explaining object ownership, the GRANT and REVOKE commands and the available privilege types for database administrators."
+  type: "reference"
+  access: "free"
+  organization: "PostgreSQL Global Development Group"
+
+- name: "MongoDB Manual"
+  url: "https://www.mongodb.com/docs/manual/"
+  description: "Official documentation for the MongoDB document database, covering installation, data modelling, queries, indexing, replication and sharding for developers and administrators."
+  type: "reference"
+  access: "free"
+  organization: "MongoDB"

@@ -25,3 +25,10 @@
   type: "journal"
   access: "free"
   organization: "Alliance of Digital Humanities Organizations"
+
+- name: "Banished Words List"
+  url: "https://www.lssu.edu/resources/about-lssu/traditions/banishedwords/"
+  description: "Annual list compiled by Lake Superior State University naming overused or misused words and phrases, based on public nominations, of interest to writers and editors."
+  type: "reference"
+  access: "free"
+  organization: "Lake Superior State University"

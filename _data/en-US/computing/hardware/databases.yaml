@@ -2,3 +2,10 @@
 - name: "Example Resource"
   url: "https://example.com"
   description: "Add a description here."
+
+- name: "PassMark CPU Benchmarks"
+  url: "https://www.cpubenchmark.net/"
+  description: "Searchable database of processor benchmark scores and price-performance comparisons, helping buyers and builders compare desktop, laptop and server CPUs."
+  type: "database"
+  access: "free"
+  organization: "PassMark Software"
