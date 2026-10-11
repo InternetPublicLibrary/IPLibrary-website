@@ -38,3 +38,25 @@
 }
 /* Links inside running text must not rely on color alone (WCAG 1.4.1) */
 .ipl-info-body p a, .ipl-info-body li a:not([class*="bg-"]) { text-decoration: underline; text-underline-offset: 0.15em; }
+/* Every institutional page opens the same way: left-aligned article header, no decorative icon tile */
+.ipl-info-body > :first-child,
+.ipl-info-body > :first-child .text-center { text-align: left; }
+.ipl-info-body > :first-child[class*="bg-gradient"],
+.ipl-info-body > :first-child [class*="bg-gradient-to"]:has(h1) {
+  background: none;
+  color: var(--color-text);
+  padding: 0 0 var(--space-6);
+  box-shadow: none;
+}
+.ipl-info-body > :first-child [class*="bg-gradient-to"]:has(h1) h1,
+.ipl-info-body > :first-child[class*="bg-gradient"] h1 { color: var(--color-text); }
+.ipl-info-body > :first-child [class*="bg-gradient-to"]:has(h1) p { color: var(--color-muted); }
+.ipl-info-body > :first-child [class*="w-16"][class*="h-16"]:not(input):not(img),
+.ipl-info-body > :first-child [class*="w-20"][class*="h-20"]:not(input):not(img),
+.ipl-info-body > :first-child [class*="w-12"][class*="h-12"]:has(> i) { display: none; }
+.ipl-info-body h1 { font-size: var(--text-2xl); font-weight: var(--weight-semibold); line-height: var(--leading-tight); }
+@media (min-width: 64rem) { .ipl-info-body h1 { font-size: var(--text-3xl); } }
+.ipl-info-body > :first-child .text-center > .flex:has(> [class*="bg-gradient"]):not(:has(a, button)) { display: none; }
+.ipl-info-body > :first-child .text-center > p { margin-inline: 0; }
+.ipl-info-body > :first-child { padding-top: 0; min-height: 0; }
+.ipl-info-body > :first-child > [class*="max-w-"] { max-width: none; padding-inline: 0; }

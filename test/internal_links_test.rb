@@ -2,7 +2,7 @@ require_relative 'test_helper'
 require 'uri'
 
 class InternalLinksTest < Minitest::Test
-  EXTERNAL = %r{\A([a-z][a-z0-9+.-]*:|//|#|\{\{|\{%)|\$\{}i
+  EXTERNAL = %r{\A([a-z][a-z0-9+.-]*:|//|#|\{\{|\{%|')|\$\{}i
 
   def test_every_internal_href_resolves_to_a_built_file
     dest = SiteBuild.site.dest
