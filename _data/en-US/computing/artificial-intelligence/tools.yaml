@@ -39,3 +39,17 @@
   type: "tool"
   access: "free"
   organization: "Ollama"
+
+- name: "Marvin"
+  url: "https://github.com/PrefectHQ/marvin"
+  description: "Open-source Python library for building applications with large language models, offering structured outputs, classification and agent workflows for developers."
+  type: "tool"
+  access: "free"
+  organization: "Prefect"
+
+- name: "Guidance"
+  url: "https://github.com/guidance-ai/guidance"
+  description: "Open-source Python library for controlling large language model output through templates, constraints and grammars, helping developers get structured results."
+  type: "tool"
+  access: "free"
+  organization: "guidance-ai"

@@ -18,3 +18,17 @@
   type: "community"
   access: "free"
   organization: "OSDev.org"
+
+- name: "Linux Containers"
+  url: "https://linuxcontainers.org"
+  description: "Home of the LXC, Incus and related open source projects, offering documentation, downloads and community support for system containers and virtual machines on Linux."
+  type: "site"
+  access: "free"
+  organization: "Linux Containers"
+
+- name: "Linux Handbook"
+  url: "https://linuxhandbook.com"
+  description: "Website of tutorials and guides on Linux commands, system administration, Docker and DevOps topics, aimed at beginners and working administrators."
+  type: "site"
+  access: "freemium"
+  organization: "Linux Handbook"

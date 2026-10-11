@@ -18,3 +18,10 @@
   type: "community"
   access: "free"
   organization: "C4Media"
+
+- name: "DigitalOcean Community"
+  url: "https://www.digitalocean.com/community"
+  description: "Large collection of technical tutorials and questions and answers on Linux servers, web stacks and cloud deployment, maintained by a cloud hosting company."
+  type: "community"
+  access: "free"
+  organization: "DigitalOcean"

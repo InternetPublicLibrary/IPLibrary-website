@@ -18,3 +18,17 @@
   type: "blog"
   access: "free"
   organization: "Thoughtworks"
+
+- name: "Open Container Initiative"
+  url: "https://opencontainers.org"
+  description: "Linux Foundation project that maintains open industry specifications for container image formats, runtimes and distribution, with documentation of each standard."
+  type: "site"
+  access: "free"
+  organization: "Open Container Initiative"
+
+- name: "Docker Blog"
+  url: "https://www.docker.com/blog/"
+  description: "Company blog publishing product announcements, tutorials and engineering articles about containers, Docker tooling and developer workflows."
+  type: "blog"
+  access: "free"
+  organization: "Docker"

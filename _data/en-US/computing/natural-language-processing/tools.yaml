@@ -25,3 +25,10 @@
   type: "tool"
   access: "free"
   organization: "Stanford University"
+
+- name: "Hugging Face Transformers"
+  url: "https://huggingface.co/docs/transformers/index"
+  description: "Documentation for the open-source Transformers library, which provides pretrained text, vision and audio models and APIs for inference and fine-tuning."
+  type: "tool"
+  access: "free"
+  organization: "Hugging Face"

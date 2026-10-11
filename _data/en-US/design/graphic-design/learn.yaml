@@ -18,3 +18,10 @@
   type: "course"
   access: "paid"
   organization: "Interaction Design Foundation"
+
+- name: "The Best Free Alternatives to the Most Popular Fonts"
+  url: "https://blog.spoongraphics.co.uk/articles/the-best-free-alternatives-to-the-most-popular-fonts"
+  description: "Guide comparing widely used commercial typefaces such as Futura and DIN with similar free fonts, helping designers on a budget find suitable substitutes."
+  type: "reference"
+  access: "free"
+  organization: "Spoon Graphics"

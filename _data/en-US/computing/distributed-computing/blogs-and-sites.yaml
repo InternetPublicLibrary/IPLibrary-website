@@ -25,3 +25,10 @@
   type: "blog"
   access: "free"
   organization: "Amazon Web Services"
+
+- name: "IPFS Forum"
+  url: "https://discuss.ipfs.tech"
+  description: "Discussion forum for the InterPlanetary File System community, where users and developers ask questions and share projects about decentralized storage."
+  type: "community"
+  access: "free"
+  organization: "IPFS"

@@ -25,3 +25,10 @@
   type: "reference"
   access: "free"
   organization: "Google Cloud"
+
+- name: "BigQuery Documentation"
+  url: "https://docs.cloud.google.com/bigquery/docs"
+  description: "Official documentation for Google BigQuery, the serverless data warehouse, including guides to SQL queries, user-defined functions, loading data and administration."
+  type: "reference"
+  access: "free"
+  organization: "Google Cloud"

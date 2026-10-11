@@ -18,3 +18,10 @@
   type: "blog"
   access: "free"
   organization: "Thoughtworks"
+
+- name: "Archive Team Wiki"
+  url: "https://wiki.archiveteam.org/"
+  description: "Community wiki of a volunteer group that rescues websites at risk of disappearing, documenting archiving software, ongoing projects and preservation techniques."
+  type: "community"
+  access: "free"
+  organization: "Archive Team"
