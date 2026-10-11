@@ -71,6 +71,9 @@
   --color-cyan-700: #155E75;
   --color-pink-600: #BE185D;
   --color-pink-700: #9D174D;
+  /* 500 grays used for secondary text: keep a margin above 4.5:1 */
+  --color-slate-500: #5A6A7E;
+  --color-gray-500: #5D6470;
 }
 
 :root[data-theme='dark'] {

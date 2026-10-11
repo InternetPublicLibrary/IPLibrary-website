@@ -157,7 +157,7 @@ const IPL = {
     if (!container) return;
 
     const isPortuguese = lang === 'pt-BR';
-    container.innerHTML = `<div class="animate-pulse text-slate-500">${isPortuguese ? 'Carregando...' : 'Loading...'}</div>`;
+    container.innerHTML = `<div class="text-slate-600" role="status">${isPortuguese ? 'Carregando...' : 'Loading...'}</div>`;
 
     try {
       const commits = await this.fetchGitHubCommits(5);
