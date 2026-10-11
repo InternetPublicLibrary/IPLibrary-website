@@ -12,9 +12,23 @@ class ResourcesDataTest < Minitest::Test
     refute_empty FILES
   end
 
+  # Reserved example domains (RFC 2606), compared on the parsed host so a real URL that merely mentions one in its
+  # path or query is not flagged, and lookalike hosts such as example.com.evil.test are.
+  PLACEHOLDER_HOST = /\A(?:.+\.)?example\.(?:com|org|net)\z/i
+
   def test_no_placeholder_resources_remain
-    placeholders = FILES.select { |file| File.read(file).include?('example.com') }
+    placeholders = FILES.select do |file|
+      entries = YAML.safe_load(File.read(file)) || []
+      entries.is_a?(Array) && entries.any? { |entry| entry.is_a?(Hash) && placeholder_url?(entry['url']) }
+    end
     assert_empty placeholders, "#{placeholders.size} files still hold placeholders, e.g. #{relative(placeholders.first)}"
+  end
+
+  def test_placeholder_detection_uses_the_host
+    assert placeholder_url?('https://example.com/resource')
+    assert placeholder_url?('https://docs.example.org/')
+    refute placeholder_url?('https://real.site/?ref=example.com')
+    refute placeholder_url?('https://example.com.evil.test/')
   end
 
   def test_entries_are_well_formed
@@ -37,6 +51,12 @@ class ResourcesDataTest < Minitest::Test
   end
 
   private
+
+  def placeholder_url?(url)
+    PLACEHOLDER_HOST.match?(URI.parse(url.to_s).host.to_s)
+  rescue URI::InvalidURIError
+    false
+  end
 
   def relative(file)
     file.to_s.delete_prefix("#{ROOT}/")

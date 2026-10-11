@@ -6,7 +6,7 @@
   organization: "First Round Capital"
 
 - name: "Paul Graham Essays"
-  url: "http://www.paulgraham.com/articles.html"
+  url: "https://www.paulgraham.com/articles.html"
   description: "Collection of influential essays on startup mechanics, funding, technical development, and founder psychology."
   type: "blog"
   access: "free"

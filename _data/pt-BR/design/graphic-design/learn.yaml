@@ -1,11 +1,3 @@
-- name: "Thinking with Type"
-  url: "http://thinkingwithtype.com/"
-  description: "Guia online interativo baseado na obra clássica de Ellen Lupton sobre grelhas, hierarquia tipográfica, entrelinha e ritmo visual."
-  type: "textbook"
-  access: "free"
-  language: "en"
-  organization: "Ellen Lupton"
-
 - name: "Adobe Illustrator Tutorials"
   url: "https://helpx.adobe.com/illustrator/tutorials.html"
   description: "Cursos práticos e tutoriais passo a passo da Adobe para domínio de curvas vetoriais, teoria da cor e ilustrações complexas."

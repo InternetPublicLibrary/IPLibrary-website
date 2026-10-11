@@ -1,5 +1,5 @@
 - name: "OSDI (USENIX Symposium on Operating Systems Design and Implementation)"
-  url: "https://www.usenix.org/conferences"
+  url: "https://www.usenix.org/conferences/byname/179"
   description: "A premier academic systems conference presenting innovative research in operating systems design and large-scale software systems."
   type: "conference"
   access: "paid"
@@ -13,7 +13,7 @@
   organization: "ACM SIGOPS"
 
 - name: "USENIX ATC (Annual Technical Conference)"
-  url: "https://www.usenix.org/conferences"
+  url: "https://www.usenix.org/conferences/byname/131"
   description: "A major conference covering high-quality research and real-world experience in computer systems software, storage, and virtualization."
   type: "conference"
   access: "paid"
