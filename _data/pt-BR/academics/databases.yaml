@@ -9,7 +9,7 @@
   tags: ["Acesso Aberto", "América Latina"]
 
 - name: "Portal de Periódicos CAPES"
-  url: "https://www-periodicos-capes-gov-br.ezl.periodicos.capes.gov.br/"
+  url: "https://www.periodicos.capes.gov.br/"
   description: "Maior acervo de publicações científicas do Brasil, oferecendo acesso a textos completos e bases de dados."
   tags: ["Governo", "Multidisciplinar"]
 

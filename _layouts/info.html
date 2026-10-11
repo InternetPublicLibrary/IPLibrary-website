@@ -65,7 +65,7 @@ h2 headings, and navigation between the institutional pages.
     var body = document.querySelector('[data-ipl-info]');
     var box = document.querySelector('[data-ipl-info-contents]');
     if (!body || !box) return;
-    var headings = Array.prototype.slice.call(body.querySelectorAll('h2'));
+    var headings = Array.prototype.slice.call(body.querySelectorAll('h2:not([data-no-toc])'));
     if (headings.length < 2) return;
     var list = box.querySelector('ol');
     headings.forEach(function (heading, index) {

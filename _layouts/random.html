@@ -1,0 +1,128 @@
+---
+layout: info
+---
+{%- comment -%}
+Random resource (spec 001, revised) — shows a real curated resource immediately (no empty "click to start"
+state), where it lives in the library, and more random picks and a random topic below.
+Data: /api/<lang>/search-index.json (resources and sections; fields are already HTML-escaped by the
+generator, so they are inserted as HTML, never re-escaped or evaluated).
+{%- endcomment -%}
+{%- assign lang = page.lang | default: 'en-US' -%}
+{%- assign pt = false -%}{%- if lang == 'pt-BR' -%}{%- assign pt = true -%}{%- endif -%}
+<section class="pb-2">
+  <h1 class="text-3xl lg:text-4xl font-semibold leading-tight mb-2">{{ page.title | escape }}</h1>
+  <p class="text-lg text-gray-700 max-w-prose">{% if pt %}Um recurso selecionado da biblioteca, escolhido ao acaso. Descubra algo novo ou sorteie outro.{% else %}A curated resource from the library, picked at random. Discover something new or draw another.{% endif %}</p>
+</section>
+
+<div data-ipl-random data-lang="{{ lang }}" aria-live="polite">
+  <article class="bg-white border border-gray-200 rounded-xl shadow-sm overflow-hidden mt-4" aria-labelledby="random-title">
+    <div class="bg-purple-50 border-b border-purple-200 px-5 py-2 text-sm font-semibold text-purple-900 flex items-center gap-2">
+      <i class="fas fa-dice text-purple-700" aria-hidden="true"></i>{% if pt %}Seu recurso aleatório{% else %}Your random resource{% endif %}
+    </div>
+    <div class="p-5 sm:p-6">
+      <h2 id="random-title" class="text-2xl font-semibold text-gray-900" data-random-title data-no-toc>{% if pt %}Sorteando…{% else %}Drawing…{% endif %}</h2>
+      <p class="text-sm text-gray-600 mt-1" data-random-domain></p>
+      <p class="text-gray-800 mt-3 max-w-prose" data-random-description></p>
+      <dl class="mt-4 grid grid-cols-1 sm:grid-cols-3 gap-3 text-sm" data-random-meta hidden>
+        <div class="bg-gray-50 rounded-lg p-3"><dt class="text-gray-600">{% if pt %}Na biblioteca{% else %}In the library{% endif %}</dt><dd class="font-medium" data-random-topic></dd></div>
+        <div class="bg-gray-50 rounded-lg p-3" data-random-kind-box><dt class="text-gray-600">{% if pt %}Tipo{% else %}Type{% endif %}</dt><dd class="font-medium" data-random-kind>—</dd></div>
+        <div class="bg-gray-50 rounded-lg p-3" data-random-access-box><dt class="text-gray-600">{% if pt %}Acesso{% else %}Access{% endif %}</dt><dd class="font-medium" data-random-access>—</dd></div>
+      </dl>
+      <div class="mt-5 flex flex-wrap gap-3">
+        <a href="#" data-random-visit rel="noopener" class="inline-flex items-center gap-2 min-h-11 px-5 rounded-lg bg-blue-600 text-white font-semibold hover:bg-blue-700"><i class="fas fa-external-link-alt" aria-hidden="true"></i>{% if pt %}Visitar o recurso{% else %}Visit the resource{% endif %}</a>
+        <button type="button" data-random-next class="inline-flex items-center gap-2 min-h-11 px-5 rounded-lg border border-gray-300 bg-white font-semibold text-gray-800 hover:border-blue-500 hover:text-blue-700"><i class="fas fa-random" aria-hidden="true"></i>{% if pt %}Outro recurso{% else %}Another resource{% endif %}</button>
+        <a href="#" data-random-topic-link class="inline-flex items-center gap-2 min-h-11 px-5 rounded-lg border border-gray-300 bg-white font-semibold text-gray-800 hover:border-blue-500 hover:text-blue-700"><i class="fas fa-compass" aria-hidden="true"></i>{% if pt %}Tema aleatório{% else %}Random topic{% endif %}</a>
+      </div>
+    </div>
+  </article>
+
+  <section class="mt-8" aria-labelledby="more-picks">
+    <h2 id="more-picks" class="text-xl font-semibold border-b border-gray-200 pb-2 mb-4">{% if pt %}Mais sorteios{% else %}More picks{% endif %}</h2>
+    <ul class="grid grid-cols-1 sm:grid-cols-2 gap-3" role="list" data-random-more></ul>
+  </section>
+
+  <p class="mt-6 text-sm text-gray-600" data-random-count></p>
+  <noscript><p class="mt-4">{% if pt %}Ative o JavaScript para sortear recursos, ou navegue pelas <a href="/pt-BR/categorias/">categorias</a>.{% else %}Enable JavaScript to draw resources, or browse the <a href="/en-US/categories/">categories</a>.{% endif %}</p></noscript>
+</div>
+
+<script>
+  (function () {
+    var root = document.querySelector('[data-ipl-random]');
+    if (!root) return;
+    var pt = root.getAttribute('data-lang') === 'pt-BR';
+    var kinds = pt
+      ? { tools: 'Ferramenta', databases: 'Base de dados', learn: 'Aprender', publications: 'Publicação', 'blogs-and-sites': 'Blog ou site', 'events-and-conferences': 'Evento', free: 'Gratuito', freemium: 'Gratuito com planos pagos', paid: 'Pago' }
+      : { tools: 'Tool', databases: 'Database', learn: 'Learning', publications: 'Publication', 'blogs-and-sites': 'Blog or site', 'events-and-conferences': 'Event', free: 'Free', freemium: 'Freemium', paid: 'Paid' };
+    var $ = function (selector) { return root.querySelector(selector); };
+    var resources = [], sections = [], current = -1;
+
+    function domain(url) {
+      try { return new URL(url.replace(/&amp;/g, '&')).hostname.replace(/^www\./, ''); } catch (error) { return ''; }
+    }
+    function pick(list, avoid) {
+      if (list.length < 2) return 0;
+      var index;
+      do { index = Math.floor(Math.random() * list.length); } while (index === avoid);
+      return index;
+    }
+    // Fields come HTML-escaped from the generator: insert as HTML only.
+    function show(index) {
+      current = index;
+      var item = resources[index];
+      $('[data-random-title]').innerHTML = item.title;
+      $('[data-random-domain]').textContent = domain(item.url);
+      $('[data-random-description]').innerHTML = item.description;
+      $('[data-random-visit]').setAttribute('href', item.url.replace(/&amp;/g, '&'));
+      $('[data-random-topic]').innerHTML = item.topic_url
+        ? '<a class="text-blue-600 hover:underline" href="' + item.topic_url + '">' + item.category + '</a>'
+        : item.category;
+      $('[data-random-kind]').textContent = kinds[item.kind] || '';
+      $('[data-random-access]').textContent = kinds[item.access] || '';
+      $('[data-random-kind-box]').hidden = !kinds[item.kind];
+      $('[data-random-access-box]').hidden = !kinds[item.access];
+      $('[data-random-meta]').hidden = false;
+    }
+    function more() {
+      var list = $('[data-random-more]');
+      list.innerHTML = '';
+      var used = {}; used[current] = true;
+      var count = Math.min(6, resources.length - 1);
+      while (Object.keys(used).length <= count) {
+        var index = Math.floor(Math.random() * resources.length);
+        if (used[index]) continue;
+        used[index] = true;
+        var item = resources[index];
+        var li = document.createElement('li');
+        li.className = 'bg-white border border-gray-200 rounded-lg p-4';
+        li.innerHTML = '<a class="font-semibold text-blue-700 hover:underline" rel="noopener" href="' + item.url + '">' + item.title + '</a>' +
+          '<span class="block text-xs text-gray-600">' + domain(item.url) + (item.topic_url ? ' · <a class="hover:underline" href="' + item.topic_url + '">' + item.category + '</a>' : '') + '</span>' +
+          (item.description ? '<p class="text-sm text-gray-700 mt-1">' + item.description + '</p>' : '');
+        list.appendChild(li);
+      }
+    }
+    function topic() {
+      if (!sections.length) return;
+      $('[data-random-topic-link]').setAttribute('href', sections[Math.floor(Math.random() * sections.length)].url);
+    }
+
+    $('[data-random-next]').addEventListener('click', function () { show(pick(resources, current)); more(); topic(); });
+
+    fetch('/api/' + root.getAttribute('data-lang') + '/search-index.json')
+      .then(function (response) { if (!response.ok) throw new Error(response.status); return response.json(); })
+      .then(function (index) {
+        resources = index.filter(function (item) { return item.type === 'resource' && /^https?:\/\//.test(item.url); });
+        sections = index.filter(function (item) { return item.type === 'section'; });
+        if (!resources.length) throw new Error('empty');
+        show(pick(resources, -1)); more(); topic();
+        $('[data-random-count]').textContent = pt
+          ? 'Sorteado entre ' + resources.length + ' recursos selecionados e ' + sections.length + ' seções.'
+          : 'Drawn from ' + resources.length + ' curated resources and ' + sections.length + ' sections.';
+      })
+      .catch(function () {
+        $('[data-random-title]').textContent = pt ? 'Não foi possível carregar os recursos agora.' : 'Resources could not be loaded right now.';
+        $('[data-random-description]').innerHTML = pt
+          ? 'Tente de novo em instantes ou navegue pelas <a class="text-blue-600 underline" href="/pt-BR/categorias/">categorias</a>.'
+          : 'Try again in a moment or browse the <a class="text-blue-600 underline" href="/en-US/categories/">categories</a>.';
+      });
+  })();
+</script>

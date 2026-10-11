@@ -22,7 +22,10 @@ module Jekyll
         'url' => CGI.escapeHTML(url),
         'title' => CGI.escapeHTML(entry['title'].to_s),
         'description' => CGI.escapeHTML(entry['description'].to_s),
-        'category' => CGI.escapeHTML(entry['category'].to_s)
+        'category' => CGI.escapeHTML(entry['category'].to_s),
+        'kind' => CGI.escapeHTML(entry['kind'].to_s),
+        'access' => CGI.escapeHTML(entry['access'].to_s),
+        'topic_url' => entry['topic_url'].to_s.match?(SAFE_URL) ? CGI.escapeHTML(entry['topic_url'].to_s) : nil
       )
     end
 
@@ -122,15 +125,19 @@ module Jekyll
           end
         end
       end
+      topics = topic_lookup(lang_code, menu)
       seen = {}
-      each_real_resource(@site.data[lang_code]) do |resource, trail|
+      each_real_resource(@site.data[lang_code], [], [], &lambda { |resource, trail, keys|
         key = resource['name'].to_s.downcase
         next if key.empty? || seen[key]
 
         seen[key] = true
+        topic = topics[keys.first(2)] || topics[keys.first(1)]
         entries << { 'title' => resource['name'], 'url' => resource['url'], 'type' => 'resource',
-                     'category' => trail, 'description' => resource['description'].to_s }
-      end
+                     'category' => topic ? topic['trail'] : trail, 'description' => resource['description'].to_s,
+                     'topic_url' => topic && topic['path'], 'kind' => keys[2].to_s.sub(/\.ya?ml\z/, ''),
+                     'access' => resource['access'].to_s }
+      })
 
       page = Jekyll::PageWithoutAFile.new(@site, @site.source, File.join('api', lang_code), 'search-index.json')
       page.content = JSON.generate(entries.filter_map { |entry| self.class.safe_entry(entry) })
@@ -138,23 +145,42 @@ module Jekyll
       @site.pages << page
     end
 
-    # Walks a language's _data tree and yields curated resources, skipping generated placeholders.
-    def each_real_resource(node, trail = [], &block)
+    # Walks a language's _data tree and yields curated resources (with their folder keys), skipping placeholders.
+    def each_real_resource(node, trail = [], keys = [], &block)
       case node
       when Hash
         node.each do |key, value|
           next if %w[menu translations].include?(key)
 
-          each_real_resource(value, trail + [key], &block)
+          each_real_resource(value, trail + [key], keys + [key], &block)
         end
       when Array
         node.each do |item|
           next unless item.is_a?(Hash) && item['url'].to_s.start_with?('http')
           next if item['url'].include?('example.com')
 
-          yield item, trail.reject { |part| part.end_with?('.yaml') }.map { |part| part.tr('-', ' ').capitalize }.join(' › ')
+          block.call(item, trail.reject { |part| part.end_with?('.yaml') }.map { |part| part.tr('-', ' ').capitalize }.join(' › '), keys)
         end
       end
+    end
+
+    # Maps _data folder keys ([category] or [category, subcategory]) to the topic's localized title trail and path.
+    # Data folders use the English slugs; the en-US and localized menus are aligned position by position.
+    def topic_lookup(lang_code, menu)
+      en_menu = @site.data.dig('en-US', 'menu') || menu
+      lookup = {}
+      menu.each_with_index do |category, ci|
+        en_category = en_menu[ci] || category
+        category_key = en_category['path'].to_s.split('/').last
+        lookup[[category_key]] = { 'trail' => category['title'], 'path' => category['path'] }
+        (category['children'] || []).each_with_index do |subcategory, si|
+          en_subcategory = (en_category['children'] || [])[si] || subcategory
+          subcategory_key = en_subcategory['path'].to_s.split('/').last
+          lookup[[category_key, subcategory_key]] = { 'trail' => "#{category['title']} › #{subcategory['title']}",
+                                                       'path' => subcategory['path'] }
+        end
+      end
+      lookup
     end
 
     def extract_category_data(lang_code, category)
