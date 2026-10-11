@@ -1,45 +1,21 @@
 <!DOCTYPE html>
-<html lang="{{ page.lang | default: site.lang | default: " en" }}">
-
+<html lang="{{ page.lang | default: 'en-US' }}">
 <head>
-  <meta charset="UTF-8">
-  {% include components/atoms/head.html
-  title=page.title
-  description=page.description
-  %}
-
-  <!-- HTMX Setup -->
+  {% include components/atoms/head.html title=page.title description=page.description %}
   {% include components/htmx/htmx-setup.html %}
-
-  <!-- Additional page-specific styles -->
-  {% if page.additional_css %}
   {% for css_file in page.additional_css %}
-  <link rel="stylesheet" href="{{ css_file }}">
+  <link rel="stylesheet" href="{{ css_file | escape }}">
   {% endfor %}
-  {% endif %}
 </head>
-
-<body class="bg-gray-50 min-h-screen flex flex-col">
-  <!-- Header -->
-  {% include components/organisms/header.html %}
-
-  <!-- Main content -->
-  <main class="flex-grow">
+<body class="ipl-site">
+  {% include header.html %}
+  <main id="main-content" class="ipl-main" tabindex="-1">
     {{ content }}
   </main>
-
-  <!-- Footer -->
-  {% include components/organisms/footer.html %}
-
-  <!-- IPL Dynamic Features -->
-  <script src="/javascript/ipl-dynamic.js"></script>
-
-  <!-- Additional page-specific scripts -->
-  {% if page.additional_js %}
+  {% include footer.html %}
+  <script src="/javascript/ipl-dynamic.js" defer></script>
   {% for js_file in page.additional_js %}
-  <script src="{{ js_file }}"></script>
+  <script src="{{ js_file | escape }}" defer></script>
   {% endfor %}
-  {% endif %}
 </body>
-
 </html>

@@ -1,282 +1,66 @@
-{% comment %}
-Header Component
-Usage:
-{% include components/organisms/header.html %}
-{% endcomment %}
-
-<header class="bg-white border-b border-gray-200 shadow-sm sticky top-0 z-30">
-  <!-- Top bar with language and user options -->
-  <div class="bg-gray-50 border-b border-gray-200">
-    <div class="container mx-auto px-4">
-      <div class="flex justify-between py-1.5 text-xs text-gray-600">
-        <!-- Language switcher (Accordion) -->
-        <div class="relative">
-          <button id="lang-switcher-btn" class="flex items-center hover:text-blue-600 transition-colors duration-200"
-            aria-expanded="false" aria-controls="lang-options" aria-label="Select language">
-            <i class="fas fa-globe mr-1" aria-hidden="true"></i>
-            {% if page.lang == 'pt-BR' %}
-            Português
-            {% else %}
-            English
-            {% endif %}
-            <i id="lang-chevron" class="fas fa-chevron-down ml-1 text-xs transition-transform duration-200"
-              aria-hidden="true"></i>
-          </button>
-        </div>
-
-        <!-- User options -->
-        <div class="flex space-x-4">
-          <a href="{% if page.lang == 'pt-BR' %}/pt-BR/login/{% else %}/en-US/login/{% endif %}"
-            class="hover:text-blue-600 transition-colors duration-200">
-            <i class="fas fa-sign-in-alt mr-1"></i>{% if page.lang == 'pt-BR' %}Entrar{% else %}Log in{% endif %}
-          </a>
-          <a href="{% if page.lang == 'pt-BR' %}/pt-BR/cadastro/{% else %}/en-US/signup/{% endif %}"
-            class="hover:text-blue-600 transition-colors duration-200">
-            <i class="fas fa-user-plus mr-1"></i>{% if page.lang == 'pt-BR' %}Criar conta{% else %}Create account{%
-            endif %}
-          </a>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Language Options Accordion Panel (Discrete) -->
-  <div id="lang-options" class="hidden border-b border-gray-200 bg-gray-50">
-    <div class="container mx-auto px-4 py-2">
-      <div class="flex items-center justify-center gap-4">
-        <a href="{% include lang-switch-url.html lang="en-US" %}{{ lang_switch_url }}"
-          class="flex items-center gap-1.5 px-3 py-1 rounded-md text-xs transition-colors {% if page.lang == 'en-US' %}bg-blue-600 text-white{% else %}text-gray-600 hover:bg-gray-100{% endif %}">
-          🇺🇸 English
-          {% if page.lang == 'en-US' %}<i class="fas fa-check text-[10px] ml-0.5" aria-hidden="true"></i>{% endif %}
+{%- comment -%}
+Header (spec 001) — canonical brand, navigation, GET search and appearance control.
+Usage: {% include components/organisms/header.html %}
+Params: none; labels and destinations follow page.lang (default en-US).
+{%- endcomment -%}
+{%- assign shell_lang = page.lang | default: 'en-US' -%}
+{%- assign shell_t = site.data[shell_lang].translations -%}
+{%- if shell_lang == 'pt-BR' -%}
+  {%- assign shell_search_url = '/pt-BR/busca/' -%}
+{%- else -%}
+  {%- assign shell_search_url = '/en-US/search/' -%}
+{%- endif -%}
+<a class="ipl-skip" href="#main-content">{% if page.lang == 'pt-BR' %}Pular para o conteúdo{% else %}Skip to content{% endif %}</a>
+<header class="ipl-header">
+  <div class="ipl-container">
+    <div class="ipl-header__masthead">
+      <div class="ipl-brand">
+        <a class="ipl-brand__home" href="/{{ shell_lang }}/">
+          {% include components/atoms/brand-mark.html id_suffix="header" %}
+          <span class="ipl-brand__name">Internet Public Library</span>
         </a>
-        <span class="text-gray-300">|</span>
-        <a href="{% include lang-switch-url.html lang="pt-BR" %}{{ lang_switch_url }}"
-          class="flex items-center gap-1.5 px-3 py-1 rounded-md text-xs transition-colors {% if page.lang == 'pt-BR' %}bg-blue-600 text-white{% else %}text-gray-600 hover:bg-gray-100{% endif %}">
-          🇧🇷 Português
-          {% if page.lang == 'pt-BR' %}<i class="fas fa-check text-[10px] ml-0.5" aria-hidden="true"></i>{% endif %}
-        </a>
+        <a class="ipl-brand__credit" href="https://better-web.org">by Better Web</a>
       </div>
-    </div>
-  </div>
-
-  <!-- Main header area -->
-  <div class="container mx-auto px-4 py-3">
-    <div class="flex justify-between items-center">
-      <div class="flex items-center">
-        <a href="/{{ page.lang | default: 'en-US' }}/" class="text-2xl font-bold text-gray-800 flex items-center"
-          id="brand-link">
-          <span class="bg-blue-600 text-white w-8 h-8 rounded-lg flex items-center justify-center mr-2">IP</span>
-          <span id="brand-full" class="hidden sm:inline transition-all duration-500">Internet Public Library</span>
-          <span id="brand-short" class="hidden transition-all duration-500 opacity-0">IPL</span>
-          <span class="sm:hidden">IPL</span>
-        </a>
-        <div class="hidden lg:flex flex-col ml-3">
-          <span class="text-gray-500 text-sm">The Free Encyclopedia</span>
-          <a href="https://better-web.org" target="_blank" rel="noopener noreferrer"
-            class="text-xs text-gray-400 hover:text-blue-500 transition-colors">by Better Web</a>
-        </div>
-      </div>
-
-      <!-- Desktop search -->
-      <div class="hidden md:block w-1/3">
-        <form action="" id="header-search-form" class="relative">
-          <input type="text" id="header-search-input"
-            placeholder="{% if page.lang == 'pt-BR' %}Pesquisar IPL...{% else %}Search IPL...{% endif %}"
-            class="w-full border border-gray-300 rounded-lg px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors duration-200 pl-10">
-          <button type="submit" aria-label="Search"
-            class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-blue-600">
-            <i class="fas fa-search" aria-hidden="true"></i>
+      <search class="ipl-search" aria-label="{{ shell_t.nav.search | default: 'Search' | escape }}">
+        <form id="header-search-form" class="ipl-search__form" method="get" action="{{ shell_search_url }}">
+          <label class="ipl-visually-hidden" for="header-search-input">{% if shell_t.nav.search %}{{ shell_t.nav.search }}{% elsif page.lang == 'pt-BR' %}Pesquisar{% else %}Search{% endif %}</label>
+          <input class="ipl-input ipl-search__input" id="header-search-input" type="search" name="q" placeholder="{{ shell_t.ui.search_placeholder | escape }}">
+          <button class="ipl-button ipl-button--primary ipl-button--icon" type="submit">
+            {% include components/atoms/icon.html name="search" %}
+            <span class="ipl-visually-hidden">{% if shell_t.nav.search %}{{ shell_t.nav.search }}{% elsif page.lang == 'pt-BR' %}Pesquisar{% else %}Search{% endif %}</span>
           </button>
         </form>
-      </div>
-
-      <!-- Mobile menu toggle -->
-      <div class="md:hidden">
-        <button id="menu-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu"
-          class="text-gray-800 focus:outline-none p-2 rounded-lg hover:bg-gray-100 transition-colors duration-200">
-          <i class="fas fa-bars text-xl" aria-hidden="true"></i>
-        </button>
-      </div>
-    </div>
-  </div>
-
-  <!-- Navigation tabs (desktop) -->
-  <div class="hidden md:block bg-gray-50 border-t border-gray-200">
-    <div class="container mx-auto px-4">
-      <div class="flex">
-        <div class="flex overflow-x-auto whitespace-nowrap scrollbar-hide">
-          <a href="/{{ page.lang | default: 'en-US' }}/"
-            class="px-4 py-2.5 border-r border-gray-200 text-sm font-medium hover:bg-white hover:text-blue-600 transition-colors duration-200 {% if page.url == '/en-US/' or page.url == '/pt-BR/' %}text-blue-600 bg-white{% endif %}">
-            {% if page.lang == 'pt-BR' %}Início{% else %}Home{% endif %}
-          </a>
-
-          <a href="{% if page.lang == 'pt-BR' %}/pt-BR/categorias/{% else %}/en-US/categories/{% endif %}"
-            class="px-4 py-2.5 border-r border-gray-200 text-sm hover:bg-white hover:text-blue-600 transition-colors duration-200 {% if page.url contains '/catego' %}text-blue-600 bg-white{% endif %}">
-            {% if page.lang == 'pt-BR' %}Categorias{% else %}Categories{% endif %}
-          </a>
-
-          <a href="{% if page.lang == 'pt-BR' %}/pt-BR/alteracoes-recentes/{% else %}/en-US/recent-changes/{% endif %}"
-            class="px-4 py-2.5 border-r border-gray-200 text-sm hover:bg-white hover:text-blue-600 transition-colors duration-200 {% if page.url contains '/recent' or page.url contains '/altera' %}text-blue-600 bg-white{% endif %}">
-            {% if page.lang == 'pt-BR' %}Alterações Recentes{% else %}Recent Changes{% endif %}
-          </a>
-
-          <a href="{% if page.lang == 'pt-BR' %}/pt-BR/contribuir/{% else %}/en-US/contribute/{% endif %}"
-            class="px-4 py-2.5 border-r border-gray-200 text-sm hover:bg-white hover:text-blue-600 transition-colors duration-200 {% if page.url contains '/contri' %}text-blue-600 bg-white{% endif %}">
-            {% if page.lang == 'pt-BR' %}Contribuir{% else %}Contribute{% endif %}
-          </a>
-        </div>
-        <div class="ml-auto flex">
-          <a href="{% if page.lang == 'pt-BR' %}/pt-BR/random-resource/{% else %}/en-US/random-resource/{% endif %}"
-            class="px-4 py-2.5 border-l border-gray-200 text-sm hover:bg-white hover:text-blue-600 transition-colors duration-200">
-            <i class="fas fa-random mr-1"></i>{% if page.lang == 'pt-BR' %}Aleatório{% else %}Random{% endif %}
-          </a>
-          <a href="{% if page.lang == 'pt-BR' %}/pt-BR/ajuda/{% else %}/en-US/help/{% endif %}"
-            class="px-4 py-2.5 border-l border-gray-200 text-sm hover:bg-white hover:text-blue-600 transition-colors duration-200">
-            <i class="fas fa-question-circle mr-1"></i>{% if page.lang == 'pt-BR' %}Ajuda{% else %}Help{% endif %}
-          </a>
+      </search>
+      <div class="ipl-header__controls">
+        {% include components/molecules/language-switcher.html %}
+        <div class="ipl-appearance" data-ipl-appearance>
+          <button class="ipl-button ipl-button--icon" type="button" aria-haspopup="menu" aria-expanded="false" aria-controls="ipl-appearance-menu" data-ipl-appearance-toggle hidden>
+            {% include components/atoms/icon.html name="contrast" %}
+            <span class="ipl-visually-hidden">{% if shell_t.ui.appearance %}{{ shell_t.ui.appearance }}{% elsif page.lang == 'pt-BR' %}Aparência{% else %}Appearance{% endif %}</span>
+          </button>
+          <ul class="ipl-dropdown ipl-appearance__menu" id="ipl-appearance-menu" role="menu" aria-label="{% if page.lang == 'pt-BR' %}Aparência{% else %}Appearance{% endif %}" hidden>
+            <li role="none"><button class="ipl-appearance__choice" type="button" role="menuitemradio" aria-checked="false" data-theme-value="system">{% if shell_t.ui.theme_system %}{{ shell_t.ui.theme_system }}{% elsif page.lang == 'pt-BR' %}Sistema{% else %}System{% endif %}</button></li>
+            <li role="none"><button class="ipl-appearance__choice" type="button" role="menuitemradio" aria-checked="false" data-theme-value="light">{% if shell_t.ui.theme_light %}{{ shell_t.ui.theme_light }}{% elsif page.lang == 'pt-BR' %}Claro{% else %}Light{% endif %}</button></li>
+            <li role="none"><button class="ipl-appearance__choice" type="button" role="menuitemradio" aria-checked="false" data-theme-value="dark">{% if shell_t.ui.theme_dark %}{{ shell_t.ui.theme_dark }}{% elsif page.lang == 'pt-BR' %}Escuro{% else %}Dark{% endif %}</button></li>
+          </ul>
         </div>
       </div>
     </div>
-  </div>
-
-  <!-- Mobile menu -->
-  <div id="mobile-menu" class="hidden md:hidden">
-    <!-- Mobile search -->
-    <div class="px-4 py-3 bg-gray-50 border-t border-gray-200">
-      <div class="relative">
-        <input type="text" placeholder="Search IPL..."
-          class="w-full border border-gray-300 rounded-lg px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 pl-10">
-        <button class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400">
-          <i class="fas fa-search"></i>
-        </button>
-      </div>
+    <div class="ipl-header__navigation" data-ipl-disclosure data-ipl-mobile-nav>
+      <button id="menu-toggle" class="ipl-button ipl-menu-toggle" type="button" aria-expanded="true" aria-controls="mobile-menu" data-ipl-disclosure-toggle hidden>
+        {% include components/atoms/icon.html name="menu" %}
+        <span>{% if shell_t.nav.menu %}{{ shell_t.nav.menu }}{% elsif page.lang == 'pt-BR' %}Menu de navegação{% else %}Navigation menu{% endif %}</span>
+      </button>
+      <nav id="mobile-menu" class="ipl-nav" aria-label="{% if page.lang == 'pt-BR' %}Navegação principal{% else %}Primary navigation{% endif %}">
+        <ul class="ipl-nav__list">
+          <li><a class="ipl-nav__link" href="{% if page.lang == 'pt-BR' %}/pt-BR/categorias/{% else %}/en-US/categories/{% endif %}"{% if page.url == '/pt-BR/categorias/' or page.url == '/en-US/categories/' %} aria-current="page"{% endif %}>{{ shell_t.nav.categories | default: 'Categories' }}</a></li>
+          <li><a class="ipl-nav__link" href="{% if page.lang == 'pt-BR' %}/pt-BR/alteracoes-recentes/{% else %}/en-US/recent-changes/{% endif %}"{% if page.url == '/pt-BR/alteracoes-recentes/' or page.url == '/en-US/recent-changes/' %} aria-current="page"{% endif %}>{{ shell_t.footer.recent_changes | default: 'Recent changes' }}</a></li>
+          <li><a class="ipl-nav__link" href="{% if page.lang == 'pt-BR' %}/pt-BR/contribuir/{% else %}/en-US/contribute/{% endif %}"{% if page.url == '/pt-BR/contribuir/' or page.url == '/en-US/contribute/' %} aria-current="page"{% endif %}>{{ shell_t.nav.contribute | default: 'Contribute' }}</a></li>
+          <li><a class="ipl-nav__link" href="/{{ shell_lang }}/random-resource/">{{ shell_t.nav.random | default: 'Random' }}</a></li>
+          <li><a class="ipl-nav__link" href="{% if page.lang == 'pt-BR' %}/pt-BR/ajuda/{% else %}/en-US/help/{% endif %}"{% if page.url == '/pt-BR/ajuda/' or page.url == '/en-US/help/' %} aria-current="page"{% endif %}>{{ shell_t.nav.help | default: 'Help' }}</a></li>
+        </ul>
+      </nav>
     </div>
-
-    <!-- Mobile navigation -->
-    <nav class="border-t border-gray-200">
-      <a href="/{{ page.lang | default: 'en-US' }}/"
-        class="flex items-center px-4 py-3 hover:bg-gray-50 border-b border-gray-100 hover:text-blue-600 transition-colors duration-200">
-        <i class="fas fa-home w-6 text-gray-500"></i>{% if page.lang == 'pt-BR' %}Início{% else %}Home{% endif %}
-      </a>
-
-      <a href="{% if page.lang == 'pt-BR' %}/pt-BR/categorias/{% else %}/en-US/categories/{% endif %}"
-        class="flex items-center px-4 py-3 hover:bg-gray-50 border-b border-gray-100 hover:text-blue-600 transition-colors duration-200">
-        <i class="fas fa-th-large w-6 text-gray-500"></i>{% if page.lang == 'pt-BR' %}Categorias{% else %}Categories{%
-        endif %}
-      </a>
-
-      <a href="{% if page.lang == 'pt-BR' %}/pt-BR/alteracoes-recentes/{% else %}/en-US/recent-changes/{% endif %}"
-        class="flex items-center px-4 py-3 hover:bg-gray-50 border-b border-gray-100 hover:text-blue-600 transition-colors duration-200">
-        <i class="fas fa-history w-6 text-gray-500"></i>{% if page.lang == 'pt-BR' %}Alterações Recentes{% else %}Recent
-        Changes{% endif %}
-      </a>
-
-      <a href="{% if page.lang == 'pt-BR' %}/pt-BR/random-resource/{% else %}/en-US/random-resource/{% endif %}"
-        class="flex items-center px-4 py-3 hover:bg-gray-50 border-b border-gray-100 hover:text-blue-600 transition-colors duration-200">
-        <i class="fas fa-random w-6 text-gray-500"></i>{% if page.lang == 'pt-BR' %}Aleatório{% else %}Random Resource{%
-        endif %}
-      </a>
-
-      <a href="{% if page.lang == 'pt-BR' %}/pt-BR/contribuir/{% else %}/en-US/contribute/{% endif %}"
-        class="flex items-center px-4 py-3 hover:bg-gray-50 border-b border-gray-100 hover:text-blue-600 transition-colors duration-200">
-        <i class="fas fa-edit w-6 text-gray-500"></i>{% if page.lang == 'pt-BR' %}Contribuir{% else %}Contribute{% endif
-        %}
-      </a>
-
-      <a href="{% if page.lang == 'pt-BR' %}/pt-BR/ajuda/{% else %}/en-US/help/{% endif %}"
-        class="flex items-center px-4 py-3 hover:bg-gray-50 hover:text-blue-600 transition-colors duration-200">
-        <i class="fas fa-question-circle w-6 text-gray-500"></i>{% if page.lang == 'pt-BR' %}Ajuda{% else %}Help{% endif
-        %}
-      </a>
-    </nav>
   </div>
 </header>
-
-<script>
-  // Mobile menu toggle
-  document.addEventListener('DOMContentLoaded', function () {
-    // Mobile menu toggle
-    const menuToggle = document.getElementById('menu-toggle');
-    if (menuToggle) {
-      menuToggle.addEventListener('click', function () {
-        const mobileMenu = document.getElementById('mobile-menu');
-        mobileMenu.classList.toggle('hidden');
-      });
-    }
-
-    // Language switcher accordion toggle
-    const langBtn = document.getElementById('lang-switcher-btn');
-    const langOptions = document.getElementById('lang-options');
-    const langChevron = document.getElementById('lang-chevron');
-
-    if (langBtn && langOptions && langChevron) {
-      langBtn.addEventListener('click', function () {
-        const isExpanded = langBtn.getAttribute('aria-expanded') === 'true';
-        langBtn.setAttribute('aria-expanded', !isExpanded);
-        langOptions.classList.toggle('hidden');
-        langChevron.style.transform = isExpanded ? 'rotate(0deg)' : 'rotate(180deg)';
-      });
-
-      // Close when clicking outside
-      document.addEventListener('click', function (e) {
-        if (!langBtn.contains(e.target) && !langOptions.contains(e.target)) {
-          langBtn.setAttribute('aria-expanded', 'false');
-          langOptions.classList.add('hidden');
-          langChevron.style.transform = 'rotate(0deg)';
-        }
-      });
-    }
-
-    // Header search functionality
-    const headerSearchForm = document.getElementById('header-search-form');
-    const headerSearchInput = document.getElementById('header-search-input');
-
-    if (headerSearchForm && headerSearchInput) {
-      headerSearchForm.addEventListener('submit', function (e) {
-        e.preventDefault();
-        const query = headerSearchInput.value.trim();
-        if (query) {
-          // Detect current language from URL
-          const currentPath = window.location.pathname;
-          const lang = currentPath.startsWith('/pt-BR') ? 'pt-BR' : 'en-US';
-          const searchPath = lang === 'pt-BR' ? '/pt-BR/busca/' : '/en-US/search/';
-          window.location.href = searchPath + '?q=' + encodeURIComponent(query);
-        }
-      });
-    }
-
-    // Save language preference when switching
-    document.querySelectorAll('a[href^="/en-US"], a[href^="/pt-BR"]').forEach(link => {
-      link.addEventListener('click', function () {
-        const lang = this.getAttribute('href').substring(1, 6);
-        localStorage.setItem('preferred_language', lang);
-      });
-    });
-
-    // Brand animation: minimize "Internet Public Library" to "IPL" after 3 seconds
-    const brandFull = document.getElementById('brand-full');
-    const brandShort = document.getElementById('brand-short');
-
-    if (brandFull && brandShort && window.innerWidth >= 640) {
-      setTimeout(() => {
-        // Fade out full name
-        brandFull.style.opacity = '0';
-        brandFull.style.transform = 'translateX(-10px)';
-
-        setTimeout(() => {
-          brandFull.classList.add('hidden');
-          brandFull.classList.remove('sm:inline');
-
-          // Show short name
-          brandShort.classList.remove('hidden');
-          brandShort.classList.add('sm:inline');
-
-          // Fade in short name
-          setTimeout(() => {
-            brandShort.style.opacity = '1';
-          }, 50);
-        }, 300);
-      }, 3000);
-    }
-  });
-</script>
+<script src="/javascript/ipl-shell.js" defer></script>

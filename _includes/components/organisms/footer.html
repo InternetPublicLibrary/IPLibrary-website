@@ -1,316 +1,45 @@
-{% comment %}
-Footer Component
-Usage:
-{% include components/organisms/footer.html %}
-{% endcomment %}
-
-<footer class="bg-white border-t border-gray-200 py-10">
-  <div class="container mx-auto px-4">
-    <!-- Main footer navigation -->
-    <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-10">
-      <div>
-        <div class="flex items-center mb-3">
-          <span
-            class="bg-blue-600 text-white w-8 h-8 rounded-lg flex items-center justify-center mr-2 text-xs font-bold">IP</span>
-          <h3 class="text-lg font-medium text-gray-800">Internet Public Library</h3>
+{%- comment -%}
+Footer (spec 001) — canonical brand, locale categories and working community/license links.
+Usage: {% include components/organisms/footer.html %}
+Params: none; reads site.data[page.lang].menu and translations (default en-US).
+{%- endcomment -%}
+{%- assign footer_lang = page.lang | default: 'en-US' -%}
+{%- assign footer_t = site.data[footer_lang].translations -%}
+{%- assign footer_menu = site.data[footer_lang].menu -%}
+{%- include github-action-url.html -%}
+<footer class="ipl-footer">
+  <div class="ipl-container">
+    <div class="ipl-footer__grid">
+      <div class="ipl-footer__identity">
+        <div class="ipl-brand">
+          <a class="ipl-brand__home" href="/{{ footer_lang }}/">
+            {% include components/atoms/brand-mark.html id_suffix="footer" %}
+            <span class="ipl-brand__name">Internet Public Library</span>
+          </a>
+          <a class="ipl-brand__credit" href="https://better-web.org">by Better Web</a>
         </div>
-        <p class="text-gray-600 text-sm mb-4">A free encyclopedia of curated internet resources.</p>
-        <div class="flex space-x-4">
-          <a href="https://github.com/InternetPublicLibrary" target="_blank" rel="noopener noreferrer"
-            aria-label="GitHub" class="text-gray-400 hover:text-gray-900 transition-colors duration-200">
-            <i class="fab fa-github text-lg"></i>
-          </a>
-          <a href="https://twitter.com/InternetPubLib" target="_blank" rel="noopener noreferrer"
-            aria-label="X (Twitter)" class="text-gray-400 hover:text-blue-400 transition-colors duration-200">
-            <i class="fab fa-x-twitter text-lg"></i>
-          </a>
-          <a href="https://facebook.com/InternetPublicLibrary" target="_blank" rel="noopener noreferrer"
-            aria-label="Facebook" class="text-gray-400 hover:text-blue-600 transition-colors duration-200">
-            <i class="fab fa-facebook text-lg"></i>
-          </a>
-          <a href="https://linkedin.com/company/internet-public-library" target="_blank" rel="noopener noreferrer"
-            aria-label="LinkedIn" class="text-gray-400 hover:text-blue-700 transition-colors duration-200">
-            <i class="fab fa-linkedin text-lg"></i>
-          </a>
-          <a href="https://youtube.com/@InternetPublicLibrary" target="_blank" rel="noopener noreferrer"
-            aria-label="YouTube" class="text-gray-400 hover:text-red-600 transition-colors duration-200">
-            <i class="fab fa-youtube text-lg"></i>
-          </a>
-        </div>
+        <p class="ipl-footer__description">{% if footer_t.footer.description %}{{ footer_t.footer.description }}{% elsif page.lang == 'pt-BR' %}Uma enciclopédia gratuita de recursos da internet curados.{% else %}A free encyclopedia of curated internet resources.{% endif %}</p>
+        {% include components/molecules/language-selector.html %}
       </div>
-
-      <div>
-        <h4 class="text-base font-medium text-gray-800 mb-4">Categories</h4>
-        <ul class="space-y-2 text-sm">
-          {% for category in site.data.en.menu.en limit:6 %}
-          <li><a href="{{ category.path }}"
-              class="text-gray-600 hover:text-blue-600 hover:underline transition-colors duration-200">{{ category.name
-              | capitalize }}</a></li>
+      <nav class="ipl-footer__section" aria-label="{{ footer_t.nav.categories | default: 'Categories' | escape }}">
+        <h2 class="ipl-footer__title">{{ footer_t.nav.categories | default: 'Categories' }}</h2>
+        <ul class="ipl-footer__links">
+          {% for category in footer_menu limit:6 %}
+          <li><a href="{{ category.path | escape }}">{{ category.title | escape }}</a></li>
           {% endfor %}
-          <li class="pt-1"><a href="{% if page.lang == 'pt-BR' %}/pt-BR/categorias/{% else %}/en-US/categories/{% endif %}" class="text-blue-600 hover:underline text-xs flex items-center">View
-              all categories <i class="fas fa-arrow-right ml-1 text-xs"></i></a></li>
+          <li><a href="{% if page.lang == 'pt-BR' %}/pt-BR/categorias/{% else %}/en-US/categories/{% endif %}">{{ footer_t.ui.view_all | default: 'View all' }}</a></li>
         </ul>
-      </div>
-
-      <div>
-        <h4 class="text-base font-medium text-gray-800 mb-4">{% if page.lang == 'pt-BR' %}Sobre{% else %}About{% endif
-          %}</h4>
-        <ul class="space-y-2 text-sm">
-          <li><a href="{% if page.lang == 'pt-BR' %}/pt-BR/sobre{% else %}/en-US/about{% endif %}"
-              class="text-gray-600 hover:text-blue-600 hover:underline transition-colors duration-200">{% if page.lang
-              == 'pt-BR' %}Sobre a BPI{% else %}About IPL{% endif %}</a></li>
-          <li><a href="{% if page.lang == 'pt-BR' %}/pt-BR/missao{% else %}/en-US/mission{% endif %}"
-              class="text-gray-600 hover:text-blue-600 hover:underline transition-colors duration-200">{% if page.lang
-              == 'pt-BR' %}Missão{% else %}Mission{% endif %}</a></li>
-          <li><a
-              href="{% if page.lang == 'pt-BR' %}/pt-BR/portal-comunidade{% else %}/en-US/community-portal{% endif %}"
-              class="text-gray-600 hover:text-blue-600 hover:underline transition-colors duration-200">{% if page.lang
-              == 'pt-BR' %}Portal da Comunidade{% else %}Community Portal{% endif %}</a></li>
-          <li><a
-              href="{% if page.lang == 'pt-BR' %}/pt-BR/alteracoes-recentes{% else %}/en-US/recent-changes{% endif %}"
-              class="text-gray-600 hover:text-blue-600 hover:underline transition-colors duration-200">{% if page.lang
-              == 'pt-BR' %}Alterações Recentes{% else %}Recent Changes{% endif %}</a></li>
-          <li><a href="{% if page.lang == 'pt-BR' %}/pt-BR/contato{% else %}/en-US/contact{% endif %}"
-              class="text-gray-600 hover:text-blue-600 hover:underline transition-colors duration-200">{% if page.lang
-              == 'pt-BR' %}Contate-nos{% else %}Contact Us{% endif %}</a></li>
+      </nav>
+      <nav class="ipl-footer__section" aria-label="{{ footer_t.nav.contribute | default: 'Contribute' | escape }}">
+        <h2 class="ipl-footer__title">{{ footer_t.nav.contribute | default: 'Contribute' }}</h2>
+        <ul class="ipl-footer__links">
+          <li><a href="{% if page.lang == 'pt-BR' %}/pt-BR/contribuir/{% else %}/en-US/contribute/{% endif %}">{{ footer_t.contribute.guidelines | default: 'Contribution guidelines' }}</a></li>
+          <li><a href="{% if page.lang == 'pt-BR' %}/pt-BR/ajuda/{% else %}/en-US/help/{% endif %}">{{ footer_t.nav.help | default: 'Help' }}</a></li>
+          <li><a href="{{ github_report_url | escape }}">{{ footer_t.footer.report_issues | default: 'Report issues' }}</a></li>
+          <li><a href="https://github.com/InternetPublicLibrary">GitHub</a></li>
         </ul>
-      </div>
-
-      <div>
-        <h4 class="text-base font-medium text-gray-800 mb-4">{% if page.lang == 'pt-BR' %}Contribuir{% else
-          %}Contribute{% endif %}</h4>
-        <ul class="space-y-2 text-sm">
-          <li><a href="{% if page.lang == 'pt-BR' %}/pt-BR/ajuda{% else %}/en-US/help{% endif %}"
-              class="text-gray-600 hover:text-blue-600 hover:underline transition-colors duration-200">{% if page.lang
-              == 'pt-BR' %}Ajuda{% else %}Help{% endif %}</a></li>
-          <li><a href="{% if page.lang == 'pt-BR' %}/pt-BR/contribuir{% else %}/en-US/contribute{% endif %}"
-              class="text-gray-600 hover:text-blue-600 hover:underline transition-colors duration-200">{% if page.lang
-              == 'pt-BR' %}Criar Conteúdo{% else %}Create Content{% endif %}</a></li>
-          <li><a href="{% if page.lang == 'pt-BR' %}/pt-BR/reportar-problemas{% else %}/en-US/report-issues{% endif %}"
-              class="text-gray-600 hover:text-blue-600 hover:underline transition-colors duration-200">{% if page.lang
-              == 'pt-BR' %}Reportar Problemas{% else %}Report Issues{% endif %}</a></li>
-          <li><a
-              href="{% if page.lang == 'pt-BR' %}/pt-BR/politicas-conteudo{% else %}/en-US/content-policies{% endif %}"
-              class="text-gray-600 hover:text-blue-600 hover:underline transition-colors duration-200">{% if page.lang
-              == 'pt-BR' %}Políticas de Conteúdo{% else %}Content Policies{% endif %}</a></li>
-          <li><a href="{% if page.lang == 'pt-BR' %}/pt-BR/doar{% else %}/en-US/donate{% endif %}"
-              class="text-gray-600 hover:text-blue-600 hover:underline transition-colors duration-200">{% if page.lang
-              == 'pt-BR' %}Doar{% else %}Donate{% endif %}</a></li>
-        </ul>
-      </div>
+      </nav>
     </div>
-
-    <!-- Language selector and legal links -->
-    <div class="border-t border-gray-100 pt-6 flex flex-col md:flex-row justify-between">
-      <div class="mb-6 md:mb-0">
-        <h4 class="text-sm font-medium text-gray-800 mb-3">{% if page.lang == 'pt-BR' %}Idiomas{% else %}Languages{%
-          endif %}</h4>
-        <div class="flex flex-wrap gap-4 text-sm">
-          <a href="{% include lang-switch-url.html lang="en-US" %}{{ lang_switch_url }}"
-            class="{% if page.lang == 'en-US' %}font-medium{% endif %} text-gray-600 hover:text-blue-600 hover:underline transition-colors duration-200">English</a>
-          <a href="{% include lang-switch-url.html lang="pt-BR" %}{{ lang_switch_url }}"
-            class="{% if page.lang == 'pt-BR' %}font-medium{% endif %} text-gray-600 hover:text-blue-600 hover:underline transition-colors duration-200">Português</a>
-          <a href="{% if page.lang == 'pt-BR' %}/pt-BR/adicionar-idioma{% else %}/en-US/add-language{% endif %}"
-            class="text-blue-600 hover:underline text-xs flex items-center">{% if page.lang == 'pt-BR' %}Adicionar seu
-            idioma{% else %}Add your language{% endif %} <i class="fas fa-plus ml-1"></i></a>
-        </div>
-      </div>
-
-      <div class="text-sm text-gray-500">
-        <div class="mb-3">
-          <p>Content is available under <a href="#" class="text-blue-600 hover:underline">Creative Commons
-              Attribution-ShareAlike License</a>.</p>
-        </div>
-        <div class="flex flex-wrap gap-x-4 gap-y-2">
-          <a href="{% if page.lang == 'pt-BR' %}/pt-BR/politica-privacidade/{% else %}/en-US/privacy-policy/{% endif %}"
-            class="hover:text-blue-600 hover:underline transition-colors duration-200">{% if page.lang == 'pt-BR'
-            %}Política de Privacidade{% else %}Privacy Policy{% endif %}</a>
-          <a href="{% if page.lang == 'pt-BR' %}/pt-BR/termos-uso/{% else %}/en-US/terms-of-use/{% endif %}"
-            class="hover:text-blue-600 hover:underline transition-colors duration-200">{% if page.lang == 'pt-BR'
-            %}Termos de Uso{% else %}Terms of Use{% endif %}</a>
-          <a href="{% if page.lang == 'pt-BR' %}/pt-BR/politica-cookies/{% else %}/en-US/cookie-policy/{% endif %}"
-            class="hover:text-blue-600 hover:underline transition-colors duration-200">{% if page.lang == 'pt-BR'
-            %}Política de Cookies{% else %}Cookie Policy{% endif %}</a>
-          <a href="{% if page.lang == 'pt-BR' %}/pt-BR/contato/{% else %}/en-US/contact/{% endif %}"
-            class="hover:text-blue-600 hover:underline transition-colors duration-200">{% if page.lang == 'pt-BR'
-            %}Contate a IPL{% else %}Contact IPL{% endif %}</a>
-        </div>
-      </div>
-    </div>
-
-    <!-- Copyright and Maintainer Info -->
-    <div class="mt-8 pt-6 border-t border-gray-100">
-      <!-- Main Project Info -->
-      <div class="text-center mb-6">
-        <p class="text-sm text-gray-600 mb-2">
-          {% if page.lang == 'pt-BR' %}
-          <i class="fas fa-heart text-red-500 mr-1"></i>
-          Internet Public Library é um projeto comunitário mantido por
-          {% else %}
-          <i class="fas fa-heart text-red-500 mr-1"></i>
-          Internet Public Library is a community project maintained by
-          {% endif %}
-          <a href="https://beopendigital.com" target="_blank" rel="noopener noreferrer"
-            class="font-semibold text-blue-600 hover:text-blue-800 hover:underline">
-            Open Digital Brasil
-          </a>
-        </p>
-        <p class="text-xs text-gray-400">
-          {% if page.lang == 'pt-BR' %}
-          Contribuidores de conteúdo mantêm seus próprios direitos autorais.
-          {% else %}
-          Content contributors maintain their own copyrights.
-          {% endif %}
-        </p>
-      </div>
-
-      <!-- Accordion for Open Digital Details -->
-      <div class="max-w-xl mx-auto">
-        <div class="bg-gray-50 rounded-xl border border-gray-200 overflow-hidden">
-          <button id="opendigital-accordion-btn"
-            class="w-full px-4 py-3 flex items-center justify-between text-left hover:bg-gray-100 transition-colors"
-            aria-expanded="false" aria-controls="opendigital-details">
-            <div class="flex items-center gap-3">
-              <div class="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center">
-                <span class="text-white text-xs font-bold">OD</span>
-              </div>
-              <div>
-                <span class="text-sm font-medium text-gray-800">Open Digital Brasil</span>
-                <span class="text-xs text-gray-500 ml-2">
-                  {% if page.lang == 'pt-BR' %}Mantenedora{% else %}Maintainer{% endif %}
-                </span>
-              </div>
-            </div>
-            <i id="accordion-icon" class="fas fa-chevron-down text-gray-400 text-sm transition-transform duration-200"
-              aria-hidden="true"></i>
-          </button>
-
-          <div id="opendigital-details" class="hidden border-t border-gray-200">
-            <div class="p-4 space-y-3 text-sm">
-              <!-- Company Name -->
-              <div class="flex items-start gap-3">
-                <i class="fas fa-building text-gray-400 mt-0.5" aria-hidden="true"></i>
-                <div>
-                  <p class="font-medium text-gray-800">Open Digital Brasil Inova Simples (I.S.)</p>
-                  <p class="text-xs text-gray-500">CNPJ: 50.748.071/0001-45</p>
-                </div>
-              </div>
-
-              <!-- Address -->
-              <div class="flex items-start gap-3">
-                <i class="fas fa-map-marker-alt text-gray-400 mt-0.5" aria-hidden="true"></i>
-                <p class="text-gray-600">
-                  Rua Catanduva, 138, Loja 2 – Chácara<br>
-                  Betim – MG, CEP 32670-334, Brasil
-                </p>
-              </div>
-
-              <!-- Contact -->
-              <div class="flex items-start gap-3">
-                <i class="fas fa-phone text-gray-400 mt-0.5" aria-hidden="true"></i>
-                <a href="tel:+5531994501907" class="text-blue-600 hover:underline">(31) 99450-1907</a>
-              </div>
-
-              <div class="flex items-start gap-3">
-                <i class="fas fa-envelope text-gray-400 mt-0.5" aria-hidden="true"></i>
-                <a href="mailto:contato@beopendigital.com"
-                  class="text-blue-600 hover:underline">contato@beopendigital.com</a>
-              </div>
-
-              <!-- Website -->
-              <div class="flex items-start gap-3">
-                <i class="fas fa-globe text-gray-400 mt-0.5" aria-hidden="true"></i>
-                <a href="https://beopendigital.com" target="_blank" rel="noopener noreferrer"
-                  class="text-blue-600 hover:underline">
-                  beopendigital.com
-                </a>
-              </div>
-
-              <!-- Social Links -->
-              <div class="flex items-center gap-4 pt-2 border-t border-gray-100">
-                <span class="text-xs text-gray-500">{% if page.lang == 'pt-BR' %}Redes Sociais:{% else %}Social:{% endif
-                  %}</span>
-                <div class="flex gap-3">
-                  <a href="https://facebook.com/OpenDigitalBrasil" target="_blank" rel="noopener noreferrer"
-                    aria-label="Facebook" class="text-gray-400 hover:text-blue-600">
-                    <i class="fab fa-facebook" aria-hidden="true"></i>
-                  </a>
-                  <a href="https://instagram.com/OpenDigitalBrasil" target="_blank" rel="noopener noreferrer"
-                    aria-label="Instagram" class="text-gray-400 hover:text-pink-500">
-                    <i class="fab fa-instagram" aria-hidden="true"></i>
-                  </a>
-                  <a href="https://linkedin.com/company/OpenDigitalBrasil" target="_blank" rel="noopener noreferrer"
-                    aria-label="LinkedIn" class="text-gray-400 hover:text-blue-700">
-                    <i class="fab fa-linkedin" aria-hidden="true"></i>
-                  </a>
-                  <a href="https://tiktok.com/@OpenDigitalBrasil" target="_blank" rel="noopener noreferrer"
-                    aria-label="TikTok" class="text-gray-400 hover:text-gray-800">
-                    <i class="fab fa-tiktok" aria-hidden="true"></i>
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Copyright -->
-      <p class="text-center text-xs text-gray-400 mt-4">
-        &copy; 2023–{{ 'now' | date: "%Y" }} Open Digital Brasil.
-        {% if page.lang == 'pt-BR' %}Todos os direitos reservados.{% else %}All rights reserved.{% endif %}
-      </p>
-    </div>
-
-    <!-- Accordion Script -->
-    <script>
-      document.addEventListener('DOMContentLoaded', function () {
-        const btn = document.getElementById('opendigital-accordion-btn');
-        const details = document.getElementById('opendigital-details');
-        const icon = document.getElementById('accordion-icon');
-
-        if (btn && details && icon) {
-          btn.addEventListener('click', function () {
-            const isExpanded = btn.getAttribute('aria-expanded') === 'true';
-            btn.setAttribute('aria-expanded', !isExpanded);
-            details.classList.toggle('hidden');
-            icon.style.transform = isExpanded ? 'rotate(0deg)' : 'rotate(180deg)';
-          });
-        }
-      });
-    </script>
-
-    <!-- LocalBusiness Schema -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "Organization",
-      "name": "Open Digital Brasil",
-      "legalName": "Open Digital Brasil Inova Simples (I.S.)",
-      "url": "https://beopendigital.com",
-      "logo": "https://beopendigital.com/logo.png",
-      "taxID": "50.748.071/0001-45",
-      "address": {
-        "@type": "PostalAddress",
-        "streetAddress": "Rua Catanduva, 138, Loja 2 – Chácara",
-        "addressLocality": "Betim",
-        "addressRegion": "MG",
-        "postalCode": "32670-334",
-        "addressCountry": "BR"
-      },
-      "contactPoint": {
-        "@type": "ContactPoint",
-        "telephone": "+55-31-99450-1907",
-        "contactType": "customer service",
-        "email": "contato@beopendigital.com",
-        "availableLanguage": ["Portuguese", "English"]
-      },
-      "sameAs": [
-        "https://facebook.com/OpenDigitalBrasil",
-        "https://instagram.com/OpenDigitalBrasil",
-        "https://linkedin.com/company/OpenDigitalBrasil",
-        "https://tiktok.com/@OpenDigitalBrasil"
-      ]
-    }
-    </script>
+    <p class="ipl-footer__license">{{ footer_t.footer.license_text | default: 'Content is available under' }} <a href="{% if page.lang == 'pt-BR' %}/pt-BR/licenca/{% else %}/en-US/license/{% endif %}">{{ footer_t.footer.license_name | default: 'Creative Commons Attribution-ShareAlike License' }}</a>.</p>
   </div>
 </footer>

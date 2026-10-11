@@ -1,0 +1,27 @@
+{%- comment -%}
+GitHub actions (spec 001) — sets github_edit_url, github_suggest_url and github_report_url.
+Usage: {% include github-action-url.html %}<a href="{{ github_edit_url | escape }}">Edit</a>
+Params: none; uses page.lang (default en-US), page.path, page.title and the absolute page URL.
+Jekyll's inspect filter retains the source page class in an array: PageWithoutAFile paths are
+synthetic, so only a matching Jekyll::Page may produce an edit URL. No file-name heuristics.
+{%- endcomment -%}
+{%- assign github_lang = 'en-US' -%}
+{%- if page.lang == 'pt-BR' -%}{%- assign github_lang = 'pt-BR' -%}{%- endif -%}
+{%- assign github_repo_url = 'https://github.com/InternetPublicLibrary/' | append: github_lang -%}
+{%- assign github_page_title = page.title | default: 'Internet Public Library' -%}
+{%- assign github_page_body = page.url | absolute_url | url_encode -%}
+{%- assign github_edit_title = 'Edit: ' | append: github_page_title | url_encode -%}
+{%- assign github_suggest_title = 'Resource suggestion: ' | append: github_page_title | url_encode -%}
+{%- assign github_report_title = 'Problem on: ' | append: github_page_title | url_encode -%}
+{%- assign github_edit_url = github_repo_url | append: '/issues/new?title=' | append: github_edit_title | append: '&body=' | append: github_page_body -%}
+{%- assign github_suggest_url = github_repo_url | append: '/issues/new?title=' | append: github_suggest_title | append: '&body=' | append: github_page_body -%}
+{%- assign github_report_url = github_repo_url | append: '/issues/new?title=' | append: github_report_title | append: '&body=' | append: github_page_body -%}
+{%- assign github_source_prefix = github_lang | append: '/' -%}
+{%- assign github_path_prefix = page.path | slice: 0, github_source_prefix.size -%}
+{%- if github_path_prefix == github_source_prefix -%}
+  {%- assign github_source_pages = site.pages | where: 'path', page.path | inspect -%}
+  {%- if github_source_pages contains 'Jekyll::Page @relative_path=' -%}
+    {%- assign github_source_path = page.path | remove_first: github_source_prefix -%}
+    {%- assign github_edit_url = github_repo_url | append: '/edit/master/' | append: github_source_path -%}
+  {%- endif -%}
+{%- endif -%}

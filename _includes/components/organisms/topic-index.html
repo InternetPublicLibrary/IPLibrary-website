@@ -1,0 +1,157 @@
+{%- comment -%}
+Topic index (spec 001 S3) — shared body of category and subcategory pages: title and lead first, then the
+child topics with real counts, curated resources, optional Wikipedia overview and research elsewhere.
+Usage: {% include components/organisms/topic-index.html level="category" %}
+Params:
+  level  "category" (children are subcategories) | "subcategory" (children are sections)
+Reads: page.title, page.description, page.lang, page.children, page.data_folder,
+       page.parent_category / page.parent_category_path, content (passed as include.content)
+{%- endcomment -%}
+{%- assign lang = page.lang | default: 'en-US' -%}
+{%- assign pt = false -%}{%- if lang == 'pt-BR' -%}{%- assign pt = true -%}{%- endif -%}
+
+{%- assign children = page.children -%}
+{%- unless children -%}
+  {%- for item in site.data[lang].menu -%}{%- if item.path == page.url -%}{%- assign children = item.children -%}{%- endif -%}{%- endfor -%}
+{%- endunless -%}
+
+{%- assign resource_groups = nil -%}
+{%- assign resource_count = 0 -%}
+{%- if page.data_folder -%}
+  {%- assign resource_groups = site.data[lang][page.data_folder] -%}
+  {%- for group in resource_groups -%}
+    {%- for resource in group[1] -%}{%- if resource.url -%}{%- assign resource_count = resource_count | plus: 1 -%}{%- endif -%}{%- endfor -%}
+  {%- endfor -%}
+{%- endif -%}
+
+{%- if include.level == 'subcategory' -%}
+  {%- if pt -%}{%- assign child_label = 'seções' -%}{%- assign children_title = 'Seções' -%}{%- else -%}{%- assign child_label = 'sections' -%}{%- assign children_title = 'Sections' -%}{%- endif -%}
+{%- else -%}
+  {%- if pt -%}{%- assign child_label = 'subcategorias' -%}{%- assign children_title = 'Subcategorias' -%}{%- else -%}{%- assign child_label = 'subcategories' -%}{%- assign children_title = 'Subcategories' -%}{%- endif -%}
+{%- endif -%}
+
+<div class="ipl-container ipl-topic">
+  <nav class="ipl-topic__breadcrumb" aria-label="Breadcrumb">
+    <ol role="list">
+      <li><a class="ipl-link ipl-link--quiet" href="/{{ lang }}/">{% if pt %}Início{% else %}Home{% endif %}</a></li>
+      {%- if page.parent_category and page.parent_category_path %}
+      <li><a class="ipl-link ipl-link--quiet" href="{{ page.parent_category_path }}">{{ page.parent_category }}</a></li>
+      {%- endif %}
+      <li><span aria-current="page">{{ page.title }}</span></li>
+    </ol>
+  </nav>
+
+  <header class="ipl-topic__header">
+    <h1 class="ipl-topic__title">{{ page.title }}</h1>
+    {%- if page.description %}<p class="ipl-page-lead">{{ page.description }}</p>{% endif %}
+    <p class="ipl-topic__facts">
+      {%- if children and children.size > 0 -%}{{ children.size }} {{ child_label }}{%- endif -%}
+      {%- if resource_count > 0 -%}{% if children and children.size > 0 %} · {% endif %}{{ resource_count }} {% if pt %}recursos selecionados{% else %}curated resources{% endif %}{%- endif -%}
+    </p>
+  </header>
+
+  <div class="ipl-topic__layout">
+    <div class="ipl-topic__main">
+      {%- if children and children.size > 0 %}
+      <section class="ipl-topic__section" aria-labelledby="topic-children">
+        <h2 id="topic-children" class="ipl-section-title">{{ children_title }}</h2>
+        <ul class="ipl-portal" role="list">
+          {%- for child in children %}
+          <li class="ipl-portal__item">
+            <h3 class="ipl-portal__title"><a class="ipl-link ipl-link--quiet" href="{{ child.path }}">{{ child.title }}</a></h3>
+            {%- if child.children and child.children.size > 0 %}
+            <p class="ipl-portal__meta">{{ child.children.size }} {% if pt %}seções{% else %}sections{% endif %}</p>
+            <ul class="ipl-portal__children" role="list">
+              {%- for grandchild in child.children limit: 4 %}
+              <li><a class="ipl-link" href="{{ grandchild.path }}">{{ grandchild.title }}</a></li>
+              {%- endfor %}
+              {%- if child.children.size > 4 %}
+              <li><a class="ipl-link ipl-portal__more" href="{{ child.path }}">{% if pt %}Ver todas{% else %}See all{% endif %} ({{ child.children.size }})<span class="ipl-visually-hidden"> — {{ child.title }}</span></a></li>
+              {%- endif %}
+            </ul>
+            {%- endif %}
+          </li>
+          {%- endfor %}
+        </ul>
+      </section>
+      {%- endif %}
+
+      {%- if resource_count > 0 %}
+      <section class="ipl-topic__section" aria-labelledby="topic-resources">
+        <h2 id="topic-resources" class="ipl-section-title">{% if pt %}Recursos selecionados{% else %}Curated resources{% endif %}</h2>
+        {%- for group in resource_groups %}
+          {%- assign group_key = group[0] | replace: '.yaml', '' -%}
+          {%- case group_key -%}
+            {%- when 'tools' -%}{%- if pt -%}{%- assign group_title = 'Ferramentas' -%}{%- else -%}{%- assign group_title = 'Tools' -%}{%- endif -%}
+            {%- when 'databases' -%}{%- if pt -%}{%- assign group_title = 'Bases de dados' -%}{%- else -%}{%- assign group_title = 'Databases' -%}{%- endif -%}
+            {%- when 'learn' -%}{%- if pt -%}{%- assign group_title = 'Aprender' -%}{%- else -%}{%- assign group_title = 'Learn' -%}{%- endif -%}
+            {%- else -%}{%- assign group_title = group_key | replace: '-', ' ' | capitalize -%}
+          {%- endcase -%}
+          {%- assign listed = group[1] | where_exp: 'resource', 'resource.url' -%}
+          {%- if listed.size > 0 %}
+        <h3 class="ipl-resource-group__title">{{ group_title }}</h3>
+        <ul class="ipl-resource-list" role="list">
+          {%- for resource in listed %}
+          {%- assign resource_name = resource.name | default: resource.title | default: resource.url -%}
+          <li class="ipl-resource">
+            <a class="ipl-link ipl-resource__title" href="{{ resource.url }}" rel="noopener"{% if resource.language %} hreflang="{{ resource.language }}"{% endif %}>{{ resource_name }}</a>
+            {%- assign host = resource.url | split: '//' | last | split: '/' | first | remove_first: 'www.' -%}
+            <span class="ipl-resource__source">{{ host }}</span>
+            {%- if resource.description %}<p class="ipl-resource__desc">{{ resource.description }}</p>{% endif %}
+          </li>
+          {%- endfor %}
+        </ul>
+          {%- endif %}
+        {%- endfor %}
+      </section>
+      {%- endif %}
+
+      {%- assign intro = include.content | strip -%}
+      {%- if intro != '' %}
+      <section class="ipl-topic__intro" aria-labelledby="topic-about">
+        <h2 id="topic-about" class="ipl-section-title">{% if pt %}Sobre este tema{% else %}About this topic{% endif %}</h2>
+        <div class="ipl-prose">
+          {{ include.content }}
+        </div>
+      </section>
+      {%- endif %}
+
+      {%- comment -%} Self-hiding until a Wikipedia extract loads; carries its own heading. {%- endcomment %}
+      {% include components/wiki_preview.html %}
+
+      <details class="ipl-research" data-ipl-research data-query="{{ page.title | escape }}">
+        <summary class="ipl-research__summary">
+          <span class="ipl-research__title">{% if pt %}Pesquisar em outros lugares{% else %}Research elsewhere{% endif %}</span>
+          <span class="ipl-hint">{% if pt %}Resultados ao vivo de serviços externos (OpenAlex, arXiv, ORCID e outros). Não são curados pela IPL.{% else %}Live results from external services (OpenAlex, arXiv, ORCID and others). Not curated by IPL.{% endif %}</span>
+        </summary>
+        <div class="ipl-research__body">
+          {% include components/templates/academic-dashboard.html search_query=page.title %}
+        </div>
+      </details>
+
+      {%- if page.show_discussion %}
+      <section id="discussion" class="ipl-topic__section" aria-label="{% if pt %}Discussão{% else %}Discussion{% endif %}">
+        {% include components/discussion.html %}
+      </section>
+      {%- endif %}
+    </div>
+
+    <aside class="ipl-topic__aside" aria-label="{% if pt %}Sobre este tema{% else %}About this topic{% endif %}">
+      <section class="ipl-panel">
+        <h2 class="ipl-panel__title">{% if pt %}Ajude a melhorar{% else %}Help improve{% endif %}</h2>
+        <ul class="ipl-home__links" role="list">
+          <li><a class="ipl-link" href="{% if pt %}/pt-BR/contribuir/{% else %}/en-US/contribute/{% endif %}">{% if pt %}Como contribuir{% else %}How to contribute{% endif %}</a></li>
+          {%- if page.show_discussion %}
+          <li><a class="ipl-link" href="#discussion">{% if pt %}Discutir este tema{% else %}Discuss this topic{% endif %}</a></li>
+          {%- endif %}
+        </ul>
+      </section>
+      {%- if page.parent_category and page.parent_category_path %}
+      <section class="ipl-panel ipl-panel--quiet">
+        <h2 class="ipl-panel__title">{% if pt %}Faz parte de{% else %}Part of{% endif %}</h2>
+        <a class="ipl-link" href="{{ page.parent_category_path }}">{{ page.parent_category }}</a>
+      </section>
+      {%- endif %}
+    </aside>
+  </div>
+</div>

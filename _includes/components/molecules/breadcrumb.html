@@ -1,32 +1,19 @@
-{% comment %}
-  Breadcrumb Component
-  Usage:
-  {% include components/molecules/breadcrumb.html items=page.breadcrumb_items %}
-  
-  Parameters:
-  - items: Array of objects with title and url properties
-{% endcomment %}
-
-<nav aria-label="Breadcrumb" class="text-sm text-gray-600 bg-white p-3 border border-gray-200 rounded-md mb-4">
-  <ol class="flex flex-wrap items-center space-x-1">
-    <li>
-      <a href="/" class="text-blue-600 hover:text-blue-800 hover:underline transition-colors duration-200">Home</a>
-    </li>
-    
+{%- comment -%}
+Breadcrumb (spec 001) — localized home and complete, wrapping ancestor names.
+Usage: {% include components/molecules/breadcrumb.html items=page.breadcrumb_items %}
+Params: items array of {title, url}; the last item represents the current page.
+{%- endcomment -%}
+{%- assign breadcrumb_lang = page.lang | default: 'en-US' -%}
+{%- assign breadcrumb_t = site.data[breadcrumb_lang].translations -%}
+<nav class="ipl-breadcrumb" aria-label="Breadcrumb">
+  <ol class="ipl-breadcrumb__list">
+    <li><a href="/{{ breadcrumb_lang }}/">{% if breadcrumb_t.nav.home %}{{ breadcrumb_t.nav.home }}{% elsif page.lang == 'pt-BR' %}Início{% else %}Home{% endif %}</a></li>
     {% for item in include.items %}
-      {% if forloop.last %}
-        <li aria-current="page" class="flex items-center">
-          <span class="mx-1 text-gray-400">›</span>
-          <span class="text-gray-800 font-medium">{{ item.title }}</span>
-        </li>
-      {% else %}
-        <li class="flex items-center">
-          <span class="mx-1 text-gray-400">›</span>
-          <a href="{{ item.url }}" class="text-blue-600 hover:text-blue-800 hover:underline transition-colors duration-200">
-            {{ item.title }}
-          </a>
-        </li>
-      {% endif %}
+    <li>
+      <span class="ipl-breadcrumb__separator" aria-hidden="true">›</span>
+      {% if forloop.last %}<span aria-current="page">{{ item.title | escape }}</span>
+      {% else %}<a href="{{ item.url | escape }}">{{ item.title | escape }}</a>{% endif %}
+    </li>
     {% endfor %}
   </ol>
-</nav> 
+</nav>

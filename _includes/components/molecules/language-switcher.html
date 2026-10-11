@@ -1,29 +1,25 @@
-<div class="language-switcher">
-  <script>
-    // Function to set the preferred language in localStorage
-    function setPreferredLanguage(language) {
-      localStorage.setItem('preferred_language', language);
-      
-      // Redirect to the selected language version
-      window.location.href = '/' + language + '/';
-      
-      return false; // Prevent default link action
-    }
-  </script>
-  
-  <div class="flex space-x-2">
-    {% assign current_lang = page.lang | default: 'en-US' %}
-    
-    <a href="#" 
-       onclick="return setPreferredLanguage('en-US');" 
-       class="flex items-center px-2 py-1 rounded {% if current_lang == 'en-US' %}bg-blue-100 text-blue-800 font-medium{% else %}text-gray-600 hover:bg-gray-100{% endif %}">
-      <span class="mr-1">🇺🇸</span> English
-    </a>
-    
-    <a href="#" 
-       onclick="return setPreferredLanguage('pt-BR');" 
-       class="flex items-center px-2 py-1 rounded {% if current_lang == 'pt-BR' %}bg-blue-100 text-blue-800 font-medium{% else %}text-gray-600 hover:bg-gray-100{% endif %}">
-      <span class="mr-1">🇧🇷</span> Português
-    </a>
-  </div>
-</div> 
+{%- comment -%}
+Language disclosure (spec 001) — native links remain available without JavaScript.
+Usage: {% include components/molecules/language-switcher.html %}
+Params: id optional unique prefix; default preserves lang-switcher-btn / lang-options.
+{%- endcomment -%}
+{%- assign switcher_lang = page.lang | default: 'en-US' -%}
+{%- assign switcher_t = site.data[switcher_lang].translations -%}
+{%- assign switcher_button_id = 'lang-switcher-btn' -%}
+{%- assign switcher_panel_id = 'lang-options' -%}
+{%- if include.id -%}
+  {%- assign switcher_button_id = include.id | append: '-btn' -%}
+  {%- assign switcher_panel_id = include.id | append: '-options' -%}
+{%- endif -%}
+<div class="ipl-language" data-ipl-disclosure>
+  <button class="ipl-button ipl-language__toggle" id="{{ switcher_button_id | escape }}" type="button" aria-expanded="true" aria-controls="{{ switcher_panel_id | escape }}" data-ipl-disclosure-toggle hidden>
+    {% include components/atoms/icon.html name="globe" %}
+    <span class="ipl-visually-hidden">{% if switcher_t.footer.languages %}{{ switcher_t.footer.languages }}{% elsif page.lang == 'pt-BR' %}Idiomas{% else %}Languages{% endif %}: </span>
+    <span>{% if page.lang == 'pt-BR' %}Português{% else %}English{% endif %}</span>
+    {% include components/atoms/icon.html name="chevron-down" size="sm" %}
+  </button>
+  <ul class="ipl-dropdown ipl-language__options" id="{{ switcher_panel_id | escape }}">
+    <li>{% include lang-switch-url.html lang="en-US" %}<a class="ipl-language__link" href="{{ lang_switch_url | escape }}" lang="en-US" hreflang="en-US" data-ipl-language="en-US"{% if page.lang == 'en-US' %} aria-current="page"{% endif %}>English</a></li>
+    <li>{% include lang-switch-url.html lang="pt-BR" %}<a class="ipl-language__link" href="{{ lang_switch_url | escape }}" lang="pt-BR" hreflang="pt-BR" data-ipl-language="pt-BR"{% if page.lang == 'pt-BR' %} aria-current="page"{% endif %}>Português</a></li>
+  </ul>
+</div>

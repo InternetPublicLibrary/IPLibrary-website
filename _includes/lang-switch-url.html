@@ -1,15 +1,17 @@
-{% comment -%}
-Sets `lang_switch_url` to the current page in `include.lang`, or to that
-language's home when no page exists at the mirrored path (slugs differ
-between languages, e.g. /en-US/academics/ vs /pt-BR/academicos/).
-Usage: {% include lang-switch-url.html lang="pt-BR" -%}
-{% endcomment -%}
-{% assign lang_switch_url = '/' | append: include.lang | append: '/' -%}
-{% assign lang_prefix = '/' | append: page.lang | append: '/' -%}
-{% if page.lang and page.lang != include.lang and page.url contains lang_prefix -%}
-{% assign lang_candidate = page.url | replace_first: lang_prefix, lang_switch_url -%}
-{% assign lang_matches = site.pages | where: 'url', lang_candidate -%}
-{% if lang_matches.size > 0 -%}{% assign lang_switch_url = lang_candidate -%}{% endif -%}
-{% elsif page.lang == include.lang -%}
-{% assign lang_switch_url = page.url -%}
-{% endif -%}
+{%- comment -%}
+Language destination (spec 001) — sets lang_switch_url without rendering markup.
+Usage: {% include lang-switch-url.html lang="pt-BR" %}{{ lang_switch_url }}
+Params: lang required target language; preserves the mirrored path, otherwise its home.
+{%- endcomment -%}
+{%- assign lang_switch_url = '/' | append: include.lang | append: '/' -%}
+{%- assign lang_prefix = '/' | append: page.lang | append: '/' -%}
+{%- assign lang_url_prefix = page.url | slice: 0, lang_prefix.size -%}
+{%- if page.lang and lang_url_prefix == lang_prefix -%}
+  {%- if page.lang == include.lang -%}
+    {%- assign lang_switch_url = page.url -%}
+  {%- else -%}
+    {%- assign lang_candidate = page.url | replace_first: lang_prefix, lang_switch_url -%}
+    {%- assign lang_matches = site.pages | where: 'url', lang_candidate -%}
+    {%- if lang_matches.size > 0 -%}{%- assign lang_switch_url = lang_candidate -%}{%- endif -%}
+  {%- endif -%}
+{%- endif -%}
