@@ -16,7 +16,7 @@ end
 # curl handles redirects, HTTP/2 and TLS quirks more reliably than Net::HTTP for this check.
 def reachable?(url)
   out, status = Open3.capture2('curl', '-sS', '-o', '/dev/null', '-L', '--max-redirs', '5', '--max-time', '25',
-                               '-A', 'Mozilla/5.0 (IPLibrary link check; +https://ipl.better-web.org)',
+                               '-A', 'Mozilla/5.0 (IPLibrary link check; +https://ipl.better-web.org)', '-H', 'Accept: text/html,*/*',
                                '-w', '%{http_code}', url)
   code = out.to_i
   return [true, code.to_s] if code.between?(200, 399)
