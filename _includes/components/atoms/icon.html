@@ -1,2 +1,32 @@
-<i class="fas fa-{{ include.name }} {{ include.class }}" {% if include.id %}id="{{ include.id }}" {% endif %}
-    aria-hidden="true"></i>
+{%- comment -%}
+Icon (spec 001) — one stroke icon set: 24px grid, 1.75px stroke (see .ipl-icon in primitives.css).
+Usage: {% include components/atoms/icon.html name="search" %}
+Params:
+  name   (required) search | menu | close | chevron-down | chevron-right | arrow-left | external | globe |
+         contrast | edit | message | book | info | alert | check | plus | history | folder
+  size   optional "sm" (16px); default 20px
+  label  optional accessible name; without it the icon is decorative (aria-hidden)
+  class  optional extra classes
+{%- endcomment -%}
+<svg class="ipl-icon{% if include.size == 'sm' %} ipl-icon--sm{% endif %}{% if include.class %} {{ include.class }}{% endif %}" viewBox="0 0 24 24" focusable="false"{% if include.label %} role="img" aria-label="{{ include.label | escape }}"{% else %} aria-hidden="true"{% endif %}>
+{%- case include.name -%}
+{%- when 'search' -%}<circle cx="11" cy="11" r="7"/><path d="m20 20-3.6-3.6"/>
+{%- when 'menu' -%}<path d="M4 6h16M4 12h16M4 18h16"/>
+{%- when 'close' -%}<path d="M6 6l12 12M18 6 6 18"/>
+{%- when 'chevron-down' -%}<path d="m6 9 6 6 6-6"/>
+{%- when 'chevron-right' -%}<path d="m9 6 6 6-6 6"/>
+{%- when 'arrow-left' -%}<path d="M19 12H5m7 7-7-7 7-7"/>
+{%- when 'external' -%}<path d="M14 4h6v6m0-6-9 9m7 1v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/>
+{%- when 'globe' -%}<circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.7 3.8 5.7 3.8 9s-1.3 6.3-3.8 9c-2.5-2.7-3.8-5.7-3.8-9S9.5 5.7 12 3z"/>
+{%- when 'contrast' -%}<circle cx="12" cy="12" r="9"/><path d="M12 3v18a9 9 0 0 0 0-18z" fill="currentColor" stroke="none"/>
+{%- when 'edit' -%}<path d="M4 20h4L19 9l-4-4L4 16v4zm9-13 4 4"/>
+{%- when 'message' -%}<path d="M20 12a8 8 0 0 1-11.6 7.1L4 20l1-4.4A8 8 0 1 1 20 12z"/>
+{%- when 'book' -%}<path d="M5 4.5A1.5 1.5 0 0 1 6.5 3H19v15H6.5A1.5 1.5 0 0 0 5 19.5zm0 15A1.5 1.5 0 0 0 6.5 21H19"/>
+{%- when 'info' -%}<circle cx="12" cy="12" r="9"/><path d="M12 11v5m0-8h.01"/>
+{%- when 'alert' -%}<path d="M12 4 21 20H3zm0 6v4m0 3h.01"/>
+{%- when 'check' -%}<path d="m5 12 5 5 9-10"/>
+{%- when 'plus' -%}<path d="M12 5v14M5 12h14"/>
+{%- when 'history' -%}<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>
+{%- when 'folder' -%}<path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+{%- endcase -%}
+</svg>

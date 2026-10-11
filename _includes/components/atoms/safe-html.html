@@ -1,0 +1,20 @@
+{%- comment -%}
+Safe HTML helpers for scripts that build markup from external API data (research panel sources).
+Usage: {% include components/atoms/safe-html.html %} once, before scripts that call:
+  iplEsc(text)  → text with & < > " ' escaped (for element content and attribute values)
+  iplText(html) → plain text of an HTML snippet (e.g. Wikipedia search snippets)
+  iplUrl(url)   → the URL escaped for an attribute if it is http(s), otherwise "#"
+{%- endcomment -%}
+<script>
+  window.iplEsc = window.iplEsc || function (value) {
+    return String(value == null ? '' : value).replace(/[&<>"']/g, function (c) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+    });
+  };
+  window.iplText = window.iplText || function (html) {
+    return new DOMParser().parseFromString(String(html || ''), 'text/html').body.textContent || '';
+  };
+  window.iplUrl = window.iplUrl || function (url) {
+    return /^https?:\/\//i.test(String(url || '')) ? window.iplEsc(url) : '#';
+  };
+</script>

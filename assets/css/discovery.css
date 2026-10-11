@@ -1,0 +1,62 @@
+/* discovery — owned by spec 001 slice (see plan.md ownership table). */
+
+/*
+ * Info pages (_layouts/info.html): hand-written bodies from the content repositories.
+ * Legacy gradient heroes become a plain article header; inner containers lose their own centering.
+ * Unlayered rules here override the layered Tailwind utilities used in those bodies.
+ */
+.ipl-info-body > section:first-of-type[class*="bg-gradient"] {
+  background: none;
+  color: var(--color-text);
+  padding: 0 0 var(--space-6);
+  text-align: left;
+}
+.ipl-info-body > section:first-of-type[class*="bg-gradient"] > .container {
+  max-width: none;
+  padding-inline: 0;
+  text-align: left;
+}
+.ipl-info-body > section:first-of-type[class*="bg-gradient"] h1 {
+  margin: 0 0 var(--space-2);
+  font-size: var(--text-2xl);
+  line-height: var(--leading-tight);
+  font-weight: var(--weight-semibold);
+  color: var(--color-text);
+}
+.ipl-info-body > section:first-of-type[class*="bg-gradient"] p {
+  max-width: var(--measure-article);
+  margin-inline: 0;
+  color: var(--color-muted);
+  font-size: var(--text-md);
+  opacity: 1;
+}
+.ipl-info-body .container { max-width: none; padding-inline: 0; }
+.ipl-info-body .mx-auto { margin-inline: 0; }
+.ipl-info-body > section + section, .ipl-info-body > div + section { padding-top: 0; }
+@media (min-width: 64rem) {
+  .ipl-info-body > section:first-of-type[class*="bg-gradient"] h1 { font-size: var(--text-3xl); }
+}
+/* Links inside running text must not rely on color alone (WCAG 1.4.1) */
+.ipl-info-body p a, .ipl-info-body li a:not([class*="bg-"]) { text-decoration: underline; text-underline-offset: 0.15em; }
+/* Every institutional page opens the same way: left-aligned article header, no decorative icon tile */
+.ipl-info-body > :first-child,
+.ipl-info-body > :first-child .text-center { text-align: left; }
+.ipl-info-body > :first-child[class*="bg-gradient"],
+.ipl-info-body > :first-child [class*="bg-gradient-to"]:has(h1) {
+  background: none;
+  color: var(--color-text);
+  padding: 0 0 var(--space-6);
+  box-shadow: none;
+}
+.ipl-info-body > :first-child [class*="bg-gradient-to"]:has(h1) h1,
+.ipl-info-body > :first-child[class*="bg-gradient"] h1 { color: var(--color-text); }
+.ipl-info-body > :first-child [class*="bg-gradient-to"]:has(h1) p { color: var(--color-muted); }
+.ipl-info-body > :first-child [class*="w-16"][class*="h-16"]:not(input):not(img),
+.ipl-info-body > :first-child [class*="w-20"][class*="h-20"]:not(input):not(img),
+.ipl-info-body > :first-child [class*="w-12"][class*="h-12"]:has(> i) { display: none; }
+.ipl-info-body h1 { font-size: var(--text-2xl); font-weight: var(--weight-semibold); line-height: var(--leading-tight); }
+@media (min-width: 64rem) { .ipl-info-body h1 { font-size: var(--text-3xl); } }
+.ipl-info-body > :first-child .text-center > .flex:has(> [class*="bg-gradient"]):not(:has(a, button)) { display: none; }
+.ipl-info-body > :first-child .text-center > p { margin-inline: 0; }
+.ipl-info-body > :first-child { padding-top: 0; min-height: 0; }
+.ipl-info-body > :first-child > [class*="max-w-"] { max-width: none; padding-inline: 0; }

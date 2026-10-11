@@ -40,16 +40,16 @@
           <img src="https://orcid.org/assets/vectors/orcid.logo.icon.svg" alt="ORCID" class="w-10 h-10 flex-shrink-0">
           <div class="flex-1">
             <h3 class="font-semibold text-lg text-gray-800">
-              <a href="https://orcid.org/${orcidId}" target="_blank" rel="noopener noreferrer" class="hover:text-green-600">
-                ${fullName}
+              <a href="https://orcid.org/${encodeURIComponent(orcidId)}" target="_blank" rel="noopener noreferrer" class="hover:text-green-600">
+                ${iplEsc(fullName)}
               </a>
             </h3>
-            ${institution ? `<p class="text-sm text-gray-600">${institution}</p>` : ''}
-            <p class="text-xs text-gray-400 mt-1">ORCID: ${orcidId}</p>
+            ${institution ? `<p class="text-sm text-gray-600">${iplEsc(institution)}</p>` : ''}
+            <p class="text-xs text-gray-400 mt-1">ORCID: ${iplEsc(orcidId)}</p>
           </div>
         </div>
         <div class="flex gap-3 mt-3">
-          <a href="https://orcid.org/${orcidId}" target="_blank" class="text-green-600 text-sm hover:underline flex items-center">
+          <a href="https://orcid.org/${encodeURIComponent(orcidId)}" target="_blank" class="text-green-600 text-sm hover:underline flex items-center">
             <i class="fas fa-external-link-alt mr-1"></i> View Profile
           </a>
           <a href="https://scholar.google.com/citations?user=${encodeURIComponent(fullName)}" target="_blank" class="text-blue-600 text-sm hover:underline flex items-center">

@@ -1,0 +1,6 @@
+# Code owners review every pull request, including contributions opened by the IPL contribute service
+# (InternetPublicLibrary/contribute, ADR 0003). Replace the user with a maintainers team when one exists.
+*            @matbrgz
+/_data/      @matbrgz
+/_layouts/   @matbrgz
+/_plugins/   @matbrgz

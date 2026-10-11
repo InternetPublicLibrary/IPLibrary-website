@@ -16,6 +16,7 @@
         try {
             const response = await fetch(endpoint);
             const data = await response.json();
+            if (!response.ok || data.error) throw new Error(data.error || String(response.status));
             const results = data.results;
 
             loader.classList.add('hidden');
@@ -32,22 +33,22 @@
                 const doi = work.doi;
                 const pdf = work.open_access?.oa_url;
 
-                let meta = `<span class="font-medium text-gray-700">${authors}${work.authorships.length > 3 ? ' et al.' : ''}</span>`;
-                meta += ` • ${year} • ${venue}`;
+                let meta = `<span class="font-medium text-gray-700">${iplEsc(authors)}${work.authorships.length > 3 ? ' et al.' : ''}</span>`;
+                meta += ` • ${iplEsc(year)} • ${iplEsc(venue)}`;
 
                 // Reconstructing result-card molecule logic in JS
                 let html = `
       <div class="bg-white border border-gray-200 p-4 rounded-lg shadow-sm hover:shadow-md transition-shadow">
         <h3 class="font-semibold text-lg text-gray-800 mb-1">
-          <a href="${doi || '#'}" target="_blank" rel="noopener noreferrer" class="hover:underline">
-            ${work.title}
+          <a href="${iplUrl(doi)}" target="_blank" rel="noopener noreferrer" class="hover:underline">
+            ${iplEsc(work.title)}
           </a>
         </h3>
         <div class="text-xs text-gray-500 mb-2">${meta}</div>
         
         <div class="flex gap-3 mt-3">
-          ${doi ? `<a href="${doi}" target="_blank" class="text-blue-600 text-sm hover:underline flex items-center"><i class="fas fa-external-link-alt mr-1"></i> View Paper</a>` : ''}
-          ${pdf ? `<a href="${pdf}" target="_blank" class="text-green-600 text-sm hover:underline flex items-center"><i class="fas fa-file-pdf mr-1"></i> PDF</a>` : ''}
+          ${doi ? `<a href="${iplUrl(doi)}" target="_blank" class="text-blue-600 text-sm hover:underline flex items-center"><i class="fas fa-external-link-alt mr-1"></i> View Paper</a>` : ''}
+          ${pdf ? `<a href="${iplUrl(pdf)}" target="_blank" class="text-green-600 text-sm hover:underline flex items-center"><i class="fas fa-file-pdf mr-1"></i> PDF</a>` : ''}
         </div>
       </div>`;
                 return html;
@@ -56,7 +57,15 @@
         } catch (error) {
             console.error('OpenAlex Error:', error);
             loader.classList.add('hidden');
-            container.innerHTML = '<p class="text-red-500 text-center">Error loading papers.</p>';
+            const pt = document.documentElement.lang === 'pt-BR';
+            const direct = 'https://openalex.org/works?search=' + encodeURIComponent(query);
+            container.innerHTML = `<div class="rounded-lg border border-yellow-200 bg-yellow-50 p-4 text-sm text-yellow-800">
+              <p>${pt ? 'O OpenAlex está indisponível no momento (limite de consultas ou falha de rede).' : 'OpenAlex is unavailable right now (rate limit or network error).'}</p>
+              <p class="mt-2 flex flex-wrap gap-4">
+                <button type="button" class="font-semibold underline" data-openalex-retry>${pt ? 'Tentar novamente' : 'Try again'}</button>
+                <a class="font-semibold underline" href="${iplUrl(direct)}" rel="noopener">${pt ? 'Pesquisar no openalex.org' : 'Search on openalex.org'}</a>
+              </p></div>`;
+            container.querySelector('[data-openalex-retry]').addEventListener('click', () => searchOpenAlex(query));
         }
     }
 </script>

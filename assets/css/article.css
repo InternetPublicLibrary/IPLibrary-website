@@ -1,0 +1,59 @@
+/* Article typography; layout and cards remain Tailwind utilities (spec 001, ADR 0002). */
+.ipl-prose {
+  max-width: 74ch;
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 17px;
+  line-height: 1.6;
+  color: var(--color-gray-900);
+  overflow-wrap: anywhere;
+}
+.ipl-prose h1,
+.ipl-prose h2,
+.ipl-prose h3,
+.ipl-prose h4 {
+  font-family: 'Source Sans 3', sans-serif;
+  font-weight: 600;
+  line-height: 1.25;
+  color: var(--color-gray-900);
+  scroll-margin-top: 1.5rem;
+}
+.ipl-prose h1 { font-size: 2rem; margin: 0 0 1rem; }
+.ipl-prose h2 {
+  font-size: 1.5rem;
+  margin: 1.5rem 0 .75rem;
+  padding-bottom: .35rem;
+  border-bottom: 1px solid var(--color-gray-200);
+}
+.ipl-prose h3 { font-size: 1.2rem; margin: 1.25rem 0 .5rem; }
+.ipl-prose h4 { font-size: 1.05rem; margin: 1rem 0 .5rem; }
+.ipl-prose section > h2:first-child { margin-top: 0; }
+.ipl-prose p { margin: .75rem 0; }
+.ipl-prose p:first-child { margin-top: 0; }
+.ipl-prose ul { list-style: disc; padding-left: 1.5rem; margin: .75rem 0; }
+.ipl-prose ol { list-style: decimal; padding-left: 1.5rem; margin: .75rem 0; }
+.ipl-prose ul.list-none { list-style: none; padding-left: 0; }
+.ipl-prose li { margin-block: .25rem; }
+.ipl-prose a {
+  color: var(--color-blue-600);
+  text-decoration: underline;
+  text-underline-offset: .15em;
+}
+.ipl-prose a:hover { color: var(--color-blue-800); }
+.ipl-prose a:focus-visible {
+  outline: 3px solid var(--color-blue-600);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+.ipl-prose blockquote {
+  border-left: 3px solid var(--color-gray-200);
+  padding-left: 1rem;
+  margin: 1rem 0;
+  color: var(--color-gray-700);
+}
+.ipl-prose pre { overflow-x: auto; padding: .75rem; background: var(--color-gray-100); }
+.ipl-prose img { max-width: 100%; height: auto; }
+.ipl-prose table { display: block; overflow-x: auto; max-width: 100%; border-collapse: collapse; }
+.ipl-prose th, .ipl-prose td { border: 1px solid var(--color-gray-200); padding: .4rem .6rem; }
+@media (min-width: 1024px) {
+  .ipl-prose { font-size: 18px; }
+}

@@ -2,6 +2,7 @@ require 'yaml'
 require 'fileutils'
 require 'json'
 require 'date'
+require 'rake/testtask'
 
 # Load caching system
 require_relative 'scripts/build-cache'
@@ -417,3 +418,9 @@ def generate_help_page(lang)
   
   puts "Generated help page: #{path}/index.html"
 end 
+
+Rake::TestTask.new(:test) do |t|
+  t.libs << 'test'
+  t.pattern = 'test/**/*_test.rb'
+  t.warning = false
+end

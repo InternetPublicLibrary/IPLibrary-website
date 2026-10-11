@@ -1,29 +1,38 @@
-## About This Resource
+{% comment %} Resource details from source metadata; no generated edit date. {% endcomment %}
+{% if page.lang == 'pt-BR' %}
+## Sobre este recurso
 
-This page provides information about **{{ page.title }}**, a {{ page.resource_type }} resource in the {{ page.category }} category.
+**{{ page.title }}**{% if page.resource_type %} é um recurso do tipo {{ page.resource_type }}{% endif %}{% if page.category %} na categoria {{ page.category }}{% endif %}.
 
-### Overview
+### Descrição
 
 {{ page.description }}
 
-{% if page.tags %}
-This resource is tagged with: {{ page.tags | join: ", " }}.
+{% if page.tags.size > 0 %}
+Marcadores: {{ page.tags | join: ', ' }}.
 {% endif %}
 
-### How to Use
+### Acesso
 
-You can access this resource by clicking the "Visit Resource" button above. 
+O link para o recurso leva ao site de origem, onde você pode verificar as condições atuais de acesso.
+{% else %}
+## About this resource
 
-{% if page.access == "Free" %}
-This resource is freely available to all users.
-{% elsif page.access == "Partially paid" %}
-This resource offers some free content, but certain features or content may require payment.
-{% elsif page.access == "Paid" %}
-This is a paid resource that requires purchase or subscription to access.
+**{{ page.title }}**{% if page.resource_type %} is a {{ page.resource_type }} resource{% endif %}{% if page.category %} in the {{ page.category }} category{% endif %}.
+
+### Description
+
+{{ page.description }}
+
+{% if page.tags.size > 0 %}
+Tags: {{ page.tags | join: ', ' }}.
 {% endif %}
 
-### Additional Information
+### Access
 
-Last updated: {{ page.last_updated }}
+The resource link opens its source website, where you can check the current conditions of access.
+{% endif %}
 
-If you find this resource helpful, consider exploring other related resources in the {{ page.category }} category. 
+{% if page.access %}
+{{ page.access }}
+{% endif %}

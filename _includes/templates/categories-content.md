@@ -1,9 +1,18 @@
-Welcome to the Internet Public Library Categories. This page provides an overview of all available categories in our library.
+{% comment %} Library directory introduction, localized without unsupported collection claims. {% endcomment %}
+{% if page.lang == 'pt-BR' %}
+## Organização da biblioteca
 
-## What are Categories?
+As categorias agrupam os temas da Internet Public Library. Cada categoria contém subcategorias e seções que permitem consultar áreas mais específicas.
 
-Categories organize our resources into logical groups to help you find what you're looking for. Each category contains subcategories that further narrow down the topics, and each subcategory may contain sections with specific resources.
+## Como navegar
 
-## How to Use
+Escolha uma categoria na lista para ver seus temas ou use a pesquisa no cabeçalho para procurar um título. Os recursos selecionados e as ferramentas de pesquisa externa são apresentados separadamente.
+{% else %}
+## Library organization
 
-Browse through the categories below to find the topics that interest you. Click on any category to explore its subcategories and resources. You can also use the search function in the sidebar to find specific categories quickly. 
+Categories group the topics in the Internet Public Library. Each category contains subcategories and sections for exploring more specific areas.
+
+## Browsing the library
+
+Choose a category from the list to explore its topics, or use the header search to find a title. Curated resources and external research tools are presented separately.
+{% endif %}

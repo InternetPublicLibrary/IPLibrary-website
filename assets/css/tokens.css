@@ -1,0 +1,130 @@
+/*
+ * IPL design tokens — Design System v1.0 "Meridian Archive".
+ * Spec: docs/specs/001-design-system-v1/spec.md
+ * Every text pair below was checked for WCAG 2.2 AA (ratios in research/codex-audit.md).
+ * Components consume only these properties; never hard-code a color, size or radius.
+ */
+
+:root {
+  color-scheme: light;
+
+  /* Surfaces and text */
+  --color-page: #F7F9FA;           /* text 13.67:1 */
+  --color-surface: #FFFFFF;        /* text 14.44:1 */
+  --color-surface-raised: #FFFFFF;
+  --color-text: #202B33;
+  --color-muted: #52616B;          /* 6.40:1 on surface, 6.06:1 on page */
+
+  /* Interaction */
+  --color-primary: #0064A8;        /* links, focus, primary buttons — 6.20:1 on white */
+  --color-primary-hover: #004B80;  /* 9.06:1 */
+  --color-on-primary: #FFFFFF;
+  --color-primary-soft: #EAF5FC;   /* primary on it: 5.60:1 */
+  --color-visited: #674C83;        /* 7.15:1 */
+  --color-secondary: #005F68;
+  --color-secondary-soft: #EAF7F5; /* secondary on it: 6.74:1 */
+
+  /* Status (always paired with their soft background) */
+  --color-success: #177448;
+  --color-success-soft: #EAF6EE;
+  --color-warning: #805500;
+  --color-warning-soft: #FFF5DA;
+  --color-danger: #B3261E;
+  --color-danger-soft: #FFF0EE;
+
+  /* Lines */
+  --color-control-border: #7B8B96; /* ≥3:1 boundary for inputs */
+  --color-divider: #CCD7DF;        /* decorative only */
+
+  /* Brand (logo only — never a text color) */
+  --brand-globe-highlight: #00BDFD;
+  --brand-globe-mid: #0096F2;
+  --brand-globe-base: #0079E0;
+
+  /* Type */
+  --font-ui: 'Source Sans 3', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --font-heading: var(--font-ui);
+  --font-code: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  --text-xs: 0.875rem;   /* 14px metadata */
+  --text-sm: 1rem;       /* 16px UI */
+  --text-md: 1.125rem;   /* 18px article body / lead */
+  --text-lg: 1.3125rem;  /* 21px h3 */
+  --text-xl: 1.625rem;   /* 26px h2 */
+  --text-2xl: 2rem;      /* 32px h1 mobile */
+  --text-3xl: 2.5rem;    /* 40px h1 desktop */
+  --leading-tight: 1.15;
+  --leading-snug: 1.3;
+  --leading-normal: 1.5;
+  --leading-relaxed: 1.65;
+  --weight-regular: 400;
+  --weight-semibold: 600;
+
+  /* Space (4px base) */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-12: 3rem;
+  --gutter: var(--space-4);
+
+  /* Shape and depth */
+  --radius-control: 0.25rem;
+  --radius-panel: 0.5rem;
+  --radius-pill: 999px;
+  --border-width: 1px;
+  --shadow-overlay: 0 4px 16px rgb(0 40 64 / 12%);
+
+  /* Layout */
+  --measure-article: 70ch;
+  --width-shell: 80rem;
+  --target-min: 1.5rem;      /* 24px WCAG 2.5.8 */
+  --target-comfort: 2.75rem; /* 44px primary controls */
+
+  /* Focus and motion */
+  --focus-width: 3px;
+  --focus-offset: 2px;
+  --focus-color: var(--color-primary);
+  --duration-control: 120ms;
+}
+
+@media (min-width: 64rem) {
+  :root { --gutter: var(--space-8); }
+}
+
+/* Dark: explicit choice */
+:root[data-theme='dark'] {
+  color-scheme: dark;
+  --color-page: #151C22;
+  --color-surface: #1E2932;
+  --color-surface-raised: #24313B;
+  --color-text: #E6EDF2;
+  --color-muted: #AEBCC6;
+  --color-primary: #7CCBFF;
+  --color-primary-hover: #A6DCFF;
+  --color-on-primary: #151C22;
+  --color-primary-soft: #1E2932;
+  --color-visited: #C6A5E9;
+  --color-secondary: #97C7CC;
+  --color-secondary-soft: #1E2932;
+  --color-success: #69CD99;
+  --color-success-soft: #1E2932;
+  --color-warning: #F1CC78;
+  --color-warning-soft: #1E2932;
+  --color-danger: #FFAAA4;
+  --color-danger-soft: #1E2932;
+  --color-divider: #3D4D59;
+  --shadow-overlay: 0 4px 16px rgb(0 0 0 / 32%);
+}
+
+/* Light is the default; dark applies only by explicit choice (maintainer decision 2026-10-10). */
+
+/* Windows high contrast and similar: let the system palette win */
+@media (forced-colors: active) {
+  :root {
+    --focus-color: Highlight;
+    --color-control-border: CanvasText;
+    --color-divider: CanvasText;
+  }
+}

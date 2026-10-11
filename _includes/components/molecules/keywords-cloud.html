@@ -28,7 +28,10 @@ Displays related keywords/topics based on page content
 {% endif %}
 {% endfor %}
 {% endif %}
+{% assign keywords = auto_keywords | split: "," %}
+{% endunless %}
 
+{% if keywords.size > 0 %}
 {% assign t = site.data[page.lang].translations %}
 <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-5">
     <h3 class="font-semibold text-gray-900 mb-4 text-sm uppercase tracking-wider text-gray-500">

@@ -112,10 +112,15 @@ exclude:
   
   # Development and documentation files
   - README.md
+  - en-US/README.md
+  - pt-BR/README.md
   - AGENTS.md
   - TODO.md
   - claude.md
   - LICENSE
+  # Submodule repo licenses collide with /<lang>/license/ on case-insensitive filesystems
+  - en-US/LICENSE
+  - pt-BR/LICENSE
   - Makefile
   - Rakefile
   - build.sh
@@ -128,6 +133,8 @@ exclude:
   - test_debug/
   - docs/
   - scripts/
+  - test/
+  - e2e/
   - pages/
   - _plugins_bak/
   - _en-US_bak/

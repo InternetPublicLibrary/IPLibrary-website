@@ -157,7 +157,7 @@ const IPL = {
     if (!container) return;
 
     const isPortuguese = lang === 'pt-BR';
-    container.innerHTML = `<div class="animate-pulse text-slate-500">${isPortuguese ? 'Carregando...' : 'Loading...'}</div>`;
+    container.innerHTML = `<div class="text-slate-600" role="status">${isPortuguese ? 'Carregando...' : 'Loading...'}</div>`;
 
     try {
       const commits = await this.fetchGitHubCommits(5);
@@ -173,7 +173,7 @@ const IPL = {
           <div class="flex-1 min-w-0">
             <a href="${commit.url}" target="_blank" class="text-slate-700 hover:text-blue-600 line-clamp-1">${commit.message}</a>
             <div class="text-xs text-slate-500">
-              <span class="bg-slate-100 px-1 rounded">${commit.repo}</span>
+              <span class="bg-slate-100 text-slate-700 px-1 rounded">${commit.repo}</span>
               · ${this.timeAgo(commit.date, lang)}
             </div>
           </div>

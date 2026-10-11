@@ -46,7 +46,7 @@ This component automatically detects the current page language and loads the app
 
     <!-- Discussion Tabs -->
     <div class="mb-8">
-      <nav class="flex space-x-2 bg-white rounded-xl p-2 shadow-sm border border-slate-200" role="tablist">
+      <nav class="flex flex-wrap gap-2 bg-white rounded-xl p-2 shadow-sm border border-slate-200" role="tablist">
         <button id="discussion-tab"
           class="flex-1 px-4 py-2 text-sm font-medium rounded-lg transition-all duration-200 bg-blue-600 text-white"
           role="tab" aria-selected="true" aria-controls="discussion-panel">
@@ -229,8 +229,9 @@ This component automatically detects the current page language and loads the app
           {% endif %}
         </p>
 
+        {% assign issue_title = page.title | url_encode %}
         {% assign issue_url = "https://github.com/" | append: giscus_config.repo | append:
-        "/issues/new?template=content-issue.md&title=" | append: page.title | url_encode | append: "&labels=content,bug"
+        "/issues/new?template=content-issue.md&title=" | append: issue_title | append: "&labels=content,bug"
         %}
 
         {% if current_lang == "pt-BR" %}

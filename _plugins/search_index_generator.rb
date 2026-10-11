@@ -1,4 +1,5 @@
 require 'json'
+require 'cgi'
 require 'digest'
 require 'fileutils'
 
@@ -7,6 +8,27 @@ module Jekyll
     safe true
     priority :low  # Run after all other generators
     
+    # http(s) or site-relative; no protocol-relative ("//", "/\\") and no characters that could break
+    # out of an HTML attribute when the search page builds href="..." with innerHTML.
+    SAFE_URL = %r{\A(https?://[^\s"'<>`\\]+|/(?![/\\])[^\s"'<>`\\]*)\z}.freeze
+
+    # The search pages insert index fields with innerHTML: escape text, allow only http(s) or
+    # site-relative URLs. Returns nil for entries that cannot be made safe.
+    def self.safe_entry(entry)
+      url = entry['url'].to_s.strip
+      return nil unless url.match?(SAFE_URL)
+
+      entry.merge(
+        'url' => CGI.escapeHTML(url),
+        'title' => CGI.escapeHTML(entry['title'].to_s),
+        'description' => CGI.escapeHTML(entry['description'].to_s),
+        'category' => CGI.escapeHTML(entry['category'].to_s),
+        'kind' => CGI.escapeHTML(entry['kind'].to_s),
+        'access' => CGI.escapeHTML(entry['access'].to_s),
+        'topic_url' => entry['topic_url'].to_s.match?(SAFE_URL) ? CGI.escapeHTML(entry['topic_url'].to_s) : nil
+      )
+    end
+
     def generate(site)
       puts "Starting SearchIndexGenerator..."
       @site = site
@@ -80,10 +102,87 @@ module Jekyll
       output_path = File.join(@site.dest, 'api', 'search', "#{lang_code}.json")
       FileUtils.mkdir_p(File.dirname(output_path))
       File.write(output_path, JSON.generate(search_data))
+
+      # The search pages fetch /api/<lang>/search-index.json. Files written straight into _site are
+      # removed by Jekyll's cleanup, so publish the flat index as a page of the site instead.
+      publish_flat_index(lang_code, lang_data['menu'])
       
       puts "Generated search index for #{lang_code}: #{search_data['total_entries']} entries"
     end
     
+    # Flat list consumed by en-US/search.html and pt-BR/busca.html: [{title, description, category, url, type}]
+    def publish_flat_index(lang_code, menu)
+      entries = []
+      menu.each do |category|
+        entries << { 'title' => category['title'], 'url' => category['path'], 'type' => 'category',
+                     'category' => category['title'], 'description' => '' }
+        (category['children'] || []).each do |subcategory|
+          entries << { 'title' => subcategory['title'], 'url' => subcategory['path'], 'type' => 'subcategory',
+                       'category' => category['title'], 'description' => '' }
+          (subcategory['children'] || []).each do |section|
+            entries << { 'title' => section['title'], 'url' => section['path'], 'type' => 'section',
+                         'category' => "#{category['title']} › #{subcategory['title']}", 'description' => '' }
+          end
+        end
+      end
+      topics = topic_lookup(lang_code, menu)
+      seen = {}
+      each_real_resource(@site.data[lang_code], [], [], &lambda { |resource, trail, keys|
+        key = resource['name'].to_s.downcase
+        next if key.empty? || seen[key]
+
+        seen[key] = true
+        topic = topics[keys.first(2)] || topics[keys.first(1)]
+        entries << { 'title' => resource['name'], 'url' => resource['url'], 'type' => 'resource',
+                     'category' => topic ? topic['trail'] : trail, 'description' => resource['description'].to_s,
+                     'topic_url' => topic && topic['path'], 'kind' => keys[2].to_s.sub(/\.ya?ml\z/, ''),
+                     'access' => resource['access'].to_s }
+      })
+
+      page = Jekyll::PageWithoutAFile.new(@site, @site.source, File.join('api', lang_code), 'search-index.json')
+      page.content = JSON.generate(entries.filter_map { |entry| self.class.safe_entry(entry) })
+      page.data = { 'layout' => nil, 'sitemap' => false, 'render_with_liquid' => false }
+      @site.pages << page
+    end
+
+    # Walks a language's _data tree and yields curated resources (with their folder keys), skipping placeholders.
+    def each_real_resource(node, trail = [], keys = [], &block)
+      case node
+      when Hash
+        node.each do |key, value|
+          next if %w[menu translations].include?(key)
+
+          each_real_resource(value, trail + [key], keys + [key], &block)
+        end
+      when Array
+        node.each do |item|
+          next unless item.is_a?(Hash) && item['url'].to_s.start_with?('http')
+          next if item['url'].include?('example.com')
+
+          block.call(item, trail.reject { |part| part.end_with?('.yaml') }.map { |part| part.tr('-', ' ').capitalize }.join(' › '), keys)
+        end
+      end
+    end
+
+    # Maps _data folder keys ([category] or [category, subcategory]) to the topic's localized title trail and path.
+    # Data folders use the English slugs; the en-US and localized menus are aligned position by position.
+    def topic_lookup(lang_code, menu)
+      en_menu = @site.data.dig('en-US', 'menu') || menu
+      lookup = {}
+      menu.each_with_index do |category, ci|
+        en_category = en_menu[ci] || category
+        category_key = en_category['path'].to_s.split('/').last
+        lookup[[category_key]] = { 'trail' => category['title'], 'path' => category['path'] }
+        (category['children'] || []).each_with_index do |subcategory, si|
+          en_subcategory = (en_category['children'] || [])[si] || subcategory
+          subcategory_key = en_subcategory['path'].to_s.split('/').last
+          lookup[[category_key, subcategory_key]] = { 'trail' => "#{category['title']} › #{subcategory['title']}",
+                                                       'path' => subcategory['path'] }
+        end
+      end
+      lookup
+    end
+
     def extract_category_data(lang_code, category)
       {
         'id' => generate_id(category['path']),
