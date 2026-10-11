@@ -1,4 +1,13 @@
-# Placeholder - Add resources here
-- name: "Example Resource"
-  url: "https://example.com"
-  description: "Add a description here."
+- name: "TechCrunch Disrupt"
+  url: "https://techcrunch.com/events/techcrunch-disrupt/"
+  description: "Annual technology startup conference featuring the Startup Battlefield pitch competition, founder keynotes, and venture networking."
+  type: "conference"
+  access: "paid"
+  organization: "TechCrunch"
+
+- name: "Startup Grind Global Conference"
+  url: "https://www.startupgrind.com/conference/"
+  description: "Global recurring conference connecting entrepreneurs, early-stage investors, and innovators in Silicon Valley."
+  type: "conference"
+  access: "paid"
+  organization: "Startup Grind"

@@ -1,4 +1,6 @@
-# Placeholder - Add resources here
-- name: "Example Resource"
-  url: "https://example.com"
-  description: "Add a description here."
+- name: "HR Technology Conference & Exposition"
+  url: "https://www.hrtechconference.com/"
+  description: "Annual conference and trade exposition focused on human capital management technologies, payroll systems, and HR analytics."
+  type: "conference"
+  access: "paid"
+  organization: "LRP Media Group"

@@ -1,4 +1,13 @@
-# Placeholder - Add resources here
-- name: "Example Resource"
-  url: "https://example.com"
-  description: "Add a description here."
+- name: "INFORMS Annual Meeting"
+  url: "https://connect.informs.org/events/calendar"
+  description: "Global operations research and analytics conference bringing together thousands of academics, data scientists, and industry leaders."
+  type: "conference"
+  access: "paid"
+  organization: "INFORMS"
+
+- name: "Gartner Data & Analytics Summit"
+  url: "https://www.gartner.com/en/conferences/na/data-analytics"
+  description: "Leading executive gathering focused on enterprise data architecture, governance, business analytics strategies, and AI implementation."
+  type: "conference"
+  access: "paid"
+  organization: "Gartner"

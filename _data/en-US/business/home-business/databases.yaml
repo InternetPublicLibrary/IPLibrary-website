@@ -1,4 +1,13 @@
-# Placeholder - Add resources here
-- name: "Example Resource"
-  url: "https://example.com"
-  description: "Add a description here."
+- name: "IRS Home Office Tax Guidance (Publication 587)"
+  url: "https://www.irs.gov/forms-pubs/about-publication-587"
+  description: "Official federal tax repository and guidance database detailing qualifying criteria, allowable deductions, and calculation rules for home offices."
+  type: "database"
+  access: "free"
+  organization: "Internal Revenue Service"
+
+- name: "SBA Business Licensing and Permitting Directory"
+  url: "https://www.sba.gov/business-guide/launch-your-business/apply-licenses-permits"
+  description: "Federal guide and regulatory directory for locating local zoning, home occupation permits, and state business compliance requirements."
+  type: "database"
+  access: "free"
+  organization: "U.S. Small Business Administration"

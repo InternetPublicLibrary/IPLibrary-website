@@ -1,4 +1,13 @@
-# Placeholder - Add resources here
-- name: "Example Resource"
-  url: "https://example.com"
-  description: "Add a description here."
+- name: "ICA Annual Conference"
+  url: "https://www.icahdq.org/page/annual-conference"
+  description: "Premier international conference hosted by the International Communication Association gathering communication scholars and practitioners."
+  type: "conference"
+  access: "paid"
+  organization: "International Communication Association"
+
+- name: "PRSA ICON"
+  url: "https://www.prsa.org/conferences/icon"
+  description: "Annual international conference for public relations and strategic communications professionals hosted by the Public Relations Society of America."
+  type: "conference"
+  access: "paid"
+  organization: "Public Relations Society of America"

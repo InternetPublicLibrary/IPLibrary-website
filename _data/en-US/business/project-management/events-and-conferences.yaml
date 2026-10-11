@@ -1,4 +1,13 @@
-# Placeholder - Add resources here
-- name: "Example Resource"
-  url: "https://example.com"
-  description: "Add a description here."
+- name: "PMI Global Summit"
+  url: "https://www.pmi.org/learning/training-events/events"
+  description: "Flagship global annual conference organized by the Project Management Institute for practitioners, leaders, and researchers."
+  type: "conference"
+  access: "paid"
+  organization: "Project Management Institute"
+
+- name: "IPMA World Congress"
+  url: "https://www.ipma.world/"
+  description: "Annual international gathering of project management researchers, executives, and practitioners from member associations."
+  type: "conference"
+  access: "paid"
+  organization: "International Project Management Association"

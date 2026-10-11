@@ -1,4 +1,13 @@
-# Placeholder - Add resources here
-- name: "Example Resource"
-  url: "https://example.com"
-  description: "Add a description here."
+- name: "POMS Annual Conference"
+  url: "https://pomsmeetings.org/"
+  description: "Annual international academic and industry conference organized by the Production and Operations Management Society."
+  type: "conference"
+  access: "paid"
+  organization: "Production and Operations Management Society"
+
+- name: "ASCM Connect"
+  url: "https://www.ascm.org/ascm-connect/"
+  description: "Annual supply chain and operations conference gathering industry leaders to discuss logistics, demand planning, and procurement."
+  type: "conference"
+  access: "paid"
+  organization: "Association for Supply Chain Management"

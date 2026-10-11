@@ -1,4 +1,13 @@
-# Placeholder - Add resources here
-- name: "Example Resource"
-  url: "https://example.com"
-  description: "Add a description here."
+- name: "PRDV226: Introduction to Human Resource Management"
+  url: "https://learn.saylor.org/course/view.php?id=38"
+  description: "Free self-paced online course introducing recruitment principles, labor laws, performance management, and workplace safety."
+  type: "course"
+  access: "free"
+  organization: "Saylor Academy"
+
+- name: "SHRM Educational Resources"
+  url: "https://www.shrm.org/learning"
+  description: "Professional learning catalog offering compliance webinars, competency-based credentials, and continuing education modules."
+  type: "course"
+  access: "freemium"
+  organization: "Society for Human Resource Management"

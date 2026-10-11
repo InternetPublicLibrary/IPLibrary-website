@@ -1,4 +1,13 @@
-# Placeholder - Add resources here
-- name: "Example Resource"
-  url: "https://example.com"
-  description: "Add a description here."
+- name: "Introduction to Operations Management"
+  url: "https://ocw.mit.edu/courses/15-761-introduction-to-operations-management-spring-2013/"
+  description: "University lecture course covering queueing theory, inventory management, supply contracts, and process analysis."
+  type: "course"
+  access: "free"
+  organization: "Massachusetts Institute of Technology"
+
+- name: "ASCM Supply Chain Learning Center"
+  url: "https://www.ascm.org/learning/"
+  description: "Professional certification and foundational training modules covering supply chain logistics, procurement, and operations."
+  type: "course"
+  access: "paid"
+  organization: "Association for Supply Chain Management"

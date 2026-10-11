@@ -1,4 +1,13 @@
-# Placeholder - Add resources here
-- name: "Example Resource"
-  url: "https://example.com"
-  description: "Add a description here."
+- name: "ABA Business Law Section Events"
+  url: "https://www.americanbar.org/groups/business_law/events/"
+  description: "Annual meetings and continuing legal education conferences organized by the ABA Business Law Section, including the Spring and Fall meetings."
+  type: "conference"
+  access: "paid"
+  organization: "American Bar Association"
+
+- name: "International Bar Association Annual Conference"
+  url: "https://www.ibanet.org/conferences"
+  description: "Premier global conference bringing together thousands of international business and commercial lawyers each year."
+  type: "conference"
+  access: "paid"
+  organization: "International Bar Association"

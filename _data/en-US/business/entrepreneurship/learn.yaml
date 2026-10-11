@@ -1,4 +1,13 @@
-# Placeholder - Add resources here
-- name: "Example Resource"
-  url: "https://example.com"
-  description: "Add a description here."
+- name: "Entrepreneurship"
+  url: "https://openstax.org/details/books/entrepreneurship"
+  description: "Peer-reviewed open textbook exploring ideation, opportunity recognition, entrepreneurial finance, business law, and growth."
+  type: "textbook"
+  access: "free"
+  organization: "OpenStax"
+
+- name: "Y Combinator Startup School"
+  url: "https://www.startupschool.org/"
+  description: "Free online curriculum and community providing video lectures, practical guides, and founder mentorship for early-stage startups."
+  type: "course"
+  access: "free"
+  organization: "Y Combinator"

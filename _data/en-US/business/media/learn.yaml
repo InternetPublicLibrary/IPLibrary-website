@@ -1,4 +1,13 @@
-# Placeholder - Add resources here
-- name: "Example Resource"
-  url: "https://example.com"
-  description: "Add a description here."
+- name: "Reuters Institute Oxford Seminars"
+  url: "https://reutersinstitute.politics.ox.ac.uk/"
+  description: "Academic reports and seminar archives investigating contemporary media business models, audience behavior, and investigative reporting."
+  type: "course"
+  access: "free"
+  organization: "University of Oxford"
+
+- name: "Knight Center for Journalism in the Americas Courses"
+  url: "https://knightcenter.utexas.edu/"
+  description: "Free and low-cost online courses covering digital storytelling, media product management, audience engagement, and data reporting."
+  type: "course"
+  access: "freemium"
+  organization: "University of Texas at Austin"

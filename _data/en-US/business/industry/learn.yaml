@@ -1,4 +1,13 @@
-# Placeholder - Add resources here
-- name: "Example Resource"
-  url: "https://example.com"
-  description: "Add a description here."
+- name: "Industrial Organization: A Strategic Approach"
+  url: "https://open.umn.edu/opentextbooks/textbooks/187"
+  description: "Open textbook examining market structures, competitive behavior, monopoly regulation, and antitrust economic principles."
+  type: "textbook"
+  access: "free"
+  organization: "Open Textbook Library"
+
+- name: "SME Tooling U Educational Catalog"
+  url: "https://www.toolingu.com/"
+  description: "Workforce training and apprenticeship platform providing online courses in advanced manufacturing, machining, and industrial safety."
+  type: "course"
+  access: "paid"
+  organization: "Society of Manufacturing Engineers"

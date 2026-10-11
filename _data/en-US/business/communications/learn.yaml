@@ -1,4 +1,13 @@
-# Placeholder - Add resources here
-- name: "Example Resource"
-  url: "https://example.com"
-  description: "Add a description here."
+- name: "Business Communication: Five Core Competencies"
+  url: "https://open.umn.edu/opentextbooks/textbooks/1283"
+  description: "Peer-reviewed open textbook addressing professional writing, presentations, team communication, and message strategy."
+  type: "textbook"
+  access: "free"
+  organization: "Open Textbook Library"
+
+- name: "Management Communication: Strategic Insights and Practical Skills"
+  url: "https://open.umn.edu/opentextbooks/textbooks/1360"
+  description: "Open educational textbook focusing on executive presence, workplace discourse, crisis communication, and data storytelling."
+  type: "textbook"
+  access: "free"
+  organization: "Open Textbook Library"
