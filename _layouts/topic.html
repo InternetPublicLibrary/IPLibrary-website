@@ -1,0 +1,239 @@
+---
+layout: default
+---
+{%- comment -%}
+Topic article (spec 001, revised) — category and subcategory pages in the same Wikipedia-style article
+shell as section pages (_layouts/section.html): breadcrumb, title, Article/Talk/Edit tabs, lead, infobox,
+contents, then every content block of the old pages: overview, children with their sections, curated
+resources, Wikipedia overview, research panel, discussion and related topics.
+The level is derived from the menu: a topic with a parent category is a subcategory.
+{%- endcomment -%}
+{%- include components/atoms/topic-meta.html -%}
+{%- assign lang = page.lang | default: 'en-US' -%}
+{%- assign t = site.data[lang].translations -%}
+{%- assign pt = false -%}{%- if lang == 'pt-BR' -%}{%- assign pt = true -%}{%- endif -%}
+{%- assign level = 'category' -%}
+{%- assign menu = site.data[lang].menu -%}
+
+{%- comment -%} Locate this topic in the menu: the node, its parent and its siblings. {%- endcomment -%}
+{%- assign node = nil -%}{%- assign parent = nil -%}{%- assign siblings = menu -%}
+{%- for category in menu -%}
+  {%- if category.path == page.url -%}{%- assign node = category -%}{%- endif -%}
+  {%- for subcategory in category.children -%}
+    {%- if subcategory.path == page.url -%}{%- assign node = subcategory -%}{%- assign parent = category -%}{%- assign siblings = category.children -%}{%- endif -%}
+  {%- endfor -%}
+{%- endfor -%}
+{%- if parent -%}{%- assign level = 'subcategory' -%}{%- endif -%}
+{%- assign children = node.children | default: page.children -%}
+{%- assign url_parts = page.url | split: '/' -%}
+{%- if level == 'subcategory' -%}
+  {%- assign topic_data = site.data[lang][url_parts[2]][url_parts[3]] -%}
+{%- else -%}
+  {%- assign topic_data = site.data[lang][url_parts[2]] -%}
+{%- endif -%}
+{%- include components/atoms/real-resources.html node=topic_data -%}
+{%- assign section_total = 0 -%}
+{%- if level == 'category' -%}{%- for child in children -%}{%- assign section_total = section_total | plus: child.children.size -%}{%- endfor -%}{%- endif -%}
+
+{%- comment -%} Real GitHub actions (no account system): edit the source file or open an issue. {%- endcomment -%}
+{%- assign issue_base = 'https://github.com/InternetPublicLibrary/' | append: lang | append: '/issues/new?title=' -%}
+{%- assign issue_body = page.url | absolute_url | url_encode -%}
+{%- capture edit_title -%}{% if pt %}Editar: {% else %}Edit: {% endif %}{{ topic_title }}{%- endcapture -%}
+{%- capture suggest_title -%}{% if pt %}Sugestão de recurso: {% else %}Resource suggestion: {% endif %}{{ topic_title }}{%- endcapture -%}
+{%- assign edit_url = issue_base | append: edit_title | url_encode | append: '&body=' | append: issue_body -%}
+{%- assign edit_title_enc = edit_title | url_encode -%}{%- assign suggest_title_enc = suggest_title | url_encode -%}
+{%- assign edit_url = issue_base | append: edit_title_enc | append: '&body=' | append: issue_body -%}
+{%- assign source_prefix = lang | append: '/' -%}
+{%- if page.github_edit_url -%}{%- assign edit_url = page.github_edit_url -%}
+{%- elsif page.path contains source_prefix -%}{%- assign source_path = page.path | remove_first: source_prefix -%}{%- assign edit_url = 'https://github.com/InternetPublicLibrary/' | append: lang | append: '/edit/master/' | append: source_path -%}{%- endif -%}
+{%- assign suggest_url = issue_base | append: suggest_title_enc | append: '&body=' | append: issue_body -%}
+
+{%- if level == 'subcategory' -%}
+  {%- if pt -%}{%- assign children_label = 'Seções' -%}{%- assign siblings_label = 'Outras subcategorias' -%}{%- else -%}{%- assign children_label = 'Sections' -%}{%- assign siblings_label = 'Other subcategories' -%}{%- endif -%}
+{%- else -%}
+  {%- if pt -%}{%- assign children_label = 'Subcategorias' -%}{%- assign siblings_label = 'Outras categorias' -%}{%- else -%}{%- assign children_label = 'Subcategories' -%}{%- assign siblings_label = 'Other categories' -%}{%- endif -%}
+{%- endif -%}
+{%- assign intro = content | strip -%}
+
+<div class="container mx-auto px-4 py-5 lg:py-8 text-gray-900">
+  <div class="grid grid-cols-1 lg:grid-cols-12 gap-5 lg:gap-6">
+    <!-- Title and lead first (mobile order), like section articles -->
+    <header class="lg:col-start-3 lg:col-span-10 min-w-0">
+      <nav aria-label="Breadcrumb" class="text-sm text-gray-600 mb-3">
+        <ol class="flex flex-wrap gap-x-2 gap-y-1">
+          <li><a href="/{{ lang }}/" class="text-blue-600 hover:underline">{{ t.nav.home | default: 'Home' }}</a></li>
+          {%- if parent %}<li><span aria-hidden="true">› </span><a href="{{ parent.path }}" class="text-blue-600 hover:underline">{{ parent.title | escape }}</a></li>{% endif %}
+          <li><span aria-hidden="true">› </span><span aria-current="page">{{ topic_title | escape }}</span></li>
+        </ol>
+      </nav>
+      <h1 id="article-title" class="text-3xl lg:text-4xl font-semibold leading-tight mb-2">{{ topic_title | escape }}</h1>
+      <nav aria-label="{% if pt %}Ações do artigo{% else %}Article actions{% endif %}" class="flex flex-wrap border-b border-gray-200 mb-4 text-sm">
+        <a href="#overview" aria-current="location" class="inline-flex items-center min-h-11 px-4 border-b-2 border-blue-600 text-blue-700 font-semibold">{% if pt %}Artigo{% else %}Article{% endif %}</a>
+        <a href="#discussion" class="inline-flex items-center min-h-11 px-4 text-blue-600 hover:bg-blue-50">{% if pt %}Discussão{% else %}Talk{% endif %}</a>
+        <a href="{{ edit_url | escape }}" rel="noopener" class="inline-flex items-center min-h-11 px-4 text-blue-600 hover:bg-blue-50">{% if pt %}Editar{% else %}Edit{% endif %}</a>
+      </nav>
+      <div class="max-w-prose text-base lg:text-lg leading-relaxed">
+        <p class="m-0">{% if page.description and page.description != '' %}{{ page.description | escape }}{% elsif pt %}Recursos e conhecimento da comunidade sobre {{ topic_title | escape }}.{% else %}Resources and community knowledge about {{ topic_title | escape }}.{% endif %}</p>
+      </div>
+    </header>
+
+    <!-- Infobox -->
+    <div class="lg:col-start-10 lg:col-span-3 lg:row-start-2 min-w-0">
+      <aside aria-labelledby="information-title" class="bg-white border border-gray-200 rounded-lg overflow-hidden text-sm text-gray-700">
+        <h2 id="information-title" class="bg-blue-50 border-b border-blue-100 px-4 py-2 font-semibold text-base text-blue-900 text-center">{{ topic_title | escape }}</h2>
+        <dl class="divide-y divide-gray-100">
+          <div class="flex justify-between gap-3 px-4 py-2"><dt class="font-semibold">{% if pt %}Tipo{% else %}Type{% endif %}</dt><dd>{% if level == 'subcategory' %}{% if pt %}Subcategoria{% else %}Subcategory{% endif %}{% else %}{% if pt %}Categoria{% else %}Category{% endif %}{% endif %}</dd></div>
+          {%- if parent %}<div class="flex justify-between gap-3 px-4 py-2"><dt class="font-semibold">{% if pt %}Categoria{% else %}Category{% endif %}</dt><dd class="text-right"><a href="{{ parent.path }}" class="text-blue-600 hover:underline">{{ parent.title | escape }}</a></dd></div>{% endif %}
+          <div class="flex justify-between gap-3 px-4 py-2"><dt class="font-semibold">{{ children_label }}</dt><dd>{{ children.size | default: 0 }}</dd></div>
+          {%- if section_total > 0 %}<div class="flex justify-between gap-3 px-4 py-2"><dt class="font-semibold">{% if pt %}Seções{% else %}Sections{% endif %}</dt><dd>{{ section_total }}</dd></div>{% endif %}
+          <div class="flex justify-between gap-3 px-4 py-2"><dt class="font-semibold">{{ t.layout.curated_resources | default: 'Curated resources' }}</dt><dd>{{ real_resource_total }}</dd></div>
+          <div class="flex justify-between gap-3 px-4 py-2"><dt class="font-semibold">{% if pt %}Idiomas{% else %}Languages{% endif %}</dt><dd class="flex flex-wrap justify-end gap-x-3">
+            {%- for language in site.languages %}{% include lang-switch-url.html lang=language.code %}<a href="{{ lang_switch_url }}" hreflang="{{ language.code }}" lang="{{ language.code }}" class="text-blue-600 hover:underline">{% if language.code == 'pt-BR' %}Português{% elsif language.code == 'en-US' %}English{% else %}{{ language.name | escape }}{% endif %}</a>{% endfor -%}
+          </dd></div>
+        </dl>
+        <div class="border-t border-gray-100 px-4 py-3 flex flex-col gap-1">
+          <a href="{{ suggest_url | escape }}" rel="noopener" class="inline-flex items-center gap-2 min-h-9 font-semibold text-blue-600 hover:underline"><i class="fas fa-plus-circle" aria-hidden="true"></i>{% if pt %}Sugerir um recurso{% else %}Suggest a resource{% endif %}</a>
+          <a href="{% if pt %}/pt-BR/reportar-problemas/{% else %}/en-US/report-issues/{% endif %}" class="inline-flex items-center gap-2 min-h-9 text-blue-600 hover:underline"><i class="fas fa-flag" aria-hidden="true"></i>{{ t.footer.report_issues | default: 'Report issues' }}</a>
+        </div>
+      </aside>
+    </div>
+
+    <article aria-labelledby="article-title" data-ipl-article class="lg:col-start-3 lg:col-span-7 lg:row-start-2 min-w-0">
+      <nav aria-labelledby="contents-title" class="bg-gray-50 border border-gray-200 rounded-lg p-4 mb-5 text-sm">
+        <h2 id="contents-title" class="font-semibold text-base mb-2">{% if pt %}Conteúdo{% else %}Contents{% endif %}</h2>
+        <ol class="space-y-1 list-decimal list-inside">
+          <li><a href="#overview" class="text-blue-600 hover:underline">{% if pt %}Visão geral{% else %}Overview{% endif %}</a></li>
+          {%- if children.size > 0 %}<li><a href="#children" class="text-blue-600 hover:underline">{{ children_label }}</a></li>{% endif %}
+          <li><a href="#resources" class="text-blue-600 hover:underline">{{ t.layout.curated_resources | default: 'Curated resources' }}</a></li>
+          <li><a href="#research" class="text-blue-600 hover:underline">{% if pt %}Pesquisa{% else %}Research{% endif %}</a></li>
+          <li><a href="#discussion" class="text-blue-600 hover:underline">{% if pt %}Discussão{% else %}Discussion{% endif %}</a></li>
+          <li><a href="#related" class="text-blue-600 hover:underline">{{ siblings_label }}</a></li>
+        </ol>
+      </nav>
+
+      <div class="ipl-prose">
+        <section aria-labelledby="overview" class="bg-white border border-gray-200 rounded-lg p-4 sm:p-5">
+          <h2 id="overview">{% if pt %}Visão geral{% else %}Overview{% endif %}</h2>
+          {%- if intro != '' %}{{ content }}{% else %}<p>{% if pt %}{{ topic_title | escape }} reúne {{ children.size }} {{ children_label | downcase }} com recursos selecionados, wiki e discussão da comunidade.{% else %}{{ topic_title | escape }} brings together {{ children.size }} {{ children_label | downcase }} with curated resources, wiki and community discussion.{% endif %}</p>{% endif %}
+        </section>
+      </div>
+
+      {%- if children.size > 0 %}
+      <section aria-labelledby="children" class="bg-white border border-gray-200 rounded-lg p-4 sm:p-5 mt-5">
+        <h2 id="children" class="text-xl font-semibold border-b border-gray-200 pb-2 mb-4">{{ children_label }} <span class="text-sm font-normal text-gray-600">({{ children.size }})</span></h2>
+        <ul class="grid grid-cols-1 sm:grid-cols-2 gap-3" role="list">
+          {%- for child in children %}
+          <li class="border border-gray-200 rounded-lg p-4 hover:border-blue-300 transition-colors">
+            <h3 class="font-semibold text-gray-900"><a href="{{ child.path }}" class="hover:text-blue-600">{{ child.title | escape }}</a></h3>
+            {%- if child.children.size > 0 %}
+            <p class="text-xs text-gray-600 mt-0.5">{{ child.children.size }} {% if level == 'category' %}{% if pt %}seções{% else %}sections{% endif %}{% else %}{% if pt %}tópicos{% else %}topics{% endif %}{% endif %}</p>
+            <ul class="flex flex-wrap gap-1.5 mt-2" role="list">
+              {%- comment -%} Sections (under a category) have pages; deeper menu levels do not, so they are listed as text. {%- endcomment -%}
+              {%- for grandchild in child.children %}<li>{% if level == 'category' %}<a href="{{ grandchild.path }}" class="inline-flex items-center min-h-6 px-2 py-0.5 text-xs rounded-full bg-blue-50 text-blue-700 hover:bg-blue-100">{{ grandchild.title | escape }}</a>{% else %}<span class="inline-flex items-center px-2 py-0.5 text-xs rounded-full bg-gray-100 text-gray-700">{{ grandchild.title | escape }}</span>{% endif %}</li>{% endfor %}
+            </ul>
+            {%- else %}
+            <p class="text-sm text-gray-600 mt-1">{% if pt %}Artigo, recursos, wiki e discussão.{% else %}Article, resources, wiki and discussion.{% endif %}</p>
+            {%- endif %}
+          </li>
+          {%- endfor %}
+        </ul>
+      </section>
+      {%- endif %}
+
+      <!-- Curated resources, grouped by type -->
+      <section aria-labelledby="resources" class="bg-white border border-gray-200 rounded-lg p-4 sm:p-5 mt-5">
+        <h2 id="resources" class="text-xl font-semibold border-b border-gray-200 pb-2 mb-4">{{ t.layout.curated_resources | default: 'Curated resources' }}{% if real_resource_total > 0 %} <span class="text-sm font-normal text-gray-600">({{ real_resource_total }})</span>{% endif %}</h2>
+        {%- if real_resource_total > 0 %}
+        {%- if pt -%}
+          {%- assign resource_types = "tools|fa-tools|Ferramentas;databases|fa-database|Bases de dados;learn|fa-graduation-cap|Aprender;publications|fa-book|Publicações;blogs-and-sites|fa-globe|Blogs e sites;events-and-conferences|fa-calendar-alt|Eventos e conferências" | split: ';' -%}
+        {%- else -%}
+          {%- assign resource_types = "tools|fa-tools|Tools;databases|fa-database|Databases;learn|fa-graduation-cap|Learn;publications|fa-book|Publications;blogs-and-sites|fa-globe|Blogs and sites;events-and-conferences|fa-calendar-alt|Events and conferences" | split: ';' -%}
+        {%- endif -%}
+        {%- assign shown = '' | split: '' -%}
+        {%- for resource_type in resource_types -%}
+          {%- assign rt = resource_type | split: '|' -%}
+          {%- assign listed = '' | split: '' -%}
+          {%- for r in real_resources -%}{%- if r.ipl_group == rt[0] -%}{%- assign listed = listed | push: r -%}{%- endif -%}{%- endfor -%}
+          {%- if level == 'subcategory' -%}{%- assign listed = '' | split: '' -%}{%- for r in topic_data[rt[0]] -%}{%- if r.url -%}{%- unless r.url contains 'example.com' -%}{%- assign listed = listed | push: r -%}{%- endunless -%}{%- endif -%}{%- endfor -%}{%- endif -%}
+          {%- if listed.size > 0 %}
+        <h3 class="flex items-center gap-2 font-semibold text-gray-800 mt-4 mb-1"><i class="fas {{ rt[1] }} text-blue-600" aria-hidden="true"></i>{{ rt[2] }} <span class="text-xs font-normal text-gray-600">({{ listed.size }})</span></h3>
+        <ul class="divide-y divide-gray-100" role="list">
+          {%- for resource in listed %}{%- assign shown = shown | push: resource.url %}
+          <li class="py-2.5">
+            <a href="{{ resource.url | escape }}" rel="noopener" class="font-semibold text-blue-700 hover:underline">{{ resource.name | default: resource.title | escape }}</a>
+            <span class="text-xs text-gray-600 ml-1">{{ resource.url | split: '//' | last | split: '/' | first | remove_first: 'www.' | escape }}</span>
+            {%- if resource.access %}<span class="ml-1 text-xs px-1.5 py-0.5 rounded bg-green-50 text-green-700">{{ resource.access | escape }}</span>{% endif %}
+            {%- if resource.description %}<p class="text-sm text-gray-700 mt-0.5">{{ resource.description | escape }}</p>{% endif %}
+          </li>
+          {%- endfor %}
+        </ul>
+          {%- endif -%}
+        {%- endfor -%}
+        {%- comment -%} Resources outside the six types (e.g. category-level lists) are listed too, so nothing is hidden. {%- endcomment -%}
+        {%- assign others = '' | split: '' -%}
+        {%- for r in real_resources -%}{%- unless shown contains r.url -%}{%- assign others = others | push: r -%}{%- endunless -%}{%- endfor -%}
+        {%- if others.size > 0 %}
+        {%- if shown.size > 0 %}<h3 class="flex items-center gap-2 font-semibold text-gray-800 mt-4 mb-1"><i class="fas fa-bookmark text-blue-600" aria-hidden="true"></i>{% if pt %}Outros recursos{% else %}More resources{% endif %} <span class="text-xs font-normal text-gray-600">({{ others.size }})</span></h3>{% endif %}
+        <ul class="divide-y divide-gray-100" role="list">
+          {%- for resource in others %}
+          <li class="py-2.5">
+            <a href="{{ resource.url | escape }}" rel="noopener" class="font-semibold text-blue-700 hover:underline">{{ resource.name | default: resource.title | escape }}</a>
+            <span class="text-xs text-gray-600 ml-1">{{ resource.url | split: '//' | last | split: '/' | first | remove_first: 'www.' | escape }}</span>
+            {%- if resource.description %}<p class="text-sm text-gray-700 mt-0.5">{{ resource.description | escape }}</p>{% endif %}
+          </li>
+          {%- endfor %}
+        </ul>
+        {%- endif %}
+        {%- else %}
+        <p class="text-gray-700">{% if pt %}Ainda não há recursos selecionados para {{ topic_title | escape }}.{% else %}There are no curated resources for {{ topic_title | escape }} yet.{% endif %}</p>
+        {%- endif %}
+        <a href="{{ suggest_url | escape }}" rel="noopener" class="inline-flex items-center gap-2 min-h-11 font-semibold text-blue-600 hover:underline"><i class="fas fa-plus" aria-hidden="true"></i>{% if pt %}Sugerir um recurso{% else %}Suggest a resource{% endif %}</a>
+      </section>
+
+      <!-- Wikipedia overview (hidden until an extract loads) -->
+      <div class="mt-5">{% include components/wiki_preview.html %}</div>
+
+      <!-- Research panel: live external sources -->
+      <section id="research" class="mt-5 scroll-mt-24" aria-label="{% if pt %}Pesquisa{% else %}Research{% endif %}">
+        {% include components/templates/academic-dashboard.html search_query=topic_title search_query_en=topic_title_en %}
+      </section>
+
+      <div id="discussion" class="mt-5 scroll-mt-24">
+        {% include components/discussion.html %}
+      </div>
+
+      <!-- Related: siblings at the same level -->
+      <section class="bg-white border border-gray-200 rounded-lg p-4 sm:p-5 mt-5" aria-labelledby="related">
+        <h2 id="related" class="text-xl font-semibold border-b border-gray-200 pb-2 mb-3">{{ siblings_label }}</h2>
+        <p class="text-sm leading-relaxed">
+          {%- for sibling in siblings -%}{%- if sibling.path != page.url -%}<a href="{{ sibling.path }}" class="text-blue-600 hover:underline">{{ sibling.title | escape }}</a>{% unless forloop.last %} <span class="text-gray-400" aria-hidden="true">·</span> {% endunless %}{%- endif -%}{%- endfor -%}
+        </p>
+        {%- if parent %}<p class="text-sm mt-2">{% if pt %}Parte de{% else %}Part of{% endif %} <a href="{{ parent.path }}" class="text-blue-600 hover:underline">{{ parent.title | escape }}</a></p>{% endif %}
+      </section>
+    </article>
+
+    <!-- Local navigation after the article in source order -->
+    <aside aria-label="{% if pt %}Navegação local{% else %}Local navigation{% endif %}" class="lg:col-start-1 lg:col-span-2 lg:row-start-2 min-w-0">
+      <div class="lg:sticky lg:top-4 space-y-5">
+        <nav aria-labelledby="siblings-title" class="bg-white border border-gray-200 rounded-lg p-4 text-sm">
+          {%- if parent %}<a href="{{ parent.path }}" class="text-blue-600 hover:underline">{% if pt %}Voltar para{% else %}Back to{% endif %} {{ parent.title | escape }}</a>{% endif %}
+          <h2 id="siblings-title" class="font-semibold text-base my-3">{% if level == 'subcategory' %}{% if pt %}Subcategorias de {{ parent.title | escape }}{% else %}Subcategories of {{ parent.title | escape }}{% endif %}{% else %}{% if pt %}Categorias{% else %}Categories{% endif %}{% endif %}</h2>
+          <ul class="space-y-2">
+            {%- for sibling in siblings %}<li><a href="{{ sibling.path }}" {% if sibling.path == page.url %}aria-current="page"{% endif %} class="text-blue-600 hover:underline {% if sibling.path == page.url %}font-semibold{% endif %}">{{ sibling.title | escape }}</a></li>{% endfor %}
+          </ul>
+        </nav>
+        <nav aria-labelledby="on-this-page-title" class="bg-white border border-gray-200 rounded-lg p-4 text-sm">
+          <h2 id="on-this-page-title" class="font-semibold text-base mb-3">{{ t.layout.on_this_page | default: 'On this page' }}</h2>
+          <ul class="space-y-2">
+            <li><a href="#overview" class="text-blue-600 hover:underline">{% if pt %}Visão geral{% else %}Overview{% endif %}</a></li>
+            {%- if children.size > 0 %}<li><a href="#children" class="text-blue-600 hover:underline">{{ children_label }}</a></li>{% endif %}
+            <li><a href="#resources" class="text-blue-600 hover:underline">{{ t.layout.curated_resources | default: 'Curated resources' }}</a></li>
+            <li><a href="#research" class="text-blue-600 hover:underline">{% if pt %}Pesquisa{% else %}Research{% endif %}</a></li>
+            <li><a href="#discussion" class="text-blue-600 hover:underline">{% if pt %}Discussão{% else %}Discussion{% endif %}</a></li>
+          </ul>
+        </nav>
+        {% include components/molecules/keywords-cloud.html %}
+      </div>
+    </aside>
+  </div>
+</div>

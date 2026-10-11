@@ -2,6 +2,7 @@
 <section aria-labelledby="resources" class="bg-white border border-gray-200 rounded-lg p-4 sm:p-5 mt-5">
   <h2 id="resources">{{ t.layout.curated_resources | default: 'Curated resources' }}</h2>
   {% if resources.size > 0 %}
+  {% if resources_from_parent %}<p class="text-sm text-gray-600">{% if pt %}Recursos selecionados para <a href="{{ parent_subcategory.path }}">{{ parent_subcategory.title | escape }}</a>, que inclui {{ topic_title | escape }}.{% else %}Curated for <a href="{{ parent_subcategory.path }}">{{ parent_subcategory.title | escape }}</a>, which includes {{ topic_title | escape }}.{% endif %}</p>{% endif %}
   <ul class="list-none p-0 divide-y divide-gray-200">
     {% for resource in resources %}
     <li class="py-3">

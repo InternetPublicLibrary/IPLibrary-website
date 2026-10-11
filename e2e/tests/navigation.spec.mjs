@@ -23,7 +23,7 @@ test.describe('generated category pages', () => {
   test('subcategory page is served at its directory URL', async ({ page }) => {
     const response = await page.goto('/en-US/academics/computer-science-theory/');
     expect(response?.status()).toBe(200);
-    await expect(page.locator('#category-title')).toHaveText('Computer Science Theory');
+    await expect(page.locator('h1')).toHaveText('Computer Science Theory');
   });
 
   test('keywords cloud links to the search page', async ({ page }) => {

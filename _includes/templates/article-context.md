@@ -37,6 +37,13 @@
   {% endfor %}
 {% endfor %}
 {% assign resources = resources | uniq %}
+{% comment %} Spec 002 curates resources per subcategory; a section without its own shows its subcategory's. {% endcomment %}
+{% assign resources_from_parent = false %}
+{% if resources.size == 0 and parent_subcategory %}
+  {% assign parent_topic_data = site.data[lang][category_folder][subcategory_folder] %}
+  {% include components/atoms/real-resources.html node=parent_topic_data %}
+  {% if real_resource_total > 0 %}{% assign resources = real_resources %}{% assign resources_from_parent = true %}{% endif %}
+{% endif %}
 {% assign wiki_url = topic_path | append: 'wiki/' %}
 {% assign wiki_pages = site.pages | where: 'url', wiki_url %}
 {% assign issue_base = 'https://github.com/InternetPublicLibrary/' | append: lang | append: '/issues/new?title=' %}

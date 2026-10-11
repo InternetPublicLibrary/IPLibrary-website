@@ -16,7 +16,7 @@ include components/templates/academic-dashboard.html search_query=topic_title se
 {%- endif -%}
 
 {% include components/atoms/safe-html.html %}
-<div class="academic-dashboard bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden" data-research-panel
+<div class="academic-dashboard w-full max-w-full min-w-0 bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden" data-research-panel
   data-query="{{ include.search_query | escape }}" data-query-en="{{ query_en | escape }}">
 
   <!-- Header: what this is, where it comes from, and the query -->
@@ -49,7 +49,7 @@ include components/templates/academic-dashboard.html search_query=topic_title se
   </div>
 
   <!-- Tabs -->
-  <div class="overflow-x-auto border-b border-slate-200">
+  <div class="w-full max-w-full overflow-x-auto border-b border-slate-200">
     <div role="tablist" aria-label="{% if pt %}Fontes de pesquisa{% else %}Research sources{% endif %}" class="flex min-w-max px-2">
       {%- for tab in research_tabs -%}
       {%- assign tb = tab | split: '|' %}
