@@ -5,6 +5,9 @@
 - [x] T2 Pin Tailwind browser 4.3.3 and Font Awesome 6.4.0 with integrity hashes; remove GA snippets.
 - [x] T3 Dependabot (bundler, npm for root and `e2e/`, GitHub Actions) and CodeQL (JavaScript, Ruby).
 - [ ] T4 Deletion list (vendor/bundle, debug files, unused JS/images, legacy includes) → maintainer approval → remove.
+  - [x] vendor/bundle untracked (approved).
+  - [ ] Debug files, legacy root includes, unused Semantic UI JS/images, unused components — awaiting approval.
+  - History rewrite declined: the clone keeps the existing pack; AC3's size target applies to the working tree.
 ## Phase 2 — Toolchain
 - [ ] T5 Ruby 3.4; bundle update; suites green.
 - [ ] T6 CI workflow (Minitest, Playwright + axe); remove npm-based workflows.
