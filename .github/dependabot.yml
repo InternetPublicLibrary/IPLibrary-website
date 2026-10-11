@@ -1,0 +1,30 @@
+# Spec 005 T3 — weekly dependency updates, grouped so each ecosystem opens one PR.
+version: 2
+updates:
+  - package-ecosystem: bundler
+    directory: /
+    schedule: { interval: weekly }
+    groups:
+      gems: { patterns: ["*"] }
+
+  - package-ecosystem: npm
+    directory: /
+    schedule: { interval: weekly }
+    groups:
+      root-packages: { patterns: ["*"] }
+
+  - package-ecosystem: npm
+    directory: /e2e
+    schedule: { interval: weekly }
+    groups:
+      e2e-packages: { patterns: ["*"] }
+
+  - package-ecosystem: github-actions
+    directory: /
+    schedule: { interval: weekly }
+    groups:
+      actions: { patterns: ["*"] }
+
+  - package-ecosystem: gitsubmodule
+    directory: /
+    schedule: { interval: weekly }

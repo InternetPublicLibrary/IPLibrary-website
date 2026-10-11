@@ -72,8 +72,9 @@ staticman:
   # Secret used to secure communication with Staticman
   secret: "REPLACE_WITH_YOUR_SECRET"
   # reCAPTCHA configuration
+  # Off until contribute (spec 003) replaces Staticman; the site key below is a placeholder.
   recaptcha:
-    enabled: true
+    enabled: false
     siteKey: "REPLACE_WITH_YOUR_SITE_KEY"
     secret: "REPLACE_WITH_YOUR_SECRET"
 
