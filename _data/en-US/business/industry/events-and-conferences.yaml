@@ -1,4 +1,13 @@
-# Placeholder - Add resources here
-- name: "Example Resource"
-  url: "https://example.com"
-  description: "Add a description here."
+- name: "Hannover Messe"
+  url: "https://www.hannovermesse.de/"
+  description: "World's leading industrial technology and trade fair held annually in Germany covering robotics, manufacturing energy, and digital industry."
+  type: "conference"
+  access: "paid"
+  organization: "Deutsche Messe AG"
+
+- name: "IMTS - International Manufacturing Technology Show"
+  url: "https://www.imts.com/"
+  description: "Major recurring North American industrial trade show presenting advancements in digital manufacturing, machining, and robotics."
+  type: "conference"
+  access: "paid"
+  organization: "Association for Manufacturing Technology"

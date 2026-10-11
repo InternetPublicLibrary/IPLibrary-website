@@ -1,4 +1,13 @@
-# Placeholder - Add resources here
-- name: "Example Resource"
-  url: "https://example.com"
-  description: "Add a description here."
+- name: "Mastering Strategic Management"
+  url: "https://open.umn.edu/opentextbooks/textbooks/mastering-strategic-management"
+  description: "Peer-reviewed open textbook examining corporate strategy formulation, competitive advantage, environmental analysis, and execution."
+  type: "textbook"
+  access: "free"
+  organization: "Open Textbook Library"
+
+- name: "Strategic Management"
+  url: "https://open.umn.edu/opentextbooks/textbooks/strategic-management"
+  description: "Open educational textbook addressing strategic vision, core competencies, industry life cycles, and corporate diversification."
+  type: "textbook"
+  access: "free"
+  organization: "Open Textbook Library"

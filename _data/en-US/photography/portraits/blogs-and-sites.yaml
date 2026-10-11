@@ -1,4 +1,18 @@
-# Placeholder - Add resources here
-- name: "Example Resource"
-  url: "https://example.com"
-  description: "Add a description here."
+- name: "The Portrait System Blog"
+  url: "https://theportraitsystem.com/"
+  description: "Educational blog featuring portrait photographer interviews, studio business tips, and posing tutorials."
+  type: "blog"
+  access: "free"
+  organization: "The Portrait System"
+
+- name: "Peter Hurley Blog"
+  url: "https://peterhurley.com/"
+  description: "Specialized blog sharing studio lighting setups, client expression coaching, and commercial headshot techniques."
+  type: "blog"
+  access: "free"
+
+- name: "Fstoppers Portrait Section"
+  url: "https://fstoppers.com/"
+  description: "Tutorial and review community covering portrait lighting modifiers, tethered workflows, and creative portrait setups."
+  type: "community"
+  access: "free"

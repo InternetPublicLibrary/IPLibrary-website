@@ -1,4 +1,17 @@
-# Placeholder - Add resources here
-- name: "Example Resource"
-  url: "https://example.com"
-  description: "Add a description here."
+- name: "The App Whisperer"
+  url: "https://theappwhisperer.com/"
+  description: "Web community and blog celebrating mobile photography, digital artistry, and mobile journalism."
+  type: "blog"
+  access: "free"
+
+- name: "Mobiography"
+  url: "https://www.mobiography.net/"
+  description: "Independent blog and showcase dedicated to mobile photographers, phone camera accessories, and editing tips."
+  type: "blog"
+  access: "free"
+
+- name: "iPhone Photography School Blog"
+  url: "https://iphonephotographyschool.com/"
+  description: "Tutorial blog featuring practical mobile photography guides, composition advice, and camera settings tips."
+  type: "blog"
+  access: "free"

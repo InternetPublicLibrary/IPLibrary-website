@@ -1,4 +1,19 @@
-# Placeholder - Add resources here
-- name: "Example Resource"
-  url: "https://example.com"
-  description: "Add a description here."
+- name: "ExifTool Documentation and Tag Guides"
+  url: "https://exiftool.org/"
+  description: "Official documentation and command reference explaining EXIF, MakerNotes, and color metadata manipulation."
+  type: "reference"
+  access: "free"
+
+- name: "Calibrite Color Management Education"
+  url: "https://calibrite.com/"
+  description: "Guides and webinars detailing monitor calibration, camera profiling targets, and printer color consistency."
+  type: "reference"
+  access: "free"
+  organization: "Calibrite"
+
+- name: "DPReview Buying Guides and Gear Masterclasses"
+  url: "https://www.dpreview.com/"
+  description: "In-depth evaluations and tutorials on choosing and configuring camera accessories, tripods, and studio lights."
+  type: "reference"
+  access: "free"
+  organization: "Gear Patrol"

@@ -1,4 +1,13 @@
-# Placeholder - Add resources here
-- name: "Example Resource"
-  url: "https://example.com"
-  description: "Add a description here."
+- name: "Cannes Lions International Festival of Creativity"
+  url: "https://www.canneslions.com/"
+  description: "Global annual festival and awards celebrating creativity, branded entertainment, advertising media, and marketing communications."
+  type: "conference"
+  access: "paid"
+  organization: "Ascential"
+
+- name: "Advertising Week"
+  url: "https://advertisingweek.com/"
+  description: "Annual multi-city conference series uniting advertising, media, technology, and culture leaders to discuss industry transformation."
+  type: "conference"
+  access: "paid"
+  organization: "Advertising Week"

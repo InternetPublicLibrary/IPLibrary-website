@@ -1,4 +1,13 @@
-# Placeholder - Add resources here
-- name: "Example Resource"
-  url: "https://example.com"
-  description: "Add a description here."
+- name: "US Census Bureau E-Commerce Statistics"
+  url: "https://www.census.gov/retail/ecommerce.html"
+  description: "Official United States government quarterly retail e-commerce sales datasets, historical benchmarks, and economic indicators."
+  type: "database"
+  access: "free"
+  organization: "U.S. Census Bureau"
+
+- name: "UNCTADstat Digital Economy Data"
+  url: "https://unctadstat.unctad.org/datacentre/"
+  description: "United Nations database tracking global e-commerce indicators, business ICT usage, and digital trade statistics across economies."
+  type: "database"
+  access: "free"
+  organization: "UN Trade and Development"

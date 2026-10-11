@@ -1,4 +1,18 @@
-# Placeholder - Add resources here
-- name: "Example Resource"
-  url: "https://example.com"
-  description: "Add a description here."
+- name: "Nature Photographers Network"
+  url: "https://www.naturephotographers.network/"
+  description: "Peer community and discussion forum dedicated to the art, technique, and ethics of nature and landscape photography."
+  type: "community"
+  access: "freemium"
+  organization: "Nature Photographers Network"
+
+- name: "Thomas Heaton Photography Blog"
+  url: "https://thomasheaton.co.uk/"
+  description: "Field blog and video journal sharing behind-the-scenes landscape photography adventures and location insights."
+  type: "blog"
+  access: "free"
+
+- name: "Michael Shainblum Photography"
+  url: "https://shainblumphoto.com/"
+  description: "Showcase and educational blog highlighting fine-art landscape, nightscape, and aerial photography."
+  type: "blog"
+  access: "free"

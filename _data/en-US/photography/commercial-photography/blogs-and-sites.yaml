@@ -1,4 +1,19 @@
-# Placeholder - Add resources here
-- name: "Example Resource"
-  url: "https://example.com"
-  description: "Add a description here."
+- name: "A Photo Editor"
+  url: "https://aphotoeditor.com/"
+  description: "Industry blog covering the business of commercial photography, pricing negotiations, and portfolio reviews."
+  type: "blog"
+  access: "free"
+
+- name: "Ads of the World"
+  url: "https://www.adsoftheworld.com/"
+  description: "Global creative advertising archive featuring commercial photography campaigns and visual media from international agencies."
+  type: "blog"
+  access: "free"
+  organization: "Clio Network"
+
+- name: "FCP - Freelance Commercial Photography"
+  url: "https://apanational.org/"
+  description: "Community updates and commercial industry insights from the American Photographic Artists network."
+  type: "community"
+  access: "free"
+  organization: "American Photographic Artists"

@@ -1,4 +1,13 @@
-# Placeholder - Add resources here
-- name: "Example Resource"
-  url: "https://example.com"
-  description: "Add a description here."
+- name: "American Finance Association Annual Meeting"
+  url: "https://afajof.org/"
+  description: "Premier academic finance conference held annually presenting research papers on financial economics, banking, and investments."
+  type: "conference"
+  access: "paid"
+  organization: "American Finance Association"
+
+- name: "Financial Management Association Annual Meeting"
+  url: "https://www.fma.org/"
+  description: "Global recurring conference connecting corporate finance practitioners, academics, and financial researchers."
+  type: "conference"
+  access: "paid"
+  organization: "Financial Management Association International"

@@ -1,4 +1,13 @@
-# Placeholder - Add resources here
-- name: "Example Resource"
-  url: "https://example.com"
-  description: "Add a description here."
+- name: "DXOMARK Camera Sensor Database"
+  url: "https://www.dxomark.com/"
+  description: "Standardized benchmark database evaluating digital camera sensor performance, color sensitivity, and dynamic range."
+  type: "database"
+  access: "free"
+  organization: "DXOMARK"
+
+- name: "Photons to Photos"
+  url: "https://www.photonstophotos.net/"
+  description: "Independent database of digital camera sensor dynamic range, read noise, and ISO invariance measurements."
+  type: "database"
+  access: "free"
+

@@ -1,4 +1,13 @@
-# Placeholder - Add resources here
-- name: "Example Resource"
-  url: "https://example.com"
-  description: "Add a description here."
+- name: "Massive Dev Chart Film Database"
+  url: "https://www.digitaltruth.com/devchart.php"
+  description: "Cross-referenced database of film emulsions, chemical developer combinations, dilution ratios, and processing times."
+  type: "database"
+  access: "free"
+  organization: "Digitaltruth Photo"
+
+- name: "Emulsive Film Index"
+  url: "https://emulsive.org/reviews/film-reviews"
+  description: "Extensive repository of black-and-white, color negative, and slide film stock reviews and sample imagery."
+  type: "database"
+  access: "free"
+  organization: "EMULSIVE"

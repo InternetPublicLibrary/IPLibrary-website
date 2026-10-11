@@ -1,4 +1,13 @@
-# Placeholder - Add resources here
-- name: "Example Resource"
-  url: "https://example.com"
-  description: "Add a description here."
+- name: "Crunchbase"
+  url: "https://www.crunchbase.com/"
+  description: "Comprehensive database covering private and public company financing rounds, venture capital investments, and founder profiles."
+  type: "database"
+  access: "freemium"
+  organization: "Crunchbase"
+
+- name: "Wellfound"
+  url: "https://wellfound.com/"
+  description: "Global startup database connecting emerging technology ventures, founding teams, startup candidates, and angel networks."
+  type: "database"
+  access: "free"
+  organization: "Wellfound"

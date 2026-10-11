@@ -1,4 +1,20 @@
-# Placeholder - Add resources here
-- name: "Example Resource"
-  url: "https://example.com"
-  description: "Add a description here."
+- name: "MathOverflow"
+  url: "https://mathoverflow.net/"
+  description: "Collaborative question-and-answer platform for professional mathematicians, researchers, and graduate students."
+  type: "community"
+  access: "free"
+  organization: "Stack Exchange"
+
+- name: "What's new by Terence Tao"
+  url: "https://terrytao.wordpress.com/"
+  description: "Expository mathematical blog by Fields Medalist Terence Tao covering research updates, lecture notes, and open problems."
+  type: "blog"
+  access: "free"
+
+- name: "Statistical Modeling, Causal Inference, and Social Science"
+  url: "https://statmodeling.stat.columbia.edu/"
+  description: "Influential statistics blog by Andrew Gelman and colleagues discussing Bayesian methods, data science, and replication."
+  type: "blog"
+  access: "free"
+  organization: "Columbia University"
+

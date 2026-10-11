@@ -1,4 +1,14 @@
-# Placeholder - Add resources here
-- name: "Example Resource"
-  url: "https://example.com"
-  description: "Add a description here."
+- name: "React Conf"
+  url: "https://conf.react.dev/"
+  description: "Official conference for the React community bringing together the React core team and international frontend engineers."
+  type: "conference"
+  access: "paid"
+  organization: "Meta"
+
+- name: "SmashingConf"
+  url: "https://smashingconf.com"
+  description: "Friendly, practical conference series for frontend developers and designers focusing on real-world web design and engineering."
+  type: "conference"
+  access: "paid"
+  organization: "Smashing Media AG"
+

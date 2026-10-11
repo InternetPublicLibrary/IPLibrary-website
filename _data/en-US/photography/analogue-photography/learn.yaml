@@ -1,4 +1,19 @@
-# Placeholder - Add resources here
-- name: "Example Resource"
-  url: "https://example.com"
-  description: "Add a description here."
+- name: "Ilford Photo Learning Zone"
+  url: "https://www.ilfordphoto.com/learning-zone"
+  description: "Official guides and technical tutorials on black-and-white film processing and darkroom printing."
+  type: "reference"
+  access: "free"
+  organization: "Harman Technology"
+
+- name: "Film Photography Project Learning"
+  url: "https://filmphotographyproject.com/"
+  description: "Educational articles, podcasts, and video guides on analog cameras, film stocks, and home processing."
+  type: "course"
+  access: "free"
+  organization: "The Film Photography Project"
+
+- name: "Shoot It With Film Guides"
+  url: "https://shootitwithfilm.com/"
+  description: "Beginner-friendly educational tutorials on metering, choosing film cameras, and developing film at home."
+  type: "reference"
+  access: "free"

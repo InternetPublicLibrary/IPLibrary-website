@@ -1,4 +1,13 @@
-# Placeholder - Add resources here
-- name: "Example Resource"
-  url: "https://example.com"
-  description: "Add a description here."
+- name: "Strategic Management Society Annual Conference"
+  url: "https://www.strategicmanagement.net/"
+  description: "Premier global conference bringing together leading strategy scholars, consultants, and business executives."
+  type: "conference"
+  access: "paid"
+  organization: "Strategic Management Society"
+
+- name: "World Economic Forum Annual Meeting"
+  url: "https://www.weforum.org/events/world-economic-forum-annual-meeting/"
+  description: "Flagship global gathering in Davos uniting business leaders, government heads, and strategists to define worldwide agendas."
+  type: "conference"
+  access: "paid"
+  organization: "World Economic Forum"

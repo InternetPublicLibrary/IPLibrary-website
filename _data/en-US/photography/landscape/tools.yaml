@@ -1,4 +1,19 @@
-# Placeholder - Add resources here
-- name: "Example Resource"
-  url: "https://example.com"
-  description: "Add a description here."
+- name: "PhotoPills"
+  url: "https://www.photopills.com/"
+  description: "Comprehensive planning application providing sun, moon, and Milky Way predictions alongside depth of field and exposure calculators."
+  type: "tool"
+  access: "paid"
+  organization: "PhotoPills"
+
+- name: "The Photographer's Ephemeris"
+  url: "https://photoephemeris.com/"
+  description: "Map-centric sun, moon, and Milky Way light calculator helping outdoor photographers plan natural light alignments."
+  type: "tool"
+  access: "freemium"
+  organization: "Crookneck Consulting"
+
+- name: "Lightme Light Meter"
+  url: "https://www.digitaltruth.com/devchart.php"
+  description: "Exposure planning and dynamic range reference utility tailored for outdoor and landscape photographers."
+  type: "tool"
+  access: "free"

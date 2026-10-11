@@ -1,4 +1,17 @@
-# Placeholder - Add resources here
-- name: "Example Resource"
-  url: "https://example.com"
-  description: "Add a description here."
+- name: "35mmc"
+  url: "https://www.35mmc.com/"
+  description: "Community-driven blog featuring reviews of analog cameras, lenses, film stocks, and photographic experiences."
+  type: "blog"
+  access: "free"
+
+- name: "EMULSIVE"
+  url: "https://emulsive.org/"
+  description: "Community platform dedicated to film photography articles, technical guides, interviews, and community projects."
+  type: "community"
+  access: "free"
+
+- name: "Kosmo Foto"
+  url: "https://kosmofoto.com/"
+  description: "Independent blog providing news, camera reviews, and history centered on analog and vintage photography."
+  type: "blog"
+  access: "free"

@@ -1,4 +1,13 @@
-# Placeholder - Add resources here
-- name: "Example Resource"
-  url: "https://example.com"
-  description: "Add a description here."
+- name: "Academy of Management Annual Meeting"
+  url: "https://aom.org/events/annual-meeting"
+  description: "Premier academic management conference bringing together thousands of scholars to present organizational research."
+  type: "conference"
+  access: "paid"
+  organization: "Academy of Management"
+
+- name: "Global Peter Drucker Forum"
+  url: "https://www.druckerforum.org/"
+  description: "Annual international management conference held in Vienna discussing modern leadership philosophy and management practice."
+  type: "conference"
+  access: "paid"
+  organization: "Peter Drucker Society Europe"

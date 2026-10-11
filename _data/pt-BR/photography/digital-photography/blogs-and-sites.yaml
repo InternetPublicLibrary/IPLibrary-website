@@ -1,4 +1,14 @@
-# Placeholder - Add resources here
-- name: "Example Resource"
-  url: "https://example.com"
-  description: "Add a description here."
+- name: "DPReview"
+  url: "https://www.dpreview.com/"
+  description: "Portal de referência internacional com testes detalhados de câmeras e lentes digitais, comparativos de estúdio e fóruns."
+  type: "blog"
+  language: "en"
+  access: "free"
+  organization: "Gear Patrol"
+
+- name: "PetaPixel"
+  url: "https://petapixel.com/"
+  description: "Principal site de notícias sobre tecnologia de câmeras, lançamentos de sensores e tendências da indústria fotográfica."
+  type: "blog"
+  language: "en"
+  access: "free"

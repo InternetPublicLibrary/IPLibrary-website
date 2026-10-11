@@ -1,4 +1,13 @@
-# Placeholder - Add resources here
-- name: "Example Resource"
-  url: "https://example.com"
-  description: "Add a description here."
+- name: "Google Video Ads Certification on Skillshop"
+  url: "https://skillshop.withgoogle.com/"
+  description: "Accredited online courses and assessments covering YouTube advertising formats, video creative guidelines, and performance metrics."
+  type: "course"
+  access: "free"
+  organization: "Google"
+
+- name: "Meta Blueprint Mobile Video Essentials"
+  url: "https://www.facebookblueprint.com/"
+  description: "Free self-paced coursework teaching mobile-first video production, Reels storytelling, and mobile ad creative design."
+  type: "course"
+  access: "free"
+  organization: "Meta"

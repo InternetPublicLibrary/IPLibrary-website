@@ -1,4 +1,13 @@
-# Placeholder - Add resources here
-- name: "Example Resource"
-  url: "https://example.com"
-  description: "Add a description here."
+- name: "Journal of Marketing Communications"
+  url: "https://www.tandfonline.com/journals/rjmc20"
+  description: "Peer-reviewed journal publishing scholarly articles on integrated communications, brand storytelling, and content strategy."
+  type: "journal"
+  access: "paid"
+  organization: "Taylor & Francis"
+
+- name: "Journal of Brand Strategy"
+  url: "https://www.henrystewartpublications.com/jbs"
+  description: "Professional quarterly journal presenting peer-reviewed best practices in branded content, thought leadership, and communications."
+  type: "journal"
+  access: "paid"
+  organization: "Henry Stewart Publications"

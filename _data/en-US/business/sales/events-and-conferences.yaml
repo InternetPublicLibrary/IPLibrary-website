@@ -1,4 +1,13 @@
-# Placeholder - Add resources here
-- name: "Example Resource"
-  url: "https://example.com"
-  description: "Add a description here."
+- name: "Dreamforce"
+  url: "https://www.salesforce.com/dreamforce/"
+  description: "World's largest enterprise software and sales conference hosted annually by Salesforce in San Francisco."
+  type: "conference"
+  access: "paid"
+  organization: "Salesforce"
+
+- name: "Sales Management Association Annual Conference"
+  url: "https://salesmanagement.org/"
+  description: "Annual conference focusing on sales leadership, sales enablement, compensation structuring, and commercial operations."
+  type: "conference"
+  access: "paid"
+  organization: "Sales Management Association"

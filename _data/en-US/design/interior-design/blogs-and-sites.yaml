@@ -1,4 +1,13 @@
-# Placeholder - Add resources here
-- name: "Example Resource"
-  url: "https://example.com"
-  description: "Add a description here."
+- name: "Dezeen Interiors"
+  url: "https://www.dezeen.com/interiors/"
+  description: "Architecture and design magazine publishing daily reviews of residential, workplace, and commercial interior schemes."
+  type: "blog"
+  access: "free"
+  organization: "Dezeen"
+
+- name: "Architectural Digest"
+  url: "https://www.architecturaldigest.com"
+  description: "Influential design authority showcasing world-class international interior design, renovations, and decorative trends."
+  type: "blog"
+  access: "freemium"
+  organization: "Condé Nast"

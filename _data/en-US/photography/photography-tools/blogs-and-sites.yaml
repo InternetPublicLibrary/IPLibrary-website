@@ -1,4 +1,19 @@
-# Placeholder - Add resources here
-- name: "Example Resource"
-  url: "https://example.com"
-  description: "Add a description here."
+- name: "Lensrentals Blog"
+  url: "https://www.lensrentals.com/blog/"
+  description: "Engineering and repair blog providing optical bench tests, teardowns, and reliability statistics for lenses and camera bodies."
+  type: "blog"
+  access: "free"
+  organization: "Lensrentals"
+
+- name: "The-Digital-Picture"
+  url: "https://www.the-digital-picture.com/"
+  description: "Comprehensive photographic equipment testing site featuring ISO 12233 resolution test chart comparisons and lens evaluations."
+  type: "blog"
+  access: "free"
+
+- name: "DPReview"
+  url: "https://www.dpreview.com/"
+  description: "Authoritative reviews and comparison testing of photographic tools, sensors, lenses, and imaging accessories."
+  type: "blog"
+  access: "free"
+  organization: "Gear Patrol"

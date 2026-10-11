@@ -1,4 +1,6 @@
-# Placeholder - Add resources here
-- name: "Example Resource"
-  url: "https://example.com"
-  description: "Add a description here."
+- name: "CSUN Assistive Technology Conference"
+  url: "https://www.csun.edu/cod/conference/"
+  description: "An annual international gathering focused on advancements in assistive technology and digital accessibility."
+  type: "conference"
+  access: "paid"
+  organization: "California State University, Northridge"

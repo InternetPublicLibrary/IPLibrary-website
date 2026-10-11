@@ -1,4 +1,13 @@
-# Placeholder - Add resources here
-- name: "Example Resource"
-  url: "https://example.com"
-  description: "Add a description here."
+- name: "NAR NXT, The REALTOR Experience"
+  url: "https://narnxt.realtor/"
+  description: "Annual national conference and trade expo organized by the National Association of Realtors bringing together real estate professionals."
+  type: "conference"
+  access: "paid"
+  organization: "National Association of Realtors"
+
+- name: "Inman Connect"
+  url: "https://www.inman.com/event/inman-connect-new-york/"
+  description: "Flagship recurring residential real estate industry conference focusing on brokerage leadership, proptech, and market strategy."
+  type: "conference"
+  access: "paid"
+  organization: "Inman"

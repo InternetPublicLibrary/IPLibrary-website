@@ -1,4 +1,13 @@
-# Placeholder - Add resources here
-- name: "Example Resource"
-  url: "https://example.com"
-  description: "Add a description here."
+- name: "National Small Business Week Virtual Summit"
+  url: "https://www.sba.gov/national-small-business-week"
+  description: "Annual national event organized by the SBA offering educational webinars, awards, and networking for home and micro businesses."
+  type: "conference"
+  access: "free"
+  organization: "U.S. Small Business Administration"
+
+- name: "SCORE National Small Business Conferences"
+  url: "https://www.score.org/events"
+  description: "Regular recurring virtual conferences and mentorship summits tailored for solopreneurs, freelancers, and home business owners."
+  type: "conference"
+  access: "free"
+  organization: "SCORE Association"

@@ -1,4 +1,24 @@
-# Placeholder - Add resources here
-- name: "Example Resource"
-  url: "https://example.com"
-  description: "Add a description here."
+- name: "Computational Complexity Blog"
+  url: "https://blog.computationalcomplexity.org/"
+  description: "Influential academic blog written by Lance Fortnow and Bill Gasarch exploring complexity theory, algorithms, and theory life."
+  type: "blog"
+  access: "free"
+
+- name: "Windows on Theory"
+  url: "https://windowsontheory.org/"
+  description: "Collaborative research blog by theoretical computer scientists discussing algorithms, complexity, cryptography, and open problems."
+  type: "blog"
+  access: "free"
+
+- name: "Theoretical Computer Science Stack Exchange"
+  url: "https://cstheory.stackexchange.com/"
+  description: "Question and answer community for researchers, academics, and graduate students in theoretical computer science."
+  type: "community"
+  access: "free"
+  organization: "Stack Exchange"
+
+- name: "In Theory"
+  url: "https://lucatrevisan.wordpress.com/"
+  description: "Theoretical computer science blog maintained by the late Luca Trevisan, covering complexity theory, randomness, and spectral graph theory."
+  type: "blog"
+  access: "free"

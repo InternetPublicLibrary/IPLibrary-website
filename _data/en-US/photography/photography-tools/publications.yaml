@@ -1,4 +1,19 @@
-# Placeholder - Add resources here
-- name: "Example Resource"
-  url: "https://example.com"
-  description: "Add a description here."
+- name: "Shutterbug"
+  url: "https://www.shutterbug.com/"
+  description: "Photography magazine focused on camera gear tests, lens benchmarks, darkroom tools, and digital accessory reviews."
+  type: "journal"
+  access: "free"
+  organization: "AVTech Media Americas"
+
+- name: "Digital Camera World"
+  url: "https://www.digitalcameraworld.com/"
+  description: "Publication reviewing cameras, lenses, filters, tripods, studio flash units, and post-processing software."
+  type: "journal"
+  access: "free"
+  organization: "Future plc"
+
+- name: "Outdoor Photographer Gear Reviews"
+  url: "https://www.outdoorphotographer.com/"
+  description: "Field tests and technical assessments of outdoor photography equipment, rugged tripods, and specialty packs."
+  type: "journal"
+  access: "paid"

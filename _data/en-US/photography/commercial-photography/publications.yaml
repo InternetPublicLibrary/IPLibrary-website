@@ -1,4 +1,14 @@
-# Placeholder - Add resources here
-- name: "Example Resource"
-  url: "https://example.com"
-  description: "Add a description here."
+- name: "Lürzer's Archive"
+  url: "https://www.luerzersarchive.com/"
+  description: "Bimonthly advertising magazine showcasing top commercial campaigns and the world's best advertising photographers."
+  type: "journal"
+  access: "paid"
+  organization: "Lürzer's Archive"
+
+- name: "Communication Arts"
+  url: "https://www.commarts.com/"
+  description: "Trade journal covering commercial photography, visual communication, advertising, and annual photography competitions."
+  type: "journal"
+  access: "paid"
+  organization: "Communication Arts"
+

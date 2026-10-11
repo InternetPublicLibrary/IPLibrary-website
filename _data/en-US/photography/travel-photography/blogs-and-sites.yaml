@@ -1,4 +1,18 @@
-# Placeholder - Add resources here
-- name: "Example Resource"
-  url: "https://example.com"
-  description: "Add a description here."
+- name: "Expert Vagabond"
+  url: "https://expertvagabond.com/"
+  description: "Adventure travel and photography blog sharing destination guides, camera gear reviews, and cultural shooting tips."
+  type: "blog"
+  access: "free"
+
+- name: "The Travel Photographer Blog"
+  url: "https://thetravelphotographer.blogspot.com/"
+  description: "Independent blog curated by photojournalist Tewfic El-Sawy documenting visual ethnography and expeditionary photography."
+  type: "blog"
+  access: "free"
+
+- name: "National Geographic Photography Stories"
+  url: "https://www.nationalgeographic.com/photography/"
+  description: "Editorial blog features, field dispatches, and photo stories produced by global National Geographic explorers."
+  type: "blog"
+  access: "free"
+  organization: "National Geographic Society"

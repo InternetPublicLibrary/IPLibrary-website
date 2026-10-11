@@ -1,4 +1,18 @@
-# Placeholder - Add resources here
-- name: "Example Resource"
-  url: "https://example.com"
-  description: "Add a description here."
+- name: "MIT Technology Review"
+  url: "https://www.technologyreview.com/"
+  description: "Independent media publication from MIT providing journalism and analysis on emerging engineering technologies and commercial innovations."
+  type: "blog"
+  access: "freemium"
+  organization: "MIT"
+
+- name: "Hackaday"
+  url: "https://hackaday.com/"
+  description: "Collaborative engineering community blog featuring hardware hacking, circuit design, reverse engineering, and embedded firmware projects."
+  type: "blog"
+  access: "free"
+
+- name: "Engineering.com"
+  url: "https://www.engineering.com/"
+  description: "Online engineering publication sharing trade news, design calculators, industry analyses, and webinar discussions."
+  type: "blog"
+  access: "free"

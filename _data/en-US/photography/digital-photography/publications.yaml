@@ -1,4 +1,19 @@
-# Placeholder - Add resources here
-- name: "Example Resource"
-  url: "https://example.com"
-  description: "Add a description here."
+- name: "Digital Camera World"
+  url: "https://www.digitalcameraworld.com/"
+  description: "Global photography publication featuring camera reviews, buying guides, and digital editing tutorials."
+  type: "journal"
+  access: "free"
+  organization: "Future plc"
+
+- name: "Outdoor Photographer"
+  url: "https://www.outdoorphotographer.com/"
+  description: "Quarterly publication focusing on digital landscape, wildlife, and outdoor nature photography techniques."
+  type: "journal"
+  access: "paid"
+
+- name: "Amateur Photographer"
+  url: "https://amateurphotographer.com/"
+  description: "Weekly photographic magazine providing independent digital camera tests, news, and photographic technique articles."
+  type: "journal"
+  access: "free"
+  organization: "Kelsey Media"

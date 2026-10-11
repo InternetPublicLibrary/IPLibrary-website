@@ -1,4 +1,13 @@
-# Placeholder - Add resources here
-- name: "Example Resource"
-  url: "https://example.com"
-  description: "Add a description here."
+- name: "Real Estate Finance and Investment"
+  url: "https://ocw.mit.edu/courses/11-431j-real-estate-finance-and-investment-fall-2006/"
+  description: "Graduate-level university lecture course covering commercial property valuation, mortgage contracts, deal structures, and REITs."
+  type: "course"
+  access: "free"
+  organization: "Massachusetts Institute of Technology"
+
+- name: "BiggerPockets Guides and Tutorials"
+  url: "https://www.biggerpockets.com/guides"
+  description: "Educational library and step-by-step guides covering residential property analysis, tenant management, and real estate investing."
+  type: "course"
+  access: "free"
+  organization: "BiggerPockets"
