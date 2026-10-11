@@ -1,0 +1,83 @@
+---
+layout: default
+---
+{%- comment -%}
+Info page (spec 001, revised) — the article shell for the institutional pages that live in the en-US/pt-BR
+content repositories (about, help, contribute, policies, contact…). Their hand-written bodies are kept as
+they are; legacy gradient heroes are restyled as an article header (.ipl-info-body in discovery.css).
+Adds: breadcrumb, Page/Edit tabs (edit = the source file on GitHub), automatic contents from the body's
+h2 headings, and navigation between the institutional pages.
+{%- endcomment -%}
+{%- assign lang = page.lang | default: 'en-US' -%}
+{%- assign t = site.data[lang].translations -%}
+{%- assign pt = false -%}{%- if lang == 'pt-BR' -%}{%- assign pt = true -%}{%- endif -%}
+{%- assign source_prefix = lang | append: '/' -%}
+{%- assign edit_url = 'https://github.com/InternetPublicLibrary/' | append: lang -%}
+{%- if page.path contains source_prefix -%}{%- assign edit_url = 'https://github.com/InternetPublicLibrary/' | append: lang | append: '/edit/master/' | append: page.path | remove_first: source_prefix -%}{%- endif -%}
+{%- if pt -%}
+  {%- assign info_pages = "/pt-BR/sobre/|Sobre a IPL;/pt-BR/missao/|Missão;/pt-BR/ajuda/|Ajuda;/pt-BR/contribuir/|Contribuir;/pt-BR/traduzir/|Traduzir;/pt-BR/portal-comunidade/|Portal da comunidade;/pt-BR/politicas-conteudo/|Políticas de conteúdo;/pt-BR/reportar-problemas/|Reportar problemas;/pt-BR/doar/|Doar;/pt-BR/contato/|Contato;/pt-BR/privacidade/|Privacidade;/pt-BR/termos/|Termos de uso;/pt-BR/licenca/|Licença" | split: ';' -%}
+{%- else -%}
+  {%- assign info_pages = "/en-US/about/|About IPL;/en-US/mission/|Mission;/en-US/help/|Help;/en-US/contribute/|Contribute;/en-US/translate/|Translate;/en-US/community-portal/|Community portal;/en-US/content-policies/|Content policies;/en-US/report-issues/|Report issues;/en-US/donate/|Donate;/en-US/contact/|Contact;/en-US/privacy/|Privacy;/en-US/terms/|Terms of use;/en-US/license/|License" | split: ';' -%}
+{%- endif -%}
+
+<div class="container mx-auto px-4 py-5 lg:py-8 text-gray-900">
+  <div class="grid grid-cols-1 lg:grid-cols-12 gap-5 lg:gap-6">
+    <div class="lg:col-start-3 lg:col-span-10 min-w-0">
+      <nav aria-label="Breadcrumb" class="text-sm text-gray-600 mb-3">
+        <ol class="flex flex-wrap gap-x-2 gap-y-1">
+          <li><a href="/{{ lang }}/" class="text-blue-600 hover:underline">{{ t.nav.home | default: 'Home' }}</a></li>
+          <li><span aria-hidden="true">› </span><span aria-current="page">{{ page.title | escape }}</span></li>
+        </ol>
+      </nav>
+      <nav aria-label="{% if pt %}Ações da página{% else %}Page actions{% endif %}" class="flex flex-wrap border-b border-gray-200 text-sm">
+        <a href="#info-body" aria-current="location" class="inline-flex items-center min-h-11 px-4 border-b-2 border-blue-600 text-blue-700 font-semibold">{% if pt %}Página{% else %}Page{% endif %}</a>
+        <a href="{{ edit_url | escape }}" rel="noopener" class="inline-flex items-center min-h-11 px-4 text-blue-600 hover:bg-blue-50">{% if pt %}Editar{% else %}Edit{% endif %}</a>
+      </nav>
+    </div>
+
+    <article id="info-body" class="ipl-info-body lg:col-start-3 lg:col-span-7 lg:row-start-2 min-w-0" data-ipl-info>
+      {{ content }}
+    </article>
+
+    <aside aria-label="{% if pt %}Navegação da página{% else %}Page navigation{% endif %}" class="lg:col-start-10 lg:col-span-3 lg:row-start-2 min-w-0">
+      <div class="lg:sticky lg:top-4 space-y-5">
+        <nav aria-labelledby="info-contents-title" class="bg-gray-50 border border-gray-200 rounded-lg p-4 text-sm" data-ipl-info-contents hidden>
+          <h2 id="info-contents-title" class="font-semibold text-base mb-2">{% if pt %}Nesta página{% else %}On this page{% endif %}</h2>
+          <ol class="space-y-1 list-decimal list-inside"></ol>
+        </nav>
+        <nav aria-labelledby="info-pages-title" class="bg-white border border-gray-200 rounded-lg p-4 text-sm">
+          <h2 id="info-pages-title" class="font-semibold text-base mb-3">{% if pt %}Sobre a IPL{% else %}About IPL{% endif %}</h2>
+          <ul class="space-y-2">
+            {%- for item in info_pages -%}{%- assign ip = item | split: '|' %}
+            <li><a href="{{ ip[0] }}" class="text-blue-600 hover:underline{% if ip[0] == page.url %} font-semibold{% endif %}"{% if ip[0] == page.url %} aria-current="page"{% endif %}>{{ ip[1] }}</a></li>
+            {%- endfor %}
+          </ul>
+        </nav>
+      </div>
+    </aside>
+
+    <div class="lg:col-start-1 lg:col-span-2 lg:row-start-2 hidden lg:block" aria-hidden="true"></div>
+  </div>
+</div>
+<script>
+  // Contents from the body's h2 headings (ids added when missing).
+  (function () {
+    var body = document.querySelector('[data-ipl-info]');
+    var box = document.querySelector('[data-ipl-info-contents]');
+    if (!body || !box) return;
+    var headings = Array.prototype.slice.call(body.querySelectorAll('h2'));
+    if (headings.length < 2) return;
+    var list = box.querySelector('ol');
+    headings.forEach(function (heading, index) {
+      if (!heading.id) heading.id = 'section-' + (index + 1);
+      var item = document.createElement('li');
+      var link = document.createElement('a');
+      link.href = '#' + heading.id;
+      link.className = 'text-blue-600 hover:underline';
+      link.textContent = heading.textContent.trim();
+      item.appendChild(link);
+      list.appendChild(item);
+    });
+    box.hidden = false;
+  })();
+</script>

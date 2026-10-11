@@ -1,1 +1,40 @@
 /* discovery — owned by spec 001 slice (see plan.md ownership table). */
+
+/*
+ * Info pages (_layouts/info.html): hand-written bodies from the content repositories.
+ * Legacy gradient heroes become a plain article header; inner containers lose their own centering.
+ * Unlayered rules here override the layered Tailwind utilities used in those bodies.
+ */
+.ipl-info-body > section:first-of-type[class*="bg-gradient"] {
+  background: none;
+  color: var(--color-text);
+  padding: 0 0 var(--space-6);
+  text-align: left;
+}
+.ipl-info-body > section:first-of-type[class*="bg-gradient"] > .container {
+  max-width: none;
+  padding-inline: 0;
+  text-align: left;
+}
+.ipl-info-body > section:first-of-type[class*="bg-gradient"] h1 {
+  margin: 0 0 var(--space-2);
+  font-size: var(--text-2xl);
+  line-height: var(--leading-tight);
+  font-weight: var(--weight-semibold);
+  color: var(--color-text);
+}
+.ipl-info-body > section:first-of-type[class*="bg-gradient"] p {
+  max-width: var(--measure-article);
+  margin-inline: 0;
+  color: var(--color-muted);
+  font-size: var(--text-md);
+  opacity: 1;
+}
+.ipl-info-body .container { max-width: none; padding-inline: 0; }
+.ipl-info-body .mx-auto { margin-inline: 0; }
+.ipl-info-body > section + section, .ipl-info-body > div + section { padding-top: 0; }
+@media (min-width: 64rem) {
+  .ipl-info-body > section:first-of-type[class*="bg-gradient"] h1 { font-size: var(--text-3xl); }
+}
+/* Links inside running text must not rely on color alone (WCAG 1.4.1) */
+.ipl-info-body p a, .ipl-info-body li a:not([class*="bg-"]) { text-decoration: underline; text-underline-offset: 0.15em; }

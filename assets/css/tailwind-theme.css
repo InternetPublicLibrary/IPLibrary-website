@@ -62,6 +62,15 @@
   --color-red-500: #D32F2F;
   --color-red-600: #B3261E;
   --color-orange-600: #B54708;
+  /* teal/emerald/cyan text tones darkened for AA (institutional pages) */
+  --color-teal-600: #0F766E;
+  --color-teal-700: #115E59;
+  --color-emerald-600: #177448;
+  --color-emerald-700: #135E3A;
+  --color-cyan-600: #0E7490;
+  --color-cyan-700: #155E75;
+  --color-pink-600: #BE185D;
+  --color-pink-700: #9D174D;
 }
 
 :root[data-theme='dark'] {
