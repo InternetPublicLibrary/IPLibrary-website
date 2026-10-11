@@ -26,11 +26,14 @@ test.describe('AC2 identity', () => {
     await expect(banner.getByText('IP', { exact: true })).toHaveCount(0);
   });
 
-  test('footer uses the same attribution', async ({ page }) => {
+  // Maintainer decision (2026-10-10): Better Web is credited as the open-source initiative behind IPL;
+  // Open Digital Brasil stays as the legal maintainer.
+  test('footer credits Better Web and keeps the maintainer', async ({ page }) => {
     await page.goto('/pt-BR/');
     const footer = page.getByRole('contentinfo');
-    await expect(footer).toContainText('Better Web');
-    await expect(footer).not.toContainText('Open Digital Brasil');
+    await expect(footer.getByRole('link', { name: 'Better Web Initiative' })).toHaveAttribute('href', 'https://better-web.org');
+    await expect(footer).toContainText('Open Digital Brasil');
+    await expect(footer.locator('a[href="#"]')).toHaveCount(0);
   });
 });
 

@@ -1,142 +1,101 @@
-{% comment %}
-Footer Component
-Usage:
-{% include components/organisms/footer.html %}
-{% endcomment %}
+{%- comment -%}
+Footer (spec 001, revised) — high-density site map: brand and real library facts, six link columns
+(categories, explore, contribute, about, legal, open source), languages and social links, then the
+maintainer block (Open Digital Brasil) and copyright. All destinations are real pages or repositories.
+Usage: {% include components/organisms/footer.html %}
+{%- endcomment -%}
+{%- assign footer_lang = page.lang | default: 'en-US' -%}
+{%- assign fpt = false -%}{%- if footer_lang == 'pt-BR' -%}{%- assign fpt = true -%}{%- endif -%}
+{%- assign footer_menu = site.data[footer_lang].menu -%}
+{%- assign footer_subcategories = 0 -%}{%- assign footer_sections = 0 -%}
+{%- for category in footer_menu -%}{%- assign footer_subcategories = footer_subcategories | plus: category.children.size -%}{%- for subcategory in category.children -%}{%- assign footer_sections = footer_sections | plus: subcategory.children.size -%}{%- endfor -%}{%- endfor -%}
+{%- assign footer_data = site.data[footer_lang] -%}{%- include components/atoms/real-resources.html node=footer_data -%}
+{%- assign footer_resources = real_resource_total -%}
 
-<footer class="bg-white border-t border-gray-200 py-10">
+<footer class="bg-white border-t border-gray-200 pt-10 pb-8 mt-10 text-sm">
   <div class="container mx-auto px-4">
-    <!-- Main footer navigation -->
-    <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-10">
-      <div>
-        <div class="flex items-center mb-3">
-          <span class="mr-2 flex">{% include components/atoms/brand-mark.html size="32" id_suffix="footer" %}</span>
-          <div>
-            <h3 class="text-lg font-medium text-gray-800 leading-tight">Internet Public Library</h3>
-            <a href="https://better-web.org" rel="noopener" class="text-xs text-gray-600 hover:text-blue-600">by Better Web</a>
-          </div>
-        </div>
-        <p class="text-gray-600 text-sm mb-4">A free encyclopedia of curated internet resources.</p>
-        <div class="flex space-x-4">
-          <a href="https://github.com/InternetPublicLibrary" target="_blank" rel="noopener noreferrer"
-            aria-label="GitHub" class="text-gray-400 hover:text-gray-900 transition-colors duration-200">
-            <i class="fab fa-github text-lg"></i>
-          </a>
-          <a href="https://twitter.com/InternetPubLib" target="_blank" rel="noopener noreferrer"
-            aria-label="X (Twitter)" class="text-gray-400 hover:text-blue-400 transition-colors duration-200">
-            <i class="fab fa-x-twitter text-lg"></i>
-          </a>
-          <a href="https://facebook.com/InternetPublicLibrary" target="_blank" rel="noopener noreferrer"
-            aria-label="Facebook" class="text-gray-400 hover:text-blue-600 transition-colors duration-200">
-            <i class="fab fa-facebook text-lg"></i>
-          </a>
-          <a href="https://linkedin.com/company/internet-public-library" target="_blank" rel="noopener noreferrer"
-            aria-label="LinkedIn" class="text-gray-400 hover:text-blue-700 transition-colors duration-200">
-            <i class="fab fa-linkedin text-lg"></i>
-          </a>
-          <a href="https://youtube.com/@InternetPublicLibrary" target="_blank" rel="noopener noreferrer"
-            aria-label="YouTube" class="text-gray-400 hover:text-red-600 transition-colors duration-200">
-            <i class="fab fa-youtube text-lg"></i>
-          </a>
+
+    <!-- Brand, mission and real facts -->
+    <div class="flex flex-col lg:flex-row lg:items-start gap-6 pb-8 border-b border-gray-200">
+      <div class="flex items-start gap-3 lg:w-1/3">
+        <span class="flex flex-shrink-0">{% include components/atoms/brand-mark.html size="48" id_suffix="footer" %}</span>
+        <div>
+          <p class="text-lg font-semibold text-gray-900 leading-tight">Internet Public Library</p>
+          <p class="text-gray-600 mt-1">{% if fpt %}A biblioteca livre e comunitária de recursos selecionados da internet, em português e inglês.{% else %}The free, community-curated library of internet resources, in English and Portuguese.{% endif %}</p>
+          <p class="text-gray-600 mt-1">{% if fpt %}Um projeto da{% else %}A project of{% endif %} <a href="https://better-web.org" rel="noopener" class="font-semibold text-blue-700 underline">Better Web</a> · {% if fpt %}código aberto{% else %}open source{% endif %}</p>
         </div>
       </div>
-
-      <div>
-        {%- assign footer_lang = page.lang | default: 'en-US' %}
-        <h4 class="text-base font-medium text-gray-800 mb-4">{% if footer_lang == 'pt-BR' %}Categorias{% else %}Categories{% endif %}</h4>
-        <ul class="space-y-2 text-sm">
-          {% for category in site.data[footer_lang].menu %}
-          <li><a href="{{ category.path }}"
-              class="text-gray-600 hover:text-blue-600 hover:underline transition-colors duration-200">{{ category.title }}</a></li>
-          {% endfor %}
-          <li class="pt-1"><a href="{% if page.lang == 'pt-BR' %}/pt-BR/categorias/{% else %}/en-US/categories/{% endif %}" class="text-blue-600 hover:underline text-xs flex items-center">View
-              all categories <i class="fas fa-arrow-right ml-1 text-xs"></i></a></li>
-        </ul>
-      </div>
-
-      <div>
-        <h4 class="text-base font-medium text-gray-800 mb-4">{% if page.lang == 'pt-BR' %}Sobre{% else %}About{% endif
-          %}</h4>
-        <ul class="space-y-2 text-sm">
-          <li><a href="{% if page.lang == 'pt-BR' %}/pt-BR/sobre{% else %}/en-US/about{% endif %}"
-              class="text-gray-600 hover:text-blue-600 hover:underline transition-colors duration-200">{% if page.lang
-              == 'pt-BR' %}Sobre a BPI{% else %}About IPL{% endif %}</a></li>
-          <li><a href="{% if page.lang == 'pt-BR' %}/pt-BR/missao{% else %}/en-US/mission{% endif %}"
-              class="text-gray-600 hover:text-blue-600 hover:underline transition-colors duration-200">{% if page.lang
-              == 'pt-BR' %}Missão{% else %}Mission{% endif %}</a></li>
-          <li><a
-              href="{% if page.lang == 'pt-BR' %}/pt-BR/portal-comunidade{% else %}/en-US/community-portal{% endif %}"
-              class="text-gray-600 hover:text-blue-600 hover:underline transition-colors duration-200">{% if page.lang
-              == 'pt-BR' %}Portal da Comunidade{% else %}Community Portal{% endif %}</a></li>
-          <li><a
-              href="{% if page.lang == 'pt-BR' %}/pt-BR/alteracoes-recentes{% else %}/en-US/recent-changes{% endif %}"
-              class="text-gray-600 hover:text-blue-600 hover:underline transition-colors duration-200">{% if page.lang
-              == 'pt-BR' %}Alterações Recentes{% else %}Recent Changes{% endif %}</a></li>
-          <li><a href="{% if page.lang == 'pt-BR' %}/pt-BR/contato{% else %}/en-US/contact{% endif %}"
-              class="text-gray-600 hover:text-blue-600 hover:underline transition-colors duration-200">{% if page.lang
-              == 'pt-BR' %}Contate-nos{% else %}Contact Us{% endif %}</a></li>
-        </ul>
-      </div>
-
-      <div>
-        <h4 class="text-base font-medium text-gray-800 mb-4">{% if page.lang == 'pt-BR' %}Contribuir{% else
-          %}Contribute{% endif %}</h4>
-        <ul class="space-y-2 text-sm">
-          <li><a href="{% if page.lang == 'pt-BR' %}/pt-BR/ajuda{% else %}/en-US/help{% endif %}"
-              class="text-gray-600 hover:text-blue-600 hover:underline transition-colors duration-200">{% if page.lang
-              == 'pt-BR' %}Ajuda{% else %}Help{% endif %}</a></li>
-          <li><a href="{% if page.lang == 'pt-BR' %}/pt-BR/contribuir{% else %}/en-US/contribute{% endif %}"
-              class="text-gray-600 hover:text-blue-600 hover:underline transition-colors duration-200">{% if page.lang
-              == 'pt-BR' %}Criar Conteúdo{% else %}Create Content{% endif %}</a></li>
-          <li><a href="{% if page.lang == 'pt-BR' %}/pt-BR/reportar-problemas{% else %}/en-US/report-issues{% endif %}"
-              class="text-gray-600 hover:text-blue-600 hover:underline transition-colors duration-200">{% if page.lang
-              == 'pt-BR' %}Reportar Problemas{% else %}Report Issues{% endif %}</a></li>
-          <li><a
-              href="{% if page.lang == 'pt-BR' %}/pt-BR/politicas-conteudo{% else %}/en-US/content-policies{% endif %}"
-              class="text-gray-600 hover:text-blue-600 hover:underline transition-colors duration-200">{% if page.lang
-              == 'pt-BR' %}Políticas de Conteúdo{% else %}Content Policies{% endif %}</a></li>
-          <li><a href="{% if page.lang == 'pt-BR' %}/pt-BR/doar{% else %}/en-US/donate{% endif %}"
-              class="text-gray-600 hover:text-blue-600 hover:underline transition-colors duration-200">{% if page.lang
-              == 'pt-BR' %}Doar{% else %}Donate{% endif %}</a></li>
-        </ul>
-      </div>
+      <dl class="grid grid-cols-3 sm:grid-cols-5 gap-3 lg:flex-1">
+        <div class="bg-gray-50 rounded-lg px-3 py-2"><dt class="text-xs text-gray-600">{% if fpt %}Categorias{% else %}Categories{% endif %}</dt><dd class="text-xl font-semibold text-gray-900">{{ footer_menu.size }}</dd></div>
+        <div class="bg-gray-50 rounded-lg px-3 py-2"><dt class="text-xs text-gray-600">{% if fpt %}Subcategorias{% else %}Subcategories{% endif %}</dt><dd class="text-xl font-semibold text-gray-900">{{ footer_subcategories }}</dd></div>
+        <div class="bg-gray-50 rounded-lg px-3 py-2"><dt class="text-xs text-gray-600">{% if fpt %}Seções{% else %}Sections{% endif %}</dt><dd class="text-xl font-semibold text-gray-900">{{ footer_sections }}</dd></div>
+        <div class="bg-gray-50 rounded-lg px-3 py-2"><dt class="text-xs text-gray-600">{% if fpt %}Recursos{% else %}Resources{% endif %}</dt><dd class="text-xl font-semibold text-gray-900">{{ footer_resources }}</dd></div>
+        <div class="bg-gray-50 rounded-lg px-3 py-2"><dt class="text-xs text-gray-600">{% if fpt %}Idiomas{% else %}Languages{% endif %}</dt><dd class="text-xl font-semibold text-gray-900">{{ site.languages.size | default: 2 }}</dd></div>
+      </dl>
     </div>
 
-    <!-- Language selector and legal links -->
-    <div class="border-t border-gray-100 pt-6 flex flex-col md:flex-row justify-between">
-      <div class="mb-6 md:mb-0">
-        <h4 class="text-sm font-medium text-gray-800 mb-3">{% if page.lang == 'pt-BR' %}Idiomas{% else %}Languages{%
-          endif %}</h4>
-        <div class="flex flex-wrap gap-4 text-sm">
-          <a href="{% include lang-switch-url.html lang="en-US" %}{{ lang_switch_url }}"
-            class="{% if page.lang == 'en-US' %}font-medium{% endif %} text-gray-600 hover:text-blue-600 hover:underline transition-colors duration-200">English</a>
-          <a href="{% include lang-switch-url.html lang="pt-BR" %}{{ lang_switch_url }}"
-            class="{% if page.lang == 'pt-BR' %}font-medium{% endif %} text-gray-600 hover:text-blue-600 hover:underline transition-colors duration-200">Português</a>
-          <a href="{% if page.lang == 'pt-BR' %}/pt-BR/adicionar-idioma{% else %}/en-US/add-language{% endif %}"
-            class="text-blue-600 hover:underline text-xs flex items-center">{% if page.lang == 'pt-BR' %}Adicionar seu
-            idioma{% else %}Add your language{% endif %} <i class="fas fa-plus ml-1"></i></a>
-        </div>
-      </div>
+    <!-- Site map: six dense columns -->
+    {%- if fpt -%}
+      {%- assign col_explore = "/pt-BR/|Início;/pt-BR/categorias/|Todas as categorias;/pt-BR/busca/|Busca;/pt-BR/random-resource/|Recurso aleatório;/pt-BR/alteracoes-recentes/|Alterações recentes;/pt-BR/portal-comunidade/|Portal da comunidade" | split: ';' -%}
+      {%- assign col_contribute = "/pt-BR/contribuir/|Como contribuir;/pt-BR/enviar-recurso/|Sugerir um recurso;/pt-BR/reportar-problemas/|Reportar um problema;/pt-BR/traduzir/|Ajudar a traduzir;/pt-BR/adicionar-idioma/|Adicionar um idioma;/pt-BR/politicas-conteudo/|Políticas de conteúdo" | split: ';' -%}
+      {%- assign col_about = "/pt-BR/sobre/|Sobre a IPL;/pt-BR/missao/|Missão;/pt-BR/ajuda/|Central de ajuda;/pt-BR/contato/|Contato;/pt-BR/doar/|Apoie a IPL" | split: ';' -%}
+      {%- assign col_legal = "/pt-BR/licenca/|Licença;/pt-BR/politica-privacidade/|Política de privacidade;/pt-BR/termos-uso/|Termos de uso;/pt-BR/politica-cookies/|Política de cookies" | split: ';' -%}
+    {%- else -%}
+      {%- assign col_explore = "/en-US/|Home;/en-US/categories/|All categories;/en-US/search/|Search;/en-US/random-resource/|Random resource;/en-US/recent-changes/|Recent changes;/en-US/community-portal/|Community portal" | split: ';' -%}
+      {%- assign col_contribute = "/en-US/contribute/|How to contribute;/en-US/submit-resource/|Suggest a resource;/en-US/report-issues/|Report a problem;/en-US/translate/|Help translate;/en-US/add-language/|Add a language;/en-US/content-policies/|Content policies" | split: ';' -%}
+      {%- assign col_about = "/en-US/about/|About IPL;/en-US/mission/|Mission;/en-US/help/|Help center;/en-US/contact/|Contact;/en-US/donate/|Support IPL" | split: ';' -%}
+      {%- assign col_legal = "/en-US/license/|License;/en-US/privacy-policy/|Privacy policy;/en-US/terms-of-use/|Terms of use;/en-US/cookie-policy/|Cookie policy" | split: ';' -%}
+    {%- endif %}
+    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-x-6 gap-y-8 py-8 border-b border-gray-200">
+      <nav aria-labelledby="footer-categories" class="col-span-2 md:col-span-1">
+        <h2 id="footer-categories" class="font-semibold text-gray-900 mb-3">{% if fpt %}Categorias{% else %}Categories{% endif %}</h2>
+        <ul class="space-y-1.5">
+          {%- for category in footer_menu %}<li><a href="{{ category.path }}" class="text-gray-700 hover:text-blue-700 hover:underline">{{ category.title }}</a> <span class="text-xs text-gray-600">({{ category.children.size }})</span></li>{% endfor %}
+          <li class="pt-1"><a href="{% if fpt %}/pt-BR/categorias/{% else %}/en-US/categories/{% endif %}" class="font-semibold text-blue-700 underline">{% if fpt %}Ver todas{% else %}See all{% endif %}</a></li>
+        </ul>
+      </nav>
+      {%- assign footer_cols = "explore|contribute|about|legal" | split: '|' -%}
+      {%- for col in footer_cols -%}
+        {%- case col -%}
+          {%- when 'explore' -%}{%- assign links = col_explore -%}{%- if fpt -%}{%- assign col_title = 'Explorar' -%}{%- else -%}{%- assign col_title = 'Explore' -%}{%- endif -%}
+          {%- when 'contribute' -%}{%- assign links = col_contribute -%}{%- if fpt -%}{%- assign col_title = 'Contribuir' -%}{%- else -%}{%- assign col_title = 'Contribute' -%}{%- endif -%}
+          {%- when 'about' -%}{%- assign links = col_about -%}{%- if fpt -%}{%- assign col_title = 'Sobre' -%}{%- else -%}{%- assign col_title = 'About' -%}{%- endif -%}
+          {%- when 'legal' -%}{%- assign links = col_legal -%}{%- if fpt -%}{%- assign col_title = 'Legal' -%}{%- else -%}{%- assign col_title = 'Legal' -%}{%- endif -%}
+        {%- endcase %}
+      <nav aria-labelledby="footer-{{ col }}">
+        <h2 id="footer-{{ col }}" class="font-semibold text-gray-900 mb-3">{{ col_title }}</h2>
+        <ul class="space-y-1.5">
+          {%- for link in links -%}{%- assign l = link | split: '|' %}<li><a href="{{ l[0] }}" class="text-gray-700 hover:text-blue-700 hover:underline">{{ l[1] }}</a></li>{%- endfor %}
+        </ul>
+      </nav>
+      {%- endfor %}
+      <nav aria-labelledby="footer-open-source">
+        <h2 id="footer-open-source" class="font-semibold text-gray-900 mb-3">{% if fpt %}Código aberto{% else %}Open source{% endif %}</h2>
+        <ul class="space-y-1.5">
+          <li><a href="https://github.com/InternetPublicLibrary/IPLibrary-website" rel="noopener" class="text-gray-700 hover:text-blue-700 hover:underline">{% if fpt %}Código do site{% else %}Website code{% endif %}</a></li>
+          <li><a href="https://github.com/InternetPublicLibrary/{{ footer_lang }}" rel="noopener" class="text-gray-700 hover:text-blue-700 hover:underline">{% if fpt %}Conteúdo em português{% else %}English content{% endif %}</a></li>
+          <li><a href="https://github.com/InternetPublicLibrary/IPLibrary-website/issues" rel="noopener" class="text-gray-700 hover:text-blue-700 hover:underline">{% if fpt %}Issues e roadmap{% else %}Issues and roadmap{% endif %}</a></li>
+          <li><a href="https://github.com/InternetPublicLibrary" rel="noopener" class="text-gray-700 hover:text-blue-700 hover:underline">{% if fpt %}Organização no GitHub{% else %}GitHub organization{% endif %}</a></li>
+        </ul>
+        <p class="mt-4 text-gray-600">{% if fpt %}A IPL faz parte da <a href="https://better-web.org" rel="noopener" class="font-semibold text-blue-700 underline">Better Web Initiative</a>, que desenvolve ferramentas abertas para uma web melhor. <a href="https://github.com/betterwebinit" rel="noopener" class="text-blue-700 underline">Projetos no GitHub</a>.{% else %}IPL is part of the <a href="https://better-web.org" rel="noopener" class="font-semibold text-blue-700 underline">Better Web Initiative</a>, which builds open tools for a better web. <a href="https://github.com/betterwebinit" rel="noopener" class="text-blue-700 underline">Projects on GitHub</a>.{% endif %}</p>
+      </nav>
+    </div>
 
-      <div class="text-sm text-gray-500">
-        <div class="mb-3">
-          <p>Content is available under <a href="#" class="text-blue-600 hover:underline">Creative Commons
-              Attribution-ShareAlike License</a>.</p>
-        </div>
-        <div class="flex flex-wrap gap-x-4 gap-y-2">
-          <a href="{% if page.lang == 'pt-BR' %}/pt-BR/politica-privacidade/{% else %}/en-US/privacy-policy/{% endif %}"
-            class="hover:text-blue-600 hover:underline transition-colors duration-200">{% if page.lang == 'pt-BR'
-            %}Política de Privacidade{% else %}Privacy Policy{% endif %}</a>
-          <a href="{% if page.lang == 'pt-BR' %}/pt-BR/termos-uso/{% else %}/en-US/terms-of-use/{% endif %}"
-            class="hover:text-blue-600 hover:underline transition-colors duration-200">{% if page.lang == 'pt-BR'
-            %}Termos de Uso{% else %}Terms of Use{% endif %}</a>
-          <a href="{% if page.lang == 'pt-BR' %}/pt-BR/politica-cookies/{% else %}/en-US/cookie-policy/{% endif %}"
-            class="hover:text-blue-600 hover:underline transition-colors duration-200">{% if page.lang == 'pt-BR'
-            %}Política de Cookies{% else %}Cookie Policy{% endif %}</a>
-          <a href="{% if page.lang == 'pt-BR' %}/pt-BR/contato/{% else %}/en-US/contact/{% endif %}"
-            class="hover:text-blue-600 hover:underline transition-colors duration-200">{% if page.lang == 'pt-BR'
-            %}Contate a IPL{% else %}Contact IPL{% endif %}</a>
-        </div>
+    <!-- Languages, license and social -->
+    <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4 py-6">
+      <div class="flex flex-wrap items-center gap-x-4 gap-y-2">
+        <span class="font-semibold text-gray-900">{% if fpt %}Idiomas{% else %}Languages{% endif %}</span>
+        <a hreflang="en-US" lang="en" href="{% include lang-switch-url.html lang="en-US" %}{{ lang_switch_url }}" class="text-gray-700 hover:text-blue-700 hover:underline{% if footer_lang == 'en-US' %} font-semibold{% endif %}">English</a>
+        <a hreflang="pt-BR" lang="pt-BR" href="{% include lang-switch-url.html lang="pt-BR" %}{{ lang_switch_url }}" class="text-gray-700 hover:text-blue-700 hover:underline{% if footer_lang == 'pt-BR' %} font-semibold{% endif %}">Português</a>
+        <a href="{% if fpt %}/pt-BR/adicionar-idioma/{% else %}/en-US/add-language/{% endif %}" class="text-blue-700 underline">{% if fpt %}Adicionar seu idioma{% else %}Add your language{% endif %}</a>
+      </div>
+      <p class="text-gray-600">{% if fpt %}O conteúdo está disponível sob a licença <a href="/pt-BR/licenca/" class="text-blue-700 underline">Creative Commons Atribuição-CompartilhaIgual</a>.{% else %}Content is available under the <a href="/en-US/license/" class="text-blue-700 underline">Creative Commons Attribution-ShareAlike license</a>.{% endif %}</p>
+      <div class="flex items-center gap-1">
+        <a href="https://github.com/InternetPublicLibrary" rel="noopener" aria-label="GitHub" class="w-10 h-10 flex items-center justify-center rounded-lg text-gray-600 hover:text-gray-900 hover:bg-gray-100"><i class="fab fa-github text-lg" aria-hidden="true"></i></a>
+        <a href="https://twitter.com/InternetPubLib" rel="noopener" aria-label="X (Twitter)" class="w-10 h-10 flex items-center justify-center rounded-lg text-gray-600 hover:text-gray-900 hover:bg-gray-100"><i class="fab fa-twitter text-lg" aria-hidden="true"></i></a>
+        <a href="https://facebook.com/InternetPublicLibrary" rel="noopener" aria-label="Facebook" class="w-10 h-10 flex items-center justify-center rounded-lg text-gray-600 hover:text-gray-900 hover:bg-gray-100"><i class="fab fa-facebook text-lg" aria-hidden="true"></i></a>
+        <a href="https://linkedin.com/company/internet-public-library" rel="noopener" aria-label="LinkedIn" class="w-10 h-10 flex items-center justify-center rounded-lg text-gray-600 hover:text-gray-900 hover:bg-gray-100"><i class="fab fa-linkedin text-lg" aria-hidden="true"></i></a>
+        <a href="https://youtube.com/@InternetPublicLibrary" rel="noopener" aria-label="YouTube" class="w-10 h-10 flex items-center justify-center rounded-lg text-gray-600 hover:text-gray-900 hover:bg-gray-100"><i class="fab fa-youtube text-lg" aria-hidden="true"></i></a>
       </div>
     </div>
 

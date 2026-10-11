@@ -67,8 +67,9 @@ Tailwind template and, worse, undermines its own credibility:
 
 - [ ] AC1 — `e2e/tests/accessibility.spec.mjs`: zero `serious`/`critical` axe violations on its 9 pages ×
       desktop and mobile, in light and dark appearance.
-- [ ] AC2 — Header and footer of every page show the globe mark, "Internet Public Library" and "by Better Web";
-      `site.author`/structured data agree. No "IP" tile, no "Open Digital Brasil" credit in the shell.
+- [ ] AC2 — Header and footer of every page show the globe mark, "Internet Public Library" and the Better Web
+      credit; no "IP" tile. The footer credits the Better Web Initiative (open source) and keeps Open Digital Brasil
+      as the legal maintainer (maintainer decision 2026-10-10).
 - [ ] AC3 — HTML rendered by v1 layouts and generators (not submodule content pages) contains none of: "5,000+", "Edits Today", "Topic 1", "Concept 1", "Resource 1",
       `action="#"`, `href="#"` on primary actions; no "Last updated" value equal to the build date.
 - [ ] AC4 — Section and wiki pages: exactly one `<h1>`; content `h2` rendered in the serif family; article body
