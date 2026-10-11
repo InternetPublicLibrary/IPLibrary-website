@@ -9,8 +9,8 @@ Usage: {% include components/organisms/footer.html %}
 {%- assign footer_menu = site.data[footer_lang].menu -%}
 {%- assign footer_subcategories = 0 -%}{%- assign footer_sections = 0 -%}
 {%- for category in footer_menu -%}{%- assign footer_subcategories = footer_subcategories | plus: category.children.size -%}{%- for subcategory in category.children -%}{%- assign footer_sections = footer_sections | plus: subcategory.children.size -%}{%- endfor -%}{%- endfor -%}
-{%- assign footer_data = site.data[footer_lang] -%}{%- include components/atoms/real-resources.html node=footer_data -%}
-{%- assign footer_resources = real_resource_total -%}
+{%- comment -%} Computed once per build by _plugins/resource_stats.rb. {%- endcomment -%}
+{%- assign footer_resources = site.data.resource_stats[footer_lang].resources | default: 0 -%}
 
 <footer class="bg-white border-t border-gray-200 pt-10 pb-8 mt-10 text-sm">
   <div class="container mx-auto px-4">

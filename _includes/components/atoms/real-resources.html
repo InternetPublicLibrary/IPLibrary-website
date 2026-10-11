@@ -3,16 +3,25 @@ Real resources (spec 002) — collects curated resources under a _data node, ski
 placeholders (example.com) and keeping one entry per resource name.
 Usage: {% assign topic_data = site.data[page.lang][page.data_folder] %}{% include components/atoms/real-resources.html node=topic_data %}
 Sets: real_resources (array of {name, url, description, …}), real_resource_total (number)
-Accepts a node whose values are resource lists (category files) or folders of lists (subcategories).
+Accepts a subcategory (type → list), a category (files and subcategory folders) or a whole language.
 {%- endcomment -%}
+{%- comment -%} Up to three levels: lists of resources, files (type → list), and folders (subcategory → files). {%- endcomment -%}
 {%- assign real_collected = '' | split: '' -%}
 {%- for entry in include.node -%}
-  {%- assign entry_value = entry[1] -%}
-  {%- if entry_value.first.url or entry_value.first.name -%}
-    {%- for r in entry_value -%}{%- if r.url -%}{%- unless r.url contains 'example.com' -%}{%- assign real_collected = real_collected | push: r -%}{%- endunless -%}{%- endif -%}{%- endfor -%}
+  {%- assign level1 = entry[1] -%}
+  {%- if level1.first.url or level1.first.name -%}
+    {%- for r in level1 -%}{%- if r.url -%}{%- unless r.url contains 'example.com' -%}{%- assign real_collected = real_collected | push: r -%}{%- endunless -%}{%- endif -%}{%- endfor -%}
   {%- else -%}
-    {%- for file in entry_value -%}
-      {%- if file[1].first.url -%}{%- for r in file[1] -%}{%- if r.url -%}{%- unless r.url contains 'example.com' -%}{%- assign real_collected = real_collected | push: r -%}{%- endunless -%}{%- endif -%}{%- endfor -%}{%- endif -%}
+    {%- for child in level1 -%}
+      {%- assign level2 = child[1] -%}
+      {%- if level2.first.url or level2.first.name -%}
+        {%- for r in level2 -%}{%- if r.url -%}{%- unless r.url contains 'example.com' -%}{%- assign real_collected = real_collected | push: r -%}{%- endunless -%}{%- endif -%}{%- endfor -%}
+      {%- else -%}
+        {%- for file in level2 -%}
+          {%- assign level3 = file[1] -%}
+          {%- if level3.first.url -%}{%- for r in level3 -%}{%- if r.url -%}{%- unless r.url contains 'example.com' -%}{%- assign real_collected = real_collected | push: r -%}{%- endunless -%}{%- endif -%}{%- endfor -%}{%- endif -%}
+        {%- endfor -%}
+      {%- endif -%}
     {%- endfor -%}
   {%- endif -%}
 {%- endfor -%}

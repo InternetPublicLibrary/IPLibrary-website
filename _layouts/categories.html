@@ -15,9 +15,7 @@ with its subcategories (cards) and their sections (chips). Counts come from the 
   {%- assign subcategory_total = subcategory_total | plus: category.children.size -%}
   {%- for subcategory in category.children -%}{%- assign section_total = section_total | plus: subcategory.children.size -%}{%- endfor -%}
 {%- endfor -%}
-{%- assign library_data = site.data[lang] -%}
-{%- include components/atoms/real-resources.html node=library_data -%}
-{%- assign library_resources = real_resource_total -%}
+{%- assign library_resources = site.data.resource_stats[lang].resources | default: 0 -%}
 {%- assign issue_body = page.url | absolute_url | url_encode -%}
 {%- capture suggest_title -%}{% if pt %}Sugestão de categoria ou recurso{% else %}Category or resource suggestion{% endif %}{%- endcapture -%}
 {%- assign suggest_title_enc = suggest_title | url_encode -%}

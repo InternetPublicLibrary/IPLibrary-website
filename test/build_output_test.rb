@@ -25,6 +25,24 @@ class BuildOutputTest < Minitest::Test
     assert File.file?(File.join(SiteBuild.site.dest, 'favicon.ico'))
   end
 
+  # Curated resources reach the pages (Liquid 4 cannot read data[a[2]], which hid them all) and library totals
+  # count resources inside subcategory folders.
+  def test_subcategory_pages_list_their_curated_resources
+    html = SiteBuild.output('pt-BR/marketing/seo/index.html')
+
+    refute_includes html, 'Ainda não há recursos selecionados'
+    assert_operator html.scan(/rel="noopener" class="font-semibold text-blue-700/).size, :>=, 10
+  end
+
+  def test_library_totals_count_every_curated_resource
+    stats = SiteBuild.site.data['resource_stats']
+    html = SiteBuild.output('en-US/categories/index.html')
+
+    assert_operator stats['en-US']['resources'], :>, 1000
+    assert_operator stats['pt-BR']['resources'], :>, 1000
+    assert_includes html, "<dd>#{stats['en-US']['resources']}</dd>"
+  end
+
   # Spec 001 AC3: an encyclopedia must not show invented numbers, placeholder
   # knowledge, dead actions or the build time presented as an edit date.
   FABRICATED = [
