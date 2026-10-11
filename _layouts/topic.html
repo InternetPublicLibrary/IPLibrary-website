@@ -26,11 +26,10 @@ The level is derived from the menu: a topic with a parent category is a subcateg
 {%- if parent -%}{%- assign level = 'subcategory' -%}{%- endif -%}
 {%- assign children = node.children | default: page.children -%}
 {%- assign url_parts = page.url | split: '/' -%}
-{%- if level == 'subcategory' -%}
-  {%- assign topic_data = site.data[lang][url_parts[2]][url_parts[3]] -%}
-{%- else -%}
-  {%- assign topic_data = site.data[lang][url_parts[2]] -%}
-{%- endif -%}
+{%- comment -%} Liquid 4 cannot parse nested brackets (data[a[2]]), so the path parts are assigned first. {%- endcomment -%}
+{%- assign category_key = url_parts[2] -%}{%- assign subcategory_key = url_parts[3] -%}
+{%- assign topic_data = site.data[lang][category_key] -%}
+{%- if level == 'subcategory' -%}{%- assign topic_data = topic_data[subcategory_key] -%}{%- endif -%}
 {%- include components/atoms/real-resources.html node=topic_data -%}
 {%- assign section_total = 0 -%}
 {%- if level == 'category' -%}{%- for child in children -%}{%- assign section_total = section_total | plus: child.children.size -%}{%- endfor -%}{%- endif -%}
@@ -151,10 +150,10 @@ The level is derived from the menu: a topic with a parent category is a subcateg
         {%- endif -%}
         {%- assign shown = '' | split: '' -%}
         {%- for resource_type in resource_types -%}
-          {%- assign rt = resource_type | split: '|' -%}
+          {%- assign rt = resource_type | split: '|' -%}{%- assign rt_key = rt[0] -%}
           {%- assign listed = '' | split: '' -%}
-          {%- for r in real_resources -%}{%- if r.ipl_group == rt[0] -%}{%- assign listed = listed | push: r -%}{%- endif -%}{%- endfor -%}
-          {%- if level == 'subcategory' -%}{%- assign listed = '' | split: '' -%}{%- for r in topic_data[rt[0]] -%}{%- if r.url -%}{%- unless r.url contains 'example.com' -%}{%- assign listed = listed | push: r -%}{%- endunless -%}{%- endif -%}{%- endfor -%}{%- endif -%}
+          {%- for r in real_resources -%}{%- if r.ipl_group == rt_key -%}{%- assign listed = listed | push: r -%}{%- endif -%}{%- endfor -%}
+          {%- if level == 'subcategory' -%}{%- assign listed = '' | split: '' -%}{%- for r in topic_data[rt_key] -%}{%- if r.url -%}{%- unless r.url contains 'example.com' -%}{%- assign listed = listed | push: r -%}{%- endunless -%}{%- endif -%}{%- endfor -%}{%- endif -%}
           {%- if listed.size > 0 %}
         <h3 class="flex items-center gap-2 font-semibold text-gray-800 mt-4 mb-1"><i class="fas {{ rt[1] }} text-blue-600" aria-hidden="true"></i>{{ rt[2] }} <span class="text-xs font-normal text-gray-600">({{ listed.size }})</span></h3>
         <ul class="divide-y divide-gray-100" role="list">
