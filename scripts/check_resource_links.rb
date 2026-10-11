@@ -3,7 +3,7 @@
 # Usage: ruby scripts/check_resource_links.rb [glob]   (default: _data/{en-US,pt-BR}/*/*/*.yaml)
 # Exit status 1 when any URL fails; prints one line per failure: file, url, reason.
 require 'yaml'
-require 'net/http'
+require 'open3'
 require 'uri'
 
 ROOT = File.expand_path('..', __dir__)
@@ -13,23 +13,17 @@ entries = Dir.glob(File.join(ROOT, pattern)).flat_map do |file|
   list.select { |entry| entry.is_a?(Hash) && entry['url'] }.map { |entry| [file.delete_prefix("#{ROOT}/"), entry['url']] }
 end
 
-def reachable?(url, limit = 5)
-  return [false, 'too many redirects'] if limit.zero?
+# curl handles redirects, HTTP/2 and TLS quirks more reliably than Net::HTTP for this check.
+def reachable?(url)
+  out, status = Open3.capture2('curl', '-sS', '-o', '/dev/null', '-L', '--max-redirs', '5', '--max-time', '25',
+                               '-A', 'Mozilla/5.0 (IPLibrary link check; +https://ipl.better-web.org)',
+                               '-w', '%{http_code}', url)
+  code = out.to_i
+  return [true, code.to_s] if code.between?(200, 399)
+  # Sites that block automated clients but exist (verify these by hand)
+  return [true, "#{code} (blocked bot, check manually)"] if [401, 403, 429].include?(code)
 
-  uri = URI(url)
-  Net::HTTP.start(uri.host, uri.port, use_ssl: uri.scheme == 'https', open_timeout: 10, read_timeout: 15) do |http|
-    request = Net::HTTP::Get.new(uri, 'User-Agent' => 'IPLibrary-link-check/1.0 (+https://ipl.better-web.org)')
-    response = http.request(request) { |res| res.read_body { break } }
-    case response
-    when Net::HTTPSuccess then [true, response.code]
-    when Net::HTTPRedirection then reachable?(URI.join(url, response['location']).to_s, limit - 1)
-    # Sites that block automated clients but exist (verify these by hand)
-    when Net::HTTPForbidden, Net::HTTPTooManyRequests then [true, "#{response.code} (blocked bot, check manually)"]
-    else [false, response.code]
-    end
-  end
-rescue StandardError => error
-  [false, error.class.name]
+  [false, status.success? ? code.to_s : "curl exit #{status.exitstatus}"]
 end
 
 queue = Queue.new
