@@ -1,4 +1,18 @@
-# Placeholder - Add resources here
-- name: "Example Resource"
-  url: "https://example.com"
-  description: "Add a description here."
+- name: "DPReview"
+  url: "https://www.dpreview.com/"
+  description: "Comprehensive digital camera and lens reviews, studio comparison tools, and active user forums."
+  type: "blog"
+  access: "free"
+  organization: "Gear Patrol"
+
+- name: "PetaPixel"
+  url: "https://petapixel.com/"
+  description: "Leading photography and camera news publication covering gear releases, industry commentary, and creative work."
+  type: "blog"
+  access: "free"
+
+- name: "Photography Life"
+  url: "https://photographylife.com/"
+  description: "Educational website offering detailed digital camera reviews, lens tests, and comprehensive shooting guides."
+  type: "blog"
+  access: "free"

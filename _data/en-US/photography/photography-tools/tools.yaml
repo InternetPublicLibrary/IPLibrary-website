@@ -1,4 +1,19 @@
-# Placeholder - Add resources here
-- name: "Example Resource"
-  url: "https://example.com"
-  description: "Add a description here."
+- name: "ExifTool"
+  url: "https://exiftool.org/"
+  description: "Platform-independent command-line application and library for reading, writing, and editing image and camera metadata."
+  type: "tool"
+  access: "free"
+
+- name: "ColorChecker Camera Calibration"
+  url: "https://calibrite.com/"
+  description: "Color profiling software used with physical calibration targets to generate custom DNG and ICC camera profiles."
+  type: "tool"
+  access: "free"
+  organization: "Calibrite"
+
+- name: "Darktable"
+  url: "https://www.darktable.org/"
+  description: "Open-source virtual lighttable and darkroom offering tethered shooting, lens correction, and non-destructive RAW editing."
+  type: "tool"
+  access: "free"
+  organization: "Darktable Team"

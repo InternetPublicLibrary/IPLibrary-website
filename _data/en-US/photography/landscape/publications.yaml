@@ -1,4 +1,19 @@
-# Placeholder - Add resources here
-- name: "Example Resource"
-  url: "https://example.com"
-  description: "Add a description here."
+- name: "On Landscape"
+  url: "https://www.onlandscape.co.uk/"
+  description: "Bi-weekly digital magazine dedicated to landscape photography appreciation, environmental ethics, and visual philosophy."
+  type: "journal"
+  access: "paid"
+  organization: "On Landscape"
+
+- name: "Landscape Photography Magazine"
+  url: "https://landscapephotographymagazine.com/"
+  description: "International online publication featuring landscape portfolios, location guides, and techniques."
+  type: "journal"
+  access: "paid"
+  organization: "Landscape Photography Magazine"
+
+- name: "Outdoor Photographer"
+  url: "https://www.outdoorphotographer.com/"
+  description: "Quarterly magazine presenting scenic wilderness features, equipment reviews, and environmental perspectives."
+  type: "journal"
+  access: "paid"

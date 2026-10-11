@@ -1,4 +1,19 @@
-# Placeholder - Add resources here
-- name: "Example Resource"
-  url: "https://example.com"
-  description: "Add a description here."
+- name: "Stanford CS 178: Digital Photography"
+  url: "https://graphics.stanford.edu/courses/cs178/"
+  description: "University course covering the technical foundations of photographic optics, sensors, lighting, and composition."
+  type: "course"
+  access: "free"
+  organization: "Stanford University"
+
+- name: "Cambridge in Colour Photography Tutorials"
+  url: "https://www.cambridgeincolour.com/tutorials.htm"
+  description: "Comprehensive visual guide to essential photographic concepts including exposure, depth of field, and dynamic range."
+  type: "reference"
+  access: "free"
+  organization: "Cambridge in Colour"
+
+- name: "Harvard Digital Photography Course on ALISON"
+  url: "https://alison.com/"
+  description: "Free self-paced introductory course covering camera mechanics, exposure triangle, and histogram interpretation."
+  type: "course"
+  access: "free"

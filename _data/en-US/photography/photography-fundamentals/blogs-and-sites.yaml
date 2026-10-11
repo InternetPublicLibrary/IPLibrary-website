@@ -1,4 +1,17 @@
-# Placeholder - Add resources here
-- name: "Example Resource"
-  url: "https://example.com"
-  description: "Add a description here."
+- name: "Cambridge in Colour"
+  url: "https://www.cambridgeincolour.com/"
+  description: "Educational portal and online community exploring digital imaging concepts, exposure fundamentals, and color management."
+  type: "blog"
+  access: "free"
+
+- name: "Photography Life"
+  url: "https://photographylife.com/"
+  description: "Technical photography blog publishing accessible tutorials on camera mechanics, optical concepts, and composition rules."
+  type: "blog"
+  access: "free"
+
+- name: "Fstoppers"
+  url: "https://fstoppers.com/"
+  description: "Community and photography news website sharing tutorials, lighting diagrams, and fundamentals for photographers."
+  type: "community"
+  access: "free"

@@ -1,4 +1,19 @@
-# Placeholder - Add resources here
-- name: "Example Resource"
-  url: "https://example.com"
-  description: "Add a description here."
+- name: "BBC Wildlife Magazine"
+  url: "https://www.discoverwildlife.com/"
+  description: "British natural history publication featuring world-class wildlife photography, species profiles, and conservation essays."
+  type: "journal"
+  access: "free"
+  organization: "Our Media"
+
+- name: "Wildlife Photographer of the Year Portfolio Books"
+  url: "https://www.nhm.ac.uk/wpy"
+  description: "Annual book publications compiling the 100 winning and highly commended images from the Natural History Museum competition."
+  type: "journal"
+  access: "paid"
+  organization: "Natural History Museum, London"
+
+- name: "Outdoor Photographer"
+  url: "https://www.outdoorphotographer.com/"
+  description: "Magazine publishing bird, mammal, and macro field photography features and technical camera articles."
+  type: "journal"
+  access: "paid"

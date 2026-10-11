@@ -1,4 +1,13 @@
-# Placeholder - Add resources here
-- name: "Example Resource"
-  url: "https://example.com"
-  description: "Add a description here."
+- name: "Langford's Basic Photography"
+  url: "https://www.routledge.com/"
+  description: "Foundational photography textbook covering optical physics, camera controls, exposure, and lighting fundamentals."
+  type: "textbook"
+  access: "paid"
+  organization: "Routledge"
+
+- name: "The Journal of Imaging Science and Technology"
+  url: "https://www.imaging.org/"
+  description: "Peer-reviewed scientific journal focusing on optical sensor design, colorimetry, and photographic image evaluation."
+  type: "journal"
+  access: "paid"
+  organization: "Society for Imaging Science and Technology"

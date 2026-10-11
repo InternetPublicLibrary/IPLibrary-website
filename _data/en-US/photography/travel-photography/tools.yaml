@@ -1,4 +1,19 @@
-# Placeholder - Add resources here
-- name: "Example Resource"
-  url: "https://example.com"
-  description: "Add a description here."
+- name: "Polarsteps"
+  url: "https://www.polarsteps.com/"
+  description: "Travel route tracking and automated visual journal application mapping photographic steps and route coordinates."
+  type: "tool"
+  access: "free"
+  organization: "Polarsteps"
+
+- name: "PhotoPills"
+  url: "https://www.photopills.com/"
+  description: "Location planning and ephemeris calculation app allowing travel photographers to predict sun and moon positions globally."
+  type: "tool"
+  access: "paid"
+  organization: "PhotoPills"
+
+- name: "Maps.me"
+  url: "https://maps.me/"
+  description: "Offline OpenStreetMap-based navigation and waypoint planning tool for remote travel photography expeditions."
+  type: "tool"
+  access: "freemium"

@@ -1,4 +1,19 @@
-# Placeholder - Add resources here
-- name: "Example Resource"
-  url: "https://example.com"
-  description: "Add a description here."
+- name: "DOF Simulator"
+  url: "https://dofsimulator.net/en/"
+  description: "Visual camera simulator calculating depth of field, background blur, and optical perspective distortion."
+  type: "tool"
+  access: "free"
+
+- name: "Cambridge in Colour Calculators"
+  url: "https://www.cambridgeincolour.com/photography-tools.htm"
+  description: "Interactive tools explaining the exposure triangle, diffraction limits, and camera sensor crop factors."
+  type: "tool"
+  access: "free"
+  organization: "Cambridge in Colour"
+
+- name: "CameraSim"
+  url: "https://camerasim.com/"
+  description: "Interactive online DSLR camera viewfinder simulator demonstrating the effects of aperture, shutter speed, and ISO."
+  type: "tool"
+  access: "free"
+  organization: "CameraSim"

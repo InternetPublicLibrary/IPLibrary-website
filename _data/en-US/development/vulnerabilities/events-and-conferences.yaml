@@ -1,4 +1,14 @@
-# Placeholder - Add resources here
-- name: "Example Resource"
-  url: "https://example.com"
-  description: "Add a description here."
+- name: "Black Hat USA"
+  url: "https://www.blackhat.com"
+  description: "Internationally renowned technical information security conference presenting the latest in vulnerability research and exploitation."
+  type: "conference"
+  access: "paid"
+  organization: "Informa Tech"
+
+- name: "DEF CON"
+  url: "https://defcon.org"
+  description: "One of the world's longest-running and largest hacker conventions focused on vulnerability research and security testing."
+  type: "conference"
+  access: "paid"
+  organization: "DEF CON Communications"
+

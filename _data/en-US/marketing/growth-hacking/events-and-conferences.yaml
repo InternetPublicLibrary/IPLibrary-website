@@ -1,4 +1,13 @@
-# Placeholder - Add resources here
-- name: "Example Resource"
-  url: "https://example.com"
-  description: "Add a description here."
+- name: "SaaStr Annual"
+  url: "https://www.saastrannual.com/"
+  description: "Premier global gathering of B2B SaaS founders, executives, and growth leaders covering scaling metrics and acquisition loops."
+  type: "conference"
+  access: "paid"
+  organization: "SaaStr"
+
+- name: "Product-Led Summit"
+  url: "https://productled.com/"
+  description: "Recurring virtual and in-person summit focused on product-led growth strategies, user onboarding, and self-serve expansion."
+  type: "conference"
+  access: "freemium"
+  organization: "ProductLed"

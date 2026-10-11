@@ -1,4 +1,13 @@
-# Placeholder - Add resources here
-- name: "Example Resource"
-  url: "https://example.com"
-  description: "Add a description here."
+- name: "International Landscape Photographer of the Year"
+  url: "https://internationallandscapephotographer.com/"
+  description: "Global annual juried competition recognizing top landscape portfolios and published in a commemorative book."
+  type: "conference"
+  access: "paid"
+  organization: "ILPOTY"
+
+- name: "Natural Landscape Photography Awards"
+  url: "https://naturallandscapeawards.com/"
+  description: "Annual international competition celebrating landscape photography with strict limits on digital manipulation."
+  type: "conference"
+  access: "paid"
+  organization: "Natural Landscape Photography Awards"

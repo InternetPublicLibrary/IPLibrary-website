@@ -1,4 +1,19 @@
-# Placeholder - Add resources here
-- name: "Example Resource"
-  url: "https://example.com"
-  description: "Add a description here."
+- name: "Light Pollution Map"
+  url: "https://www.lightpollutionmap.info/"
+  description: "Interactive global database displaying artificial sky brightness and VIIRS satellite data for nightscape planning."
+  type: "database"
+  access: "free"
+
+- name: "USGS EarthExplorer"
+  url: "https://earthexplorer.usgs.gov/"
+  description: "Geospatial database offering satellite imagery, aerial photography, and digital elevation models for location scouting."
+  type: "database"
+  access: "free"
+  organization: "United States Geological Survey"
+
+- name: "PeakFinder"
+  url: "https://www.peakfinder.com/"
+  description: "Global topographic database rendering 360-degree panoramic mountain views and peak names from any coordinate."
+  type: "database"
+  access: "freemium"
+  organization: "PeakFinder"

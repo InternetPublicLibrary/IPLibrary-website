@@ -1,4 +1,12 @@
-# Placeholder - Add resources here
-- name: "Example Resource"
-  url: "https://example.com"
-  description: "Add a description here."
+- name: "MonoVisions"
+  url: "https://monovisions.com/"
+  description: "Web publication and repository celebrating the art of monochrome photography with profiles of classic and contemporary masters."
+  type: "blog"
+  access: "free"
+
+- name: "Monochrome Awards Journal"
+  url: "https://monoawards.com/"
+  description: "Exhibition showcase and archive featuring winning monochrome portfolios across landscape, architecture, and portraiture."
+  type: "blog"
+  access: "free"
+

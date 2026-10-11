@@ -1,4 +1,19 @@
-# Placeholder - Add resources here
-- name: "Example Resource"
-  url: "https://example.com"
-  description: "Add a description here."
+- name: "Lensfun Database"
+  url: "https://lensfun.github.io/"
+  description: "Open-source database of photographic lenses providing mathematical distortion, vignetting, and chromatic aberration profiles."
+  type: "database"
+  access: "free"
+  organization: "Lensfun Project"
+
+- name: "DPReview Camera Feature Database"
+  url: "https://www.dpreview.com/products/cameras"
+  description: "Structured comparison catalog indexing camera sensors, autofocus specs, lens mounts, and physical dimensions."
+  type: "database"
+  access: "free"
+  organization: "Gear Patrol"
+
+- name: "Photons to Photos Optical and Sensor Database"
+  url: "https://www.photonstophotos.net/"
+  description: "Independent database publishing optical bench measurements, sensor quantum efficiency, and read noise data."
+  type: "database"
+  access: "free"

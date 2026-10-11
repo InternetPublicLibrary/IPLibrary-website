@@ -1,4 +1,14 @@
-# Placeholder - Add resources here
-- name: "Example Resource"
-  url: "https://example.com"
-  description: "Add a description here."
+- name: "Affiliate Summit"
+  url: "https://www.affiliatesummit.com/"
+  description: "Premier global conference series bringing together affiliates, merchants, networks, and technology providers."
+  type: "conference"
+  access: "paid"
+  organization: "Clarion Events"
+
+- name: "Affiliate World Conferences"
+  url: "https://affiliateworldconferences.com/"
+  description: "Bi-annual international gathering for elite affiliate marketers, media buyers, and ecommerce entrepreneurs."
+  type: "conference"
+  access: "paid"
+  organization: "Affiliate World"
+
