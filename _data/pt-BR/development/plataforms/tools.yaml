@@ -21,3 +21,11 @@
   access: "freemium"
   language: "pt-BR"
   organization: "Microsoft"
+
+- name: "Firebase"
+  url: "https://firebase.google.com/docs"
+  description: "Serviços de backend para apps móveis e web, com autenticação, bancos de dados, notificações push e análise."
+  type: "tool"
+  access: "freemium"
+  language: "en"
+  organization: "Google"

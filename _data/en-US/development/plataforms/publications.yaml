@@ -18,3 +18,17 @@
   type: "journal"
   access: "paid"
   organization: "IEEE Computer Society"
+
+- name: "Human Interface Guidelines"
+  url: "https://developer.apple.com/design/human-interface-guidelines/"
+  description: "Apple's design guidance for apps on its platforms, covering layout, navigation, accessibility and platform conventions."
+  type: "reference"
+  access: "free"
+  organization: "Apple"
+
+- name: "Material Design 3"
+  url: "https://m3.material.io/"
+  description: "Google's design system for Android and other platforms, with components, layout, colour and accessibility guidance."
+  type: "reference"
+  access: "free"
+  organization: "Google"
