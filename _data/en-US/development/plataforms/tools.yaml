@@ -18,3 +18,10 @@
   type: "tool"
   access: "free"
   organization: "Open Infrastructure Foundation"
+
+- name: "Firebase"
+  url: "https://firebase.google.com/docs"
+  description: "Backend services for mobile and web apps, including authentication, databases, push notifications and analytics."
+  type: "tool"
+  access: "freemium"
+  organization: "Google"

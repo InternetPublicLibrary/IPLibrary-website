@@ -1,0 +1,72 @@
+title: "Análise de dados"
+summary: "Aprenda a buscar, limpar, analisar e apresentar dados usando SQL, Python, estatística e dashboards, com cursos em português e bases públicas brasileiras."
+subcategory: "business/data-and-analytics"
+level: "beginner"
+source: "ipl"
+stages:
+  - title: "Fundamentos"
+    steps:
+      - title: "Estatística descritiva"
+        summary: "Entenda média, mediana, dispersão e distribuições para resumir dados com honestidade e perceber quando um número engana."
+        resources:
+          - "https://www.escolavirtual.gov.br"
+          - "https://www.edx.org/"
+      - title: "Consultas com SQL"
+        summary: "Aprenda a selecionar, filtrar, juntar e agregar tabelas em SQL, a linguagem usada para extrair dados de quase todo banco."
+        resources:
+          - "https://www.alura.com.br"
+          - "https://dbeaver.io/"
+      - title: "Python e notebooks"
+        summary: "Carregue e explore tabelas em notebooks Jupyter, combinando código, resultados e anotações num único documento fácil de compartilhar."
+        resources:
+          - "https://jupyter.org/"
+          - "https://www.alura.com.br"
+  - title: "Dados brasileiros"
+    steps:
+      - title: "Portais de dados abertos"
+        summary: "Encontre bases públicas já tratadas sobre o Brasil e aprenda a ler a documentação, as licenças e o dicionário de cada conjunto."
+        resources:
+          - "https://dados.gov.br"
+          - "https://basedosdados.org"
+      - title: "Séries do IBGE e do Ipea"
+        summary: "Consulte séries históricas oficiais de população, preços e economia, base de grande parte das análises socioeconômicas feitas no país."
+        resources:
+          - "https://sidra.ibge.gov.br"
+          - "https://www.ipeadata.gov.br"
+      - title: "Limpeza e preparação"
+        summary: "Trate valores ausentes, tipos errados e duplicatas, e reorganize as tabelas para que a análise parta de dados confiáveis."
+        resources:
+          - "https://www.kaggle.com"
+          - "https://www.datacamp.com/"
+  - title: "Análise e comunicação"
+    steps:
+      - title: "Testes de hipótese e regressão"
+        summary: "Verifique se diferenças são reais e modele relações entre variáveis para tirar conclusões que se sustentam diante de questionamentos."
+        resources:
+          - "https://www.escolavirtual.gov.br"
+          - "https://www.datascienceacademy.com.br"
+      - title: "Dashboards e relatórios"
+        summary: "Monte painéis interativos ligados às suas bases para que a equipe acompanhe indicadores sem depender de planilhas enviadas por e-mail."
+        resources:
+          - "https://lookerstudio.google.com"
+          - "https://www.metabase.com"
+  - title: "Ir além"
+    steps:
+      - title: "Comunidade e casos práticos"
+        summary: "Leia artigos e tutoriais da comunidade brasileira de dados e veja como outros analistas resolvem problemas com bases públicas."
+        resources:
+          - "https://www.datahackers.com.br/"
+          - "https://basedosdados.org"
+      - title: "Modelos preditivos"
+        summary: "Dê o primeiro passo em previsões com modelos simples de machine learning aplicados aos mesmos dados que você já analisa."
+        optional: true
+        resources:
+          - "https://scikit-learn.org/"
+      - title: "Estatística aplicada em profundidade"
+        summary: "Explore artigos teóricos e aplicados de estatística publicados no Brasil para aprofundar métodos e conhecer pesquisas sobre dados nacionais."
+        optional: true
+        resources:
+          - "https://rbesojs.ibge.gov.br/index.php/rbes"
+see_also:
+  - name: "Roadmap Data Analyst (roadmap.sh)"
+    url: "https://roadmap.sh/data-analyst"

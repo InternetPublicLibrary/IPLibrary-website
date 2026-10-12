@@ -1,0 +1,81 @@
+title: "JavaScript programming"
+summary: "Learn JavaScript from its core syntax and functions through the browser DOM, asynchronous code and Node.js, ending with modules, TypeScript and UI libraries."
+subcategory: "development/programming-languages"
+level: "beginner"
+source: "ipl"
+stages:
+  - title: "Core language"
+    steps:
+      - title: "Syntax, values and types"
+        summary: "Learn variables, primitive types, operators and control flow, the building blocks every JavaScript program is made from."
+        resources:
+          - "https://developer.mozilla.org"
+      - title: "Functions, scope and closures"
+        summary: "Understand how functions capture variables and how scope works, which explains most surprising behaviour in real code."
+        resources:
+          - "https://developer.mozilla.org"
+          - "https://web.dev/"
+      - title: "Objects, arrays and JSON"
+        summary: "Model data with objects and arrays, use their built-in methods and exchange structured data as JSON."
+        resources:
+          - "https://web.dev/"
+          - "https://json-schema.org/"
+  - title: "JavaScript in the browser"
+    steps:
+      - title: "The DOM and events"
+        summary: "Select, create and update page elements and handle user events, turning static HTML into interactive pages."
+        resources:
+          - "https://whatwg.org"
+          - "https://css-tricks.com"
+      - title: "Browser support and new features"
+        summary: "Check where a language or web API feature is supported and follow how browsers ship new capabilities."
+        resources:
+          - "https://caniuse.com"
+          - "https://hacks.mozilla.org/"
+      - title: "Smooth rendering"
+        summary: "Learn how scripts interact with the rendering pipeline so animations and updates stay fluid instead of janky."
+        optional: true
+        resources:
+          - "https://web.dev/articles/speed-rendering"
+  - title: "Asynchronous code and Node.js"
+    steps:
+      - title: "The event loop and async code"
+        summary: "Understand callbacks, promises and async/await on top of the event loop, essential for network requests and I/O."
+        resources:
+          - "https://nodejs.org"
+      - title: "Node.js and npm"
+        summary: "Run JavaScript outside the browser and manage third-party packages, opening the door to scripts, tools and servers."
+        resources:
+          - "https://nodejs.org"
+          - "https://www.npmjs.com"
+      - title: "Streams"
+        summary: "Process large files and network data piece by piece with Node streams instead of loading everything into memory."
+        optional: true
+        resources:
+          - "https://www.freecodecamp.org/news/node-js-streams-everything-you-need-to-know-c9141306be93"
+      - title: "A small web server"
+        summary: "Build a simple server with Express and environment-based configuration to see how JavaScript powers the backend."
+        resources:
+          - "https://developer.mozilla.org/en-US/docs/Learn/Server-side/Express_Nodejs"
+          - "https://github.com/motdotla/dotenv"
+  - title: "Ecosystem and scale"
+    steps:
+      - title: "Modules and build tools"
+        summary: "Split code into ES modules and use a modern dev server and bundler to ship them efficiently to browsers."
+        resources:
+          - "https://vite.dev"
+          - "https://www.npmjs.com"
+      - title: "TypeScript"
+        summary: "Add static types to catch mistakes before running code and make larger JavaScript codebases easier to change."
+        resources:
+          - "https://www.typescriptlang.org/docs/handbook/"
+          - "https://www.typescriptlang.org"
+      - title: "UI libraries"
+        summary: "Apply your JavaScript skills in a component library to build interfaces from reusable, state-driven pieces."
+        resources:
+          - "https://react.dev"
+          - "https://vuejs.org"
+          - "https://lit.dev/"
+see_also:
+  - name: "JavaScript Roadmap (roadmap.sh)"
+    url: "https://roadmap.sh/javascript"

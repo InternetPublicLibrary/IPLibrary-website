@@ -1,0 +1,31 @@
+---
+layout: default
+---
+{%- comment -%} Learning paths index (spec 006): every path of this language, grouped by level. {%- endcomment -%}
+{%- assign lang = page.lang | default: 'en-US' -%}
+{%- assign pt = false -%}{%- if lang == 'pt-BR' -%}{%- assign pt = true -%}{%- endif -%}
+<div class="container mx-auto px-4 py-5 lg:py-8 text-gray-900">
+  <div class="max-w-5xl mx-auto">
+    <nav aria-label="Breadcrumb" class="text-sm text-gray-600 mb-3">
+      <ol class="flex flex-wrap gap-x-2"><li><a href="/{{ lang }}/" class="text-blue-600 hover:underline">{% if pt %}Início{% else %}Home{% endif %}</a></li><li><span aria-hidden="true">› </span><span aria-current="page">{{ page.title | escape }}</span></li></ol>
+    </nav>
+    <h1 class="text-3xl lg:text-4xl font-semibold leading-tight mb-2">{{ page.title | escape }}</h1>
+    <p class="text-base lg:text-lg text-gray-700 mb-5">{{ page.description | escape }}</p>
+    {%- assign levels = 'beginner,intermediate,advanced' | split: ',' -%}
+    {%- for level in levels -%}
+      {%- assign group = page.paths | where: 'level', level -%}
+      {%- if group.size > 0 %}
+      <h2 class="text-xl font-semibold border-b border-gray-200 pb-2 mb-3 mt-6">{% if level == 'beginner' %}{% if pt %}Iniciante{% else %}Beginner{% endif %}{% elsif level == 'intermediate' %}{% if pt %}Intermediário{% else %}Intermediate{% endif %}{% else %}{% if pt %}Avançado{% else %}Advanced{% endif %}{% endif %}</h2>
+      <ul class="grid gap-3 sm:grid-cols-2 list-none p-0" role="list">
+        {%- for path in group %}
+        <li class="bg-white border border-gray-200 rounded-lg p-4">
+          <a href="{{ path.url }}" class="text-lg font-semibold text-blue-700 hover:underline">{{ path.title | escape }}</a>
+          <p class="text-sm text-gray-700 mt-1">{{ path.summary | escape }}</p>
+          <p class="text-xs text-gray-600 mt-2">{{ path.step_count }} {% if pt %}etapas{% else %}steps{% endif %}</p>
+        </li>
+        {%- endfor %}
+      </ul>
+      {%- endif -%}
+    {%- endfor %}
+  </div>
+</div>

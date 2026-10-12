@@ -1,0 +1,82 @@
+title: "Databases"
+summary: "Learn to store and query data with SQL, design sound schemas and indexes, try document and key-value stores, and manage databases safely as they change."
+subcategory: "development/databases"
+level: "beginner"
+source: "ipl"
+stages:
+  - title: "First steps"
+    steps:
+      - title: "What a database is for"
+        summary: "Survey the main kinds of databases, relational, document, key-value and wide-column, and what problem each one solves."
+        resources:
+          - "https://db-engines.com"
+      - title: "Your first SQL database"
+        summary: "Create tables and run SELECT, INSERT, UPDATE and DELETE on a zero-setup embedded database to learn SQL by doing."
+        resources:
+          - "https://www.sqlite.org"
+      - title: "PostgreSQL and a client tool"
+        summary: "Install a full relational server and a graphical client so you can explore schemas, run queries and inspect results."
+        resources:
+          - "https://www.postgresql.org/docs/"
+          - "https://dbeaver.io"
+          - "https://www.pgadmin.org"
+  - title: "Designing and querying well"
+    steps:
+      - title: "Schema design and constraints"
+        summary: "Model entities and relationships with keys and constraints so the database itself keeps your data consistent."
+        resources:
+          - "https://www.postgresql.org/docs/"
+          - "https://dataintensive.net"
+      - title: "Indexes and query performance"
+        summary: "Learn how indexes work and how to read query plans, the single biggest lever for making slow queries fast."
+        resources:
+          - "https://use-the-index-luke.com"
+      - title: "Transactions and concurrency"
+        summary: "Understand ACID guarantees and isolation levels to avoid lost updates when many users write at the same time."
+        resources:
+          - "https://dataintensive.net"
+          - "https://db.cs.cmu.edu/"
+      - title: "Users and privileges"
+        summary: "Grant each application and person only the access it needs, an essential step before exposing any database."
+        resources:
+          - "https://www.postgresql.org/docs/current/ddl-priv.html"
+  - title: "Beyond relational"
+    steps:
+      - title: "Document databases"
+        summary: "Store flexible JSON-like documents and learn when that model fits better than tables, and when it does not."
+        resources:
+          - "https://www.mongodb.com/docs/manual/"
+          - "https://www.mongodb.com"
+      - title: "Key-value stores and caching"
+        summary: "Use an in-memory store for caching, sessions and counters to take load off your main database."
+        resources:
+          - "https://redis.io"
+      - title: "Distributed wide-column databases"
+        summary: "See how a database spreads data across many machines and what consistency trade-offs that brings."
+        optional: true
+        resources:
+          - "https://cassandra.apache.org/"
+  - title: "Running databases"
+    steps:
+      - title: "Schema migrations"
+        summary: "Version schema changes as scripts that run in order, so every environment evolves the same way without manual edits."
+        resources:
+          - "https://flywaydb.org"
+          - "https://www.liquibase.com"
+      - title: "How storage engines work"
+        summary: "Look inside B-trees, logs and buffer pools to understand why databases behave the way they do under load."
+        optional: true
+        resources:
+          - "https://databass.dev"
+          - "https://db.cs.cmu.edu/"
+      - title: "Following database research"
+        summary: "Read accessible summaries of influential papers to see where database systems are heading."
+        optional: true
+        resources:
+          - "https://blog.acolyer.org/"
+          - "https://www.vldb.org/"
+see_also:
+  - name: "SQL Roadmap (roadmap.sh)"
+    url: "https://roadmap.sh/sql"
+  - name: "PostgreSQL DBA Roadmap (roadmap.sh)"
+    url: "https://roadmap.sh/postgresql-dba"

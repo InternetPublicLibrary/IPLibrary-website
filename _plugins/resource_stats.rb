@@ -19,7 +19,7 @@ module IPL
     def names(node)
       case node
       when Array then node.flat_map { |item| resource?(item) ? [item['name']] : names(item) }
-      when Hash then resource?(node) ? [node['name']] : node.except('menu', 'translations').values.flat_map { |value| names(value) }
+      when Hash then resource?(node) ? [node['name']] : node.except('menu', 'translations', 'learning-paths').values.flat_map { |value| names(value) }
       else []
       end
     end

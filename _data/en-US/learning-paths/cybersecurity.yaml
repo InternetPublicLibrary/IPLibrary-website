@@ -1,0 +1,93 @@
+title: "Cybersecurity"
+summary: "Start with networks and security thinking, then learn cryptography, web application flaws, vulnerability catalogs and system hardening through free hands-on labs and official references."
+subcategory: "computing/cyber-security"
+level: "beginner"
+source: "ipl"
+stages:
+  - title: "Security and network basics"
+    steps:
+      - title: "Thinking like a defender"
+        summary: "Learn the core ideas of confidentiality, integrity, availability and risk, and see how real attacks and breaches unfold."
+        resources:
+          - "https://www.professormesser.com/"
+          - "https://www.schneier.com/"
+          - "https://krebsonsecurity.com/"
+      - title: "How networks work"
+        summary: "Understand IP, TCP, ports and DNS, because most attacks and defenses happen on traffic moving across a network."
+        resources:
+          - "https://gaia.cs.umass.edu/kurose_ross/"
+          - "https://www.nslookup.io/learning/dns-record-types/"
+          - "https://www.iana.org/assignments/service-names-port-numbers/"
+      - title: "Watching network traffic"
+        summary: "Capture and read packets yourself to recognise normal traffic and spot what looks suspicious."
+        resources:
+          - "https://www.wireshark.org/"
+          - "https://www.wireshark.org/docs/"
+          - "https://www.tcpdump.org/"
+  - title: "Cryptography and secure communication"
+    steps:
+      - title: "Encryption and keys"
+        summary: "Learn symmetric and public-key encryption, signatures and secure tunnels, the tools that protect data in transit and at rest."
+        resources:
+          - "https://hashrocket.com/blog/posts/encryption-with-gpg-a-story-really-a-tutorial"
+          - "https://www.ssh.com/academy/ssh/tunneling-example"
+          - "https://csrc.nist.gov/publications"
+      - title: "Email authentication"
+        summary: "See how SPF, DKIM and DMARC let receivers reject forged senders, a common entry point for phishing."
+        optional: true
+        resources:
+          - "https://datatracker.ietf.org/doc/html/rfc7208"
+          - "https://datatracker.ietf.org/doc/html/rfc6376"
+          - "https://dmarc.postmarkapp.com/"
+  - title: "Web application security"
+    steps:
+      - title: "The most common web flaws"
+        summary: "Study injection, broken access control and the other recurring weaknesses so you can recognise them in your own code."
+        resources:
+          - "https://owasp.org/"
+          - "https://cwe.mitre.org"
+      - title: "Hands-on web labs"
+        summary: "Exploit deliberately vulnerable applications in guided labs, the fastest way to understand why each flaw matters."
+        resources:
+          - "https://portswigger.net/web-security"
+      - title: "Browser defenses"
+        summary: "Learn how cookie attributes and browser policies block cross-site attacks, and when they fail to."
+        resources:
+          - "https://web.dev/articles/samesite-cookies-explained"
+      - title: "Web testing tools"
+        summary: "Use an intercepting proxy and an automated injection scanner to test applications you are authorised to assess."
+        resources:
+          - "https://www.zaproxy.org"
+          - "https://sqlmap.org"
+  - title: "Vulnerabilities, threats and defense"
+    steps:
+      - title: "Tracking vulnerabilities"
+        summary: "Read CVE entries and severity scores, and learn which flaws are being exploited right now so you can patch first."
+        resources:
+          - "https://www.cve.org/"
+          - "https://nvd.nist.gov/"
+          - "https://www.cisa.gov/known-exploited-vulnerabilities-catalog"
+      - title: "How attackers operate"
+        summary: "Map attacker tactics and techniques to the detections and controls that stop them."
+        resources:
+          - "https://attack.mitre.org/"
+      - title: "Hardening and scanning your systems"
+        summary: "Apply secure configuration baselines and scan your own hosts to find exposed services before someone else does."
+        resources:
+          - "https://www.cisecurity.org/"
+          - "https://nmap.org/"
+      - title: "Staying current"
+        summary: "Follow daily threat reports and official advisories to keep up with new campaigns and emergency patches."
+        optional: true
+        resources:
+          - "https://isc.sans.edu/"
+          - "https://www.cisa.gov/news-events/cybersecurity-advisories"
+      - title: "Security of AI applications"
+        summary: "Explore how prompt injection and adversarial inputs attack systems built on large language models."
+        optional: true
+        resources:
+          - "https://arxiv.org/abs/2302.12173"
+          - "https://llm-attacks.org/"
+see_also:
+  - name: "Cyber Security Roadmap (roadmap.sh)"
+    url: "https://roadmap.sh/cyber-security"

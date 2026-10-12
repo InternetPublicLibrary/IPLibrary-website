@@ -1,0 +1,85 @@
+title: "UX design"
+summary: "Entenda como as pessoas percebem e usam interfaces e pratique pesquisa, arquitetura, prototipação e testes até conseguir projetar e justificar um fluxo usável."
+subcategory: "design/user-experience"
+level: "beginner"
+source: "ipl"
+stages:
+  - title: "Como as pessoas usam interfaces"
+    steps:
+      - title: "Princípios psicológicos"
+        summary: "Conheça as leis e heurísticas que explicam atenção, memória e tomada de decisão, base de quase toda escolha de interface."
+        resources:
+          - "https://lawsofux.com/"
+      - title: "Usabilidade na prática"
+        summary: "Leia estudos empíricos sobre usabilidade para entender o que realmente atrapalha as pessoas, em vez de confiar só na intuição."
+        resources:
+          - "https://www.nngroup.com/articles/"
+          - "https://brasil.uxdesign.cc/"
+      - title: "Processo de design"
+        summary: "Aprenda o Duplo Diamante e o design thinking para saber quando abrir o problema e quando convergir para uma solução."
+        resources:
+          - "https://www.designcouncil.org.uk/"
+          - "https://www.interaction-design.org/courses/design-thinking-the-beginner-s-guide"
+          - "https://dschool.stanford.edu/resources"
+  - title: "Conhecendo quem usa"
+    steps:
+      - title: "Métodos de pesquisa"
+        summary: "Planeje entrevistas, observação e questionários, escolhendo o método que responde à dúvida concreta que você tem sobre o público."
+        resources:
+          - "https://www.designkit.org/"
+          - "https://www.interaction-design.org/"
+      - title: "Síntese e mapas de jornada"
+        summary: "Transforme anotações de pesquisa em personas e mapas de jornada que ajudem o time a concordar sobre o problema certo."
+        resources:
+          - "https://miro.com/"
+          - "https://mural.co/"
+      - title: "Facilitação de workshops"
+        summary: "Pratique dinâmicas de ideação e cocriação, porque boa parte do trabalho de UX é conduzir decisões em grupo."
+        optional: true
+        resources:
+          - "https://www.sessionlab.com/library"
+          - "https://echos.cc/"
+  - title: "Estrutura e protótipos"
+    steps:
+      - title: "Arquitetura da informação"
+        summary: "Organize conteúdo e navegação e valide a estrutura com testes de card sorting e tree testing antes de desenhar telas."
+        resources:
+          - "https://www.optimalworkshop.com/"
+      - title: "Wireframes e protótipos"
+        summary: "Monte wireframes e protótipos clicáveis numa ferramenta de design para testar interações reais e comunicar bem com quem desenvolve."
+        resources:
+          - "https://www.figma.com/"
+          - "https://penpot.app/"
+      - title: "Padrões de produtos reais"
+        summary: "Analise como aplicativos publicados resolvem cadastro, busca e pagamento, aproveitando padrões consolidados em vez de reinventá-los."
+        optional: true
+        resources:
+          - "https://mobbin.com/"
+          - "https://www.figma.com/community"
+      - title: "Design systems"
+        summary: "Estude um design system público para entender componentes, diretrizes e consistência visual em produtos de grande escala."
+        optional: true
+        resources:
+          - "https://www.gov.br/ds/home"
+  - title: "Avaliar e incluir"
+    steps:
+      - title: "Testes de usabilidade"
+        summary: "Rode testes com protótipos e observe o comportamento real com mapas de calor, transformando os achados em melhorias priorizadas."
+        resources:
+          - "https://maze.co/"
+          - "https://www.hotjar.com/"
+      - title: "Acessibilidade digital"
+        summary: "Aplique as diretrizes de acessibilidade web e conheça ferramentas brasileiras, como a tradução para Libras, para incluir mais pessoas."
+        resources:
+          - "https://www.w3.org/WAI/tutorials/"
+          - "https://ceweb.br/"
+          - "https://vlibras.gov.br/"
+      - title: "Comunidade e carreira"
+        summary: "Monte estudos de caso para o portfólio e acompanhe a comunidade brasileira de IHC e UX para continuar aprendendo."
+        resources:
+          - "https://www.coursera.org/professional-certificates/google-ux-design"
+          - "https://www.uxconf.com.br/"
+          - "https://ceihc.sbc.org.br/"
+see_also:
+  - name: "Roadmap UX Design (roadmap.sh)"
+    url: "https://roadmap.sh/ux-design"

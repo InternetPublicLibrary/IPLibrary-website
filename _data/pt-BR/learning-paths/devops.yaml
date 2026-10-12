@@ -1,0 +1,81 @@
+title: "DevOps e nuvem"
+summary: "Do terminal Linux e do Git até contêineres, pipelines de CI/CD, infraestrutura como código e Kubernetes, com a base de sistemas distribuídos que sustenta a nuvem."
+subcategory: "development/development-environment"
+level: "intermediate"
+source: "ipl"
+stages:
+  - title: "Fundamentos"
+    steps:
+      - title: "Linux e linha de comando"
+        summary: "Domine o shell, arquivos, processos e permissões, porque quase todo servidor, contêiner e pipeline roda em Linux."
+        resources:
+          - "https://www.guiafoca.org/"
+          - "https://linuxcommand.org/"
+          - "https://missing.csail.mit.edu"
+      - title: "Controle de versão com Git"
+        summary: "Pratique commits, branches e merges até virar hábito, já que toda automação de entrega começa num push para o repositório."
+        resources:
+          - "https://git-scm.com/book/en/v2"
+          - "https://learngitbranching.js.org"
+      - title: "Virtualização na prática"
+        summary: "Suba máquinas virtuais e entenda como o sistema operacional isola processos e memória, a base conceitual dos contêineres."
+        optional: true
+        resources:
+          - "https://www.virtualbox.org/"
+          - "https://pages.cs.wisc.edu/~remzi/OSTEP/"
+  - title: "Contêineres"
+    steps:
+      - title: "Primeiros passos com Docker"
+        summary: "Empacote uma aplicação com suas dependências numa imagem, rode o contêiner e combine serviços com o Compose."
+        resources:
+          - "https://docs.docker.com/get-started/"
+          - "https://docker-curriculum.com"
+      - title: "Imagens e registros"
+        summary: "Aprenda a publicar, versionar e reaproveitar imagens e pacotes prontos em registros públicos, com atenção à origem do que você baixa."
+        resources:
+          - "https://hub.docker.com"
+          - "https://artifacthub.io"
+      - title: "Ambiente de desenvolvimento em contêiner"
+        summary: "Descreva o ambiente de trabalho em arquivos versionados para que toda a equipe programe com as mesmas ferramentas."
+        optional: true
+        resources:
+          - "https://containers.dev"
+          - "https://dotfiles.github.io"
+  - title: "Automação e infraestrutura como código"
+    steps:
+      - title: "Integração contínua"
+        summary: "Monte pipelines que instalam dependências, rodam testes e geram artefatos a cada push, para que erros apareçam em minutos."
+        resources:
+          - "https://docs.github.com/actions"
+          - "https://docs.gitlab.com/ci/"
+      - title: "Entrega contínua"
+        summary: "Leve cada versão aprovada até homologação e produção com ambientes, aprovações e segredos configurados no próprio pipeline."
+        resources:
+          - "https://docs.github.com/actions"
+          - "https://docs.gitlab.com/ci/"
+          - "https://github.blog"
+      - title: "Infraestrutura como código com Terraform"
+        summary: "Descreva redes, máquinas e serviços de nuvem em arquivos versionados e aplique mudanças de forma revisável e repetível."
+        resources:
+          - "https://developer.hashicorp.com/terraform/docs"
+  - title: "Orquestração e nuvem"
+    steps:
+      - title: "Kubernetes"
+        summary: "Entenda pods, deployments e services para rodar muitos contêineres num cluster, com escala automática e recuperação de falhas."
+        resources:
+          - "https://kubernetes.io/pt-br/docs/home/"
+          - "https://kubernetes.io/"
+          - "https://kubernetes.io/blog/"
+      - title: "Mensageria e streaming de eventos"
+        summary: "Conheça filas e logs de eventos distribuídos, comuns para desacoplar serviços em arquiteturas de nuvem."
+        optional: true
+        resources:
+          - "https://kafka.apache.org/"
+      - title: "Fundamentos de sistemas distribuídos"
+        summary: "Estude replicação, particionamento e tolerância a falhas, as ideias por trás de todo serviço de nuvem que você usa."
+        resources:
+          - "https://dataintensive.net/"
+          - "https://www.distributed-systems.net/"
+see_also:
+  - name: "Roadmap DevOps (roadmap.sh)"
+    url: "https://roadmap.sh/devops"

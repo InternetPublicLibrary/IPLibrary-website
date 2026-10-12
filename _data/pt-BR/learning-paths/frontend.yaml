@@ -1,0 +1,90 @@
+title: "Desenvolvimento frontend"
+summary: "Aprenda a criar interfaces web acessíveis, rápidas e responsivas, começando pelo funcionamento do navegador e chegando às ferramentas e frameworks atuais."
+subcategory: "development/frontend-development"
+level: "beginner"
+source: "ipl"
+stages:
+  - title: "Fundamentos da web e HTML"
+    steps:
+      - title: "Como o navegador monta uma página"
+        summary: "Entenda como o navegador busca, interpreta e desenha uma página, base para tudo o que vem depois na trilha."
+        resources:
+          - "https://developer.mozilla.org"
+          - "https://www.ceweb.br/"
+      - title: "HTML semântico"
+        summary: "Estruture o conteúdo com as tags certas, porque uma marcação bem feita ajuda acessibilidade, buscadores e estilização."
+        resources:
+          - "https://web.dev/learn"
+          - "https://validator.w3.org/nu/"
+  - title: "CSS e layout"
+    steps:
+      - title: "Base do CSS"
+        summary: "Domine cascata, especificidade, modelo de caixa e unidades para que os estilos se comportem como você espera."
+        resources:
+          - "https://web.dev/learn"
+          - "https://css-tricks.com"
+      - title: "Flexbox e Grid"
+        summary: "Pratique os dois sistemas modernos de layout, que resolvem a maioria das páginas e componentes sem gambiarras."
+        resources:
+          - "https://css-tricks.com"
+          - "https://www.freecodecamp.org/portuguese/learn"
+      - title: "Design responsivo"
+        summary: "Faça páginas que se adaptam a qualquer tela com layouts fluidos e media queries, já que a maioria acessa pelo celular."
+        resources:
+          - "https://www.freecodecamp.org/portuguese/learn"
+          - "https://learningwebdesign.com/"
+      - title: "Experimentos e inspiração"
+        summary: "Veja como o mesmo HTML ganha visuais muito diferentes e teste ideias rapidamente num editor online."
+        optional: true
+        resources:
+          - "https://www.csszengarden.com/"
+          - "https://codepen.io/"
+          - "https://tympanus.net/codrops/"
+  - title: "Interatividade, acessibilidade e desempenho"
+    steps:
+      - title: "JavaScript no navegador"
+        summary: "Use JavaScript para manipular o DOM e reagir a eventos, o que dá vida a qualquer interface interativa."
+        resources:
+          - "https://javascript.info"
+          - "https://developer.mozilla.org"
+      - title: "Acessibilidade"
+        summary: "Aplique as diretrizes WCAG e padrões inclusivos para que pessoas com leitores de tela ou só teclado usem seu site."
+        resources:
+          - "https://inclusive-components.design/"
+          - "https://wave.webaim.org/"
+          - "https://www.w3.org"
+      - title: "Compatibilidade entre navegadores"
+        summary: "Confira o suporte de cada recurso nos navegadores antes de usá-lo em produção e evite surpresas com usuários reais."
+        resources:
+          - "https://caniuse.com"
+      - title: "Desempenho"
+        summary: "Meça carregamento e renderização com ferramentas reais e corrija os gargalos que mais pesam nas Core Web Vitals."
+        resources:
+          - "https://pagespeed.web.dev/"
+          - "https://web.dev"
+  - title: "Ferramentas e frameworks"
+    steps:
+      - title: "Controle de versão com Git"
+        summary: "Aprenda a registrar mudanças, criar branches e colaborar com Git, ferramenta presente no dia a dia de toda equipe."
+        resources:
+          - "https://learngitbranching.js.org"
+          - "https://git-scm.com/book/en/v2"
+      - title: "npm e Vite"
+        summary: "Instale dependências pelo npm e use um servidor de desenvolvimento rápido para organizar projetos maiores."
+        resources:
+          - "https://www.npmjs.com"
+          - "https://vite.dev"
+      - title: "React ou Vue"
+        summary: "Escolha uma biblioteca de componentes para montar interfaces complexas a partir de peças pequenas e reutilizáveis."
+        resources:
+          - "https://react.dev"
+          - "https://vuejs.org"
+      - title: "Comunidade brasileira de frontend"
+        summary: "Acompanhe eventos e conteúdos da comunidade nacional para trocar experiências e se manter atualizado em português."
+        optional: true
+        resources:
+          - "https://braziljs.org"
+          - "https://frontinsampa.com.br"
+see_also:
+  - name: "Roadmap Frontend Developer (roadmap.sh)"
+    url: "https://roadmap.sh/frontend"

@@ -1,0 +1,77 @@
+title: "Python programming"
+summary: "Learn Python from your first program to clean, idiomatic code, automate everyday tasks, manage packages and take your first steps into data science."
+subcategory: "development/programming-languages"
+level: "beginner"
+source: "ipl"
+stages:
+  - title: "Getting started"
+    steps:
+      - title: "Install and run Python"
+        summary: "Install Python, run the interactive interpreter and execute your first script so you can experiment with every concept that follows."
+        resources:
+          - "https://www.python.org/"
+          - "https://docs.python.org/3/"
+      - title: "Variables, types and control flow"
+        summary: "Learn variables, strings, numbers, conditions and loops, the building blocks every Python program is made of."
+        resources:
+          - "https://www.py4e.com/"
+          - "https://docs.python.org/3/tutorial/"
+      - title: "Functions, data structures and files"
+        summary: "Organise code into functions and modules, work with lists and dictionaries, and read and write files on disk."
+        resources:
+          - "https://docs.python.org/3/tutorial/"
+          - "https://www.py4e.com/"
+  - title: "Writing good Python"
+    steps:
+      - title: "Code style with PEP 8"
+        summary: "Follow the official naming, layout and formatting conventions so your code is easy for others, and yourself, to read later."
+        resources:
+          - "https://peps.python.org/pep-0008/"
+      - title: "The standard library"
+        summary: "Explore the modules that ship with Python, from dates and paths to JSON and regular expressions, before reaching for extra packages."
+        resources:
+          - "https://docs.python.org/3/"
+      - title: "Shell and version control"
+        summary: "Get comfortable with the terminal and Git so you can run scripts, track changes and share your projects."
+        optional: true
+        resources:
+          - "https://missing.csail.mit.edu/"
+          - "https://git-scm.com/docs"
+  - title: "Practical projects"
+    steps:
+      - title: "Automate everyday tasks"
+        summary: "Write small programs that rename files, fill spreadsheets, scrape web pages and send emails, turning concepts into useful tools."
+        resources:
+          - "https://automatetheboringstuff.com/"
+      - title: "Packages and virtual environments"
+        summary: "Install third-party libraries with pip inside isolated virtual environments so each project keeps its own dependencies."
+        resources:
+          - "https://packaging.python.org/en/latest/"
+          - "https://pip.pypa.io/en/stable/"
+          - "https://pypi.org"
+      - title: "Publish your own package"
+        summary: "Structure a project, describe its metadata and build a distribution so others can install your code from the package index."
+        optional: true
+        resources:
+          - "https://packaging.python.org/en/latest/"
+          - "https://pypi.org"
+  - title: "Into data science"
+    steps:
+      - title: "Practise with real datasets"
+        summary: "Load public datasets and answer simple questions with Python, building the habit of exploring data before modelling it."
+        resources:
+          - "https://www.kaggle.com/datasets"
+          - "https://archive.ics.uci.edu/"
+      - title: "Machine learning with scikit-learn"
+        summary: "Train and evaluate classic models such as regression and decision trees with a consistent, well-documented Python library."
+        resources:
+          - "https://scikit-learn.org/"
+          - "https://www.fast.ai/"
+      - title: "Follow the language"
+        summary: "Keep up with new Python releases and core development news to learn features as they arrive in the language."
+        optional: true
+        resources:
+          - "https://www.python.org/"
+see_also:
+  - name: "Python Roadmap (roadmap.sh)"
+    url: "https://roadmap.sh/python"

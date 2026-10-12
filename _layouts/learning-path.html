@@ -1,0 +1,98 @@
+---
+layout: default
+---
+{%- comment -%}
+Learning path (spec 006): ordered stages and steps backed by IPL's curated resources. Each step is a <details>, so the
+page reads as an ordered list without JavaScript; javascript/learning-path.js adds progress kept in localStorage.
+{%- endcomment -%}
+{%- assign lang = page.lang | default: 'en-US' -%}
+{%- assign pt = false -%}{%- if lang == 'pt-BR' -%}{%- assign pt = true -%}{%- endif -%}
+{%- capture levels -%}{% if pt %}beginner:Iniciante;intermediate:Intermediário;advanced:Avançado{% else %}beginner:Beginner;intermediate:Intermediate;advanced:Advanced{% endif %}{%- endcapture -%}
+{%- assign level_label = page.level -%}
+{%- assign level_pairs = levels | split: ';' -%}{%- for pair in level_pairs -%}{%- assign kv = pair | split: ':' -%}{%- if kv[0] == page.level -%}{%- assign level_label = kv[1] -%}{%- endif -%}{%- endfor -%}
+{%- assign step_number = 0 -%}
+
+<div class="container mx-auto px-4 py-5 lg:py-8 text-gray-900">
+  <div class="max-w-4xl mx-auto">
+    <nav aria-label="Breadcrumb" class="text-sm text-gray-600 mb-3">
+      <ol class="flex flex-wrap gap-x-2 gap-y-1">
+        <li><a href="/{{ lang }}/" class="text-blue-600 hover:underline">{% if pt %}Início{% else %}Home{% endif %}</a></li>
+        <li><span aria-hidden="true">› </span><a href="/{{ lang }}/learning-paths/" class="text-blue-600 hover:underline">{% if pt %}Trilhas de aprendizado{% else %}Learning paths{% endif %}</a></li>
+        <li><span aria-hidden="true">› </span><span aria-current="page">{{ page.title | escape }}</span></li>
+      </ol>
+    </nav>
+
+    <header class="mb-5">
+      <h1 class="text-3xl lg:text-4xl font-semibold leading-tight mb-2">{{ page.title | escape }}</h1>
+      <p class="text-base lg:text-lg text-gray-700 leading-relaxed">{{ page.summary | escape }}</p>
+      <p class="mt-2 flex flex-wrap gap-2 text-sm">
+        <span class="px-2 py-0.5 rounded bg-blue-50 text-blue-800">{{ level_label | escape }}</span>
+        <span class="px-2 py-0.5 rounded bg-gray-100 text-gray-700">{{ page.step_count }} {% if pt %}etapas{% else %}steps{% endif %}</span>
+      </p>
+    </header>
+
+    <section class="learning-path bg-white border border-gray-200 rounded-lg p-4 sm:p-5" data-path-key="ipl:path:{{ lang | escape }}:{{ page.slug | escape }}" aria-labelledby="path-steps-title">
+      <h2 id="path-steps-title" class="sr-only">{% if pt %}Etapas{% else %}Steps{% endif %}</h2>
+      <div class="learning-path-progress hidden mb-4">
+        <div class="flex justify-between text-sm text-gray-700 mb-1">
+          <span>{% if pt %}Seu progresso{% else %}Your progress{% endif %}</span>
+          <span class="learning-path-count"></span>
+        </div>
+        <div class="h-2 rounded bg-gray-100 overflow-hidden" role="progressbar" aria-label="{% if pt %}Progresso na trilha{% else %}Path progress{% endif %}" aria-valuemin="0" aria-valuemax="{{ page.step_count }}" aria-valuenow="0">
+          <div class="learning-path-bar h-2 bg-blue-600" style="width: 0%"></div>
+        </div>
+        <p class="sr-only learning-path-status" role="status" aria-live="polite"></p>
+      </div>
+
+      {%- for stage in page.stages %}
+      <h3 class="text-lg font-semibold mt-4 mb-2 first:mt-0">{{ stage.title | escape }}</h3>
+      {%- if stage.summary %}<p class="text-sm text-gray-700 mb-2">{{ stage.summary | escape }}</p>{% endif %}
+      <ol class="space-y-2 list-none p-0 m-0">
+        {%- for step in stage.steps %}{%- assign step_number = step_number | plus: 1 %}
+        <li class="learning-path-step border border-gray-200 rounded-lg" data-step="{{ step_number }}">
+          <details open>
+            <summary class="flex items-start gap-3 p-3 cursor-pointer min-h-11">
+              <span class="shrink-0 inline-flex items-center justify-center w-7 h-7 rounded-full bg-blue-50 text-blue-800 text-sm font-semibold" aria-hidden="true">{{ step_number }}</span>
+              <span class="flex-1">
+                <span class="font-semibold">{{ step.title | escape }}</span>
+                {%- if step.optional %} <span class="text-xs text-gray-600">({% if pt %}opcional{% else %}optional{% endif %})</span>{% endif %}
+                {%- if step.summary %}<span class="block text-sm text-gray-700">{{ step.summary | escape }}</span>{% endif %}
+              </span>
+            </summary>
+            <div class="px-3 pb-3 pl-13">
+              {%- if step.resources.size > 0 %}
+              <ul class="divide-y divide-gray-100" role="list">
+                {%- for resource in step.resources %}
+                <li class="py-2">
+                  <a href="{{ resource.url | escape }}" rel="noopener" class="font-semibold text-blue-700 hover:underline">{{ resource.name | escape }}</a>
+                  <span class="text-xs text-gray-600 ml-1">{{ resource.url | split: '//' | last | split: '/' | first | remove_first: 'www.' | escape }}</span>
+                  {%- if resource.access %}<span class="ml-1 text-xs px-1.5 py-0.5 rounded bg-green-50 text-green-700">{{ resource.access | escape }}</span>{% endif %}
+                  {%- if resource.description %}<p class="text-sm text-gray-700 mt-0.5">{{ resource.description | escape }}</p>{% endif %}
+                </li>
+                {%- endfor %}
+              </ul>
+              {%- endif %}
+              <label class="learning-path-done hidden mt-2 inline-flex items-center gap-2 text-sm min-h-11">
+                <input type="checkbox" class="w-5 h-5"> {% if pt %}Concluí esta etapa{% else %}I finished this step{% endif %}
+              </label>
+            </div>
+          </details>
+        </li>
+        {%- endfor %}
+      </ol>
+      {%- endfor %}
+    </section>
+
+    {%- if page.see_also.size > 0 %}
+    <section class="mt-5 bg-white border border-gray-200 rounded-lg p-4 sm:p-5" aria-labelledby="see-also-title">
+      <h2 id="see-also-title" class="text-lg font-semibold mb-2">{% if pt %}Veja também{% else %}See also{% endif %}</h2>
+      <ul class="list-disc pl-5 space-y-1">
+        {%- for link in page.see_also %}
+        <li><a href="{{ link.url | escape }}" rel="noopener" class="text-blue-700 hover:underline">{{ link.name | escape }}</a></li>
+        {%- endfor %}
+      </ul>
+      <p class="text-xs text-gray-600 mt-2">{% if pt %}Links externos, de seus respectivos autores. Esta trilha é conteúdo original da IPL.{% else %}External links, by their respective authors. This path is original IPL content.{% endif %}</p>
+    </section>
+    {%- endif %}
+  </div>
+</div>

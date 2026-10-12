@@ -1,0 +1,80 @@
+title: "Fundamentos de ciência da computação"
+summary: "Construa uma base sólida em ciência da computação, passando por algoritmos, sistemas operacionais, redes e teoria, com materiais abertos e referências da comunidade brasileira."
+subcategory: "computing/computer-science"
+level: "beginner"
+source: "ipl"
+stages:
+  - title: "Primeiros passos"
+    steps:
+      - title: "Um roteiro para a área"
+        summary: "Veja quais disciplinas formam o núcleo da computação e em que ordem estudá-las para não se perder estudando sozinho."
+        resources:
+          - "https://teachyourselfcs.com/"
+      - title: "Linux e linha de comando"
+        summary: "Ganhe intimidade com o terminal, arquivos e processos, pois quase todo o resto do estudo passa por ferramentas de linha de comando."
+        resources:
+          - "https://www.guiafoca.org/"
+          - "https://linuxcommand.org/"
+      - title: "Controle de versão"
+        summary: "Use o Git para guardar exercícios e experimentos, um hábito que facilita qualquer projeto ou trabalho da faculdade."
+        resources:
+          - "https://git-scm.com/"
+  - title: "Algoritmos e estruturas de dados"
+    steps:
+      - title: "Estruturas de dados e algoritmos básicos"
+        summary: "Estude vetores, listas, árvores, ordenação e busca com material didático em português e exemplos de código em C."
+        resources:
+          - "https://www.ime.usp.br/~pf/algoritmos/"
+          - "https://jeffe.cs.illinois.edu/teaching/algorithms/"
+      - title: "Grafos"
+        summary: "Aprenda busca em largura e profundidade, caminhos mínimos e árvores geradoras, que modelam redes, mapas e dependências."
+        resources:
+          - "https://www.ime.usp.br/~pf/algoritmos_para_grafos/"
+      - title: "Análise e projeto de algoritmos"
+        summary: "Domine análise assintótica, recursão e programação dinâmica para estimar o custo de uma solução antes de implementá-la."
+        resources:
+          - "https://mitpress.mit.edu/algorithms/"
+          - "https://ocw.mit.edu/courses/6-046j-design-and-analysis-of-algorithms-spring-2015/"
+      - title: "Treino com problemas"
+        summary: "Resolva desafios em juiz online e conheça as competições brasileiras, ótima forma de fixar algoritmos com prática constante."
+        optional: true
+        resources:
+          - "https://www.beecrowd.com/"
+          - "https://maratona.sbc.org.br/"
+          - "https://olimpiada.ic.unicamp.br/"
+  - title: "Como o computador executa programas"
+    steps:
+      - title: "Sistemas computacionais"
+        summary: "Entenda representação de dados, código de máquina e hierarquia de memória para saber o que acontece quando um programa roda."
+        resources:
+          - "https://csapp.cs.cmu.edu/"
+      - title: "Sistemas operacionais"
+        summary: "Veja como o sistema operacional virtualiza CPU e memória, lida com concorrência e guarda dados de forma persistente."
+        resources:
+          - "https://pages.cs.wisc.edu/~remzi/OSTEP/"
+          - "https://pdos.csail.mit.edu/6.828/"
+      - title: "Redes e bancos de dados na prática"
+        summary: "Capture tráfego de rede real e consulte um banco embutido para ligar a teoria de protocolos e armazenamento ao que se observa."
+        resources:
+          - "https://www.wireshark.org/"
+          - "https://www.sqlite.org/"
+  - title: "Teoria e comunidade"
+    steps:
+      - title: "Autômatos e linguagens formais"
+        summary: "Experimente autômatos, gramáticas e máquinas de Turing para entender os modelos formais por trás de compiladores e da própria computação."
+        resources:
+          - "https://www.jflap.org/"
+      - title: "Complexidade computacional"
+        summary: "Conheça as classes P e NP e por que certos problemas parecem não ter solução eficiente, mesmo com computadores melhores."
+        optional: true
+        resources:
+          - "https://complexityzoo.net/Complexity_Zoo"
+      - title: "Ciência da computação no Brasil"
+        summary: "Acompanhe a SBC, sua revista de divulgação e os livros abertos para seguir estudando e conhecer a pesquisa feita no país."
+        resources:
+          - "https://horizontes.sbc.org.br/"
+          - "https://sol.sbc.org.br/livros/index.php/sbc"
+          - "https://www.sbc.org.br/"
+see_also:
+  - name: "Roadmap Computer Science (roadmap.sh)"
+    url: "https://roadmap.sh/computer-science"

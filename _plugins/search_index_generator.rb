@@ -150,7 +150,7 @@ module Jekyll
       case node
       when Hash
         node.each do |key, value|
-          next if %w[menu translations].include?(key)
+          next if %w[menu translations learning-paths].include?(key)
 
           each_real_resource(value, trail + [key], keys + [key], &block)
         end

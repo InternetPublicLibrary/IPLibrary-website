@@ -1,0 +1,73 @@
+title: "Programação em Python"
+summary: "Aprenda Python do primeiro programa ao código limpo e idiomático, automatize tarefas do dia a dia, use pacotes e dê os primeiros passos em ciência de dados."
+subcategory: "development/programming-languages"
+level: "beginner"
+source: "ipl"
+stages:
+  - title: "Primeiros passos"
+    steps:
+      - title: "Instale e rode o Python"
+        summary: "Instale o Python, abra o interpretador interativo e rode seu primeiro script para experimentar cada conceito que vem a seguir."
+        resources:
+          - "https://www.python.org"
+          - "https://www.cursoemvideo.com"
+      - title: "Variáveis, tipos e controle de fluxo"
+        summary: "Aprenda variáveis, textos, números, condições e laços de repetição, as peças com que todo programa em Python é montado."
+        resources:
+          - "https://www.cursoemvideo.com"
+          - "https://www.py4e.com/"
+          - "https://docs.python.org/3/tutorial/"
+      - title: "Funções, estruturas de dados e arquivos"
+        summary: "Organize o código em funções e módulos, trabalhe com listas e dicionários e leia e grave arquivos no disco."
+        resources:
+          - "https://docs.python.org/3/tutorial/"
+          - "https://www.py4e.com/"
+  - title: "Código bem escrito"
+    steps:
+      - title: "Estilo com a PEP 8"
+        summary: "Siga as convenções oficiais de nomes, indentação e formatação para que seu código seja fácil de ler por outras pessoas e por você."
+        resources:
+          - "https://peps.python.org/pep-0008/"
+      - title: "Versionamento com Git"
+        summary: "Use Git para registrar mudanças, voltar atrás com segurança e publicar seus projetos de Python."
+        optional: true
+        resources:
+          - "https://git-scm.com/book/en/v2"
+          - "https://learngitbranching.js.org"
+  - title: "Projetos práticos"
+    steps:
+      - title: "Automatize tarefas do dia a dia"
+        summary: "Escreva pequenos programas que renomeiam arquivos, preenchem planilhas, leem páginas web e enviam e-mails, transformando teoria em ferramenta útil."
+        resources:
+          - "https://automatetheboringstuff.com/"
+      - title: "Pacotes de terceiros"
+        summary: "Encontre bibliotecas no índice oficial de pacotes e instale-as com pip em ambientes virtuais separados para cada projeto."
+        resources:
+          - "https://pypi.org"
+      - title: "Comunidade Python"
+        summary: "Acompanhe as novidades da linguagem e participe da comunidade brasileira para trocar experiência e conhecer projetos reais."
+        optional: true
+        resources:
+          - "https://pythonbrasil.org.br"
+          - "https://blog.python.org"
+  - title: "Rumo à ciência de dados"
+    steps:
+      - title: "Notebooks Jupyter"
+        summary: "Use notebooks para misturar código, resultados e anotações, o ambiente mais comum para explorar dados com Python."
+        resources:
+          - "https://jupyter.org/"
+      - title: "Pratique com dados abertos"
+        summary: "Carregue bases públicas brasileiras e internacionais e responda perguntas simples com Python, criando o hábito de explorar antes de modelar."
+        resources:
+          - "https://dados.gov.br/"
+          - "https://www.ibge.gov.br/"
+          - "https://www.kaggle.com/datasets"
+      - title: "Aprendizado de máquina com scikit-learn"
+        summary: "Treine e avalie modelos clássicos, como regressão e árvores de decisão, com uma biblioteca consistente e bem documentada."
+        optional: true
+        resources:
+          - "https://scikit-learn.org/"
+          - "https://www.fast.ai/"
+see_also:
+  - name: "Roadmap Python (roadmap.sh)"
+    url: "https://roadmap.sh/python"

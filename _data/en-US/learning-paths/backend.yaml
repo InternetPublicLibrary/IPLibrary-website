@@ -1,0 +1,86 @@
+title: "Backend development"
+summary: "Build reliable server-side applications by mastering HTTP, a web framework, relational data, API design and the caching, messaging and architecture choices behind scalable systems."
+subcategory: "development/backend-development"
+level: "intermediate"
+source: "ipl"
+stages:
+  - title: "HTTP and the server side"
+    steps:
+      - title: "HTTP in depth"
+        summary: "Study requests, responses, headers, cookies and connection behaviour, since every backend decision ultimately travels over HTTP."
+        resources:
+          - "https://hpbn.co"
+          - "https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Set-Cookie"
+      - title: "A first web framework"
+        summary: "Build a small application with routing, templates and middleware in one mainstream framework to learn the request lifecycle."
+        resources:
+          - "https://developer.mozilla.org/en-US/docs/Learn/Server-side/Express_Nodejs"
+          - "https://nodejs.org"
+          - "https://www.djangoproject.com"
+          - "https://fastapi.tiangolo.com"
+      - title: "Other server ecosystems"
+        summary: "Compare how enterprise stacks in Java and .NET structure the same concepts, useful when joining larger organisations."
+        optional: true
+        resources:
+          - "https://spring.io"
+          - "https://learn.microsoft.com/en-us/aspnet/core/fundamentals/"
+  - title: "Working with data"
+    steps:
+      - title: "Relational databases and SQL"
+        summary: "Model data in tables, write SQL queries and use transactions, the default storage choice for most backends."
+        resources:
+          - "https://www.postgresql.org"
+          - "https://www.sqlite.org"
+      - title: "Indexes and query performance"
+        summary: "Learn how indexes work and how to read query plans, the most common fix for slow endpoints."
+        resources:
+          - "https://use-the-index-luke.com"
+      - title: "Schema migrations"
+        summary: "Version database changes alongside code so every environment evolves safely and deployments stay repeatable."
+        resources:
+          - "https://flywaydb.org"
+          - "https://www.liquibase.com"
+      - title: "Document and key-value stores"
+        summary: "Understand when document databases or in-memory stores fit better than relational tables, and what you give up."
+        optional: true
+        resources:
+          - "https://www.mongodb.com/docs/manual/"
+          - "https://redis.io"
+  - title: "Designing APIs"
+    steps:
+      - title: "HTTP API design"
+        summary: "Design consistent resources, validate payloads with schemas and plan versioning so clients can rely on your API."
+        resources:
+          - "https://json-schema.org/"
+          - "https://web.archive.org/web/20170610175619/https://fly.io/articles/pragmatic-api-versioning/"
+          - "https://www.postman.com"
+      - title: "RPC with gRPC"
+        summary: "Explore contract-first remote procedure calls with Protocol Buffers, common for efficient service-to-service communication."
+        optional: true
+        resources:
+          - "https://grpc.io/"
+      - title: "Configuration and secrets"
+        summary: "Keep configuration in the environment and out of code, following principles that make services portable and safe to deploy."
+        resources:
+          - "https://12factor.net/"
+          - "https://github.com/motdotla/dotenv"
+  - title: "Scaling and architecture"
+    steps:
+      - title: "Caching and messaging"
+        summary: "Reduce load with caches and decouple services with event streams, two core tools for handling growth."
+        resources:
+          - "https://redis.io"
+          - "https://kafka.apache.org"
+      - title: "Data-intensive systems"
+        summary: "Learn the trade-offs of replication, partitioning and consistency, and study how real companies scaled their backends."
+        resources:
+          - "https://dataintensive.net"
+          - "https://highscalability.com"
+      - title: "Architecture and maintainability"
+        summary: "Apply design patterns and architectural thinking so the codebase stays understandable and changeable as it grows."
+        resources:
+          - "https://martinfowler.com"
+          - "https://refactoring.guru"
+see_also:
+  - name: "Backend Developer Roadmap (roadmap.sh)"
+    url: "https://roadmap.sh/backend"
