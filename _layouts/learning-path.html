@@ -50,7 +50,7 @@ page reads as an ordered list without JavaScript; javascript/learning-path.js ad
       <ol class="space-y-2 list-none p-0 m-0">
         {%- for step in stage.steps %}{%- assign step_number = step_number | plus: 1 %}
         <li class="learning-path-step border border-gray-200 rounded-lg" data-step="{{ step_number }}">
-          <details>
+          <details open>
             <summary class="flex items-start gap-3 p-3 cursor-pointer min-h-11">
               <span class="shrink-0 inline-flex items-center justify-center w-7 h-7 rounded-full bg-blue-50 text-blue-800 text-sm font-semibold" aria-hidden="true">{{ step_number }}</span>
               <span class="flex-1">

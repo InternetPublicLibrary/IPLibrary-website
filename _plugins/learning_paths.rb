@@ -10,7 +10,7 @@ module IPL
       by_subcategory = {}
       site.config.fetch('languages', []).each do |language|
         lang = language['code']
-        paths = (site.data.dig(lang, 'learning-paths') || {}).sort.map { |slug, path| [slug, path] }
+        paths = (site.data.dig(lang, 'learning-paths') || {}).select { |_, path| path.is_a?(Hash) }.sort
         next if paths.empty?
 
         index = resource_index(site.data[lang])

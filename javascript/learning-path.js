@@ -38,6 +38,9 @@
       render(true);
     });
   });
+  // Steps are open without JavaScript; with it, only the next unfinished step stays open.
+  var next = steps.filter(function (step) { return !done[step.getAttribute('data-step')]; })[0];
+  steps.forEach(function (step) { var d = step.querySelector('details'); if (d && step !== next) d.open = false; });
   progress.classList.remove('hidden');
   render(false);
 })();
