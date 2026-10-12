@@ -1,0 +1,92 @@
+title: "Frontend development"
+summary: "Build accessible, fast and responsive web interfaces, moving from how browsers render pages through HTML, CSS and JavaScript to modern tooling and frameworks."
+subcategory: "development/frontend-development"
+level: "beginner"
+source: "ipl"
+stages:
+  - title: "How the web works and HTML"
+    steps:
+      - title: "How browsers load a page"
+        summary: "Learn how a browser requests, parses and renders a page, giving every later topic a mental model to attach to."
+        resources:
+          - "https://developer.mozilla.org"
+          - "https://hpbn.co"
+      - title: "Semantic HTML"
+        summary: "Write well-structured documents with meaningful elements, because structure drives accessibility, search engines and later styling."
+        resources:
+          - "https://web.dev/learn"
+          - "https://validator.w3.org/nu/"
+          - "https://whatwg.org"
+  - title: "Styling with CSS"
+    steps:
+      - title: "CSS fundamentals"
+        summary: "Understand the cascade, specificity, the box model and units so styles behave predictably instead of by trial and error."
+        resources:
+          - "https://web.dev/learn"
+          - "https://css-tricks.com"
+      - title: "Layout with Flexbox and Grid"
+        summary: "Practise the two modern layout systems, which replace old float hacks and handle most page and component layouts."
+        resources:
+          - "https://css-tricks.com"
+          - "https://www.freecodecamp.org/learn/2022/responsive-web-design/"
+      - title: "Responsive design"
+        summary: "Make pages adapt to any screen with fluid layouts, media queries and responsive images, since most visitors browse on phones."
+        resources:
+          - "https://www.freecodecamp.org/learn/2022/responsive-web-design/"
+          - "https://learningwebdesign.com"
+      - title: "Experiment and find inspiration"
+        summary: "See how the same markup can take radically different looks, and try small ideas quickly in an online editor."
+        optional: true
+        resources:
+          - "https://www.csszengarden.com"
+          - "https://codepen.io"
+          - "https://tympanus.net/codrops/"
+  - title: "Interactivity and quality"
+    steps:
+      - title: "JavaScript and the DOM"
+        summary: "Use JavaScript to read and change the page and respond to events, the basis of every interactive interface."
+        resources:
+          - "https://developer.mozilla.org"
+          - "https://www.theodinproject.com"
+      - title: "Accessibility"
+        summary: "Apply WCAG principles and inclusive patterns so people using keyboards, screen readers or magnification can use what you build."
+        resources:
+          - "https://www.w3.org/WAI/standards-guidelines/wcag/"
+          - "https://inclusive-components.design"
+          - "https://wave.webaim.org"
+      - title: "Browser compatibility"
+        summary: "Check which features each browser supports before relying on them, and follow how the platform keeps evolving."
+        resources:
+          - "https://caniuse.com"
+          - "https://hacks.mozilla.org/"
+      - title: "Web performance"
+        summary: "Measure loading and rendering speed with real tools, then fix the bottlenecks that most affect Core Web Vitals."
+        resources:
+          - "https://pagespeed.web.dev"
+          - "https://www.webpagetest.org"
+          - "https://web.dev/articles/speed-rendering"
+  - title: "Tooling and frameworks"
+    steps:
+      - title: "Version control with Git"
+        summary: "Track changes, branch safely and collaborate through Git, a daily tool on every professional frontend team."
+        resources:
+          - "https://git-scm.com/docs"
+          - "https://missing.csail.mit.edu/"
+      - title: "Packages and build tools"
+        summary: "Install dependencies from npm and use a fast dev server and bundler to organise larger projects."
+        resources:
+          - "https://www.npmjs.com"
+          - "https://vite.dev"
+      - title: "A component framework"
+        summary: "Learn one component-based library to build complex interfaces from small reusable pieces with predictable state."
+        resources:
+          - "https://react.dev"
+          - "https://vuejs.org"
+      - title: "Utility-first CSS"
+        summary: "Try composing designs from small utility classes, a popular alternative to writing custom stylesheets for every component."
+        optional: true
+        resources:
+          - "https://tailwindcss.com"
+see_also:
+  - name: "Frontend Developer Roadmap (roadmap.sh)"
+    url: "https://roadmap.sh/frontend"

@@ -1,0 +1,88 @@
+title: "Desenvolvimento backend"
+summary: "Aprenda a construir aplicações do lado do servidor dominando HTTP, um framework web, bancos de dados, projeto de APIs e as decisões de arquitetura que permitem escalar."
+subcategory: "development/backend-development"
+level: "intermediate"
+source: "ipl"
+stages:
+  - title: "Servidor e HTTP"
+    steps:
+      - title: "HTTP e o lado do servidor"
+        summary: "Entenda requisições, respostas, cabeçalhos e cookies, porque toda decisão de backend acaba passando pelo protocolo HTTP."
+        resources:
+          - "https://developer.mozilla.org"
+      - title: "Escolha um framework"
+        summary: "Monte uma aplicação pequena com rotas e middlewares em um framework popular para entender o ciclo de uma requisição."
+        resources:
+          - "https://nodejs.org"
+          - "https://www.djangoproject.com"
+          - "https://fastapi.tiangolo.com"
+          - "https://spring.io"
+  - title: "Bancos de dados"
+    steps:
+      - title: "SQL e modelagem relacional"
+        summary: "Modele tabelas, escreva consultas SQL e use transações, a escolha padrão de armazenamento na maioria dos sistemas."
+        resources:
+          - "https://www.postgresql.org"
+          - "https://www.cursoemvideo.com"
+          - "https://savepoint.blog.br"
+      - title: "Índices e desempenho de consultas"
+        summary: "Aprenda como os índices funcionam e como ler planos de execução, a correção mais comum para endpoints lentos."
+        resources:
+          - "https://use-the-index-luke.com"
+          - "https://planet.postgresql.org"
+      - title: "Migrações de esquema"
+        summary: "Versione as mudanças do banco junto com o código para que todos os ambientes evoluam com segurança."
+        resources:
+          - "https://flywaydb.org"
+          - "https://www.liquibase.com"
+      - title: "Bancos NoSQL"
+        summary: "Saiba quando um banco de documentos ou um armazenamento em memória serve melhor que tabelas relacionais, e o que se perde."
+        optional: true
+        resources:
+          - "https://www.mongodb.com"
+          - "https://redis.io"
+          - "https://db-engines.com"
+      - title: "Ferramentas de administração"
+        summary: "Use clientes gráficos para explorar esquemas, rodar consultas e administrar bancos sem depender só do terminal."
+        optional: true
+        resources:
+          - "https://dbeaver.io"
+          - "https://www.pgadmin.org"
+  - title: "APIs, arquitetura e qualidade"
+    steps:
+      - title: "Projetar e testar APIs"
+        summary: "Defina recursos consistentes, documente contratos e teste requisições para que os clientes possam confiar na sua API."
+        resources:
+          - "https://www.postman.com"
+          - "https://developer.mozilla.org"
+      - title: "Arquitetura e padrões de projeto"
+        summary: "Aplique princípios de engenharia de software e padrões de projeto para manter o código compreensível enquanto ele cresce."
+        resources:
+          - "https://engsoftmoderna.info"
+          - "https://refactoring.guru/pt-br"
+      - title: "Diagramas de arquitetura"
+        summary: "Documente a arquitetura com diagramas em níveis de detalhe, facilitando conversas com o time sobre o sistema."
+        optional: true
+        resources:
+          - "https://c4model.com"
+          - "https://plantuml.com"
+      - title: "Qualidade de código"
+        summary: "Automatize a análise estática para encontrar bugs, vulnerabilidades e código duplicado antes que cheguem à produção."
+        resources:
+          - "https://www.sonarsource.com"
+  - title: "Escala e sistemas distribuídos"
+    steps:
+      - title: "Cache e mensageria"
+        summary: "Alivie o banco com cache e desacople serviços com filas de eventos, duas ferramentas centrais para lidar com crescimento."
+        resources:
+          - "https://redis.io"
+          - "https://kafka.apache.org"
+      - title: "Sistemas intensivos em dados"
+        summary: "Estude replicação, particionamento e consistência, e veja como empresas reais escalaram seus backends na prática."
+        resources:
+          - "https://dataintensive.net"
+          - "https://highscalability.com"
+          - "https://martinfowler.com"
+see_also:
+  - name: "Roadmap Backend Developer (roadmap.sh)"
+    url: "https://roadmap.sh/backend"

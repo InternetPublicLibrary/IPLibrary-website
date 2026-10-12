@@ -1,0 +1,74 @@
+title: "Programação em JavaScript"
+summary: "Aprenda JavaScript do zero, passando pela sintaxe e funções, pela manipulação do navegador e pelo código assíncrono até chegar ao Node.js e às bibliotecas de interface."
+subcategory: "development/programming-languages"
+level: "beginner"
+source: "ipl"
+stages:
+  - title: "Fundamentos da linguagem"
+    steps:
+      - title: "Primeiros passos"
+        summary: "Comece com exercícios interativos e gratuitos em português para pegar o jeito da lógica de programação com JavaScript."
+        resources:
+          - "https://www.freecodecamp.org/portuguese/learn"
+      - title: "Tipos, variáveis e operadores"
+        summary: "Conheça os tipos primitivos, as variáveis e as estruturas de controle, peças básicas de qualquer programa em JavaScript."
+        resources:
+          - "https://javascript.info"
+          - "https://developer.mozilla.org"
+      - title: "Funções, escopo e closures"
+        summary: "Entenda como funções guardam variáveis e como o escopo funciona, o que explica boa parte dos comportamentos inesperados."
+        resources:
+          - "https://javascript.info"
+      - title: "Objetos, arrays e JSON"
+        summary: "Modele dados com objetos e arrays, aproveite seus métodos nativos e troque informações estruturadas no formato JSON."
+        resources:
+          - "https://developer.mozilla.org"
+          - "https://www.freecodecamp.org/portuguese/learn"
+  - title: "JavaScript no navegador"
+    steps:
+      - title: "DOM e eventos"
+        summary: "Selecione, crie e altere elementos da página e trate eventos do usuário para transformar HTML estático em algo interativo."
+        resources:
+          - "https://web.dev"
+          - "https://www.w3.org"
+      - title: "Compatibilidade entre navegadores"
+        summary: "Verifique em quais navegadores cada recurso da linguagem funciona antes de usá-lo em um projeto real."
+        resources:
+          - "https://caniuse.com"
+      - title: "Leituras e comunidade"
+        summary: "Acompanhe artigos e a comunidade brasileira de JavaScript para conhecer boas práticas e novidades do ecossistema."
+        optional: true
+        resources:
+          - "https://braziljs.org"
+          - "https://css-tricks.com"
+          - "https://www.smashingmagazine.com"
+  - title: "Código assíncrono e Node.js"
+    steps:
+      - title: "Promises e async/await"
+        summary: "Domine callbacks, promises e async/await sobre o event loop, essenciais para requisições de rede e leitura de arquivos."
+        resources:
+          - "https://web.dev"
+          - "https://nodejs.org"
+      - title: "JavaScript no servidor com Node.js"
+        summary: "Rode JavaScript fora do navegador para criar scripts, ferramentas de linha de comando e servidores web simples."
+        resources:
+          - "https://nodejs.org"
+      - title: "Testando APIs"
+        summary: "Use um cliente de API para enviar requisições e inspecionar respostas enquanto desenvolve seus primeiros serviços."
+        optional: true
+        resources:
+          - "https://www.postman.com"
+  - title: "Ecossistema"
+    steps:
+      - title: "Módulos e Vite"
+        summary: "Organize o código em módulos ES e use um servidor de desenvolvimento rápido para empacotar o projeto para o navegador."
+        resources:
+          - "https://vite.dev"
+      - title: "React ou Vue"
+        summary: "Coloque o JavaScript em prática numa biblioteca de componentes, construindo interfaces com peças reutilizáveis e estado previsível."
+        resources:
+          - "https://react.dev"
+          - "https://vuejs.org"
+see_also:
+  - name: "Roadmap JavaScript (roadmap.sh)"
+    url: "https://roadmap.sh/javascript"

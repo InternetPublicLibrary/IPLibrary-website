@@ -36,12 +36,12 @@ Usage: {% include components/organisms/footer.html %}
 
     <!-- Site map: six dense columns -->
     {%- if fpt -%}
-      {%- assign col_explore = "/pt-BR/|Início;/pt-BR/categorias/|Todas as categorias;/pt-BR/busca/|Busca;/pt-BR/random-resource/|Recurso aleatório;/pt-BR/alteracoes-recentes/|Alterações recentes;/pt-BR/portal-comunidade/|Portal da comunidade" | split: ';' -%}
+      {%- assign col_explore = "/pt-BR/|Início;/pt-BR/categorias/|Todas as categorias;/pt-BR/learning-paths/|Trilhas de aprendizado;/pt-BR/busca/|Busca;/pt-BR/random-resource/|Recurso aleatório;/pt-BR/alteracoes-recentes/|Alterações recentes;/pt-BR/portal-comunidade/|Portal da comunidade" | split: ';' -%}
       {%- assign col_contribute = "/pt-BR/contribuir/|Como contribuir;/pt-BR/enviar-recurso/|Sugerir um recurso;/pt-BR/reportar-problemas/|Reportar um problema;/pt-BR/traduzir/|Ajudar a traduzir;/pt-BR/adicionar-idioma/|Adicionar um idioma;/pt-BR/politicas-conteudo/|Políticas de conteúdo" | split: ';' -%}
       {%- assign col_about = "/pt-BR/sobre/|Sobre a IPL;/pt-BR/missao/|Missão;/pt-BR/ajuda/|Central de ajuda;/pt-BR/contato/|Contato;/pt-BR/doar/|Apoie a IPL" | split: ';' -%}
       {%- assign col_legal = "/pt-BR/licenca/|Licença;/pt-BR/politica-privacidade/|Política de privacidade;/pt-BR/termos-uso/|Termos de uso;/pt-BR/politica-cookies/|Política de cookies" | split: ';' -%}
     {%- else -%}
-      {%- assign col_explore = "/en-US/|Home;/en-US/categories/|All categories;/en-US/search/|Search;/en-US/random-resource/|Random resource;/en-US/recent-changes/|Recent changes;/en-US/community-portal/|Community portal" | split: ';' -%}
+      {%- assign col_explore = "/en-US/|Home;/en-US/categories/|All categories;/en-US/learning-paths/|Learning paths;/en-US/search/|Search;/en-US/random-resource/|Random resource;/en-US/recent-changes/|Recent changes;/en-US/community-portal/|Community portal" | split: ';' -%}
       {%- assign col_contribute = "/en-US/contribute/|How to contribute;/en-US/submit-resource/|Suggest a resource;/en-US/report-issues/|Report a problem;/en-US/translate/|Help translate;/en-US/add-language/|Add a language;/en-US/content-policies/|Content policies" | split: ';' -%}
       {%- assign col_about = "/en-US/about/|About IPL;/en-US/mission/|Mission;/en-US/help/|Help center;/en-US/contact/|Contact;/en-US/donate/|Support IPL" | split: ';' -%}
       {%- assign col_legal = "/en-US/license/|License;/en-US/privacy-policy/|Privacy policy;/en-US/terms-of-use/|Terms of use;/en-US/cookie-policy/|Cookie policy" | split: ';' -%}

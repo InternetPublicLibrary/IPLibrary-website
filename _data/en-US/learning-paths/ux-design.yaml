@@ -1,0 +1,87 @@
+title: "UX design"
+summary: "Learn how people perceive and use interfaces, then practise research, structure, prototyping and testing until you can design and defend a usable product flow."
+subcategory: "design/user-experience"
+level: "beginner"
+source: "ipl"
+stages:
+  - title: "How people use things"
+    steps:
+      - title: "Usability basics"
+        summary: "Read the classic ideas of affordances, signifiers and mental models, which explain why some interfaces feel obvious and others confuse."
+        resources:
+          - "https://jnd.org/books/"
+          - "https://sensible.com/dont-make-me-think/"
+      - title: "Psychology behind interfaces"
+        summary: "Study the cognitive principles and biases that shape attention, memory and decisions, so your design choices rest on how minds actually work."
+        resources:
+          - "https://lawsofux.com"
+          - "https://www.interaction-design.org/literature/book/the-encyclopedia-of-human-computer-interaction-2nd-ed"
+      - title: "The design process"
+        summary: "Get an overview of human-centred design and the Double Diamond, learning when to explore problems broadly and when to converge on solutions."
+        resources:
+          - "https://www.designcouncil.org.uk/"
+          - "https://www.designkit.org"
+          - "https://dschool.stanford.edu"
+  - title: "Understanding users"
+    steps:
+      - title: "User research methods"
+        summary: "Learn to plan interviews, observation and surveys, and to pick a method that answers the question you actually have about users."
+        resources:
+          - "https://www.nngroup.com/articles/"
+          - "https://www.interaction-design.org/courses"
+      - title: "Synthesis and journey maps"
+        summary: "Turn research notes into personas, empathy maps and journey maps that the whole team can use to agree on the real problem."
+        resources:
+          - "https://miro.com"
+          - "https://mural.co"
+      - title: "Running workshops"
+        summary: "Practise facilitating ideation and co-creation sessions, because UX work often means guiding stakeholders toward shared decisions."
+        optional: true
+        resources:
+          - "https://gamestorming.com"
+          - "https://toolbox.hyperisland.com/"
+          - "https://www.sessionlab.com/"
+  - title: "Structure and prototypes"
+    steps:
+      - title: "Information architecture and flows"
+        summary: "Organise content, navigation and task flows so users can predict where things are and finish what they came to do."
+        resources:
+          - "https://boxesandarrows.com"
+          - "https://pageflows.com"
+      - title: "Wireframing"
+        summary: "Sketch low-fidelity layouts quickly to test structure and priorities before spending time on colour, type and polish."
+        resources:
+          - "https://balsamiq.com/"
+          - "https://penpot.app"
+      - title: "Interactive prototypes"
+        summary: "Build clickable prototypes in a design tool so you can test realistic interactions and hand clear specifications to developers."
+        resources:
+          - "https://www.figma.com"
+          - "https://help.figma.com"
+          - "https://penpot.app"
+      - title: "Learning from real patterns"
+        summary: "Browse how shipped products solve common screens like onboarding and checkout, borrowing proven patterns instead of reinventing them."
+        optional: true
+        resources:
+          - "https://mobbin.com"
+          - "https://uxmovement.com"
+  - title: "Evaluate and include everyone"
+    steps:
+      - title: "Usability testing"
+        summary: "Run moderated and unmoderated tests on prototypes, watching where people stumble and turning findings into prioritised design changes."
+        resources:
+          - "https://maze.co/"
+          - "https://www.nngroup.com/articles/"
+      - title: "Accessible design"
+        summary: "Apply accessibility guidance to layouts, forms and content so your product works for people using assistive technologies."
+        resources:
+          - "https://www.w3.org/WAI/tutorials/"
+      - title: "Portfolio and next steps"
+        summary: "Document projects as case studies and keep learning through structured courses and the practitioner community writing about UX."
+        resources:
+          - "https://www.coursera.org/professional-certificates/google-ux-design"
+          - "https://uxdesign.cc"
+          - "https://www.smashingmagazine.com/category/ux-design/"
+see_also:
+  - name: "UX Design Roadmap (roadmap.sh)"
+    url: "https://roadmap.sh/ux-design"

@@ -1,0 +1,82 @@
+title: "Bancos de dados"
+summary: "Aprenda SQL na prática, modele tabelas e índices no PostgreSQL, conheça bancos NoSQL e versione mudanças de esquema com segurança, do primeiro SELECT à produção."
+subcategory: "development/databases"
+level: "beginner"
+source: "ipl"
+stages:
+  - title: "Primeiros passos"
+    steps:
+      - title: "SQL do zero"
+        summary: "Siga um curso gratuito em português para criar tabelas e escrever suas primeiras consultas com calma e muitos exemplos."
+        resources:
+          - "https://www.cursoemvideo.com"
+      - title: "Panorama dos bancos de dados"
+        summary: "Compare bancos relacionais, de documentos, chave-valor e colunares para saber qual problema cada tipo resolve."
+        resources:
+          - "https://db-engines.com"
+      - title: "Um banco embutido para praticar"
+        summary: "Use um banco SQL que funciona num único arquivo, sem servidor, para treinar consultas em qualquer computador."
+        resources:
+          - "https://www.sqlite.org/"
+  - title: "PostgreSQL na prática"
+    steps:
+      - title: "Instalação e documentação"
+        summary: "Instale o PostgreSQL e aprenda a navegar pela documentação oficial, com apoio da comunidade brasileira quando surgirem dúvidas."
+        resources:
+          - "https://www.postgresql.org/docs/"
+          - "https://postgresql.org.br/"
+      - title: "Ferramentas gráficas"
+        summary: "Use um cliente visual para explorar esquemas, executar consultas e conferir resultados sem depender só do terminal."
+        resources:
+          - "https://dbeaver.io"
+          - "https://www.pgadmin.org"
+      - title: "Modelagem e transações"
+        summary: "Modele entidades com chaves e restrições e entenda transações e isolamento para manter os dados consistentes com vários usuários."
+        resources:
+          - "https://dataintensive.net"
+          - "https://www.postgresql.org/docs/"
+      - title: "Índices e desempenho"
+        summary: "Entenda como índices funcionam e como ler planos de execução, a forma mais eficaz de acelerar consultas lentas."
+        resources:
+          - "https://use-the-index-luke.com"
+          - "https://savepoint.blog.br"
+  - title: "Além do relacional"
+    steps:
+      - title: "Bancos de documentos"
+        summary: "Guarde documentos flexíveis no formato JSON e descubra quando esse modelo funciona melhor que tabelas, e quando não."
+        resources:
+          - "https://www.mongodb.com"
+      - title: "Cache e chave-valor"
+        summary: "Use um armazenamento em memória para cache, sessões e contadores, aliviando a carga do banco principal."
+        resources:
+          - "https://redis.io"
+      - title: "Bancos distribuídos"
+        summary: "Veja como um banco espalha dados por muitas máquinas e quais concessões de consistência isso exige."
+        optional: true
+        resources:
+          - "https://cassandra.apache.org/"
+  - title: "Em produção e por dentro"
+    steps:
+      - title: "Migrações de esquema"
+        summary: "Versione alterações de esquema em scripts ordenados para que todos os ambientes evoluam igual, sem ajustes manuais."
+        resources:
+          - "https://flywaydb.org"
+          - "https://www.liquibase.com"
+      - title: "Como os motores de armazenamento funcionam"
+        summary: "Conheça árvores B, logs e buffers para entender por que um banco se comporta de certo jeito sob carga."
+        optional: true
+        resources:
+          - "https://databass.dev"
+          - "https://db.cs.cmu.edu/"
+      - title: "Comunidade PostgreSQL"
+        summary: "Acompanhe artigos, boletins e eventos da comunidade para continuar aprendendo depois do básico."
+        optional: true
+        resources:
+          - "https://planet.postgresql.org"
+          - "https://postgresweekly.com"
+          - "https://pgconf.com.br"
+see_also:
+  - name: "Roadmap SQL (roadmap.sh)"
+    url: "https://roadmap.sh/sql"
+  - name: "Roadmap PostgreSQL DBA (roadmap.sh)"
+    url: "https://roadmap.sh/postgresql-dba"

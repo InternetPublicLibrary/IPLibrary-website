@@ -1,0 +1,73 @@
+title: "Machine learning"
+summary: "Aprenda a criar modelos que aprendem com dados, dos algoritmos clássicos e da validação correta até redes neurais, com cursos gratuitos e documentação oficial."
+subcategory: "computing/machine-learning"
+level: "intermediate"
+source: "ipl"
+stages:
+  - title: "Bases"
+    steps:
+      - title: "O que é inteligência artificial"
+        summary: "Entenda o que a IA consegue ou não fazer e onde o aprendizado de máquina entra, antes de partir para fórmulas e código."
+        resources:
+          - "https://www.elementsofai.com/"
+      - title: "Fundamentos matemáticos"
+        summary: "Revise álgebra linear, probabilidade e otimização aplicadas ao aprendizado supervisionado, a teoria que sustenta todos os algoritmos seguintes."
+        resources:
+          - "https://cs229.stanford.edu/"
+      - title: "Primeiros modelos"
+        summary: "Treine, faça previsões e avalie modelos simples com uma biblioteca de API uniforme, aprendendo o fluxo de treino e teste."
+        resources:
+          - "https://scikit-learn.org/stable/user_guide.html"
+          - "https://scikit-learn.org/"
+  - title: "Aprendizado de máquina clássico"
+    steps:
+      - title: "Dados para experimentar"
+        summary: "Escolha conjuntos de dados de referência bem documentados para comparar seus resultados com os de outros pesquisadores e praticantes."
+        resources:
+          - "https://archive.ics.uci.edu/"
+          - "https://www.openml.org/"
+          - "https://www.kaggle.com/datasets"
+      - title: "Validação e métricas"
+        summary: "Use validação cruzada e métricas adequadas ao problema para que o desempenho medido reflita o comportamento do modelo em dados novos."
+        resources:
+          - "https://scikit-learn.org/stable/user_guide.html"
+          - "https://machinelearningmastery.com/"
+      - title: "Árvores e gradient boosting"
+        summary: "Domine árvores de decisão e ensembles com boosting, geralmente a melhor escolha para dados tabulares, usando bibliotecas otimizadas."
+        resources:
+          - "https://xgboost.readthedocs.io/"
+          - "https://lightgbm.readthedocs.io/"
+      - title: "Ajuste de hiperparâmetros"
+        summary: "Automatize a busca pelas melhores configurações do modelo, interrompendo cedo as tentativas pouco promissoras para economizar processamento."
+        optional: true
+        resources:
+          - "https://optuna.org/"
+  - title: "Aprendizado profundo"
+    steps:
+      - title: "Redes neurais na prática"
+        summary: "Monte e treine redes neurais com um framework moderno, aprendendo tensores, laços de treino e transferência de aprendizado em projetos reais."
+        resources:
+          - "https://pytorch.org/"
+          - "https://course.fast.ai/"
+      - title: "Modelos pré-treinados"
+        summary: "Reaproveite modelos já treinados para texto e imagem e faça ajuste fino para suas tarefas, sem precisar treinar tudo do zero."
+        optional: true
+        resources:
+          - "https://huggingface.co/"
+          - "https://huggingface.co/learn/nlp-course"
+  - title: "Prática e pesquisa"
+    steps:
+      - title: "Rastreamento de experimentos"
+        summary: "Registre parâmetros, métricas e versões de cada execução para que os experimentos sejam reprodutíveis e fáceis de comparar depois."
+        resources:
+          - "https://mlflow.org/"
+      - title: "Pesquisa no Brasil e no mundo"
+        summary: "Acompanhe artigos de eventos brasileiros e explicações visuais de pesquisas internacionais para seguir a evolução da área além dos cursos."
+        optional: true
+        resources:
+          - "https://sol.sbc.org.br/"
+          - "https://bracis.sbc.org.br/"
+          - "https://distill.pub/"
+see_also:
+  - name: "Roadmap Machine Learning (roadmap.sh)"
+    url: "https://roadmap.sh/machine-learning"

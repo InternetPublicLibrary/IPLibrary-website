@@ -1,0 +1,74 @@
+title: "Desenvolvimento de apps móveis"
+summary: "Crie apps nativos para Android com Kotlin e para iOS com SwiftUI, avance para Flutter ou React Native, conecte serviços de backend, teste e publique nas lojas."
+subcategory: "development/plataforms"
+level: "intermediate"
+source: "ipl"
+stages:
+  - title: "Linguagens e design"
+    steps:
+      - title: "Kotlin para Android"
+        summary: "Aprenda a sintaxe do Kotlin, a segurança contra nulos, classes e corrotinas, a linguagem principal dos apps Android atuais."
+        resources:
+          - "https://kotlinlang.org/docs/home.html"
+      - title: "Swift para as plataformas da Apple"
+        summary: "Domine optionals, structs, protocolos e closures do Swift, a base de qualquer app para iPhone e iPad."
+        resources:
+          - "https://www.swift.org/documentation/"
+      - title: "Diretrizes de design de cada plataforma"
+        summary: "Entenda como Android e iOS tratam navegação, tipografia, gestos e acessibilidade, para que o app pareça natural em cada sistema."
+        resources:
+          - "https://m3.material.io/"
+          - "https://developer.apple.com/design/human-interface-guidelines/"
+  - title: "Desenvolvimento nativo"
+    steps:
+      - title: "Android com Jetpack Compose"
+        summary: "Siga os cursos oficiais para montar telas com Compose, controlar estado, navegar entre telas e guardar dados no aparelho."
+        resources:
+          - "https://developer.android.com/courses"
+          - "https://developer.android.com/docs"
+      - title: "iOS com SwiftUI"
+        summary: "Construa apps iOS completos passo a passo com views, fluxo de dados e listas do SwiftUI, e depois aprofunde nos frameworks da Apple."
+        resources:
+          - "https://developer.apple.com/tutorials/swiftui"
+          - "https://developer.apple.com/documentation/"
+  - title: "Multiplataforma"
+    steps:
+      - title: "Flutter"
+        summary: "Escreva um único código em Dart que desenha os mesmos widgets no Android e no iOS, e compare essa abordagem com a nativa."
+        resources:
+          - "https://docs.flutter.dev/"
+      - title: "React Native com Expo"
+        summary: "Use React e JavaScript para criar apps móveis nativos, deixando o Expo cuidar da configuração, dos testes no aparelho e dos builds."
+        resources:
+          - "https://reactnative.dev/docs/getting-started"
+          - "https://docs.expo.dev/"
+  - title: "Backend, testes e publicação"
+    steps:
+      - title: "Serviços de backend"
+        summary: "Ligue o app a autenticação, banco de dados na nuvem, armazenamento de arquivos e notificações push sem manter servidores próprios."
+        resources:
+          - "https://firebase.google.com/docs"
+      - title: "Testes de apps"
+        summary: "Planeje testes unitários para a lógica e testes de interface para os fluxos principais, com vocabulário e técnicas de qualidade de software."
+        resources:
+          - "https://juliodelima.com.br"
+          - "https://bstqb.org.br"
+      - title: "Comunidade de testes"
+        summary: "Acompanhe artigos e discussões sobre automação e estratégia de testes para melhorar continuamente a qualidade dos seus apps."
+        optional: true
+        resources:
+          - "https://www.ministryoftesting.com"
+      - title: "Publicação nas lojas"
+        summary: "Aprenda assinatura do app, página na loja, regras de revisão e lançamentos graduais no Google Play e na App Store."
+        resources:
+          - "https://developer.android.com/docs"
+          - "https://developer.apple.com/documentation/"
+see_also:
+  - name: "Roadmap Android Developer (roadmap.sh)"
+    url: "https://roadmap.sh/android"
+  - name: "Roadmap iOS Developer (roadmap.sh)"
+    url: "https://roadmap.sh/ios"
+  - name: "Roadmap Flutter (roadmap.sh)"
+    url: "https://roadmap.sh/flutter"
+  - name: "Roadmap React Native (roadmap.sh)"
+    url: "https://roadmap.sh/react-native"

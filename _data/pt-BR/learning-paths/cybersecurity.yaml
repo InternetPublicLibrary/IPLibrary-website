@@ -1,0 +1,75 @@
+title: "Cibersegurança"
+summary: "Comece pela segurança no dia a dia e pelas redes, depois pratique segurança web, acompanhe vulnerabilidades e aprenda a proteger sistemas com ferramentas livres."
+subcategory: "computing/cyber-security"
+level: "beginner"
+source: "ipl"
+stages:
+  - title: "Fundamentos"
+    steps:
+      - title: "Segurança no dia a dia"
+        summary: "Entenda senhas, golpes, códigos maliciosos e cópias de segurança com o guia do CERT.br, ponto de partida para qualquer iniciante."
+        resources:
+          - "https://cartilha.cert.br/"
+          - "https://www.cert.br/"
+      - title: "Como as redes funcionam"
+        summary: "Aprenda IP, TCP, portas e DNS, porque a maior parte dos ataques e das defesas acontece no tráfego de rede."
+        resources:
+          - "https://gaia.cs.umass.edu/kurose_ross/"
+          - "https://www.iana.org/assignments/service-names-port-numbers/"
+      - title: "Análise de tráfego"
+        summary: "Capture e leia pacotes por conta própria para reconhecer o tráfego normal e identificar o que foge do padrão."
+        resources:
+          - "https://www.wireshark.org/"
+          - "https://www.wireshark.org/docs/"
+          - "https://www.tcpdump.org/"
+      - title: "Criptografia e padrões"
+        summary: "Conheça os padrões de criptografia, hashes e assinaturas digitais que protegem dados armazenados e em trânsito."
+        resources:
+          - "https://csrc.nist.gov/publications"
+  - title: "Segurança de aplicações web"
+    steps:
+      - title: "As falhas web mais comuns"
+        summary: "Estude injeção, controle de acesso quebrado e outras fraquezas recorrentes para reconhecê-las no seu próprio código."
+        resources:
+          - "https://owasp.org/"
+          - "https://cwe.mitre.org"
+      - title: "Laboratórios práticos"
+        summary: "Explore aplicações propositalmente vulneráveis em laboratórios guiados e gratuitos, a forma mais rápida de entender cada falha."
+        resources:
+          - "https://portswigger.net/web-security"
+      - title: "Ferramentas de teste web"
+        summary: "Use proxies de interceptação para inspecionar e alterar requisições em aplicações que você tem autorização para testar."
+        resources:
+          - "https://www.zaproxy.org"
+          - "https://portswigger.net/burp"
+  - title: "Vulnerabilidades, ameaças e defesa"
+    steps:
+      - title: "Catálogos de vulnerabilidades"
+        summary: "Aprenda a ler identificadores CVE e notas de gravidade para decidir o que precisa ser corrigido primeiro."
+        resources:
+          - "https://www.cve.org/"
+          - "https://nvd.nist.gov/"
+      - title: "Táticas dos atacantes"
+        summary: "Relacione as técnicas usadas em ataques reais às detecções e aos controles capazes de interrompê-las."
+        resources:
+          - "https://attack.mitre.org/"
+      - title: "Endurecimento e varredura"
+        summary: "Aplique configurações seguras de referência e faça varreduras nos seus próprios servidores para achar serviços expostos."
+        resources:
+          - "https://www.cisecurity.org/"
+          - "https://nmap.org/"
+      - title: "Ambiente de testes de intrusão"
+        summary: "Monte um laboratório com uma distribuição voltada a testes de segurança para praticar em máquinas que são suas."
+        optional: true
+        resources:
+          - "https://www.kali.org/"
+      - title: "Acompanhar as ameaças"
+        summary: "Siga alertas oficiais e notícias diárias para saber de novas campanhas e correções urgentes."
+        optional: true
+        resources:
+          - "https://www.cert.br"
+          - "https://thehackernews.com"
+          - "https://www.cisa.gov/news-events/cybersecurity-advisories"
+see_also:
+  - name: "Roadmap Cyber Security (roadmap.sh)"
+    url: "https://roadmap.sh/cyber-security"

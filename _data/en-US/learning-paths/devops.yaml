@@ -1,0 +1,93 @@
+title: "DevOps and cloud"
+summary: "Go from the Linux shell and Git to containers, automated delivery, infrastructure as code and Kubernetes, building the habits that keep software shipping reliably."
+subcategory: "development/development-environment"
+level: "intermediate"
+source: "ipl"
+stages:
+  - title: "Foundations"
+    steps:
+      - title: "Linux and the command line"
+        summary: "Get comfortable with the shell, files, processes and permissions, since almost every server, container and pipeline runs on Linux."
+        resources:
+          - "https://linuxcommand.org/"
+          - "https://missing.csail.mit.edu/"
+      - title: "Version control with Git"
+        summary: "Learn commits, branches, merges and remotes well, because every automated pipeline starts from a change pushed to a repository."
+        resources:
+          - "https://git-scm.com/docs"
+          - "https://nvie.com/posts/a-successful-git-branching-model/"
+      - title: "How operating systems work"
+        summary: "Study processes, memory, isolation and virtualization so containers and virtual machines stop feeling like magic."
+        optional: true
+        resources:
+          - "https://pages.cs.wisc.edu/~remzi/OSTEP/"
+          - "https://www.qemu.org/docs/master/"
+  - title: "Containers"
+    steps:
+      - title: "Running your first containers"
+        summary: "Package an application with its dependencies into an image and run it the same way on any machine."
+        resources:
+          - "https://docs.docker.com/"
+          - "https://docs.podman.io/en/latest/"
+      - title: "Images, layers and registries"
+        summary: "Understand image layers, the open container standards and public registries, so you can build small images and share them safely."
+        resources:
+          - "https://opencontainers.org"
+          - "https://hub.docker.com"
+          - "https://docker-saigon.github.io/post/Docker-Internals/"
+      - title: "Build a container runtime yourself"
+        summary: "Recreate namespaces, cgroups and chroot by hand to see exactly which Linux features a container engine combines."
+        optional: true
+        resources:
+          - "https://github.com/Fewbytes/rubber-docker"
+          - "https://github.com/opencontainers/runc"
+  - title: "Automation and delivery"
+    steps:
+      - title: "Continuous integration and delivery"
+        summary: "Automate building, testing and releasing every change, so integration problems surface within minutes instead of at release time."
+        resources:
+          - "https://martinfowler.com"
+          - "https://www.jenkins.io/"
+          - "https://cd.foundation/"
+      - title: "Configuration management"
+        summary: "Describe server setup as repeatable code instead of manual steps, so any machine can be rebuilt to a known state."
+        resources:
+          - "https://www.redhat.com/en/ansible-collaborative"
+          - "https://saltproject.io"
+      - title: "Infrastructure as code"
+        summary: "Declare networks, machines and cloud services in versioned files, review them like code and apply them predictably."
+        resources:
+          - "https://github.com/hashicorp/terraform"
+          - "https://docs.cloud.google.com/docs/terraform/best-practices/general-style-structure"
+      - title: "Reproducible development environments"
+        summary: "Pin tools and dependencies so every developer and every pipeline runs exactly the same environment."
+        optional: true
+        resources:
+          - "https://nix.dev"
+          - "https://containers.dev"
+  - title: "Cloud and orchestration"
+    steps:
+      - title: "Kubernetes"
+        summary: "Learn pods, deployments and services to run many containers across a cluster with scaling, rollouts and self-healing."
+        resources:
+          - "https://kubernetes.io/docs/"
+          - "https://kubernetes.io/blog/"
+      - title: "Managed cloud platforms"
+        summary: "Compare serverless containers and reference architectures to decide how much infrastructure you actually want to operate yourself."
+        resources:
+          - "https://docs.cloud.google.com/run/docs"
+          - "https://docs.cloud.google.com/architecture"
+          - "https://aws.amazon.com/blogs/architecture/"
+      - title: "Monitoring and error tracking"
+        summary: "Collect errors and performance data from production so problems are noticed and diagnosed before users report them."
+        resources:
+          - "https://sentry.io"
+      - title: "Distributed systems thinking"
+        summary: "Study replication, partitioning and failure modes, the ideas underneath every cloud service you deploy to."
+        optional: true
+        resources:
+          - "https://dataintensive.net/"
+          - "https://www.distributed-systems.net/"
+see_also:
+  - name: "DevOps Roadmap (roadmap.sh)"
+    url: "https://roadmap.sh/devops"

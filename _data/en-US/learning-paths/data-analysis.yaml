@@ -1,0 +1,77 @@
+title: "Data analysis"
+summary: "Learn to find, clean, summarise and visualise data, from spreadsheets and SQL to statistics and dashboards, using free courses, open textbooks and public datasets."
+subcategory: "business/data-and-analytics"
+level: "beginner"
+source: "ipl"
+stages:
+  - title: "Foundations"
+    steps:
+      - title: "Spreadsheet analysis"
+        summary: "Sort, filter, chart and pivot data in a spreadsheet, the quickest way to start asking questions of a small dataset."
+        resources:
+          - "https://open.umn.edu/opentextbooks/textbooks/1687"
+      - title: "Descriptive statistics"
+        summary: "Understand averages, spread, distributions and sampling so you can summarise data honestly and spot when a number is misleading."
+        resources:
+          - "https://openstax.org/details/books/introductory-business-statistics-2e"
+      - title: "Querying data with SQL"
+        summary: "Select, filter, join and aggregate tables with SQL, the common language for pulling data out of almost every database."
+        resources:
+          - "https://www.kaggle.com/learn"
+          - "https://dbeaver.io/"
+  - title: "Finding and preparing data"
+    steps:
+      - title: "Finding datasets"
+        summary: "Search open government, economic and research portals for data that fits your question, and learn to read their documentation and licences."
+        resources:
+          - "https://www.data.gov/"
+          - "https://data.worldbank.org/"
+          - "https://datasetsearch.research.google.com/"
+      - title: "Cleaning data with Python"
+        summary: "Load tables into Python, fix missing values, types and duplicates, and reshape data so later analysis rests on reliable inputs."
+        resources:
+          - "https://www.kaggle.com/learn"
+          - "https://www.datacamp.com/"
+      - title: "Visual workflows"
+        summary: "Build repeatable analysis pipelines by connecting nodes instead of writing code, useful for teams that mix analysts and non-programmers."
+        optional: true
+        resources:
+          - "https://www.knime.com/"
+  - title: "Analysis and communication"
+    steps:
+      - title: "Hypothesis testing and regression"
+        summary: "Test whether differences are real and model relationships between variables, moving from describing data to drawing defensible conclusions."
+        resources:
+          - "https://openstax.org/details/books/introductory-business-statistics-2e"
+          - "https://www.edx.org/"
+      - title: "Charts that communicate"
+        summary: "Choose chart types that match your message and design clear visuals, so findings are understood by people who never see the data."
+        resources:
+          - "https://flowingdata.com/"
+          - "https://public.tableau.com/"
+      - title: "Dashboards with BI tools"
+        summary: "Connect a business intelligence tool to a database and publish dashboards that let colleagues explore and monitor metrics themselves."
+        resources:
+          - "https://www.metabase.com/"
+          - "https://superset.apache.org/"
+  - title: "Going further"
+    steps:
+      - title: "Practice on real problems"
+        summary: "Pick public datasets, ask your own questions and write up the answers, while reading how experienced analysts reason about data."
+        resources:
+          - "https://www.kaggle.com/datasets"
+          - "https://simplystatistics.org/"
+      - title: "Predictive analysis"
+        summary: "Take a first step toward forecasting outcomes with simple machine learning models built on the same cleaned data you already analyse."
+        optional: true
+        resources:
+          - "https://scikit-learn.org/"
+          - "https://towardsdatascience.com/"
+      - title: "Cloud data warehouses"
+        summary: "Run SQL over very large tables in a serverless warehouse when your data outgrows a laptop or a single database server."
+        optional: true
+        resources:
+          - "https://docs.cloud.google.com/bigquery/docs"
+see_also:
+  - name: "Data Analyst Roadmap (roadmap.sh)"
+    url: "https://roadmap.sh/data-analyst"

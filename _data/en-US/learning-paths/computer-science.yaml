@@ -1,0 +1,80 @@
+title: "Computer science foundations"
+summary: "Build a solid base in computer science, from how machines run programs through algorithms, operating systems and networks, up to the limits of what computation can do."
+subcategory: "computing/computer-science"
+level: "beginner"
+source: "ipl"
+stages:
+  - title: "Getting oriented"
+    steps:
+      - title: "Map of the field"
+        summary: "See which core subjects make up computer science and in what order to tackle them, so self-study stays focused instead of scattered."
+        resources:
+          - "https://teachyourselfcs.com/"
+      - title: "Working at the command line"
+        summary: "Get comfortable with the shell, files and processes, since nearly every later topic is explored by running tools from a terminal."
+        resources:
+          - "https://linuxcommand.org/"
+      - title: "Version control"
+        summary: "Track your exercises and experiments with Git, a habit that makes every project and course assignment easier to manage."
+        resources:
+          - "https://git-scm.com/"
+      - title: "Where computing came from"
+        summary: "Learn the history of computing machines and ideas, which explains many design choices that still shape today's systems."
+        optional: true
+        resources:
+          - "https://computerhistory.org/"
+  - title: "Algorithms and data structures"
+    steps:
+      - title: "Core data structures and algorithms"
+        summary: "Study arrays, lists, trees, hashing, sorting and searching with working code, the toolkit behind efficient programs."
+        resources:
+          - "https://www.coursera.org/learn/algorithms-part1"
+          - "https://jeffe.cs.illinois.edu/teaching/algorithms/"
+      - title: "Analysing and designing algorithms"
+        summary: "Learn asymptotic analysis, recursion, greedy methods and dynamic programming so you can reason about cost before writing code."
+        resources:
+          - "https://jeffe.cs.illinois.edu/teaching/algorithms/"
+          - "https://mitpress.mit.edu/algorithms/"
+          - "https://ocw.mit.edu/courses/6-046j-design-and-analysis-of-algorithms-spring-2015/"
+  - title: "How computers run programs"
+    steps:
+      - title: "Computer systems"
+        summary: "Understand data representation, machine code, memory hierarchy and linking to see what really happens when your program executes."
+        resources:
+          - "https://csapp.cs.cmu.edu/"
+      - title: "Operating systems"
+        summary: "Learn how an operating system virtualises CPU and memory, handles concurrency and stores data persistently on disk."
+        resources:
+          - "https://pages.cs.wisc.edu/~remzi/OSTEP/"
+          - "https://pdos.csail.mit.edu/6.828/"
+      - title: "Experimenting with emulators"
+        summary: "Run and inspect systems inside an emulator or virtual machine, a safe way to try what you read about kernels and hardware."
+        optional: true
+        resources:
+          - "https://www.qemu.org/"
+          - "https://www.virtualbox.org/"
+      - title: "Networks and databases in practice"
+        summary: "Capture real network traffic and query a small embedded database to connect protocol and storage theory with observable behaviour."
+        resources:
+          - "https://www.wireshark.org/"
+          - "https://www.sqlite.org/"
+  - title: "Theory of computation"
+    steps:
+      - title: "Automata and formal languages"
+        summary: "Experiment with finite automata, grammars and Turing machines to understand the formal models behind parsers and computation itself."
+        resources:
+          - "https://www.jflap.org/"
+      - title: "Complexity and its limits"
+        summary: "Get an introduction to complexity classes such as P and NP, which explain why some problems resist efficient solutions."
+        optional: true
+        resources:
+          - "https://complexityzoo.net/Complexity_Zoo"
+          - "https://blog.computationalcomplexity.org/"
+      - title: "Keep up with the field"
+        summary: "Read accessible summaries of research and the flagship magazine of the profession to see how foundations feed current work."
+        resources:
+          - "https://cacm.acm.org/"
+          - "https://blog.acolyer.org/"
+see_also:
+  - name: "Computer Science Roadmap (roadmap.sh)"
+    url: "https://roadmap.sh/computer-science"

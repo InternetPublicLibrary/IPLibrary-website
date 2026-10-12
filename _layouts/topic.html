@@ -139,6 +139,21 @@ The level is derived from the menu: a topic with a parent category is a subcateg
       </section>
       {%- endif %}
 
+      {%- comment -%} Learning paths of this subcategory (spec 006). {%- endcomment -%}
+      {%- assign path_key = category_key | append: '/' | append: subcategory_key -%}
+      {%- assign lang_paths = site.data.learning_paths_by_subcategory[lang] -%}
+      {%- assign topic_paths = lang_paths[path_key] -%}
+      {%- if level == 'subcategory' and topic_paths.size > 0 %}
+      <section aria-labelledby="learning-paths-title" class="bg-white border border-gray-200 rounded-lg p-4 sm:p-5 mt-5">
+        <h2 id="learning-paths-title" class="text-xl font-semibold border-b border-gray-200 pb-2 mb-3">{% if pt %}Trilhas de aprendizado{% else %}Learning paths{% endif %}</h2>
+        <ul class="space-y-2 list-none p-0" role="list">
+          {%- for path in topic_paths %}
+          <li><a href="{{ path.url }}" class="font-semibold text-blue-700 hover:underline">{{ path.title | escape }}</a> <span class="text-xs text-gray-600">({{ path.step_count }} {% if pt %}etapas{% else %}steps{% endif %})</span><p class="text-sm text-gray-700">{{ path.summary | escape }}</p></li>
+          {%- endfor %}
+        </ul>
+      </section>
+      {%- endif %}
+
       <!-- Curated resources, grouped by type -->
       <section aria-labelledby="resources" class="bg-white border border-gray-200 rounded-lg p-4 sm:p-5 mt-5">
         <h2 id="resources" class="text-xl font-semibold border-b border-gray-200 pb-2 mb-4">{{ t.layout.curated_resources | default: 'Curated resources' }}{% if real_resource_total > 0 %} <span class="text-sm font-normal text-gray-600">({{ real_resource_total }})</span>{% endif %}</h2>

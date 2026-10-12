@@ -1,0 +1,83 @@
+title: "Machine learning"
+summary: "Build models that learn from data, from classical algorithms and honest evaluation to neural networks and transformers, using official documentation and free university courses."
+subcategory: "computing/machine-learning"
+level: "intermediate"
+source: "ipl"
+stages:
+  - title: "Foundations"
+    steps:
+      - title: "The theory behind learning"
+        summary: "Review the linear algebra, probability and optimisation behind supervised learning so later algorithms read as variations on familiar ideas."
+        resources:
+          - "https://cs229.stanford.edu/"
+      - title: "Your first models"
+        summary: "Fit, predict and score simple models with a consistent API, learning the train and test workflow every project follows."
+        resources:
+          - "https://scikit-learn.org/stable/user_guide.html"
+          - "https://machinelearningmastery.com/"
+      - title: "Datasets for practice"
+        summary: "Pick well-documented benchmark datasets to experiment with, so you can compare your results against known baselines."
+        resources:
+          - "https://archive.ics.uci.edu/"
+          - "https://www.openml.org/"
+          - "https://www.kaggle.com/datasets"
+  - title: "Classical machine learning"
+    steps:
+      - title: "Linear models and regularisation"
+        summary: "Understand linear and logistic regression, overfitting and regularisation, the ideas that explain why models generalise or fail."
+        resources:
+          - "https://scikit-learn.org/stable/user_guide.html"
+          - "https://cs229.stanford.edu/"
+      - title: "Evaluation and validation"
+        summary: "Use cross-validation, suitable metrics and data leakage checks so reported accuracy reflects how a model behaves on new data."
+        resources:
+          - "https://scikit-learn.org/"
+          - "https://machinelearningmastery.com/"
+      - title: "Trees and gradient boosting"
+        summary: "Learn decision trees and boosted ensembles, often the strongest choice for tabular data, and train them with dedicated fast libraries."
+        resources:
+          - "https://xgboost.readthedocs.io/"
+          - "https://lightgbm.readthedocs.io/"
+      - title: "Hyperparameter tuning"
+        summary: "Search model settings automatically instead of by hand, with pruning to stop unpromising trials early and save compute."
+        optional: true
+        resources:
+          - "https://optuna.org/"
+  - title: "Deep learning"
+    steps:
+      - title: "How neural networks learn"
+        summary: "Build intuition for layers, gradient descent and backpropagation before writing code, so training behaviour makes sense when it goes wrong."
+        resources:
+          - "https://www.3blue1brown.com/topics/neural-networks"
+          - "https://sebastianraschka.com/blog/2021/dl-course.html"
+      - title: "Training with PyTorch"
+        summary: "Write tensors, models and training loops in a deep learning framework, and learn to load data and track losses on a GPU."
+        resources:
+          - "https://docs.pytorch.org/tutorials/"
+          - "https://pytorch.org/"
+      - title: "Practical deep learning"
+        summary: "Train image and text models end to end with transfer learning, focusing on what works in practice before diving into theory."
+        resources:
+          - "https://course.fast.ai/"
+      - title: "Transformers"
+        summary: "Understand attention and the transformer architecture behind modern language models, then fine-tune pretrained models for your own tasks."
+        optional: true
+        resources:
+          - "https://jalammar.github.io/illustrated-transformer/"
+          - "https://huggingface.co/learn/nlp-course"
+  - title: "Practice and research"
+    steps:
+      - title: "Tracking experiments"
+        summary: "Log parameters, metrics and model versions for every run so experiments are reproducible and easy to compare later."
+        resources:
+          - "https://mlflow.org/"
+      - title: "Reading research"
+        summary: "Read clear visual explanations and open peer-reviewed papers to follow how the field evolves beyond tutorials and courses."
+        optional: true
+        resources:
+          - "https://distill.pub/"
+          - "https://openreview.net/"
+          - "https://www.jmlr.org/"
+see_also:
+  - name: "Machine Learning Roadmap (roadmap.sh)"
+    url: "https://roadmap.sh/machine-learning"
