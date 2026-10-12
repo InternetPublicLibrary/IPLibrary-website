@@ -34,6 +34,16 @@ class BuildOutputTest < Minitest::Test
     assert_operator html.scan(/rel="noopener" class="font-semibold text-blue-700/).size, :>=, 10
   end
 
+  # Spec 006 T4: learning paths are searchable, and their "see also" links are not indexed as resources.
+  def test_search_index_lists_learning_paths
+    entries = JSON.parse(SiteBuild.output('api/pt-BR/search-index.json'))
+    paths = entries.select { |entry| entry['type'] == 'learning-path' }
+
+    assert_operator paths.size, :>=, 12
+    assert(paths.any? { |entry| entry['url'] == '/pt-BR/learning-paths/python/' })
+    refute(entries.any? { |entry| entry['type'] == 'resource' && entry['url'].start_with?('https://roadmap.sh/') && entry['category'].to_s.include?('See also') })
+  end
+
   def test_library_totals_count_every_curated_resource
     stats = SiteBuild.site.data['resource_stats']
     html = SiteBuild.output('en-US/categories/index.html')

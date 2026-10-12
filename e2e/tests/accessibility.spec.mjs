@@ -12,6 +12,8 @@ const PAGES = [
   ['section', '/en-US/academics/computer-science-theory/cryptography-theory/'],
   ['wiki', '/en-US/academics/computer-science-theory/cryptography-theory/wiki/'],
   ['search', '/en-US/search/'],
+  ['learning paths', '/en-US/learning-paths/'],
+  ['learning path pt-BR', '/pt-BR/learning-paths/frontend/'],
   ['not found', '/this-page-does-not-exist/'],
 ];
 

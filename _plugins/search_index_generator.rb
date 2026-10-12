@@ -125,6 +125,15 @@ module Jekyll
           end
         end
       end
+      # Learning paths (spec 006): searchable by their title, summary and step titles.
+      label = lang_code == 'pt-BR' ? 'Trilhas de aprendizado' : 'Learning paths'
+      (@site.data.dig(lang_code, 'learning-paths') || {}).sort.each do |slug, path|
+        next unless path.is_a?(Hash)
+
+        steps = Array(path['stages']).flat_map { |stage| Array(stage['steps']).map { |step| step['title'] } }.compact
+        entries << { 'title' => path['title'], 'url' => "/#{lang_code}/learning-paths/#{slug}/", 'type' => 'learning-path',
+                     'category' => label, 'description' => [path['summary'], steps.join(' · ')].compact.join(' ') }
+      end
       topics = topic_lookup(lang_code, menu)
       seen = {}
       each_real_resource(@site.data[lang_code], [], [], &lambda { |resource, trail, keys|
