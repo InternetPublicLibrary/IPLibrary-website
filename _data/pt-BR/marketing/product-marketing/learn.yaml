@@ -21,3 +21,11 @@
   language: "en"
   access: "paid"
   organization: "Reforge"
+
+- name: "Roadmap DevRel (roadmap.sh)"
+  url: "https://roadmap.sh/devrel"
+  description: "Roadmap interativo sobre relações com desenvolvedores (DevRel): os temas em uma ordem de estudo sugerida, cada um com links para aprofundamento."
+  type: "reference"
+  access: "free"
+  language: "en"
+  organization: "roadmap.sh"

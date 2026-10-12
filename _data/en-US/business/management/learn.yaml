@@ -18,3 +18,17 @@
   type: "course"
   access: "free"
   organization: "Saylor Academy"
+
+- name: "Engineering Manager Roadmap (roadmap.sh)"
+  url: "https://roadmap.sh/engineering-manager"
+  description: "Interactive roadmap on managing software engineering teams: topics laid out in a suggested study order, each linking to further reading."
+  type: "reference"
+  access: "free"
+  organization: "roadmap.sh"
+
+- name: "Product Manager Roadmap (roadmap.sh)"
+  url: "https://roadmap.sh/product-manager"
+  description: "Interactive roadmap on product management: topics laid out in a suggested study order, each linking to further reading."
+  type: "reference"
+  access: "free"
+  organization: "roadmap.sh"

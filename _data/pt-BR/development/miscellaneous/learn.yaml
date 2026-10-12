@@ -21,3 +21,11 @@
   access: "freemium"
   language: "en"
   organization: "LeetCode"
+
+- name: "Roadmap Blockchain Developer (roadmap.sh)"
+  url: "https://roadmap.sh/blockchain"
+  description: "Roadmap interativo sobre desenvolvimento blockchain: os temas em uma ordem de estudo sugerida, cada um com links para aprofundamento."
+  type: "reference"
+  access: "free"
+  language: "en"
+  organization: "roadmap.sh"

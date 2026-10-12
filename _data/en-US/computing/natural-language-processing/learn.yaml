@@ -53,3 +53,10 @@
   type: "course"
   access: "free"
   organization: "Cohere"
+
+- name: "Prompt Engineering Roadmap (roadmap.sh)"
+  url: "https://roadmap.sh/prompt-engineering"
+  description: "Interactive roadmap on prompting language models: topics laid out in a suggested study order, each linking to further reading."
+  type: "reference"
+  access: "free"
+  organization: "roadmap.sh"

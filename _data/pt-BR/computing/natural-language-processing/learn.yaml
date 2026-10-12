@@ -21,3 +21,11 @@
   access: "free"
   language: "en"
   organization: "Stanford University and University of Colorado Boulder"
+
+- name: "Roadmap Prompt Engineering (roadmap.sh)"
+  url: "https://roadmap.sh/prompt-engineering"
+  description: "Roadmap interativo sobre engenharia de prompts para modelos de linguagem: os temas em uma ordem de estudo sugerida, cada um com links para aprofundamento."
+  type: "reference"
+  access: "free"
+  language: "en"
+  organization: "roadmap.sh"

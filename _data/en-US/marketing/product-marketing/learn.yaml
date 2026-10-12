@@ -18,3 +18,10 @@
   type: "course"
   access: "paid"
   organization: "Reforge"
+
+- name: "DevRel Roadmap (roadmap.sh)"
+  url: "https://roadmap.sh/devrel"
+  description: "Interactive roadmap on developer relations: topics laid out in a suggested study order, each linking to further reading."
+  type: "reference"
+  access: "free"
+  organization: "roadmap.sh"
