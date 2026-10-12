@@ -18,3 +18,10 @@
   type: "reference"
   access: "free"
   organization: "Software Freedom Conservancy"
+
+- name: "QA Engineer Roadmap (roadmap.sh)"
+  url: "https://roadmap.sh/qa"
+  description: "Interactive roadmap on software quality assurance: topics laid out in a suggested study order, each linking to further reading."
+  type: "reference"
+  access: "free"
+  organization: "roadmap.sh"

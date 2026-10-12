@@ -21,3 +21,11 @@
   access: "free"
   language: "pt-BR"
   organization: "BSTQB"
+
+- name: "Roadmap QA Engineer (roadmap.sh)"
+  url: "https://roadmap.sh/qa"
+  description: "Roadmap interativo sobre garantia de qualidade de software: os temas em uma ordem de estudo sugerida, cada um com links para aprofundamento."
+  type: "reference"
+  access: "free"
+  language: "en"
+  organization: "roadmap.sh"

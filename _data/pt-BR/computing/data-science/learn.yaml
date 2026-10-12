@@ -29,3 +29,11 @@
   access: "freemium"
   language: "en"
   organization: "edX"
+
+- name: "Roadmap AI and Data Scientist (roadmap.sh)"
+  url: "https://roadmap.sh/ai-data-scientist"
+  description: "Roadmap interativo sobre ciência de dados e IA aplicada: os temas em uma ordem de estudo sugerida, cada um com links para aprofundamento."
+  type: "reference"
+  access: "free"
+  language: "en"
+  organization: "roadmap.sh"
