@@ -18,3 +18,10 @@
   type: "reference"
   access: "free"
   organization: "Internet Archive"
+
+- name: "Blockchain Developer Roadmap (roadmap.sh)"
+  url: "https://roadmap.sh/blockchain"
+  description: "Interactive roadmap on blockchain development: topics laid out in a suggested study order, each linking to further reading."
+  type: "reference"
+  access: "free"
+  organization: "roadmap.sh"

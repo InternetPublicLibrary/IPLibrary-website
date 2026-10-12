@@ -29,3 +29,11 @@
   access: "free"
   language: "en"
   organization: "SQLite Consortium"
+
+- name: "Roadmap Elasticsearch (roadmap.sh)"
+  url: "https://roadmap.sh/elasticsearch"
+  description: "Roadmap interativo sobre busca com Elasticsearch: os temas em uma ordem de estudo sugerida, cada um com links para aprofundamento."
+  type: "reference"
+  access: "free"
+  language: "en"
+  organization: "roadmap.sh"

@@ -21,3 +21,11 @@
   access: "free"
   language: "en"
   organization: "Dave Shea"
+
+- name: "Roadmap WordPress (roadmap.sh)"
+  url: "https://roadmap.sh/wordpress"
+  description: "Roadmap interativo sobre a criação de sites com WordPress: os temas em uma ordem de estudo sugerida, cada um com links para aprofundamento."
+  type: "reference"
+  access: "free"
+  language: "en"
+  organization: "roadmap.sh"

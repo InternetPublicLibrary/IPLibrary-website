@@ -18,3 +18,10 @@
   type: "course"
   access: "free"
   organization: "Moz"
+
+- name: "SEO Roadmap (roadmap.sh)"
+  url: "https://roadmap.sh/seo"
+  description: "Interactive roadmap on search engine optimisation: topics laid out in a suggested study order, each linking to further reading."
+  type: "reference"
+  access: "free"
+  organization: "roadmap.sh"

@@ -18,3 +18,17 @@
   type: "course"
   access: "free"
   organization: "Epic Games"
+
+- name: "Game Developer Roadmap (roadmap.sh)"
+  url: "https://roadmap.sh/game-developer"
+  description: "Interactive roadmap on game development: topics laid out in a suggested study order, each linking to further reading."
+  type: "reference"
+  access: "free"
+  organization: "roadmap.sh"
+
+- name: "Server Side Game Developer Roadmap (roadmap.sh)"
+  url: "https://roadmap.sh/server-side-game-developer"
+  description: "Interactive roadmap on game server development: topics laid out in a suggested study order, each linking to further reading."
+  type: "reference"
+  access: "free"
+  organization: "roadmap.sh"

@@ -25,3 +25,10 @@
   type: "reference"
   access: "free"
   organization: "SQLite Consortium"
+
+- name: "Elasticsearch Roadmap (roadmap.sh)"
+  url: "https://roadmap.sh/elasticsearch"
+  description: "Interactive roadmap on search with Elasticsearch: topics laid out in a suggested study order, each linking to further reading."
+  type: "reference"
+  access: "free"
+  organization: "roadmap.sh"

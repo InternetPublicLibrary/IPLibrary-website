@@ -25,3 +25,10 @@
   type: "course"
   access: "freemium"
   organization: "edX"
+
+- name: "AI and Data Scientist Roadmap (roadmap.sh)"
+  url: "https://roadmap.sh/ai-data-scientist"
+  description: "Interactive roadmap on data science and applied AI: topics laid out in a suggested study order, each linking to further reading."
+  type: "reference"
+  access: "free"
+  organization: "roadmap.sh"

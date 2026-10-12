@@ -99,6 +99,12 @@ Restart the server after editing anything in `_plugins/` or `_config.yml`; Jekyl
 - Minitest lives in `test/` and runs through `rake test`. With Docker: `docker exec iplibrary-dev bundle exec rake test`.
 - Playwright lives in `e2e/`, a separate Yarn project with `nodeLinker: node-modules`, because Playwright does not run under the root Plug'n'Play install. The first time, run `yarn test:e2e:install` to download Chromium. Tests reuse a server already on port 4000; point them elsewhere with `E2E_BASE_URL`.
 
+## Credits
+
+Curated entries link to and credit their publishers in the `organization` field; IPL writes its own names and
+descriptions and does not copy their content. Developer roadmaps are linked from [roadmap.sh](https://roadmap.sh),
+whose roadmaps remain theirs (their licence allows sharing links, not republishing the content).
+
 ## License
 
 Code and content are released under the terms in [LICENSE](LICENSE). The Source Sans 3 and Source Serif 4 fonts in

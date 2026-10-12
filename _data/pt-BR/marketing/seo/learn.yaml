@@ -21,3 +21,11 @@
   language: "en"
   access: "free"
   organization: "Moz"
+
+- name: "Roadmap SEO (roadmap.sh)"
+  url: "https://roadmap.sh/seo"
+  description: "Roadmap interativo sobre otimização para mecanismos de busca: os temas em uma ordem de estudo sugerida, cada um com links para aprofundamento."
+  type: "reference"
+  access: "free"
+  language: "en"
+  organization: "roadmap.sh"

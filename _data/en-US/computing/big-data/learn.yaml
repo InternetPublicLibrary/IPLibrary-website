@@ -32,3 +32,10 @@
   type: "reference"
   access: "free"
   organization: "Google Cloud"
+
+- name: "Data Engineer Roadmap (roadmap.sh)"
+  url: "https://roadmap.sh/data-engineer"
+  description: "Interactive roadmap on data engineering: topics laid out in a suggested study order, each linking to further reading."
+  type: "reference"
+  access: "free"
+  organization: "roadmap.sh"

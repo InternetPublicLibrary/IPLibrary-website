@@ -29,3 +29,11 @@
   access: "free"
   language: "en"
   organization: "Google Cloud"
+
+- name: "Roadmap Data Engineer (roadmap.sh)"
+  url: "https://roadmap.sh/data-engineer"
+  description: "Roadmap interativo sobre engenharia de dados: os temas em uma ordem de estudo sugerida, cada um com links para aprofundamento."
+  type: "reference"
+  access: "free"
+  language: "en"
+  organization: "roadmap.sh"

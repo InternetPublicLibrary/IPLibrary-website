@@ -29,3 +29,11 @@
   access: "free"
   language: "pt-BR"
   organization: "Rede Nacional de Ensino e Pesquisa"
+
+- name: "Roadmap Network Engineer (roadmap.sh)"
+  url: "https://roadmap.sh/network-engineer"
+  description: "Roadmap interativo sobre engenharia de redes: os temas em uma ordem de estudo sugerida, cada um com links para aprofundamento."
+  type: "reference"
+  access: "free"
+  language: "en"
+  organization: "roadmap.sh"

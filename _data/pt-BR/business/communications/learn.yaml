@@ -21,3 +21,11 @@
   language: "pt-BR"
   access: "freemium"
   organization: "Rock Content"
+
+- name: "Roadmap Technical Writer (roadmap.sh)"
+  url: "https://roadmap.sh/technical-writer"
+  description: "Roadmap interativo sobre escrita técnica: os temas em uma ordem de estudo sugerida, cada um com links para aprofundamento."
+  type: "reference"
+  access: "free"
+  language: "en"
+  organization: "roadmap.sh"
