@@ -35,6 +35,8 @@ class LearningPathsTest < Minitest::Test
         steps = path['stages'].flat_map { |stage| stage['steps'] }
         assert_operator steps.size, :>=, 6, "#{where}: too few steps"
         steps.each { |step| assert step['title'] && step['summary'], "#{where}: step without title or summary" }
+        assert_match(/\A[a-z0-9]+(?:-[a-z0-9]+)*\z/, slug, "#{where}: slug")
+        Array(path['see_also']).each { |link| assert_match(%r{\Ahttps://[^\s"'<>]+\z}, link['url'].to_s, "#{where}: see_also must be https") }
       end
     end
   end

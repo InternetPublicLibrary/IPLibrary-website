@@ -16,10 +16,14 @@ module IPL
         index = resource_index(site.data[lang])
         missing = []
         listed = paths.map do |slug, path|
+          raise Jekyll::Errors::FatalException, "Learning path slug must be lowercase letters, digits and hyphens: #{slug}" unless slug.match?(SLUG)
+
+          path = path.merge('see_also' => safe_links(path['see_also'], "#{lang}/#{slug}"))
           stages = Array(path['stages']).map do |stage|
             steps = Array(stage['steps']).map do |step|
               resources = Array(step['resources']).filter_map do |url|
                 entry = index[normalize(url)]
+                entry = nil unless entry && entry['url'].to_s.match?(SAFE_URL)
                 missing << "#{lang}/#{slug}: #{url}" unless entry
                 entry
               end
@@ -50,7 +54,20 @@ module IPL
       site.data['learning_paths_by_subcategory'] = by_subcategory
     end
 
+    SLUG = /\A[a-z0-9]+(?:-[a-z0-9]+)*\z/
+    SAFE_URL = %r{\Ahttps://[^\s"'<>]+\z}
+
     private
+
+    # External "see also" links come from YAML: only plain https URLs may reach an href.
+    def safe_links(links, where)
+      Array(links).map do |link|
+        url = link.is_a?(Hash) ? link['url'].to_s : ''
+        raise Jekyll::Errors::FatalException, "#{where}: see_also URL must be https: #{url}" unless url.match?(SAFE_URL)
+
+        { 'name' => link['name'].to_s, 'url' => url }
+      end
+    end
 
     def add_page(site, dir, data)
       page = Jekyll::PageWithoutAFile.new(site, site.source, dir, 'index.html')
