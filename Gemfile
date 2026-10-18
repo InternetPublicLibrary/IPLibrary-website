@@ -14,10 +14,10 @@ source "https://rubygems.org"
 ruby '3.2.2'
 
 # Fix for the public_suffix dependency issue
-gem "public_suffix", "~> 5.1.1"
+gem "public_suffix", "~> 7.0.5"
 
 # Faraday 2.0+ and retry middleware
-gem "faraday", "~> 2.0"
+gem "faraday", "~> 2.14"
 gem "faraday-retry"
 
 gem 'html-proofer'
