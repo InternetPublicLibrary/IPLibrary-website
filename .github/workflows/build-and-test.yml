@@ -21,7 +21,7 @@ jobs:
     
     steps:
     - name: Checkout repository
-      uses: actions/checkout@v4
+      uses: actions/checkout@v7
       with:
         submodules: recursive
         fetch-depth: 0
@@ -33,7 +33,7 @@ jobs:
         bundler-cache: true
 
     - name: Setup Node.js
-      uses: actions/setup-node@v4
+      uses: actions/setup-node@v7
       with:
         node-version: ${{ env.NODE_VERSION }}
         cache: 'npm'
@@ -42,7 +42,7 @@ jobs:
       run: npm ci
 
     - name: Cache Jekyll build
-      uses: actions/cache@v4
+      uses: actions/cache@v6
       with:
         path: |
           .jekyll-cache
@@ -70,7 +70,7 @@ jobs:
         JEKYLL_ENV: development
 
     - name: Upload development build artifacts
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@v7
       with:
         name: development-site
         path: _site/
@@ -83,7 +83,7 @@ jobs:
     
     steps:
     - name: Checkout repository
-      uses: actions/checkout@v4
+      uses: actions/checkout@v7
       with:
         submodules: recursive
         fetch-depth: 0
@@ -95,7 +95,7 @@ jobs:
         bundler-cache: true
 
     - name: Setup Node.js
-      uses: actions/setup-node@v4
+      uses: actions/setup-node@v7
       with:
         node-version: ${{ env.NODE_VERSION }}
         cache: 'npm'
@@ -104,7 +104,7 @@ jobs:
       run: npm ci
 
     - name: Cache Jekyll build
-      uses: actions/cache@v4
+      uses: actions/cache@v6
       with:
         path: |
           .jekyll-cache
@@ -129,7 +129,7 @@ jobs:
         JEKYLL_ENV: production
 
     - name: Upload production build artifacts
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@v7
       with:
         name: production-site
         path: _site/
@@ -143,7 +143,7 @@ jobs:
     
     steps:
     - name: Checkout repository
-      uses: actions/checkout@v4
+      uses: actions/checkout@v7
 
     - name: Setup Ruby
       uses: ruby/setup-ruby@v1
@@ -152,7 +152,7 @@ jobs:
         bundler-cache: true
 
     - name: Download production build
-      uses: actions/download-artifact@v4
+      uses: actions/download-artifact@v8
       with:
         name: production-site
         path: _site/
@@ -185,7 +185,7 @@ jobs:
     
     steps:
     - name: Checkout repository
-      uses: actions/checkout@v4
+      uses: actions/checkout@v7
 
     - name: Setup Ruby
       uses: ruby/setup-ruby@v1
@@ -194,7 +194,7 @@ jobs:
         bundler-cache: true
 
     - name: Download production build
-      uses: actions/download-artifact@v4
+      uses: actions/download-artifact@v8
       with:
         name: production-site
         path: _site/
@@ -218,15 +218,15 @@ jobs:
     
     steps:
     - name: Checkout repository
-      uses: actions/checkout@v4
+      uses: actions/checkout@v7
 
     - name: Setup Node.js
-      uses: actions/setup-node@v4
+      uses: actions/setup-node@v7
       with:
         node-version: ${{ env.NODE_VERSION }}
 
     - name: Download production build
-      uses: actions/download-artifact@v4
+      uses: actions/download-artifact@v8
       with:
         name: production-site
         path: _site/
@@ -297,15 +297,15 @@ jobs:
     
     steps:
     - name: Checkout repository
-      uses: actions/checkout@v4
+      uses: actions/checkout@v7
 
     - name: Setup Node.js
-      uses: actions/setup-node@v4
+      uses: actions/setup-node@v7
       with:
         node-version: ${{ env.NODE_VERSION }}
 
     - name: Download production build
-      uses: actions/download-artifact@v4
+      uses: actions/download-artifact@v8
       with:
         name: production-site
         path: _site/
@@ -345,7 +345,7 @@ jobs:
     
     steps:
     - name: Checkout repository
-      uses: actions/checkout@v4
+      uses: actions/checkout@v7
 
     - name: Setup Ruby
       uses: ruby/setup-ruby@v1
@@ -354,7 +354,7 @@ jobs:
         bundler-cache: true
 
     - name: Setup Node.js
-      uses: actions/setup-node@v4
+      uses: actions/setup-node@v7
       with:
         node-version: ${{ env.NODE_VERSION }}
         cache: 'npm'
